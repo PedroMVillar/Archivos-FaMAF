@@ -41,37 +41,14 @@ Este comando creará una carpeta llamada "Archivos-FaMAF" en el directorio actua
 
 ---
 
+| [![Cambio de Base](./assets/readme.imgs/cambiodebase.png)](https://enlace1.com) | [![Determinantes por inducción](./assets/readme.imgs/detinduc.png)](https://enlace2.com) | [![Diagonalización](./assets/readme.imgs/diagonal.png)](https://enlace3.com) | [![Planos](./assets/readme.imgs/planos.png)](https://enlace4.com) |
+|:---:|:---:|:---:|:---:|
+| [Cambio de Base](https://enlace1.com) | [Determinantes por inducción](https://enlace2.com) | [Diagonalización](https://enlace3.com) | [Planos](https://enlace4.com) |
+
+---
+
 <div style="text-align:center;">
-  <h4>Apuntes - Resúmenes</h4>
-</div>
-<div align="center" style="display: flex; flex-wrap: wrap; justify-content: center;">
-  <div style="margin: 10px; text-align: center;">
-    <a href="https://enlace1.com" target="_blank">
-      <img src="./assets/readme.imgs/cambiodebase.png" alt="Imagen 1" width="150">
-    </a>
-    <div style="font-size: 14px;">Cambio de Base</div>
-  </div>
-
-  <div style="margin: 10px; text-align: center;">
-    <a href="https://enlace2.com" target="_blank">
-      <img src="./assets/readme.imgs/detinduc.png" alt="Imagen 2" width="150">
-    </a>
-    <div style="font-size: 14px;">Determinantes por inducción</div>
-  </div>
-
-  <div style="margin: 10px; text-align: center;">
-    <a href="https://enlace2.com" target="_blank">
-      <img src="./assets/readme.imgs/diagonal.png" alt="Imagen 2" width="150">
-    </a>
-    <div style="font-size: 14px;">Diagonalización</div>
-  </div>
-
-  <div style="margin: 10px; text-align: center;">
-    <a href="https://enlace2.com" target="_blank">
-      <img src="./assets/readme.imgs/planos.png" alt="Imagen 2" width="150">
-    </a>
-    <div style="font-size: 14px;">Planos</div>
-  </div>
+  <h4>Ejercicios Resueltos</h4>
 </div>
 
 ## Apuntes Notas de Clase
