@@ -1,0 +1,270 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Do not alter this block (unless you're familiar with LaTeX
+\documentclass{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, fancyhdr, color, comment, graphicx, environ}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{background}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+\setlength{\headheight}{1.5cm}
+
+
+\pagestyle{fancy}
+
+\SetBgContents{https://github.com/PedroMVillar}
+\SetBgScale{3} % Escala de la marca de agua
+\SetBgColor{gray!80} % Color de la marca de agua
+\SetBgAngle{45} % Ángulo de inclinación de la marca de agua
+\SetBgOpacity{0.2} % Opacidad de la marca de agua
+
+
+\newenvironment{problem}[2][Ejercicio]
+    { \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{definition}[2][Definición]
+    { \begin{mdframed}[backgroundcolor=red!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{theorem}[2][Teorema]
+    { \begin{mdframed}[backgroundcolor=green!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{lemma}[2][Lema]
+    { \begin{mdframed}[backgroundcolor=green!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{proposition}[2][Proposición]
+    { \begin{mdframed}[backgroundcolor=green!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{corollary}[2][Corolario]
+    { \begin{mdframed}[backgroundcolor=green!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{example}[2][Ejemplo]
+    { \begin{mdframed}[backgroundcolor=yellow!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{remark}[2][Observación]
+    { \begin{mdframed}[backgroundcolor=yellow!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{note}
+    {\textit{Nota:}}
+    {}
+
+\newenvironment{conclusion}
+    {\textit{Conclusión:}}
+    {}
+
+\newenvironment{notation}
+    {\textit{Notación:}}
+    {}
+
+\newenvironment{question}
+    {\textit{Pregunta:}}
+    {}
+
+\newenvironment{answer}
+    {\textit{Respuesta:}}
+    {}
+
+% Define solution environment
+\newenvironment{solution}
+    {\textit{Solución:}}
+    {}
+
+\renewcommand{\qed}{\quad\qedsymbol}
+
+% prevent line break in inline mode
+\binoppenalty=\maxdimen
+\relpenalty=\maxdimen
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Header Configuarción
+\lhead{Pedro Villar}
+\rhead{Álgebra Lineal} 
+\chead{\textbf{Planos}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Definiciones y teoremas
+\section*{Definiciones}
+\begin{definition}{\textit{Plano}}
+    Un plano queda completamente definido por tres elementos fundamentales: un punto perteneciente al plano (que actúa como origen), y dos vectores no colineales que yacen en el plano. Estos dos vectores, podrían llamarse "vectores direccionales", determinan la orientación y la extensión del plano en el espacio tridimensional.
+\end{definition}
+\begin{definition}{\textit{Ecuación normal de un plano}}
+    Sea $(a,b,c)$ un vector normal al plano, es decir normal a los dos vectores direccionales, y $(x_0,y_0,z_0)$ un punto por el que pasa, se llama ecuación normal del plano a:
+\[
+\langle (x,y,z) - (x_0,y_0,z_0) , (a,b,c) \rangle=0
+\]
+\end{definition}
+\begin{definition}{\textit{Forma implícita de un plano}}
+    De esta ecuación se puede deducir la forma implícita $ax+by+cz=d$, donde $(a,b,c)$ es el vector normal y $d$ es el número que se obtiene simplemente reemplazando $x=x_0, \ y=y_0 \ z=z_0$.
+\[
+P = \{ (x,y,z) : ax+by+cz = d\}.
+\]
+\end{definition}
+\begin{definition}{\textit{Forma paramétrica de un plano}}
+    Sean $w_1$ y $w_2$ los dos vectores que generan al plano y sea $v$ un punto por el que pasa, el plano se define de forma paramétrica como:
+    \[
+    P = \{ v + sw_1+tw_2: s,t \in \mathbb{R} \}
+    \]
+    Si un plano viene definido de la forma $\Pi = \{ sw_1+tw_2: s,t \in \mathbb{R} \}$ quiere decir que pasa por el origen.    
+\end{definition}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Intersección de planos
+\section*{Intersección de planos}
+La intersección entre dos planos en el espacio tridimensional se produce cuando ambos comparten al menos una línea común. La forma más común de expresar la ecuación de un plano en el espacio es a través de su forma implícita. Cuando se busca la intersección entre dos planos, se plantea un sistema de ecuaciones con las ecuaciones implícitas de ambos planos.
+Por ejemplo si tenemos dos planos definidos como $\Pi_1 = \{ A_1x+B_1y+ C_1z = d_1\}$ y $\Pi_2 = \{ A_2x+B_2y+ C_2z = d_2\}$, la intersección será
+\[
+\Pi_1 \cap \Pi_2
+\begin{cases}
+A_1x+B_1y+ C_1z = d_1 \\
+A_2x+B_2y+ C_2z = d_2
+\end{cases}
+\]
+La solución de ese sistema puede dar $3$ resultados diferentes:
+\begin{itemize}
+\item 
+Si el sistema tiene \emph{una solución única}, significa que los dos planos se cruzan en una línea.
+\item 
+Si el sistema tiene \emph{infinitas soluciones}, entonces los dos planos son paralelos y coincidentes.
+\item 
+Si el sistema \emph{no tiene solución}, los dos planos son paralelos pero no coincidentes en ningún punto.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Ejemplos
+\newpage
+\section*{Ejemplos}
+\begin{problem}{1}
+    Escribir la ecuación paramétrica y la ecuación normal de los siguientes planos:
+\begin{itemize}
+\item 
+$\pi_1 :$ el plano que pasa por $(0,0,0)$, $(1,1,0)$, $(1,-2,0)$.
+\item 
+$\pi_2 :$ el plano que pasa por $(1, 2, -2)$ y es perpendicular a la recta que pasa por $(2, 1, -1), (3, -2, 1)$.
+\item 
+$\pi_3 = \{w \in \mathbb{R}^3 : w = s(1, 2, 0) + t(2, 0, 1) + (1, 0, 0) \}.$
+\end{itemize}
+\end{problem}
+\begin{solution}
+\begin{itemize}
+\item[$\pi_1$:] Si queremos buscar la forma paramétrica, necesitamos dos vectores que generen al plano, y para ello selecionamos dos pares vectores no colineales para formarlos:
+\[
+v_1 = (0,0,0) - (1,1,0) = (-1,-1,0)
+\]\[
+v_2 = (1,1,0) - (1,-2,0) = (0,3,0)
+\]
+Ahora la forma paramétrica del plano es:
+\[
+\pi_1 = \{ s(-1,-1,0) + t(0,3,0) : s,t \in \mathbb{R}^3 \}
+\]
+Para buscar la ecuación normal del plano, se necesita el vector normal al plano, y para eso se puede buscar un vector ortogonal a los dos vectores generadores:
+\[
+\begin{aligned}
+(-1,-1,0) \times (0,3,0) &=
+\begin{vmatrix}
+e_1 & e_2 & e_3 \\
+-1 & -1 & 0 \\
+0 & 3 & 0
+\end{vmatrix} \\
+&= e_1 \cdot 0 + e_2 \cdot 0 + e_3 \cdot (-3) \\
+&= (0,0,-3)
+\end{aligned}
+\]
+El vector ortogonal a $(-1,-1,0)$ y $(0,3,0)$ es $(0,0,-3)$, con esto podemos definir la ecuación normal del plano:
+\[
+\langle (x,y,z), (1,1,0), (0,0,-3) \rangle = 0
+\]
+\item[$\pi_2$:] Si el plano es perpendicular a la recta que pasa por dos puntos, con esos dos puntos podemos formar nuestro vector normal al plano:
+\[
+(2,1,-1)- (3,-2,1) = (-1,3,-2)
+\]
+Con esto la ecuación normal del plano es
+\[
+\langle (x,y,z) - (1,2,-2), (-1,3,2) \rangle = 0
+\]
+Para obtener la forma paramétrica, hay que tener dos vectores que generen al plano, por lo tanto podríamos sacar la forma implícita y ver dos puntos mas que cumplan y con ello armar dos direccionales. La forma implícita es $-x+3y+2z = d$, donde $d$ se obtiene al evaluar el punto por el que pasa, $-1+3\cdot 2+2\cdot (-2) = 1$, entonces la representación implícita completa es $x+3y+2z = 1$, y dos puntos por los que pasa son: $(0,1,-1)$, $(1,0,0)$.
+Con esto, la representación paramétrica de $\pi_2$ es:
+\[
+\pi_2 = \{ (1,2,-2) + s(0,1,-1) + t(1,0,0) : s,t \in \mathbb{R} \}
+\]
+\item[$\pi_3:$] La forma paramétrica ya está dada, y la ecuación normal depende de un vector normal que va a ser obtenido al hacer el producto cruz entre los dos vectores generadores dados en la consigna:
+\[
+\begin{aligned}
+(1,2,0) \times (2,0,1) &=
+\begin{vmatrix}
+e_1 & e_2 & e_3 \\
+1 & 2 & 0 \\
+2 & 0 & 1
+\end{vmatrix} \\
+&= e_1 \cdot 2 + e_2 \cdot 1 + e_3 \cdot (-4) \\
+&= (2,1,-4)
+\end{aligned}
+\]
+Entonces la ecuación normal es:
+\[
+\langle (x,y,z) - (1,0,0), (2,1,-4) \rangle
+\]
+\end{itemize}
+\end{solution}
+
+\begin{problem}{2}
+    Sea $R$ el plano en $\mathbb{R}^3$ que pasa por los puntos $(0,2,1), (0,0,-2)$ y $(0,1,0)$. Sea $P$ el plano que es paralelo al plano $R$ y pasa por el punto $(2,0,1)$. Dado $a\in \mathbb{R}$, consideremos $\Pi_a$ el plano \newline $\Pi_a = \{ (x,y,z)\in R^3 : x+y-az = 4 \}.$
+\begin{itemize}
+\item 
+(a) Dar la ecuación implícita de $P$.
+\item 
+(b) Determinar todos los valores $a\in R$, tales que el punto $(1,1,0) \in P \cap \Pi_a$.
+\end{itemize}
+\end{problem}
+\begin{solution}
+    \begin{itemize}
+        \item[(a)] Primero voy a expresar de forma normal al plano $R$, se tiene que pasa por 3 puntos, por lo que si busco dos pares de vectores no colineales entre sí, puedo obtener mis dos vectores generadores, para luego haciendo el producto cruz entre los vectores generadores obtener el vector normal al plano:
+        Los vectores generadores serán los siguientes
+        \[
+        (0,2,1)-(0,0,-2) = (0,2,3)
+        \]\[
+        (0,2,1)-(0,1,0) = (0,1,1)
+        \]
+        Luego para obtener el vector normal:
+        \[
+        (0,2,3)\times (0,1,1) = (-1,0,0)
+        \]
+        Con esto se tiene que el plano $R$ se puede definir de la siguiente forma:
+        \[
+        \langle (x,y,z) - (0,2,1), (-1,0,0)\rangle = 0
+        \]
+        Como por hipótesis el plano $P$ es paralelo al plano $R$, por definición sus vectores normales serán el mismo, por ello se puede definir a $P$ como:
+        \[
+        \langle (x,y,z) - (2,0,1), (-1,0,0)\rangle = 0
+        \]
+        Para pasarlo a forma implícita, se tiene que $(-1)\cdot x + 0 \cdot y + 0 \cdot y = d$ y luego para obtener $d$, evalúo en el punto $(2,0,1)$ y así la ecuación implícita queda $-x=-2$ y el plano $P$ quedará definido de forma implícita como:
+        \[
+        P = \{ (x,y,z) \in R^3 : x = 2 \}
+        \]
+        \item[(b)] El punto $(1,1,0) \notin P \Rightarrow (1,1,0) \notin P \cap \Pi_a$. No vale para ningún $a$.
+    \end{itemize}
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}

@@ -1,0 +1,316 @@
+\documentclass[a4,10pt]{aleph-notas}
+
+% -- Paquetes adicionales
+\usepackage{aleph-comandos}
+\usepackage{enumitem}
+\usepackage{amssymb}
+
+\begin{document}
+
+\begin{obs}
+    Sea $A\in \K^{n \times n}$, entonces podemos aplicar el siguiente método para encontrar autovalores y autovectores de $A$.
+        \begin{enumerate}
+            \item Calcular $\chi_A(x) =\det(x Id-A)$,
+                \vskip .2cm
+            \item Encontrar las raíces $\lambda_1,\ldots,\lambda_k$ de $\chi_A(x)$.
+            \noindent No siempre es posible hacerlo, pues no hay una fórmula o método general para encontrar las raíces de polinomios de grado 5 o superior.
+            \vskip .2cm
+            \item Para cada $i$ con $1 \le i \le k$ resolver el sistema de ecuaciones lineales:
+            \begin{equation*}
+                (\lambda_i Id-A)X = 0.
+            \end{equation*}
+            Las soluciones no triviales  de este sistema son los autovectores con autovalor $\lambda_i$.
+        \end{enumerate}
+\end{obs}
+
+\begin{obs}
+    El método para probar que un conjunto es un espacio vectorial es el siguiente:
+    \begin{enumerate}
+        \item Probar las propiedades del despacio vectorial: de la adición, conmutatividad, asociatividad, elemento neutro de la suma, existencia de opuesto, de la multiplicación por escalares, elemento neutro de la multiplicación por escalares, neutro del producto, conmutatividad del producto, distributividad derecha e izquierda. 
+    \end{enumerate}
+    \item Para probar que no es un espacio vectorial se puede demostrar que no se cumple alguna de las propiedades:
+    \begin{itemize}
+        \item[(a)] $0\cdot x = 0$,
+        \item[(b)] $\lambda \cdot x = 0$ $\Rightarrow$ $\lambda = 0$ o $x = 0$.,
+    \end{itemize}
+\end{obs}
+
+\begin{obs}
+    El método para probar que un conjunto es un subespacio vectorial es el siguiente:
+    \begin{enumerate}[label=\textit{\alph*)},ref=\textit{\alph*)}]
+        \item\label{def-sub-a} si para cualesquiera $w_1,w_2 \in W$, se cumple que $w_1+w_2 \in W$ y
+        \item\label{def-sub-b} si $\lambda \in \K$ y  $w \in W$, entonces $\lambda w \in W$.
+    \end{enumerate}
+\end{obs}
+
+\begin{obs}
+    El método para probar que un vector $w$ es combinación lineal de un conjunto de vectores $\{v_1,\ldots,v_k\}$ es el siguiente: se plantea la matriz con cada vector como fila, si la fila del vector $w$ es combinación lineal de las filas de la matriz, osea se anula , entonces $w$ es combinación lineal de los vectores.
+\end{obs}
+
+\begin{obs}
+    El método para probar que un conjunto de vectores $\{v_1,\ldots,v_k\}$ es linealmente independiente es el siguiente: se plantea la matriz con cada vector como fila, si se anula alguna fila, quiere decir que un vector es combinacion lineal de los demas y por lo tanto el conjunto es LD.
+\end{obs}
+
+\begin{obs}
+    Cuando la consigna te pide operar con subconjuntos fila y columna de una matriz, el método es extraer cada fila o columna y operar con ellas como vectores.
+\end{obs}
+
+\begin{obs}
+    Observaciones útiles para probar linealidad de conjuntos: Todo subconjunto de un conjunto LI es LI. Todo conjunto que contiene un subconjunto LD es también LD. Todo conjunto que contiene al vector 0 es LD. Un conjunto es LI si y sólo si todos sus subconjuntos finitos son LI.
+\end{obs}
+
+\begin{obs}
+    El método para probar que algo es una base es el siguiente:
+    \begin{enumerate}
+        \item Probar que es un conjunto LI.
+        \item Probar que es un conjunto generador.
+    \end{enumerate}
+\end{obs}
+
+\begin{obs}
+    Cuando el enunciado pide encontrar una base de un espacio vectorial, por ejemplo $\R^n$, la base es el conjunto LI de $n$ vectores. Al plantear la matriz será equivalente a la matriz identidad. Como consecuencia, un espacio vectorial tiene infinitas bases y una de ellas es la canónica con la que es mas facil trabajar.
+\end{obs}
+
+\begin{obs}
+    Sean $W_1$ y $W_2$ subespacios vectoriales los posibles casos son:
+    \begin{itemize}
+        \item $W_1+W_2$ se obtiene colocando todos los vectores de ambos subconjuntos como filas y reduciendo para obtener una base, las filas no nulas serán la base de la suma.
+        \item $W_1 \cap W_2$ se obtiene planteando la caracterización por ecuaciones de ambos subconjuntos y luego reduciendo para obtener una base, las variables libres permiten parametrizar y conseguir la base de la interesección.
+        \item Para probar que la suma es directa basta probar que $W_1 \cap W_2 = \{0\}$.
+        \item Para probar que la suma es directa basta probar que $W_1 + W_2 = W_1 \cup W_2$. 
+        \item Para obtener el complemento hay que completar a base de $V$ con los vectores de la base de $W_1$ y $W_2$. (Para completar a base basta tomar elementos de la base canónica y probar que no se pueden expresar como combinación lineal de los vectores de la base de $W_1$ y $W_2$).
+    \end{itemize}
+\end{obs}
+
+\begin{obs}
+    Cuando el ejercicio te pide obtener una base de un conjunto que está generado por ecuaciones, la forma de proceder es despejando de las ecuaciones para luego reemplazar en tu vector $v$ y obtener una combinación lineal de los vectores de la base.
+\end{obs}
+
+\begin{obs}
+    Para extender a base un conjunto Linealmente independiente, se deben tomar vectores de la base canónica y probar que no se pueden expresar como combinación lineal de los vectores del conjunto.
+\end{obs}
+
+\begin{obs}
+    Para probar que una determinada función es una transformación lineal, se debe probar que cumple las propiedades de linealidad:
+    \begin{enumerate}
+        \item $T(v+w) = T(v) + T(w)$,
+        \item $T(\lambda v) = \lambda T(v)$.
+    \end{enumerate}
+\end{obs}
+
+\begin{obs}
+    Para probar que una transformación lineal es inyectiva, se debe probar que $T(v) = 0$ si y sólo si $v = 0$.
+\end{obs}
+
+\begin{obs}
+    Para probar que una transformación lineal es sobreyectiva, se debe probar que $T(v) = w$ tiene solución para todo $w$.
+\end{obs}
+
+\begin{obs}
+    Para probar que una transformación lineal es biyectiva, se debe probar que es inyectiva y sobreyectiva.
+\end{obs}
+
+\begin{obs}
+    Cuando el ejercicio te pide encontrar una transformación lineal que cumpla determinadas condiciones:
+    \begin{enumerate}
+        \item Se utiliza un lema: Sea $T:V\to W$ una transformación lineal con $V$ de dimensión finita. Sea $\{ v_1,...,v_k \}$ una base de $V$. Entonces $\{ T(v_1), ... , T(v_k) \}$ genera a $Im(T)$ y por lo tanto $Im(T)$ es de dimensión finita.
+        \item Luego como $T(x_1,x_2,...) = x_1T(1,0,...) + x_2T(0,1,...) + ...$ se puede definir la transformación lineal con los valores de la base canónica. Es decir hay que expresar los vectores $e_1,e_2,...$ en la base que se tiene, y luego definir la transformación lineal con los vectores resultantes.
+    \end{enumerate}
+\end{obs}
+
+\begin{obs}
+    Cuando el ejercicio dar una base del núcleo y caracterizar por ecuaciones la imagen, se deben plantear las definiciones de núcleo e imagen y utilizando los datos dados plantear en ambos casos los sistemas de ecuaciones:
+    \begin{itemize}
+        \item $ImT= \{ w \in W : w = T(v) \text{ para algún } v \in V \}$,
+        \item $NuT= \{ v \in V : T(v) = 0 \}$. 
+    \end{itemize}
+\end{obs}
+
+\begin{obs}
+    Cuando el ejercicio te pide encontrar el vector coordenada $(x,y,z)$ en otra base, se debe plantear la combinacion lineal, es decir, si la base es $v_1,v_2,v_3$, se debe plantear que $(x,y,z)= xv_1+yv_2+zv_3$ y el vector coordenada será el vector columna generado por los valores de $x,y,z$ obtenidos luego de resolver el sistema de ecuaciones. \\
+    Por ejemplo, si el enunciado dice que el vector coordenada es $(1,0,0)$, entonces ese vector se puede escribir como $1v_1+0v_2+0v_3$, por lo tanto el vector coordenada será $\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}$.
+\end{obs}
+
+\begin{obs}
+    Para hallar la matriz de cambio de base el procedimiento es el siguiente: (Sea $\mathcal{B}$ una base ordenada y $\mathcal{B}'$ otra base ordenada, si se quiere hallar la matriz de cambio de base de $\mathcal{B}$ a $\mathcal{B}'$)
+    \begin{enumerate}
+        \item Primero hay que encontrar los vectores coordenada de cada vector de la base $\mathcal{B}$ en la base $\mathcal{B}'$.
+        \item Luego se deben escribir cada vector coordenada en orden como columna de una matriz.
+    \end{enumerate}
+\end{obs}
+
+\begin{obs}
+    Para hallar la matriz de la transformación lineal el procedimiento es el siguiente: (Sea $T:V\to W$ una transformación lineal, $\mathcal{B}$ una base ordenada de $V$ y $\mathcal{B}'$ una base ordenada de $W$, si se quiere hallar la matriz de $T$ en las bases $\mathcal{B}$ y $\mathcal{B}'$)
+    \begin{enumerate}
+        \item Primero hay aplicar la transformación lineal a cada vector de la base $\mathcal{B}$ y luego expresar el resultado en la base $\mathcal{B}'$.
+        \item Luego cada transformación en la base $\mathcal{B}'$ se debe escribir como columna de una matriz. La matriz resultante es la matriz de la transformación lineal.
+    \end{enumerate}
+\end{obs}
+
+\begin{obs}
+    Las siguientes afirmaciones son consecuencias fácilmente deducibles  de la definición.
+    \begin{enumerate}
+        \item Todo conjunto que contiene un conjunto linealmente dependiente es linealmente dependiente.
+        \item  Todo subconjunto de un conjunto linealmente independiente es linealmente independiente.
+        \item  Todo conjunto que contiene el vector $0$ es linealmente dependiente; en efecto, $1.0 = 0$.
+    \end{enumerate}
+\end{obs}
+\begin{proof} 
+    Las pruebas salen como consecuencia de las definiciones:
+    \noindent \begin{enumerate}
+        \item Sea $L$ un subconjunto \textit{linealmente dependiente}, es decir existen vectores $l_1,l_2,...,l_n\in L$ y escalares $\lambda_1,\lambda_2,...,\lambda_n$ pertenecientes a un cuerpo $\K$, no todos nulos, tales que: $\lambda_1l1+\lambda_2l_2+...+\lambda_nl_n=0$. Entonces, si se le agregan vectores con coeficientes 0, el conjunto seguiría siendo LD ya que la combinación lineal seguiría dando 0, con sus escalares no todos nulos. \\
+        Supongamos que se tiene un conjunto $V$ LI y un subconjunto $W$ linealmente LD, entonces agregando todos los vectores que faltan para formar el conjunto inicial seguiría siendo LD, y eso es una contradicción, por lo tanto, los subconjuntos que se tomen de un conjunto LI son necesariamente LI.
+        \item Sea $L$ un subconjunto \textit{linealmente dependiente}, es decir existen vectores $l_1,l_2,...,l_n\in L$ y escalares $\lambda_1,\lambda_2,...,\lambda_n$ pertenecientes a un cuerpo $\K$, no todos nulos, tales que: $\lambda_1l1+\lambda_2l_2+...+\lambda_nl_n=0$. Entonces, si se le agregan vectores con coeficientes 0, el conjunto seguiría siendo LD ya que la combinación lineal seguiría dando 0, con sus escalares no todos nulos. \\
+        Entonces cualquier subconjunto LD de un conjunto mas grande arbitrario, al agregarle los elementos restantes para el conjunto original, seguirá siendo LD, por consecuencia, todo conjunto que contiene a un conjunto LD también será LD.
+        \item Sea $V$ un conjunto con vectores $v_1,v_2,...,v_n,0_v$ con el vector nulo. Va a existir una combinación lineal 
+        $$
+        0v_1+0v_2+...+0v_n+\lambda0_v=0
+        $$
+        Es decir, con cualquier $\lambda\in\K$ va a existir una combinación lineal que da 0 con no todos los escalares nulos, por lo tanto, el conjunto será LD.
+    \end{enumerate}
+\end{proof}
+
+\begin{defi}
+    Sean $V$, $W$ espacios vectoriales sobre un cuerpo $\K$ y sea $T:V \to W$ una transformación lineal.  Definimos
+    \begin{align*}
+        Im(T) &:= \{w \in W:\text{existe $v \in V$, tal que } T(v)=w\} = \{T(v): v \in V \}, \\
+        Nu(T) &:= \{v \in V: T(v)=0 \}. 
+    \end{align*}
+    A $Im(T)$ lo llamamos la \textit{imagen}\index{imagen de una trasnformación lineal} de $T$ y a $ Nu(T)$ el \textit{núcleo}\index{núcleo  de una transformación lineal} de $T$. 
+\end{defi}
+
+\begin{teo}
+    Sean $V$, $W$ espacios vectoriales sobre un cuerpo $\K$ y sea $T:V \to W$ una transformación lineal; entonces $Im(T) \subset W$ y $Nu(T) \subset V$ son subespacios vectoriales.
+\end{teo}
+\begin{proof}
+    $Im(T) \ne \emptyset$, pues $0 = T(0) \in Im(T)$. 
+    Si $T(v_1),T(v_2) \in Im(T)$ y $\lambda \in \K$,  entonces $T(v_1) + T(v_2) = T(v_1+v_2) \in Im(T)$ y $\lambda T(v_1) = T(\lambda v_1) \in Im(T)$.
+    $Nu(T) \ne \emptyset$ pues $T(0) =0$ y por lo tanto $0 \in Nu(T)$.
+    Si $v,w \in V$ tales que $T(v) =0$ y $T(w)=0$,  entonces, $T(v+w)= T(v)+T(w) =0$. por lo tanto $v+w \in Nu(T)$. Si  $\lambda \in \K$,  entonces $T(\lambda v) = \lambda T(v) = \lambda.0 =0$, luego  $\lambda v \in Nu(T)$.
+\end{proof}
+
+\begin{ejer}
+    Sea $T:\R^6\rightarrow\R^2$ una transformación lineal suryectiva y $W\subseteq \R^6$ un subespacio de dimensión 3. Demostrar que existe un $w\in W$ con $w\neq 0$ tal que $T(w)=0$.
+\end{ejer}
+\begin{proof}[Solución]
+   Por ser $T$ suryectiva, $Im(T)=\R^2$, por lo tanto, $dim(Im(T))=2$. Por el teorema de la dimensión, $dim(Nu(T))=dim(\R^6)-dim(Im(T))=6-2=4$. \\
+Por otro lado, $dim(W)=3$, entonces $W=\left \langle w_1,w_2,w_3 \right \rangle$. Entonces $w_1,w_2,w_3$ son LI, por lo tanto, $dim(\left \langle w_1,w_2,w_3 \right \rangle)=3$ y $T(w)$ es un subespacio de $ImT$ generado por $\{ T(w_1), T(w_2), T(w_3) \}$, pero $dimImT=2$, entonces, el conjunto $\{ T(w_1), T(w_2), T(w_3) \}$ es LD. Esto quiere decir que: \\
+\[
+    \exists \lambda_1,\lambda_2,\lambda_3 \in \R \text{ tal que } \lambda_1T(w_1)+\lambda_2T(w_2)+\lambda_3T(w_3)=0
+\]
+Pero como $T$ es transformación lineal, se puede sacar factor común:
+\[
+    T(\lambda_1w_1+\lambda_2w_2+\lambda_3w_3)=0
+\]
+Entonces, $\lambda_1w_1+\lambda_2w_2+\lambda_3w_3$ es un vector de $W$ tal que $T(w)=0$ y $w\neq 0$.  
+\end{proof}
+
+\begin{ejer}
+    Dar una transformación lineal $T:\R^3\rightarrow\R^3$ tal que su imagen sea el subespacio generado por $(1,0,-1)$ y $(1,2,2)$. Hallar $T(x,y,z)$. \\
+\end{ejer}
+\begin{proof}
+    Dada $\beta = \{ e_1,e_2,e_3 \}$ base canónica de $\R^3$, se puede escribir $T$ como:
+\[ 
+    T(e_1)=(1,0,-1), \ T(e_2)=(1,2,2), \ T(e_3)=(0,0,0)
+\]
+Entonces, $T(x,y,z)$ se puede escribir como:
+\[
+    T(x,y,z)=T(xe_1+ye_2+ze_3)=xT(e_1)+yT(e_2)+zT(e_3)
+\]
+\[
+    =x(1,0,-1)+y(1,2,2)+z(0,0,0)=(x+y,2y,-x+2y)
+\]
+\end{proof}
+
+\begin{ejer}
+    Sea $\mathcal{B}= \{ (1,-2,1),(2,-3,3), (-2,2,-3) \}$ un subconjunto del $\R$-espacio vectorial $\R^3$.
+\begin{itemize}
+    \item[(b)] Hallar la matriz de cambio de base de la base canónica $\mathcal{C}$ a $\mathcal{B}$.
+    \item[(c)] Hallar las coordenadas, respecto de $\mathcal{B}$, de los vectores $(1,0,1)$ y $(-1,2,1)$. 
+\end{itemize}
+\end{ejer}
+\begin{proof}
+    Para hallar la matriz de cambio de base de la base canónica $\mathcal{C}$ a $\mathcal{B}$ primero obtengo la matriz de cambio de base de $\mathcal{B}$ a $\mathcal{C}$:
+Se tiene que $[v]_{\mathcal{C}} = P_{\mathcal{B} \mathcal{C}} \cdot [v]_{\mathcal{B}}$. \\
+Primero debo expresar los vectores de $\mathcal{B}$ como combinacion lineal de los vectores de la base canónica para obtener las coordenadas:
+$$
+(1,-2,1) = 1(1,0,0)+(-2)(0,1,0)+1(0,0,1)
+$$
+$$
+(2,-3,3) = 2(1,0,0)+(-3)(0,1,0)+3(0,0,1)
+$$
+$$
+(-2,2,-3) = -2(1,0,0)+2(0,1,0)+(-3)(0,0,1)
+$$
+Entonces, la matriz de cambio de base de $\mathcal{B}$ a $\mathcal{C}$ es:
+$$
+P_{\mathcal{B} \mathcal{C}} = \begin{bmatrix}
+    1 & 2 & -2 \\
+    -2 & -3 & 2 \\
+    1 & 3 & -3
+\end{bmatrix}
+$$
+Ahora, para obtener la matriz de cambio de base de $\mathcal{C}$ a $\mathcal{B}$, debo invertir la matriz anterior, ya que lo que se busca es $[v]_{\mathcal{B}}$:
+planteo la matriz ampliada:
+$$
+\left ( \left.\begin{matrix}
+    1 & 2 & -2 \\ 
+    -2 & -3 & 2 \\ 
+    1 & 3 & -3
+    \end{matrix}\right| \begin{matrix}
+    1 & 0 & 0 \\ 
+    0 & 1 & 0 \\ 
+    0 & 0 & 1
+    \end{matrix}\right )
+\xrightarrow[]{...}
+\left ( \left.\begin{matrix}
+    1 & 0 & 0 \\ 
+    0 & 1 & 0 \\ 
+    0 & 0 & 1
+    \end{matrix}\right| \begin{matrix}
+    3 & 0 & -2 \\ 
+    -4 & -1 & 2 \\ 
+    -3 & -1 & 1
+    \end{matrix}\right )
+$$
+Entonces, la matriz de cambio de base de $\mathcal{C}$ a $\mathcal{B}$ es la obtenida inversa.
+Para hallar las coordenadas de los vectores $(1,0,1)$ y $(-1,2,1)$ en la base $\mathcal{B}$, debo plantear la matriz de cambio de base de $\mathcal{C}$ a $\mathcal{B}$ y multiplicarla por el vector:
+$$
+[(1,0,1)]_{\mathcal{B}} = \begin{bmatrix}
+    3 & 0 & -2 \\ 
+    -4 & -1 & 2 \\ 
+    -3 & -1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+    1 \\ 
+    0 \\ 
+    1
+\end{bmatrix}
+=
+\begin{bmatrix}
+    1 \\ 
+    -2 \\ 
+    -2
+\end{bmatrix}
+$$
+$$
+[(-1,2,1)]_{\mathcal{B}} = \begin{bmatrix}
+    3 & 0 & -2 \\ 
+    -4 & -1 & 2 \\ 
+    -3 & -1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+    -1 \\ 
+    2 \\ 
+    1
+\end{bmatrix}
+=
+\begin{bmatrix}
+    -5 \\ 
+    4 \\ 
+    2
+\end{bmatrix}
+$$
+\end{proof}
+
+\end{document}

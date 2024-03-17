@@ -1,0 +1,543 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Do not alter this block (unless you're familiar with LaTeX
+\documentclass{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, fancyhdr, color, comment, graphicx, environ}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{background}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+\setlength{\headheight}{1.5cm}
+
+
+\pagestyle{fancy}
+
+\SetBgContents{https://github.com/PedroMVillar}
+\SetBgScale{3} % Escala de la marca de agua
+\SetBgColor{gray!80} % Color de la marca de agua
+\SetBgAngle{45} % Ángulo de inclinación de la marca de agua
+\SetBgOpacity{0.2} % Opacidad de la marca de agua
+
+\newenvironment{problem}[2][Ejercicio]
+    { \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{definition}[2][Definición]
+    { \begin{mdframed}[backgroundcolor=red!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{theorem}[2][Teorema]
+    { \begin{mdframed}[backgroundcolor=green!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{lemma}[2][Lema]
+    { \begin{mdframed}[backgroundcolor=green!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{proposition}[2][Proposición]
+    { \begin{mdframed}[backgroundcolor=green!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{corollary}[2][Corolario]
+    { \begin{mdframed}[backgroundcolor=green!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{example}[2][Ejemplo]
+    { \begin{mdframed}[backgroundcolor=yellow!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{remark}[2][Observación]
+    { \begin{mdframed}[backgroundcolor=yellow!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{note}
+    {\textit{Nota:}}
+    {}
+
+\newenvironment{conclusion}
+    {\textit{Conclusión:}}
+    {}
+
+\newenvironment{notation}
+    {\textit{Notación:}}
+    {}
+
+\newenvironment{question}
+    {\textit{Pregunta:}}
+    {}
+
+\newenvironment{answer}
+    {\textit{Respuesta:}}
+    {}
+
+% Define solution environment
+\newenvironment{solution}
+    {\textit{Solución:}}
+    {}
+
+\renewcommand{\qed}{\quad\qedsymbol}
+
+% prevent line break in inline mode
+\binoppenalty=\maxdimen
+\relpenalty=\maxdimen
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Header Configuarción
+\lhead{Pedro Villar}
+\rhead{Álgebra Lineal} 
+\chead{\textbf{Determinantes de orden $n$}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{mdframed}[backgroundcolor=gray!40,shadow=true,roundcorner=8pt]
+    El determinante puede ser pensado como una función que a cada matriz cuadrada $n \times n$ con coeficientes en $\mathbb{K}$,  le asocia un elemento de $\mathbb{K}$.
+\end{mdframed}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Definiciones y teoremas
+\section*{Definiciones y Observaciones}
+Sea $n \in \mathbb{N}$ y $A =[a_{ij}] \in M_n(\mathbb{K})$ , entonces el \textit{determinante de $A$} (en este caso expandido por la primera columna), denotado $\det(A)$ se define como:
+        \begin{enumerate}
+            \item[(1)] si $n=1$,  $\det([a]) =a$;
+            \item[($n$)] si $n >1$, 
+            \begin{align*}
+            \det(A) &=  a_{11}\det A(1|1) - a_{21}\det A(2|1) + \cdots + (-1)^{1+n}  a_{n1}\det A(n|1) \\
+            &= \sum_{i=1}^{n} (-1)^{1+i}  a_{i1}\det A(i|1).
+            \end{align*}
+        \end{enumerate}
+
+\begin{remark}{- Propiedades de determinantes}
+Sea $A$ una matriz cuadrada de orden $n$ y $k \in \mathbb{N}$, entonces:
+\begin{enumerate}
+    \item $\det(A^t) = \det(A)$.
+    \item Si $A$ tiene dos filas iguales, entonces $\det(A) = 0$.
+    \item Si $A$ tiene una fila de ceros, entonces $\det(A) = 0$.
+    \item Si una fila es combinación lineal de otras filas, entonces $\det(A) = 0$.
+    \item Si los elementos de una fila de $A$ son múltiplos de una constante $k$, entonces $\det(A) = k\det(A)$.
+    \item Si en un determinante se intercambian dos filas, entonces $\det(A) = -\det(A)$.
+    \item Si a los elementos de una fila se le suman los elementos de otra fila multiplicados por una constante, entonces $\det(A) = \det(A)$. 
+\end{enumerate}
+\end{remark}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Triangulacion
+\section*{Determinantes por triangulación}
+Si $A$ es una matriz triangular superior (es decir que son iguales a cero los elementos que están debajo de la diagonal principal), la aplicación del desarrollo por la primera columna muestra que $det(A)$ se obtiene multiplicando los elementos de esta diagonal.
+$$
+A=\begin{bmatrix} 
+a_{11} & a_{12} & \cdots & a_{1j} & \cdots & a_{1n} \\ 
+0 & a_{22} & \cdots & a_{2j} & \cdots & a_{2n}\\ 
+\vdots & 0 & \ddots & \vdots & \ddots & \vdots \\ 
+\vdots & 0 & \cdots & a_{jj} & \cdots & a_{in} \\
+\vdots & 0 & \ddots & 0 & \ddots & \vdots \\
+0 & \cdots & \cdots & \cdots & \cdots & a_{nn}
+\end{bmatrix}
+\Rightarrow det(A) = \prod_{j=1}^{n}a_{jj}
+$$
+Por lo tanto si se tiene una matriz que no es triangular, un método útil para obtener el determinante es reducir la matriz a triangular superior y así llegar a hacer el producto de la diagonal.
+\subsection*{Método para matrices $n \times n$}
+La triangulación de una matriz $n\times n$ es un proceso algebraico que busca convertir la matriz original en una forma triangular superior o inferior mediante operaciones elementales de fila. Estas operaciones incluyen intercambio de filas, multiplicación de filas por un escalar y suma/resta de filas.
+\subsection*{Ejemplos}
+\begin{problem}{1}
+    Calcular el determinante:
+\[
+\Delta_n = 
+\begin{vmatrix}
+1 & 2 & 2 & \dots & 2 \\
+2 & 2 & 2 & \dots & 2 \\
+2 & 2 & 3 & \dots & 2 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+2 & 2 & 2 & \dots & n
+\end{vmatrix}.
+\]
+\end{problem}
+\begin{solution}
+    Efectuando las transformaciones $F_2-2F_1$, $F_3-F_2$, $F_4 - F_2$,...,$F_n-F_2$:
+\[
+\Delta_n = 
+\begin{vmatrix}
+1 & 2 & 2 & \dots & 2 \\
+2 & 2 & 2 & \dots & 2 \\
+2 & 2 & 3 & \dots & 2 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+2 & 2 & 2 & \dots & n
+\end{vmatrix} = 
+\begin{vmatrix}
+1 & 2 & 2 & \dots & 2 \\
+0 & -2 & -2 & \dots & -2 \\
+0 & 0 & 1 & \dots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \dots & n-2
+\end{vmatrix} = 1 \cdot (-2) \cdot 1 \cdot \dots \cdot (n-2) = (-2)(n-2)!
+\]
+Esto quiere decir que en la diagonal luego del $1$ aparecerán todos los escalares hasta $n-2$.
+\end{solution}
+\begin{problem}{2}
+    Calcular el determinante:
+\[
+\Delta_n = \begin{vmatrix}
+n & 1 & 1 & \dots & 1 \\
+n & 2 & 1 & \dots & 1 \\
+n & 1 & 3 & \dots & 1 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+n & 1 & 1 & \dots & n
+\end{vmatrix}.
+\]
+\end{problem}
+\begin{solution}
+    Restando a cada fila, a partir de la segunda, la primera:
+\[
+\Delta_n = \begin{vmatrix}
+n & 1 & 1 & \dots & 1 \\
+n & 2 & 1 & \dots & 1 \\
+n & 1 & 3 & \dots & 1 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+n & 1 & 1 & \dots & n
+\end{vmatrix} =
+\begin{vmatrix}
+n & 1 & 1 & \dots & 1 \\
+0 & 1 & 0 & \dots & 0 \\
+0 & 0 & 2 & \dots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \dots & n-1
+\end{vmatrix} = n \cdot (n-1)! = n!
+\]
+\end{solution}
+
+\begin{problem}{3}
+    Calcular el determinante:
+\[
+\Delta_n = \begin{vmatrix}
+1 & 2 & 3 & \dots & n \\
+-1 & 0 & 3 & \dots & n \\
+-1 & -2 & 0 & \dots & n \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+-1 & -2 & -3 & \dots & 0
+\end{vmatrix}.
+\]
+\end{problem}
+\begin{solution}
+    Sumando a cada fila menos a la primera, la primera:
+\[
+\Delta_n = \begin{vmatrix}
+1 & 2 & 3 & \dots & n \\
+-1 & 0 & 3 & \dots & n \\
+-1 & -2 & 0 & \dots & n \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+-1 & -2 & -3 & \dots & 0
+\end{vmatrix} = 
+\begin{vmatrix}
+1 & 2 & 3 & \dots & n \\
+0 & 2 & 6 & \dots & 2n \\
+0 & 0 & 3 & \dots & 2n \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \dots & n
+\end{vmatrix} = n!
+\]
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Induccion
+\section*{Determinantes por Inducción}
+Para resolver determinantes por inducción fuerte en $n$, se sigue un enfoque inductivo para matrices de orden $n$.
+\begin{enumerate}
+    \item \textbf{Caso base:} Si $n=1$, entonces $\det(A) = a_{11}$ (en algunos casos se toma $n=2$).
+    \item \textbf{Hipótesis de inducción:} Supongamos que el determinante vale para $n<k$. Y se debe probar que vale para $n=k+1$.
+    \item \textbf{Paso inductivo:} Se expande el determinante de la matriz de orden $n$ por la primera fila o columna, y se obtiene una expresión en términos de determinantes de matrices de orden $n$ o menor. Se busca aplicar la hipótesis de inducción para obtener una expresión en términos de determinantes de matrices de orden $n$ o menor.
+\end{enumerate}
+\subsection*{Ejemplos}
+\begin{problem}{1}
+    Demuestra que si $a\neq b$ entonces el siguiente determinante de $n\times n$
+    \[
+    \begin{vmatrix}
+    a+ b & ab & 0 & \dots & 0 & 0 \\
+    1 & a+b & ab & \dots & 0 & 0 \\
+    0 & 1 & a+b & \dots & 0 & 0 \\
+    \vdots & \ddots & \ddots & \dots & \vdots & \vdots \\
+    0 & 0 & 0 & \dots & a+b & ab \\
+    0 & 0 & 0 & \dots & 1 & a+b
+    \end{vmatrix} =
+    \frac{a^{n+1}-b^{n+1}}{a-b}
+    \]
+\end{problem}
+\begin{solution}
+    Para esto haremos inducción fuerte sobre $n$: \newline
+    \textbf{Caso base:}
+        Tomando $n=2$, probaremos que $\begin{vmatrix} a+b & ab \\ 1 &  a+b \end{vmatrix} =  \frac{a^3-b^3}{a-b}$:
+        \[
+    \begin{aligned}
+    \begin{vmatrix} a+b & ab \\ 1 &  a+b \end{vmatrix} &= (a+b)^2 - ab = a^2 +2ab + b^2 - ab = a^2 + ab + b^2 \\
+    &= \frac{(a-b)\cdot (a^2 + ab + b^2)}{(a-b)} = \frac{a^3-b^3}{a-b}
+    \end{aligned}
+        \]
+    \textbf{Hipótesis de inducción:} 
+    Ahora supongamos que el determinante vale para $n\leq k$ y con esto probar que vale para $n=k+1$ el determinante:
+\[
+\begin{vmatrix}
+a+ b & ab & 0 & \dots & 0 & 0 \\
+1 & a+b & ab & \dots & 0 & 0 \\
+0 & 1 & a+b & \dots & 0 & 0 \\
+\vdots & \ddots & \ddots & \dots & \vdots & \vdots \\
+0 & 0 & 0 & \dots & a+b & ab \\
+0 & 0 & 0 & \dots & 1 & a+b
+\end{vmatrix}_{(k+1)\times(k+1)} =
+\frac{a^{k+2}-b^{k+2}}{a-b}
+\]
+\textbf{Paso inductivo:} 
+Calculo el determinante expandiendo por la fila 1:
+\[
+\begin{aligned}
+& \begin{vmatrix}
+a+ b & ab & 0 & \dots & 0 & 0 \\
+1 & a+b & ab & \dots & 0 & 0 \\
+0 & 1 & a+b & \dots & 0 & 0 \\
+\vdots & \ddots & \ddots & \dots & \vdots & \vdots \\
+0 & 0 & 0 & \dots & a+b & ab \\
+0 & 0 & 0 & \dots & 1 & a+b
+\end{vmatrix} \\ \\ \\
+&= (a+b) \cdot
+\begin{vmatrix}
+a+ b & ab & 0 & \dots & 0 & 0 \\
+1 & a+b & ab & \dots & 0 & 0 \\
+0 & 1 & a+b & \dots & 0 & 0 \\
+\vdots & \ddots & \ddots & \dots & \vdots & \vdots \\
+0 & 0 & 0 & \dots & a+b & ab \\
+0 & 0 & 0 & \dots & 1 & a+b
+\end{vmatrix}_{k\times k} - ab \cdot
+\begin{vmatrix}
+1 & ab & 0 & \dots & 0 & 0 \\
+0 & a+b & ab & \dots & 0 & 0 \\
+0 & 1 & a+b & \dots & 0 & 0 \\
+\vdots & \ddots & \ddots & \dots & \vdots & \vdots \\
+0 & 0 & 0 & \dots & a+b & ab \\
+0 & 0 & 0 & \dots & 1 & a+b
+\end{vmatrix}_{k\times k} \\
+\\
+\\
+&=(a+b) \cdot \frac{a^{k+1}-b^{k+1}}{a-b} - ab \cdot
+\begin{vmatrix}
+1 & ab & 0 & \dots & 0 & 0 \\
+0 & a+b & ab & \dots & 0 & 0 \\
+0 & 1 & a+b & \dots & 0 & 0 \\
+\vdots & \ddots & \ddots & \dots & \vdots & \vdots \\
+0 & 0 & 0 & \dots & a+b & ab \\
+0 & 0 & 0 & \dots & 1 & a+b
+\end{vmatrix}_{k\times k} \\
+\\
+\\
+\end{aligned}
+\]
+\[
+\begin{aligned}
+&= (a+b) \cdot \frac{a^{k+1}-b^{k+1}}{a-b} - ab \cdot1
+\begin{vmatrix}
+a+b & ab & \dots & 0 & 0 \\
+1 & a+b & \dots & 0 & 0 \\
+\ddots & \ddots & \dots & \vdots & \vdots \\
+0 & 0 & \dots & a+b & ab \\
+0 & 0 & \dots & 1 & a+b
+\end{vmatrix}_{(k-1)\times (k-1)} \\
+\\
+\\
+&= (a+b) \cdot \frac{a^{k+1}-b^{k+1}}{a-b} - ab \cdot \frac{a^k-b^k}{a-b} = \frac{a^{k+2}-ab^{k+1}+ba^{k+1}-b^{k+2}}{a-b} - \frac{ba^{k+1}-ab^{k+1}}{a-b} \\
+\\
+\\
+&= \frac{a^{k+2}-b^{k+2}}{a-b}
+\end{aligned}
+\]
+Con esto queda probado que vale para todo $n$.
+\end{solution}
+\newpage
+\begin{problem}{2}
+    Sea $A_n = \begin{pmatrix} 2 & -1 & 0 & \dots & 0 & 0 \\ -1 & 2 & -1 & \dots & 0 & 0 \\ 0 & -1 & 2 & \dots & 0 & 0 \\ \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\ 0 & 0 & 0 & \dots & 2 & -1 \\ 0 & 0 & 0 & \dots & -1 & 2 \end{pmatrix} \in M_{n\times n}(\mathbb{R})$ probar que $det(A_n)=n+1$ para todo $n\in \mathbb{N}$.
+\end{problem}
+\begin{solution}
+    \textbf{Caso base:} Para la prueba hacemos inducción fuerte sobre $n$, para el caso base, tomamos $n=1$ y $n=2$:
+    \[
+\begin{vmatrix}
+2
+\end{vmatrix} = 2 = 1+1, \ \ \ \ \ 
+\begin{vmatrix}
+2 & -1 \\
+-1 & 2
+\end{vmatrix} = 4-1 = 3 = 2+1
+\]
+\textbf{Hipótesis de inducción:} Ahora supongamos que el determinante vale para $n\leq k$ y con esto probar que vale para $n=k+1$ el determinante:
+\[
+\begin{vmatrix} 2 & -1 & 0 & \dots & 0 & 0 \\ -1 & 2 & -1 & \dots & 0 & 0 \\ 0 & -1 & 2 & \dots & 0 & 0 \\ \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\ 0 & 0 & 0 & \dots & 2 & -1 \\ 0 & 0 & 0 & \dots & -1 & 2 \end{vmatrix}_{(k+1)\times(k+1)} = k+2
+\]
+\textbf{Paso inductivo:} 
+Calculo el determinante expandiendo por la fila 1:
+\[
+\begin{aligned}
+\begin{vmatrix} 2 & -1 & 0 & \dots & 0 & 0 \\ -1 & 2 & -1 & \dots & 0 & 0 \\ 0 & -1 & 2 & \dots & 0 & 0 \\ \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\ 0 & 0 & 0 & \dots & 2 & -1 \\ 0 & 0 & 0 & \dots & -1 & 2 \end{vmatrix}_{(k+1)\times(k+1)} &= 2 \cdot 
+\begin{vmatrix} 2 & -1 & 0 & \dots & 0 & 0 \\ -1 & 2 & -1 & \dots & 0 & 0 \\ 0 & -1 & 2 & \dots & 0 & 0 \\ \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\ 0 & 0 & 0 & \dots & 2 & -1 \\ 0 & 0 & 0 & \dots & -1 & 2 \end{vmatrix}_{k\times k} + 1 \cdot 
+\begin{vmatrix} -1 & -1 & \dots & 0 & 0 \\ 0 & 2 & \dots & 0 & 0 \\ \vdots  & \vdots & \ddots & \vdots & \vdots \\ 0 & 0 & \dots & 2 & -1 \\ 0 & 0 & \dots & -1 & 2 \end{vmatrix}_{k\times k}  \\ \\
+&= 2 (k+1) + (-1) 
+\begin{vmatrix} 2 & -1 &  \dots & 0 & 0 \\  -1 & 2 & \dots & 0 & 0 \\ \vdots & \vdots & \ddots & \vdots & \vdots \\ 0 & 0 & \dots & 2 & -1 \\ 0 &0& \dots & -1 & 2 \end{vmatrix}_{(k-1)\times (k-1)}  \\ \\
+&= 2 (k+1) + (-1)k = 2k+2-k = k+2
+\end{aligned}
+\]
+Con esto queda probado que $det(A_n)=n+1$ vale para todo $n$ natural.z
+\end{solution}
+
+\begin{problem}{3}
+    Calcular el determinante de orden $n$ de:
+\[
+A =
+\begin{bmatrix}
+1 + x^2 & x & 0 & \dots & 0 \\
+x & 1 + x^2 & x & \dots & 0 \\
+0 & x & 1 + x^2 & \dots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \dots & 1+x^2
+\end{bmatrix}
+\]
+\end{problem}
+\begin{solution}
+    Como no tenemos una fórmula, todavía no podemos hacer inducción fuerte para calcular el determinante, analicemos los resultados cuando la matriz es de orden 1,2 y 3:
+\[
+\begin{vmatrix}
+1 + x^2
+\end{vmatrix} = 1+x^2, \ \ \
+\begin{vmatrix}
+1 + x^2 & x \\
+x & 1+x^2
+\end{vmatrix} = 1 + x^2 + x^4 \ \ \
+\begin{vmatrix}
+1 + x^2 & x & 0 \\
+x & 1+x^2 & x \\
+0 & x & 1+x^2
+\end{vmatrix} = 1+x^2+x^4+x^6
+\]
+Se puede observar un patrón el determinante se va formando como $1+x^2+x^4+\dots +x^{2n}$, entonces la fórmula es
+\[
+det(A) = \sum_{k=0}^{n} x^{2k}
+\]
+\textbf{Caso base:} Tomando $n=2$, ya está probado en el paso anterior que
+\[
+\begin{vmatrix}
+1 + x^2 & x \\
+x & 1+x^2
+\end{vmatrix} = 1 + x^2 + x^4 = \sum_{k = 0}^{2} x^{2k}
+\]
+\textbf{Hipótesis de inducción:} Ahora supongamos que el determinante vale para $n\leq k$ y con esto probar que vale para $n=k+1$ el determinante:
+\[
+\begin{vmatrix}
+1 + x^2 & x & 0 & \dots & 0 \\
+x & 1 + x^2 & x & \dots & 0 \\
+0 & x & 1 + x^2 & \dots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \dots & 1+x^2
+\end{vmatrix}_{(k+ 1)\times (k+1)} = \sum_{k = 0}^{n} x^{2k+2}
+\]
+\textbf{Paso inductivo:} Desarrollo el determinante por la primera columna=
+\[
+\begin{aligned}
+\begin{vmatrix}
+1 + x^2 & x & 0 & \dots & 0 \\
+x & 1 + x^2 & x & \dots & 0 \\
+0 & x & 1 + x^2 & \dots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \dots & 1+x^2
+\end{vmatrix}_{(k+ 1)\times (k+1)} &= (1+x^2)\sum_{k=0}^{n} x^{2k} - x
+\begin{vmatrix}
+x & 0 & \dots & 0 \\
+x & 1 + x^2 & \dots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \dots & 1+x^2
+\end{vmatrix}_{k\times k} \\
+&= (1+x^2)\sum_{k=0}^{n} x^{2k} - x^2\sum_{k=0}^{n} x^{2k-2} = \sum_{k=0}^{n} x^{2k+2}
+\end{aligned}
+\]
+Con esto queda probado que vale para todo $n$ vale el determinante.
+\end{solution}
+\newpage
+\begin{problem}{4}
+    Calcular el determinante de orden $n$:
+\[
+D_n(x) = 
+\begin{vmatrix}
+2x & x^2 & 0 & \dots & 0 \\
+1 & 2x & x^2 & \dots & 0 \\
+0 & 1 & 2x & \dots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \dots & 2x
+\end{vmatrix}
+\]
+\end{problem}
+\begin{solution}
+    Como no tenemos una fórmula, todavía no podemos hacer inducción fuerte para calcular el determinante, analicemos los resultados cuando la matriz es de orden 1,2 y 3:
+\[
+D_1(x) = |2x| = 2x,
+\]\[
+D_2(x) = \begin{vmatrix} 2x & x^2 \\ 1 & 2x \end{vmatrix}= 3x^2,
+\]\[
+D_3(x)=\begin{vmatrix} 2x & x^2 & 0 \\ 1 & 2x & x^2 \\ 0 & 1 & 2x\end{vmatrix} = 4x^3
+\]
+Esto nos permite conjeturar una fórmula
+\[
+D_n(x)=(n+1)x^n
+\]
+Ahora hagamos inducción fuerte sobre $n$ para demostrar la fórmula:
+\textbf{Caso base:} El caso base ya está demostrado con $n=1$ y $n=2$
+\[
+D_1(x) = |2x| = 2x, \ \ \ \ \ D_2(x) = \begin{vmatrix} 2x & x^2 \\ 1 & 2x \end{vmatrix}= 3x^2
+\]
+\textbf{Hipótesis de inducción:} Ahora supongamos que el determinante vale para $n\leq k$ y con esto probar que vale para $n=k+1$ el determinante:
+\[
+D_{k+1}(x) = 
+\begin{vmatrix}
+2x & x^2 & 0 & \dots & 0 \\
+1 & 2x & x^2 & \dots & 0 \\
+0 & 1 & 2x & \dots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \dots & 2x
+\end{vmatrix}_{(k+1)\times(k+1)} = (k+2)x^{k+1}
+\]
+\textbf{Paso inductivo:} Desarrollando por la primera columna:
+\[
+\begin{aligned}
+\begin{vmatrix}
+2x & x^2 & 0 & \dots & 0 \\
+1 & 2x & x^2 & \dots & 0 \\
+0 & 1 & 2x & \dots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \dots & 2x
+\end{vmatrix}_{(k+1)\times(k+1)} &= 2x 
+\begin{vmatrix}
+2x & x^2 & \dots & 0 \\
+1 & 2x & \dots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \dots & 2x
+\end{vmatrix}_{k\times k} - 
+\begin{vmatrix}
+x^2 & 0 & \dots & 0 \\
+1 & 2x & \dots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \dots & 2x
+\end{vmatrix}_{k\times k} \\ \\
+&= 2xD_k(x)-x^2D_{k-1}(x) = 2x(k+1)x^k - x^2kx^{k-1} \\
+&= (k+2)x^{k+1}
+\end{aligned}
+\]
+Con esto queda probado que el determinante vale para todo $n$.
+\end{solution}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}

@@ -1,0 +1,322 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Do not alter this block (unless you're familiar with LaTeX
+\documentclass{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, fancyhdr, color, comment, graphicx, environ}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{background}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+\setlength{\headheight}{1.5cm}
+
+
+\pagestyle{fancy}
+
+\SetBgContents{https://github.com/PedroMVillar}
+\SetBgScale{3} % Escala de la marca de agua
+\SetBgColor{gray!80} % Color de la marca de agua
+\SetBgAngle{45} % Ángulo de inclinación de la marca de agua
+\SetBgOpacity{0.2} % Opacidad de la marca de agua
+
+\newenvironment{problem}[2][Ejercicio]
+    { \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+% Define solution environment
+\newenvironment{solution}
+    {\textit{Solución:}}
+    {}
+
+\renewcommand{\qed}{\quad\qedsymbol}
+
+% prevent line break in inline mode
+\binoppenalty=\maxdimen
+\relpenalty=\maxdimen
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Fill in the appropriate information below
+\lhead{Pedro Villar}
+\rhead{Álgebra Lineal} 
+\chead{\textbf{Guía - Álgebra Lineal}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\begin{mdframed}[backgroundcolor=blue!20]
+Consignas
+\end{mdframed}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Rectas y planos
+\section{Rectas y Planos}\label{sec:rectas-y-planos}
+
+\begin{problem}{1.1}
+    \emph{Halla las ecuaciones de la recta $L$ que pasa por los puntos $P = (1,0,-1)$ y $Q = (2,1-3)$:}
+    \end{problem}
+    \begin{problem}{1.2}
+    \emph{Hallar las ecuaciones del plano $P$ que pasa por los puntos $A=(0,1,-1),$ $B=(2,3,-5)$ y $C=(1,4,3)$.}    
+\end{problem}
+\begin{problem}{1.3}
+    \emph{Comprueba si existe alguna recta que pase por los puntos $P=(3,1,0)$, $Q=(0,-5,1)$, $R=(6,-5,1)$}.
+    \end{problem}
+    \begin{problem}{1.4}
+    \emph{Halla todas las ecuaciones del plano $\Pi$ Determinado por el punto $A=(1,-3,2)$ y por los vectores $u=(2,1,0)$, $v=(-1,0,3)$}.
+    \end{problem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Sistemas lineales
+\section{Sistemas lineales}\label{sec:sist-lineales}
+\begin{problem}{2.1}
+
+Para que valores del parámetro $k$, el siguiente sistema de ecuaciones lineales:
+\begin{itemize}
+\item 
+i) tiene solución única.
+\item 
+ii) no tiene solución.
+\item 
+iii) tiene soluciones infinitas.
+\end{itemize}
+\[
+\begin{cases}
+kx + y + z = 1 \\
+x + ky + z = 1 \\
+x + y + kz = 1
+\end{cases}
+\]
+\end{problem}
+
+\begin{problem}{2.2}
+Encuentre el determinante de las siguientes matrices, usando únicamente las propiedades de los determinantes:
+\[
+A = \begin{bmatrix}
+1 & a & b+c \\
+1 & b & c+a \\
+1 & c & a+b
+\end{bmatrix} \ \ \ \ \ \ \ \ \
+B = \begin{bmatrix}
+a_1^2 & a_1 & 1 \\
+a_2^2 & a_2 & 1 \\
+a_3^2 & a_3 & 1
+\end{bmatrix}
+\]
+\end{problem}
+\newpage
+\begin{problem}{2.3}	
+    Considere el valor del siguiente determinante
+\[
+\begin{vmatrix}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33} 
+\end{vmatrix} = 8
+\]
+en base a este resultado, encuentre el valor de
+\[
+\begin{vmatrix}
+-3a_{11} & -3a_{12} & -3a_{13} \\
+2a_{31} & 2a_{32} & 2a_{33} \\
+5a_{21} & 5a_{22} & 5a_{23}
+\end{vmatrix}
+\]
+\end{problem}
+\begin{problem}{2.4}
+    
+    Demuestra que si $a\neq b$ entonces el siguiente determinante de $n\times n$
+    \[
+    \begin{vmatrix}
+    a+ b & ab & 0 & \dots & 0 & 0 \\
+    1 & a+b & ab & \dots & 0 & 0 \\
+    0 & 1 & a+b & \dots & 0 & 0 \\
+    \vdots & \ddots & \ddots & \dots & \vdots & \vdots \\
+    0 & 0 & 0 & \dots & a+b & ab \\
+    0 & 0 & 0 & \dots & 1 & a+b
+    \end{vmatrix} =
+    \frac{a^{n+1}-b^{n+1}}{a-b}
+    \]
+\end{problem}
+
+\begin{problem}{2.5}
+    Encuentre la forma general de las matrices $A \in M_{2\times 2}$ tales que conmuten con la matriz $B$, esto es, $AB = BA$ donde
+\[
+B = \begin{bmatrix}
+2 & -1 \\
+1 & 1
+\end{bmatrix}
+\]
+\end{problem}
+
+\begin{problem}{2.6}
+    Muestre que si $A$ es una matriz de tamaño $n\times n$, entonces el determinante de su adjunta es igual al determinante de $A$ elevado a la $(n - 1)$, esto es
+\[
+|adj(A)| = (|A|)^{n-1}
+\]
+\end{problem}
+\begin{problem}{2.7}
+    Sea $A_n = \begin{pmatrix} 2 & -1 & 0 & \dots & 0 & 0 \\ -1 & 2 & -1 & \dots & 0 & 0 \\ 0 & -1 & 2 & \dots & 0 & 0 \\ \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\ 0 & 0 & 0 & \dots & 2 & -1 \\ 0 & 0 & 0 & \dots & -1 & 2 \end{pmatrix} \in M_{n\times n}(\mathbb{R})$ probar que $det(A_n)=n+1$ para todo $n\in \mathbb{N}$.
+\end{problem}
+\newpage
+
+\begin{problem}{2.8}
+    Determinar para que valores de $x\in \mathbb{R}$ la siguiente matriz es invertible
+\[
+A = \begin{pmatrix}
+1 & 0 & 9 & 0 \\
+3 & 1 & 2 & 3 \\
+3 & 0 & -1 & 0 \\
+3 & 1 & 2 & x
+\end{pmatrix}
+\]
+\end{problem}
+
+\begin{problem}{2.9}
+    Sea $A =  \begin{pmatrix} x & a & b & c & d \\ x & x & a & b & c \\ x & x & x & a & b \\  x & x & x & x & a \\ x & x & x & x & x \end{pmatrix}$ calcular $det(A).$
+\end{problem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Espacios Vectoriales}\label{sec:esp-vectoriales}
+
+\begin{problem}{3.1}
+    Sea $M$ el conjunto de todas las matrices invertibles de tamaño $3 \times 3$, muestre que este conjunto no es un espacio vectorial.
+\end{problem}
+
+\begin{problem}{3.2}
+    Cuales de los siguientes subconjuntos de $R_3[x]$ (espacio vectorial de polinomios de grado < 3) son subespacios vectoriales. Con las operaciones de suma y producto normales que conocemos.
+\begin{itemize}
+\item 
+\textbf{a.} $V = \{ a_0 + a_1t + a_2t^2 \ \ | \ \ a_0 = 0 \}$
+\item 
+\textbf{b.} $V = \{ a_0 + a_1t + a_2t^2 \ \ | \ \ a_2 = a_1 + 1 \}$
+\end{itemize}
+\end{problem}
+
+\begin{problem}{3.3}
+    Determine si los siguientes conjuntos $W$ son subespacios vectoriales o no del espacio vectorial $M_n$ (espacio vectorial de las matrices de tamaño $n \times n$)
+\begin{itemize}
+\item 
+\textbf{a.} $\{ W = A \in M_n \ \ | \  \ A^t = A \}$
+\item 
+\textbf{b.} $\{ A \in M_n \ \ | \ \ A \text{ es triangular superior} \}$
+\end{itemize}
+\end{problem}
+
+\begin{problem}{3.4}
+    Muestre que el conjunto de todos los puntos del plano $ax +by +cz = 0$ es un subespacio vectorial de $\mathbb{R}^3$.
+\end{problem}
+\begin{problem}{3.5}
+    Determine si $\{ 1 - 2x, x - x^2\}$ forma una base para $R_3[x]$.
+\end{problem}
+\newpage
+\begin{problem}{3.6}
+    Encuentre una base para el espacio solución del sistema de ecuaciones lineales homogéneo siguiente,
+\[
+\begin{cases}
+2x-6y+4z = 0 \\
+-x+3y-2z = 0 \\
+-3x+9y-6z = 0
+\end{cases}
+\]
+\end{problem}
+
+\section{Transformaciones Lineales}\label{sec:trans-lineales}
+
+\begin{problem}{4.1}
+    Sea $T : \mathbb{R}^3 \to \mathbb{R}_3[x]$ definida por
+\[
+T(a,b,c) = (a+b)x^2+(2a+4c)x+a-b+4c
+\]\begin{itemize}
+\item 
+(a) Dar la dimensión del núcleo de $T$. Justifique apropiadamente.
+\item 
+(b) Calcular la matriz de la transformación $T$ con respecto a la base canónica ordenada $\mathcal{C}= \{ e_1,e_2,e_3\}$ de $\mathbb{R}^3$ y la base ordenada $\mathcal{B} = \{1,1+x,1+x+x^2\}$.
+\item 
+(c) Calcular los autovalores reales y complejos de la matriz $[T]_{\mathcal{CB}}$.
+\end{itemize}
+\end{problem}
+\begin{problem}{4.2}
+    Definir una transformación lineal $T:\mathbb{R}^3 \to M_2(\mathbb{R})$ que verifique que
+\[
+Nu(T) = \{ (x,y,z) : z = x = 3y \}
+\]\[
+Im(T) = \left \{  \begin{pmatrix} a & b \\ c & d \end{pmatrix}  \in M_2(\mathbb{R}) \ | \ b=a-c, \ b-d = c \right \}
+\]
+Escribir explícitamente $T(x,y,z)$ para cualquier $(x,y,z) \in \mathbb{R}^3$. Justifique cada paso.
+\end{problem}
+\begin{problem}{4.3}
+    Definir una transformación lineal $T : R^2 \to \mathbb{R}^2$ tal que: $T(1, 1) = (1, -2)$ y $T(-1, 1) = (2, 3)$.
+\end{problem}
+
+\begin{problem}{4.4}
+    Dada la siguiente transformación lineal $T : M_2 \to \mathbb{R}_3[x]$ definida como
+\[
+T  \begin{pmatrix} a & b \\ c & d \end{pmatrix} = 
+a+b+c+(b+c+d)x+(a-d)x^2+(a+2b+2c+d)x^3
+\]
+determinar
+\begin{itemize}
+\item 
+El núcleo de la transformación y decir si es inyectiva,
+\item 
+la imagen de la transformación y decir si es sobreyectiva.
+\end{itemize}
+\end{problem}
+\newpage
+\begin{problem}{4.5}
+    Sea $T:\mathcal{C}^4 \to \mathcal{C}^3$ una transformación lineal cuyo núcleo esta generado por los vectores
+\[
+(i,0,-1,i) \ \ \ \ (2,1,-1,0) \ \ \ \ (1,1,-1-i,1)
+\]
+Determinar la dimensión de la imagen de $T$.
+\end{problem}
+
+\begin{problem}{4.6}
+    Considere la siguiente transformación lineal $T : \mathbb{R}^3 \to \mathbb{R}^2$ dada por
+\[
+T(x,y,z) = (x+y,3x-z)
+\]
+Sean $\mathcal{B}_1 \{ (1, 1, 2), (-3, 0, 1), (2, 4, 3) \}$ y $\mathcal{B}_2 = \{ (4, 1) , (3, 1) \}$ Encuentre la matriz de $T$ asociada a las bases dadas.
+\end{problem}
+\begin{problem}{4.7}
+    Sea $T : M_2 \to M_2$ una transformación lineal definida como
+\[
+T(A) = AM - MA
+\]
+donde $M=\begin{pmatrix} 1 & 2 \\ 0 & 3 \end{pmatrix}.$
+\begin{itemize}
+\item 
+Determinar el núcleo y la imagen de $T$.
+\item 
+Encontrar la matriz asociada a $T$.
+\end{itemize}
+\end{problem}
+
+\begin{problem}{4.8}
+    Sea $T: \mathbb{R}^3 \to \mathbb{R}^3$ la transformación lineal definida por
+\[
+T(x,y,z) = (x+y,x-z,-y+z)
+\]\begin{itemize}
+\item 
+Calcular los autovalores de $T$.
+\item 
+¿$T$ es diagonizable? Justificar.
+\end{itemize}
+\end{problem}
+\begin{problem}{4.9}
+    Hallar una transformación lineal $T : R_3[x] \to \mathbb{R}^4$ tal que $Nu(T) = \{ a_1x + a_1x^2 \ | \ a_1 \in \mathbb{R} \}$.
+\end{problem}
+\begin{problem}{4.10}
+    Sea $T:V\to W$ una transformación lineal, demostrar que el núcleo es un subespacio de $V$ y la imagen un subespacio de $W$.
+\end{problem}
+
+\end{document}

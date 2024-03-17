@@ -1,0 +1,162 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Do not alter this block (unless you're familiar with LaTeX
+\documentclass{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, fancyhdr, color, comment, graphicx, environ}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{background}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+\setlength{\headheight}{1.5cm}
+
+
+\pagestyle{fancy}
+
+\SetBgContents{https://github.com/PedroMVillar}
+\SetBgScale{3} % Escala de la marca de agua
+\SetBgColor{gray!80} % Color de la marca de agua
+\SetBgAngle{45} % Ángulo de inclinación de la marca de agua
+\SetBgOpacity{0.2} % Opacidad de la marca de agua
+
+
+\newenvironment{problem}[2][Ejercicio]
+    { \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{definition}[2][Definición]
+    { \begin{mdframed}[backgroundcolor=red!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{theorem}[2][Teorema]
+    { \begin{mdframed}[backgroundcolor=green!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{lemma}[2][Lema]
+    { \begin{mdframed}[backgroundcolor=green!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{proposition}[2][Proposición]
+    { \begin{mdframed}[backgroundcolor=green!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{corollary}[2][Corolario]
+    { \begin{mdframed}[backgroundcolor=green!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{example}[2][Ejemplo]
+    { \begin{mdframed}[backgroundcolor=yellow!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{remark}[2][Observación]
+    { \begin{mdframed}[backgroundcolor=yellow!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{note}
+    {\textit{Nota:}}
+    {}
+
+\newenvironment{conclusion}
+    {\textit{Conclusión:}}
+    {}
+
+\newenvironment{notation}
+    {\textit{Notación:}}
+    {}
+
+\newenvironment{question}
+    {\textit{Pregunta:}}
+    {}
+
+\newenvironment{answer}
+    {\textit{Respuesta:}}
+    {}
+
+% Define solution environment
+\newenvironment{solution}
+    {\textit{Solución:}}
+    {}
+
+\renewcommand{\qed}{\quad\qedsymbol}
+
+% prevent line break in inline mode
+\binoppenalty=\maxdimen
+\relpenalty=\maxdimen
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Header Configuarción
+\lhead{Pedro Villar}
+\rhead{Álgebra Lineal} 
+\chead{\textbf{Examen 3}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Preguntas
+
+\begin{problem}{1}
+    Justificar apropiadamente.
+    \begin{itemize}
+        \item[(a)] (\textit{5pts.}) Dar la definición de suma directa de subespacios vectoriales.
+        \item[(b)] (\textit{5pts.}) Cuales son las condiciones necesarias para que un conjunto sea un subconjunto de un espacio vectorial. 
+    \end{itemize}
+\end{problem}
+
+\begin{problem}{2}
+    (\textit{15pts.}) Sean $A,B,C \in M:{5 \times 5}$ tales que $det(A)=2$, $det(B)=3$ y $det(C)=4$. Calcular $det(PQR)$ donde $P,Q,R$ son las matrices que se obtienen a partir de $A,B,C$ mediante operaciones elementales por filas de la siguiente manera
+    \begin{enumerate}
+        \item $P$ se obtiene de $A$ sumando a la fila 1 la fila 2 multiplicada por 3.
+        \item $Q$ se obtiene de $B$ multiplicando la fila 4 por 2.
+        \item $R$ se obtiene de $C$ intercambiando la fila 1 con la fila 3.
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}{3}
+    (\textit{15pts.}) Hallar la representación paramétrica del plano que pasa por el origen y por el punto $(1,2,-1)$ y tal que uno de sus vectores direccionales es $(2,3,0)$.
+\end{problem}
+
+\begin{problem}{4}
+    (\textit{20pts.}) Para la siguiente matriz $A$, determine sus valores propios y sus vectores propios y determine la matriz que diagonaliza a $A$.
+    $$
+    A = \begin{pmatrix}
+        7 & -2 & -4 \\
+        3 & 0 & -2 \\
+        6 & -2 & -3
+    \end{pmatrix}
+    $$
+\end{problem}
+
+\begin{problem}{5}
+    Decidir si las siguientes afirmaciones son verdaderas o falsas:
+    \begin{enumerate}
+        \item[(a)] (\textit{5pts.}) Todo conjunto que contenga al vector nulo, es linealmente dependiente.
+        \item[(b)] (\textit{5pts.}) Si $T: \mathbb{R}^5 \to \mathbb{R}^3$ es una transformación lineal, entonces $dim(Nu(T)) \geq 3$.
+        \item[(c)] (\textit{5pts.}) Existe una transformación lineal $T: \mathbb{R}^4 \to \mathbb{R}^4$ tal que $dim(Im(T))=3$ y $dim(Nu(T))=3$.
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}{6}
+    Considere la transformaciónlineal $T: \mathbb{R}_4[x] \to M_{2\times 2}$ definida como
+    $$
+    T(a+bx+cx^2+dx^3) = \begin{pmatrix} a+c+2d & 2a+b+c+4d \\ 2a+b+c+3d & a+b+2d \end{pmatrix}
+    $$
+    \begin{itemize}
+        \item[(a)] (\textit{10pts.}) Determinar el nuceo e imagen de $T$.
+        \item[(b)] (\textit{5pts.}) Encontrar la matriz asociada a $T$.
+        \item[(c)] (\textit{10pts.}) Decidir si $T$ es diagonizable, y si es así dar la matriz diagonal.
+    \end{itemize}
+\end{problem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}

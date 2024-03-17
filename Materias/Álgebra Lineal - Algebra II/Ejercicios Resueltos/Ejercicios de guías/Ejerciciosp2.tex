@@ -1,0 +1,2879 @@
+\documentclass[a4paper,12pt]{article}
+\author{}
+\date{}
+\usepackage[papersize={216mm,330mm},tmargin=20mm,bmargin=20mm,lmargin=20mm,rmargin=20mm]{geometry}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,mathabx}%\for eqref
+\usepackage{lscape}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\newtcolorbox{defbox}[1]{colback=red!5!white,colframe=red!75!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{ejbox}[1]{colback=blue!5!white,colframe=blue!75!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{teobox}[1]{colback=gray!5!white,colframe=black!75!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{obbox}[1]{colback=gray!5!yellow,colframe=gray!75!black,fonttitle=\bfseries,title=#1}
+\newtcolorbox{bbox}{colback=gray!5!white,colframe=black!75!black}
+\usepackage{dsfont}
+\usepackage{hyperref}
+\pagestyle{fancy}
+\fancyhf{}
+\chead{\thepage}
+
+\title{\Large \textbf{Ejercicios Resueltos - Segunda Parte} \\ Álgebra Lineal \\ FaMAF, segundo cuatrimestre 2023 }
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+% ---------- PRÁCTICO 7 ---------- %
+\section{Práctico 7: Espacios vectoriales}
+\subsection{Ejercicio 1}
+Decidir si los siguientes conjuntos son R-espacios vectoriales, con las operaciones abajo definidas.
+\begin{enumerate}
+    \item $\mathds{R}^n$, con $v \oplus w= v - w$, y el producto por escalares usual.
+    \item $\mathds{R}^2$, con $(x,y)\oplus(x_1,y_2)=(x+x_1,0)$, $c\odot(x,y)=(cx,0)$.
+\end{enumerate}
+\subsubsection{Conceptos}
+\begin{teobox}{Teorema}
+    Las propiedades del espacio vectorial son:
+ 	\begin{itemize}
+ 		\item[S1:] $v+w=w+v$
+ 		\item[S2:] $(v+w)+u=v+(w+u)$ 
+ 		\item[S3:] $0+v=v+0=v$
+ 		\item[S4:] $v+(-v)=0$
+ 		\item[P1:] $1\cdot v=v$
+ 		\item[P2:] $\lambda_1(\lambda_2v)=(\lambda_1\lambda_2)v$
+ 		\item[D1:] $\lambda(x+w)=\lambda x + \lambda w$
+ 		\item[D2:] $(\lambda_1+\lambda_2)x=\lambda_1x+\lambda_2x$
+ 	\end{itemize}
+\end{teobox}
+\subsubsection{Prueba 1}
+Hay que probar que se cumplen todas las propiedades: \newline
+Sea $\mathds{R}^n$ un $\mathds{R}$-espacio, $v$ una n-tupla $(x_1,x_2,..,x_n)$ y w otra n-tupla $(y_1,y_2,...,y_n)$, se definió la suma como:
+$$v+w=(x_1-y_1,x_2-y_2,...,x_n-y_n)$$
+Se puede ver que \textbf{S1} no se cumple:
+$$v+w=(x_1-y_1,x_2-y_2,...,x_n-y_n)\neq w+v=(y_1-x_1,y_2-x_2,...,y_n-x_n)$$
+\begin{center}
+ 	\textit{ya que la resta no es asociativa en $\mathds{R}$.}
+\end{center}
+Por lo tanto, \textbf{no es un $\mathds{R}$-espacio}.
+\subsubsection{Prueba 2}
+Se puede ver que no cumple \textbf{P1}, es decir no tiene neutro del producto escalar, cualquier número escalar multiplicado por un par ordenado con dichas propiedades devuelve otro producto cuya coordenada $y$ es 0, por lo tanto no tiene posibilidades de cumplir la propiedad. Entonces \textbf{no es un  $\mathds{R}$-espacio}.
+\subsection{Ejercicio 2}
+Demostrar que el conjunto de números reales positivos $\mathds{R}_{>0}=\{ x \in \mathds{R} : x>0 \} $ es un $\mathds{R}$-espacio vectorial con las operaciones $x\oplus y = x\cdot y $ y $\lambda \odot x = x^\lambda$
+\newline Hay que probar que el conjunto cumple con las propiedades de un espacio vectorial:
+\begin{itemize}
+    \item[S1:] 
+    $$
+    x\oplus y = x\cdot y = y \cdot x = y \oplus x
+    $$
+    \item[S2:]
+    $$
+    (x \oplus y) \oplus u = (x \oplus y)\cdot u = (x\cdot y) \cdot u = x\cdot (y \cdot u) = x \oplus (y \cdot u) = x \oplus (y \oplus u)
+    $$
+    \item[S3:] 
+    $$
+    1 \oplus x = 1\cdot x = x
+    $$
+    \begin{center}
+        \textit{Existe $1\in\mathds{R}_{>0}$ elemento neutro de $\oplus$}
+    \end{center}
+    \item[S4:]
+    $$
+    \frac{1}{x} \oplus x = \frac{1}{x} \cdot x = 1
+    $$
+    \begin{center}
+        \textit{Existe $\frac{1}{x}\in\mathds{R}_{>0}$ elemento opuesto de $\oplus$}
+    \end{center}
+    \item[P1:]
+    $$
+    1 \odot x = x^1= x
+    $$
+    \begin{center}
+        \textit{Existe $1\in\mathds{R}_{>0}$ elemento neutro de $\odot$}
+    \end{center}
+    \item[P2:]
+    $$
+    \lambda_1\odot(\lambda_2\odot x) = \lambda_1 \odot x^{\lambda_2}= x^{\lambda_1 \cdot \lambda_2}= (\lambda_1 \cdot \lambda_2) \odot x
+    $$
+    \item[D1:]
+    $$
+    \lambda \odot (x \oplus y) = \lambda \odot (x\cdot y) = (x\cdot y)^{\lambda} = x^{\lambda} \cdot y^{\lambda} = (\lambda \odot  x) \oplus (\lambda \odot y)
+    $$
+    \item[D2:]
+    $$
+    (\lambda_1 \oplus \lambda_2) \odot x = x^{\lambda_1 \oplus \lambda_2} = x^{\lambda_1}\oplus x^{\lambda_2} = (\lambda_1 \odot x) \oplus (\lambda_2 \odot x)
+    $$
+\end{itemize}
+Cumple con todas las propiedades, entonces \textbf{es un espacio vectorial.}
+\subsection{Ejercicio 3}
+Sea $\mathbb{K}$ un cuerpo. Si $(V,\oplus, \odot)$ es un $\mathbb{K}$-espacio vectorial y $S$ un conjunto cualquiera entonces:
+$$
+V^S=\{ f: S \rightarrow V : f\text{ es una función}\},
+$$
+denota al conjunto de todas las funciones de $S$ en $V$. Definimos en $V^S$ la suma y el producto por escalares de la siguiente manera: Si $f,g \in V^S$ y $c\in \mathbb{K}$ entonces $f+g:S \rightarrow V$ y $c \cdot f : S \rightarrowtail V$ están dadas por:
+$$
+(f+g)(x)=f(x) \oplus g(x), \ \ \ \ \ \ \ (c \cdot f)(x) = c \odot f(x), \ \ \ \ \forall x \in S.
+$$
+Probar que $(V^S, +, \cdot)$ es un $\mathbb{K}$-espacio vectorial. En el caso de que $V=\mathbb{K}$, este espacio vectorial se denotará $F(S)$.
+\newline Hay que probar que cumple con las propiedades de un espacio vectorial:
+    \begin{itemize}
+	\item[S1:]
+	$$
+	(f+g)(x)=f(x)\oplus g(x)=g(x) \oplus f(x) = (g+f)(x)
+	$$
+	\begin{center}
+		\textit{Se cumple por conmutatividad de $V$ por ser un espacio vectorial}.
+	\end{center}
+	\item[S2:]
+	$$
+	(f+(g+h))(x) = f(x) \oplus (g + h)(x) = f(x) \oplus (g(x) \oplus h(x)) = (f(x) \oplus g(x)) \oplus h(x) 
+	$$
+	$$
+	= (f+g) (x) \oplus h(x) = ((f+g)+h)(x)
+	$$
+	\begin{center}
+		\textit{Se cumple por asociatividad de $V$ por ser un espacio vectorial}.
+	\end{center}
+	\item[S3:] El único vector nulo es la función cero, que asigna a cada elemento de $S$ el escalar 0 de $F$.
+	$$
+	(0 + f) (x) = 0(x) \oplus f(x) = 0 \oplus f(x) = f(x)
+	$$
+	\item[S4:] Dada $f \in V^S$, sea $-f(x)$ el opuesto de $f(x)$, que existe debido a que $V$ es un espacio vectorial, entonces:
+	$$
+	(-f+f)(x) = -f(x) \oplus f(x) = 0(x).
+	$$ 
+	\item[P1:] Existe un neutro $1$ ya que existe neutro para $\odot$ en $V$, tal que:
+	$$
+	(1 \cdot f)(x) = 1 \odot f(x) = f(x)
+	$$
+	\item[P2:]
+	$$
+	(\lambda_1 \cdot ( \lambda_2 \cdot f ))(x) = \lambda_1 \odot (\lambda_2 \cdot f)(x) = \lambda_1 \odot (\lambda_2 \odot f(x)) 
+	$$
+	$$
+	= (\lambda_1 \cdot \lambda_2) \odot f(x) = ((\lambda_1 \cdot \lambda_2) \cdot f)(x)
+	$$
+	\item[D1:] 
+	$$
+	(\lambda \cdot (f + g))(x) = \lambda \odot (f + g)(x) = (\lambda \odot f(x)) \oplus (\lambda \odot g(x)) 
+	$$
+	$$
+	= (\lambda \cdot f)(x) \oplus (\lambda \cdot g)(x) = (\lambda \cdot f + \lambda \cdot g)(x)
+	$$
+	\item[D2:]
+	$$
+	((\lambda_1 + \lambda_2)\cdot f)(x) = (\lambda_1 + \lambda_2) \odot f(x) = (\lambda_1 \odot f(x)) \oplus (\lambda_2 \odot f(x))
+	$$
+	$$
+	= (\lambda_1 \cdot f + \lambda_2 \cdot f)(x)
+	$$
+\end{itemize}
+Como cumple con las 8 propiedades del espacio vectorial, entonces $(V^S, +, \cdot)$ \textbf{es un $\mathbb{K}$-espacio vectorial.}
+\subsection{Ejercicio 4}
+Sea $\mathbb{K}$ un cuerpo y $m,n \in \mathbb{N}$. Dar estructura de $\mathbb{K}$-espacio vectorial de matrices $M_{m\times n}(\mathbb{K})$.
+\newline El \textbf{espacio de matrices} $m \times n$, $F^{m \times n}$. Sea $F$ cualquier cuerpo y sean $m$ y $n$ enteros positivos. Sea $F^{m \times n}$ el conjunto de todas las matrices $m \times n$ sobre el cuerpo $F$. La suma de dos vectores $A$ y $B$ en $F^{m \times n}$ se define por:
+$$
+(A + B)_{ij}= A_{ij} + B_{ij}.
+$$
+El producto de un escalar $c$, y de la matriz $A$ se define por:
+$$
+(cA)_{ij}= cA_{ij}
+$$
+\subsection{Ejercicio 5}
+Decidir si los siguientes subconjuntos de $\mathds{R}^n$ son subespacios vectoriales.
+\begin{itemize}
+    \item[(a)] $\{ (x_1,...,x_n) \in  \mathds{R}^n : x_1=x_n\}$
+    \item[(b)] $\{ (x_1,...,x_n) \in  \mathds{R}^n : x_1+...+x_n=1 \}$
+    \item[(c)] $\{ (x_1,...,x_n) \in  \mathds{R}^n : x_1+...+x_n=0 \}$
+    \item[(d)] $\{ (x_1,...,x_n) \in  \mathds{R}^n : x_1 \leq x_2 \}$
+    \item[(e)] $\{ (x_1,...,x_n) \in  \mathds{R}^n : x_n=1 \}$
+    \item[(f)] $\{ (x_1,...,x_n) \in  \mathds{R}^n : x_n=0 \}$
+\end{itemize}
+\subsubsection{Conceptos}
+\begin{defbox}{Definición}
+    Sea $V$ un espacio vectorial sobre $\mathds{K}$. diremos que $W \subset V$ es \textit{subespacio de $V$} si $W \neq \emptyset$ y
+        \begin{enumerate}
+            \item\label{def-sub-a} si para cualesquiera $w_1,w_2 \in W$, se cumple que $w_1+w_2 \in W$ y
+            \item\label{def-sub-b} si $\lambda \in \mathds{K}$ y  $w \in W$, entonces $\lambda w \in W$.
+        \end{enumerate}
+\end{defbox}
+\begin{teobox}{Teorema}
+    Sea $V$ un espacio vectorial sobre $\mathds{K}$ y $W$ un subespacio de $V$. Entonces $W$ con las operaciones suma y producto por escalares de $V$ es un espacio vectorial.
+\end{teobox}
+\subsubsection{Prueba A}
+Hay que probar que la adición y el producto esten contenidos en el subespacio de $\mathds{R}^n$:
+\newline Sea $x=(x_1,...,x_1)\in\mathds{R}^n$ e $y=(y_1,...,y_1)\in\mathds{R}^n$, pruebo la suma y el producto:
+$$
+x + \lambda\cdot y = (x_1,...,x_1) + \lambda \cdot (y_1,...,y_1) = (x_1,...,x_1) + (\lambda y_1 + ... + \lambda y_1)
+$$
+$$
+= (x_1+\lambda y_1 , ... , x_1 + \lambda y_1)
+$$
+Sigue perteneciendo al espacio vectorial, por lo tanto, $\{ (x_1,...,x_n) \in  \mathds{R}^n : x_1=x_n\}$ \textbf{es un subespacio} de de $\mathds{R}^n$.
+\subsubsection{Prueba B}
+Hay que probar que la adición y el producto esten contenidos en el subespacio de $\mathds{R}^n$:
+\newline Sea $x=(1,0,0,...,0)\in\mathds{R}^n$ tal que $x_1+...+x_n=1$ e $y=(1,0,0,...,0)\in\mathds{R}^n$ tal que $y_1+...+y_n=1$, pruebo la suma y el producto:
+$$
+x + y = (1,0,0,...,0) + (1,0,0,...,0) = (2,0,0,...,0) 
+$$
+Ya no pertenece al supuesto subespacio vectorial, por lo tanto $\{ (x_1,...,x_n) \in  \mathds{R}^n : x_1+...+x_n=1 \}$ \textbf{no es un espacio}
+de $\mathds{R}^n$.
+\subsubsection{Prueba C}
+Hay que probar que la adición y el producto esten contenidos en el subespacio de $\mathds{R}^n$:
+\newline Sea $x=(0,0,0,...,0)\in\mathds{R}^n$ tal que $x_1+...+x_n=0$ e $y=(0,0,0,...,0)\in\mathds{R}^n$ tal que $y_1+...+y_n=0$, pruebo la suma y el producto:
+$$
+x + y = (0,0,0,...,0) + (0,0,0,...,0) = (0,0,0,...,0) 
+$$
+$$
+\lambda x = \lambda (0,0,0,...,0) = (0,0,0,...,0) 
+$$
+La adición y el producto devuelven resultados dentro del subespacio, por lo tanto, $\{ (x_1,...,x_n) \in  \mathds{R}^n : x_1+...+x_n=0 \}$ \textbf{es un subespacio} de $\mathds{R}^n$.
+\subsubsection{Prueba D}
+Hay que probar que la adición y el producto esten contenidos en el subespacio de $\mathds{R}^n$: \newline
+Sea $x=(3,4,...,x_n)$ donde $x_1=3$ y $x_2=4$, $x_1\leq x_2$, al probar el producto con un escalar:
+$$
+(-1)\cdot x = (-1) \cdot (3,4,...,x_n) = (-3,-4,...,-x_n)
+$$
+Da como resultado un vector tal que $x_1>x_2$, el cual no pertenece al supuesto subespacio, entonces, $\{ (x_1,...,x_n) \in  \mathds{R}^n : x_1 \leq x_2 \}$ \textbf{no es un subespacio} de $\mathds{R}^n$
+\subsubsection{Prueba E}
+Hay que probar que la adición y el producto esten contenidos en el subespacio de $\mathds{R}^n$: \newline
+Sea $x=(x_1,x_2,...,1)$ e $y=(y_1,y_2,...,1)$ la suma de los vectores:
+$$
+x + y = (x_1,x_2,...,1) + (y_1,y_2,...,1) = (x_1+y_1,x_2+y_2,...,2)
+$$
+da como resultado un vector cuyo último componente es distinto de $1$, por lo tanto no pertenece al supuesto subespacio, por lo tanto, $\{ (x_1,...,x_n) \in  \mathds{R}^n : x_n=1 \}$ \textbf{no es un subespacio} de $\mathds{R}^n$.
+\subsubsection{Prueba F}
+Hay que probar que la adición y el producto esten contenidos en el subespacio de $\mathds{R}^n$: \newline
+Sea $x=(x_1,x_2,...,0)$ e $y=(y_1,y_2,...,0)$ la suma y el producto por escalar de dichos vectores:
+$$
+x + \lambda y = (x_1,x_2,...,0) + \lambda (y_1,y_2,...,0) = (x_1,x_2,...,0) + (\lambda y_1, \lambda y_2,...,0) = (x_1 + \lambda y_1, x_2 + \lambda y_2,...,0)
+$$
+Da como resultado un vector cuyo ultimo componente sigue siendo $0$, entonces $\{ (x_1,...,x_n) \in  \mathds{R}^n : x_n=0 \}$ \textbf{es un subespacio} de $\mathds{R}^n$.
+\subsection{Ejercicio 8}
+Sean $W_1$, $W_2$ subespacios de un espacio vectorial $V$. Probar que $W_1\cup W_2$ es subespacio de $V$, si y sólo si $W_1\subseteq W_2$ o bien $W_2 \subseteq W_1$. \newline
+Hay que probar lo siguiente:
+\begin{center}
+    $W_1\cup W_2$ es subespacio de $V$ $\Leftrightarrow$ $W_1\subseteq W_2 \vee W_2 \subseteq W_1$
+\end{center}
+\begin{itemize}
+    \item[($\Leftarrow$)] Al tener una disjunción el problema se separa en dos casos:
+    \begin{itemize}
+        \item Si $W_1\subseteq W_2 \Rightarrow W_1\cup W_2 = W_2$, entonces \textbf{sí es subespacio} de $V$ ya que $W_2$ es subespacio por hipótesis.
+        \item Si $W_2\subseteq W_1 \Rightarrow W_1\cup W_2 = W_1$, entonces \textbf{sí es subespacio} de $V$ ya que $W_1$ es subespacio por hipótesis.
+    \end{itemize}
+    \item[($\Rightarrow$)] Se probará por absurdo, supongamos que $W_1\cup W_2$  es subespacio de $V$ $\Rightarrow$ $W_1 \nsubseteq W_2 \wedge W_2 \nsubseteq W_1$. Si $W_1 \cup W_2$ es subespacio de $V$, entonces la suma de dos vectores $w_1$ y $w_2$ deben estar en la unión. $$w_1+w_2\in W_1 \cup W_2$$ pero esto implica que $w_1\in W_2 \vee w_2 \in W_1$ lo cual es absurdo. Por lo tanto, $W_1\cup W_2$  es subespacio de $V$ $\Rightarrow$ $W_1\subseteq W_2 \vee W_2 \subseteq W_1$ 
+\end{itemize}
+% ---------- PRÁCTICO 8 ---------- %
+\section{Práctico 8: Independencia lineal y generadores. Bases y dimensión}
+\subsection{Ejercicio 1}
+Sea $\mathds{K}$ un cuerpo y $V$ un $\mathds{K}$-espacio vectorial. Demostrar las siguientes afirmaciones:
+\begin{enumerate}
+    \item Sean $v_1,v_2\in V$ y $\lambda\in\mathds{K}$. Demostrar que $\left \langle v_1,v_2 \right \rangle =\left \langle v_1,v_2 + \lambda v_1 \right \rangle$
+    \item Si $\lambda,\mu\in\mathds{K}$ y $0\neq v\in V$ son tales que $\lambda v= \mu v$. Demostrar que $\lambda=\mu$.
+    \item Sean $w,v_1,...,v_n \in V$. Demostrar que $\left \langle w,v_1,...,v_n \right \rangle = \left \langle v_1,...,v_n \right \rangle$ si y sólo si $w\in \left \langle v_1,...,v_n \right \rangle$.
+\end{enumerate}
+\subsubsection{Conceptos}
+\begin{teobox}{Teorema}
+    Sea $V$ un $\mathds{K}$-espacio vectorial, y $v_1,...,v_n$ vectores en $V$. Dado $v\in V$, diremos que $v$ es combinación lineal de los $v_1,...,v_n$ si existen escalares $\lambda_1,...,\lambda_n$ en $\mathds{K}$ tal que: \\ $v=\lambda_1v_1+...+\lambda_nv_n$.
+\end{teobox}
+\begin{defbox}{Definición}
+    Sea $V$ un $\mathds{K}$-espacio vectorial y sean $v_1,...,v_k$ vectores en $V$. Al subespacio vectorial \\ $W=\{ \lambda_1v_1+...+\lambda_kv_k \ : \lambda_1,...,\lambda_k \in \mathds{K} \}$ de las combinaciones lineales de $v_1,...,v_n$ se lo denomina \textit{subespacio generado por $v_1,...,v_k$} y se lo puede denotar de las siguientes formas:
+    \begin{enumerate}
+        \item $W = \left \langle v_1,...,v_k \right \rangle$,
+        \item $W = gen\{ v_1,...,v_k \}$,
+        \item $W = span\{ v_1,...,v_k\}$
+    \end{enumerate}
+    Además, en este caso, diremos que el conjunto $S = \{ v_1,...,v_k\}$ genera al
+    subespacio $W$ o que los vectores $v_1,...,v_k$ generan $W$.
+\end{defbox}
+
+\subsubsection{Demostración 1}
+Hay que probar lo siguiente:
+$$
+\left \langle v_1,v_2 \right \rangle =\left \langle v_1,v_2 + \lambda v_1 \right \rangle
+$$
+Por un lado se tiene que existen escalares $\lambda_1,\lambda_2\in\mathds{K}$ tal que $v=\lambda_1v_1+\lambda_2v_2$ y por otro se tiene que existen escalares $\lambda'_1,\lambda'_2\in\mathds{K}$ tal que $v'=\lambda'_1v_1+\lambda'_2\cdot(v_2 + \lambda v_1)$ reescribiendo la ecuación:
+$$
+v'=\lambda'_1v_1+\lambda'_2\cdot(v_2 + \lambda v_1) = \lambda'_1v_1+\lambda'_2\cdot v_2 + \lambda'_2\cdot\lambda v_1 = (\lambda'_1+\lambda'_2)\cdot v_1+\lambda'_2\cdot v_2
+$$
+Por lo tanto, se prueba que un elemento de $\left \langle v_1,v_2 + \lambda v_1 \right \rangle$ pertenece a $\left \langle v_1,v_2 \right \rangle$. Analogamente se prueba que un elemento de $\left \langle v_1,v_2 \right \rangle$ pertenece a $\left \langle v_1,v_2 + \lambda v_1 \right \rangle$.
+\newline Ambos se pueden escribir como combinación lineal de $v_1$ y $v_2$, por lo tanto queda demostrada la afirmación.
+\subsubsection{Demostración 2}
+Hay que probar lo siguiente:
+$$
+\lambda v= \mu v \Rightarrow \lambda=\mu
+$$
+Partiendo de la ecuación original, al restarle $\mu v$ de ambos lados:
+$$
+\lambda v - \mu v = \mu v - \mu v
+$$
+$$
+\lambda v - \mu v = 0
+$$
+$$
+(\lambda - \mu ) \cdot v = 0
+$$
+Como $v\neq 0$, entonces $(\lambda - \mu )=0$ (Por propiedades $P_1$ y $P_2$ demostradas abajo), entonces $\lambda = \mu$. Queda probada la demostrada la afirmación.
+\begin{itemize}
+    \item[($P_1$)] \textbf{$k\cdot 0 = 0$}
+    $$
+    k \cdot 0 = k \cdot (0+0)
+    $$
+    $$
+    k \cdot 0 = k \cdot 0 + k \cdot 0
+    $$
+    $$
+    k\cdot 0 - k\cdot 0 = k \cdot 0 + k \cdot 0 - k \cdot 0
+    $$
+    $$
+    0 = k\cdot 0
+    $$
+    \item[($P_2$)] \textbf{$\lambda \cdot v = 0 \Rightarrow \lambda = 0 \vee v = 0$} \newline
+    Supongamos que $\lambda \neq 0 \Rightarrow$ existe $\lambda^{-1}$ tal que $\lambda \cdot \lambda^{-1} = 1$.
+    $$
+    \lambda \cdot v = 0
+    $$
+    $$
+    \lambda \cdot v \cdot \lambda^{-1} = 0 \cdot \lambda^{-1}
+    $$
+    $$
+    v = 0
+    $$
+    Análogamente se cumple si $v\neq 0$.
+    
+\end{itemize}
+\subsubsection{Demostración 3}
+Hay que probar lo siguiente:
+$$
+\left \langle w,v_1,...,v_n \right \rangle = \left \langle v_1,...,v_n \right \rangle \Leftrightarrow w\in \left \langle v_1,...,v_n \right \rangle
+$$
+\begin{itemize}
+    \item[($\Rightarrow$)] Se tiene que $\left \langle w,v_1,...,v_n \right \rangle = \left \langle v_1,...,v_n \right \rangle$. Entonces, esto quiere decir que el subespacio generado por el conjunto $\{ v_1,...,v_n \}$ es el mismo que el subespacio generado por $\{ w,v_1,...,v_n \}$. \newline
+    Sea $x$ un vector genérico en $\left \langle w,v_1,...,v_n \right \rangle$ e $y$ un vector en $\left \langle v_1,...,v_n \right \rangle$:
+    $$
+    x = \lambda_ww+\lambda_1v_1+...+\lambda_nv_n
+    $$
+    $$
+    y = \lambda'_1v_1+...+\lambda'_nv_n
+    $$
+    Por hipótesis, se pueden igualar y luego despejar $w$:
+    $$
+    \lambda_ww+\lambda_1v_1+...+\lambda_nv_n = \lambda'_1v_1+...+\lambda'_nv_n
+    $$
+    Al despejar $w$
+    $$
+    w = \frac{\lambda'_1-\lambda_1}{\lambda_w}\cdot v_1 + ... + \frac{\lambda'_n-\lambda_n}{\lambda_w}\cdot v_n
+    $$
+    Esto quiere decir que $w$ puede escribirse como combinación lineal de $v_1,...,v_n$, en otras palabras, pertenece al subespacio generado por el conjunto $\{ v_1,...,v_n \}$, \textbf{$w\in \left \langle v_1,...,v_n \right \rangle$}
+    \item[($\Leftarrow$)] Se tiene que $w \in \left \langle v_1,...,v_n \right \rangle$ entonces $w$ puede escribirse como $w=\lambda_1v_1+...+\lambda_nv_n$.
+    \newline Por lo tanto, un vector genérico del subespacio generado por $\{ w,v_1,...,v_n \}$ es de la forma
+    $$
+    x = \lambda'_ww+\lambda'_1v_1+...+\lambda'_nv_n
+    $$
+    Sustituyendo $w$ por $\lambda_1v_1+...+\lambda_nv_n$
+    $$
+    x = \lambda'_w\cdot (\lambda_1v_1+...+\lambda_nv_n) + \lambda'_1v_1+...+\lambda'_nv_n = \lambda'_w\cdot\lambda_1v_1 + ... + \lambda'_w\cdot\lambda_nv_n+ \lambda'_1v_1+...+\lambda'_nv_n
+    $$
+    $$
+    = \lambda''_1v_1+...+\lambda''_nv_n
+    $$
+    Coincide con el subespacio generado $\left \langle v_1,...,v_n \right \rangle$. Queda demostrada la afirmación.
+\end{itemize}
+\subsection{Ejercicio 2}
+En cada caso, determinar si el vector $w$ es combinación lineal de los vectores del conjunto $S$ en el espacio vectorial $V$.
+\begin{itemize}
+    \item[(a)] $V = \mathds{R}^4, w=(1,-1,0,0)$ y $S=\{ (1,0,0,2), (1,1,2,2), (0,1,0,1)\}$
+    \item[(b)] $V = \mathds{R}[x], w=1+x+x^2+x^3+x^4+x^5$ y $S=\{2,x+x^2,x^2+x^3,x^3+x^4,x^4+x^5 \}$
+\end{itemize}
+\subsubsection{Conceptos}
+\begin{obbox}{Observación}
+    La pregunta de si un vector $v =(b_1,\ldots,b_m) \in \mathds{K}^m$ es combinación lineal de vectores $v_1,\ldots,v_n \in \mathds{K}^m$ se resuelve con un sistema de ecuaciones lineales: si 
+    $$
+    v_i = (a_{1i},\ldots,a_{mi}), \quad \text{para $1 \le i \le n$,}
+    $$
+    entonces $v = \lambda_1v_1 + \cdots +\lambda_nv_n$ se traduce, en coordenadas, a
+    \begin{align*}
+        (b_1,\ldots,b_m) &= \lambda_1(a_{11},\ldots,a_{m1}) + \cdots +\lambda_n(a_{1n},\ldots,a_{mn}) \\
+        &= (\lambda_1a_{11} + \cdots+ \lambda_na_{1n}, \ldots, \lambda_1a_{m1} + \cdots+ \lambda_na_{mn}).
+    \end{align*}
+    Luego, $v$  es combinación lineal de los vectores $v_1,\ldots,v_n \in \mathds{K}^m$ si y sólo si  el sistema de ecuaciones:
+    \begin{equation*}
+    \begin{matrix}
+    a_{11}\lambda_1& + &a_{12}\lambda_2& + &\cdots& + &a_{1n}\lambda_n &= &b_1\\
+    \vdots&  &\vdots& &&  &\vdots \\
+    a_{m1}\lambda_1& + &a_{m2}\lambda_2& + &\cdots& + &a_{mn}\lambda_n &=&b_m,
+    \end{matrix}
+    \end{equation*}
+    \noindent con incógnitas $\lambda_1,\ldots, \lambda_n$ tiene solución.
+\end{obbox}
+\subsubsection{Punto A}
+$V = \mathds{R}^4, w=(1,-1,0,0)$ y $S=\{ (1,0,0,2), (1,1,2,2), (0,1,0,1)\}$
+\newline Se tiene que verificar si se cumple que:
+$$
+(1,-1,0,0) = \lambda_1(1,0,0,2)+\lambda_2(1,1,2,2)+\lambda_3(0,1,0,1)
+$$
+$$
+= (\lambda_1,0,0,2\lambda_1) + (\lambda_2,\lambda_2,2\lambda_2, 2\lambda_2) + (0,\lambda_3,0,\lambda_3) = (\lambda_1+\lambda_2,\lambda_2+\lambda_3,2\lambda_2,2\lambda_1+2\lambda_2+\lambda_3)
+$$
+Se forma el sistema de ecuaciones:
+$$
+\begin{cases}
+\lambda_1+\lambda_2 = 1 & \\ 
+\lambda_2+\lambda_3 = -1 & \\ 
+2\lambda_2 = 0& \\ 
+2\lambda_1+2\lambda_2+\lambda_3 = 0 & 
+\end{cases}
+$$
+Al resolverlo:
+$$
+\left ( \left.\begin{matrix}
+1 & 1 & 0 \ \\  
+0 & 1 & 1 \ \\ 
+0 & 2 & 0 \ \\ 
+2 & 2 & 1 \ \\
+\end{matrix}\right| \begin{matrix}
+1 \\ 
+-1\\ 
+0 \\
+0 \\ 
+\end{matrix}\right )
+\xrightarrow[]{f_1-f_2}
+\left ( \left.\begin{matrix}
+1 & 0 & -1 \ \\  
+0 & 1 & 1 \ \\ 
+0 & 2 & 0 \ \\ 
+2 & 2 & 1 \ \\
+\end{matrix}\right| \begin{matrix}
+2 \\ 
+-1\\ 
+0 \\
+0 \\ 
+\end{matrix}\right )
+\xrightarrow[]{f_4-2f_1}
+\left ( \left.\begin{matrix}
+1 & 0 & -1 \ \\  
+0 & 1 & 1 \ \\ 
+0 & 2 & 0 \ \\ 
+0 & 2 & 3 \ \\
+\end{matrix}\right| \begin{matrix}
+2 \\ 
+-1\\ 
+0 \\
+-4 \\ 
+\end{matrix}\right )
+\xrightarrow[]{f_4-f_3}
+\left ( \left.\begin{matrix}
+1 & 0 & -1 \ \\  
+0 & 1 & 1 \ \\ 
+0 & 2 & 0 \ \\ 
+0 & 0 & 3 \ \\
+\end{matrix}\right| \begin{matrix}
+2 \\ 
+-1\\ 
+0 \\
+-4 \\ 
+\end{matrix}\right )
+$$
+$$
+\xrightarrow[]{f_3-2f_2}
+\left ( \left.\begin{matrix}
+1 & 0 & -1 \ \\  
+0 & 1 & 1 \ \\ 
+0 & 0 & -2 \ \\ 
+0 & 0 & 3 \ \\
+\end{matrix}\right| \begin{matrix}
+2 \\ 
+-1\\ 
+2 \\
+-4 \\ 
+\end{matrix}\right )
+\xrightarrow[]{(-1/2)f_3}
+\left ( \left.\begin{matrix}
+1 & 0 & -1 \ \\  
+0 & 1 & 1 \ \\ 
+0 & 0 & 1 \ \\ 
+0 & 0 & 3 \ \\
+\end{matrix}\right| \begin{matrix}
+2 \\ 
+-1\\ 
+-1 \\
+-4 \\ 
+\end{matrix}\right )
+\xrightarrow[]{f_4-3f_3}
+\left ( \left.\begin{matrix}
+1 & 0 & -1 \ \\  
+0 & 1 & 1 \ \\ 
+0 & 0 & 1 \ \\ 
+0 & 0 & 0 \ \\
+\end{matrix}\right| \begin{matrix}
+2 \\ 
+-1\\ 
+-1 \\
+-1 \\ 
+\end{matrix}\right )
+\xrightarrow[]{(-1)f_4)}
+\left ( \left.\begin{matrix}
+1 & 0 & -1 \ \\  
+0 & 1 & 1 \ \\ 
+0 & 0 & 1 \ \\ 
+0 & 0 & 0 \ \\
+\end{matrix}\right| \begin{matrix}
+2 \\ 
+-1\\ 
+-1 \\
+1 \\ 
+\end{matrix}\right )
+$$
+$$
+\xrightarrow[]{f_3+f_4}
+\left ( \left.\begin{matrix}
+1 & 0 & -1 \ \\  
+0 & 1 & 1 \ \\ 
+0 & 0 & 1 \ \\ 
+0 & 0 & 0 \ \\
+\end{matrix}\right| \begin{matrix}
+2 \\ 
+-1\\ 
+0 \\
+1 \\ 
+\end{matrix}\right )
+\xrightarrow[f_1+f_3]{f_2+f_4}
+\left ( \left.\begin{matrix}
+1 & 0 & 0 \ \\  
+0 & 1 & 1 \ \\ 
+0 & 0 & 1 \ \\ 
+0 & 0 & 0 \ \\
+\end{matrix}\right| \begin{matrix}
+2 \\ 
+0 \\ 
+0 \\
+1 \\ 
+\end{matrix}\right )
+\xrightarrow[f_1-2f_4]{f_2-f_3}
+\left ( \left.\begin{matrix}
+1 & 0 & 0 \ \\  
+0 & 1 & 0 \ \\ 
+0 & 0 & 1 \ \\ 
+0 & 0 & 0 \ \\
+\end{matrix}\right| \begin{matrix}
+0 \\ 
+0 \\ 
+0 \\
+1 \\ 
+\end{matrix}\right )
+$$
+Se llega a $0=1$, entonces se concluye que $w$ \textbf{no se puede expresar como combinación lineal} de los vectores de $S$.
+\subsubsection{Punto B}
+Un polinomio de grado 5 se puede escribir como vector $v=(x^5,x^4,x^3,x^2,x^1,x^0)$. Entonces: \newline
+$w=(1,1,1,1,1,1)$ y $S=\{ (0,0,0,0,0,2),(0,0,0,1,1,0),(0,0,1,1,0,0),(0,1,1,0,0,0),(1,1,0,0,0,0)\}$ \newline
+Se tiene que verificar si se cumple que:
+$$
+(1,1,1,1,1,1) = \lambda_1(0,0,0,0,0,2)+\lambda_2(0,0,0,1,1,0)+\lambda_3(0,0,1,1,0,0)+\lambda_4(0,1,1,0,0,0)+\lambda_5(1,1,0,0,0,0)
+$$ 
+$$
+= (0,0,0,0,0,2\lambda_1) + (0,0,0,\lambda_2,\lambda_2,0) + (0,0,\lambda_3,\lambda_3,0,0) + (0,\lambda_4,\lambda_4,0,0,0) + (\lambda_5,\lambda_5,0,0,0,0)
+$$
+$$
+(\lambda_5,\lambda_4+\lambda_5,\lambda_3+\lambda_4,\lambda_2+\lambda_3,\lambda_2,2\lambda_1)
+$$
+Se forma el sistema de ecuaciones:
+$$
+\begin{cases}
+\lambda_5 = 1 & \\ 
+\lambda_4+\lambda_5 = 1 & \\ 
+\lambda_3+\lambda_4 = 1 & \\ 
+\lambda_2+\lambda_3 = 1 & \\
+\lambda_2 = 1 & \\
+2\lambda_1 = 1 \\
+\end{cases}
+$$
+De la ecuación 1 se obtiene $\lambda_5=1$, de la 3 $\lambda_4=1$, de la 4 $\lambda_3=0$, de la 5 $\lambda_2=1$ y de la 6 $\lambda_1=1/2$. Pero al reemplazar en la segunda ecuación $\lambda_4+\lambda_5=1+1\neq 1$, por lo tanto el sistema no tiene soluciones y por consecuencia, $w$ no se puede escribir como combinación lineal de los vectores de $S$.
+\subsection{Ejercicio 3}
+Decidir si los siguientes subconjuntos de $\mathds{R}^3$ son linealmente independientes. Cuando un conjunto no lo sea, mostrar una relación lineal no trivial entre sus elementos.
+\begin{itemize}
+    \item[(a)] $\{ (1,0,-1),(1,2,1), (0,-3,2) \}$
+    \item[(b)] $\{ (1,3,-3),(2,3,-4), (1,-3,1) \}$
+\end{itemize}
+\subsubsection{Conceptos}
+\begin{defbox}{Definición}
+    Sea $V$ un espacio vectorial sobre $\mathds{K}$. Un subconjunto $S$ de $V$ se dice \textit{linealmente dependiente} (o simplemente, \textit{LD} o \textit{dependiente}) si existen vectores distintos $v_1,\ldots,v_n \in S$  y escalares $\lambda_1,\ldots,\lambda_n$ de $\mathds{K}$, no todos nulos, tales que 	
+        \begin{equation*}
+            \lambda_1v_1+\cdots+\lambda_nv_n=0.
+        \end{equation*}
+        Un conjunto que no es linealmente dependiente se dice \textit{linealmente independiente} (o simplemente, \textit{LI} o \textit{independiente}).
+        
+        Si el conjunto $S$ tiene solo un número finito de vectores $v_1,\ldots,v_n$, diremos, para simplificar, que los $v_1,\ldots,v_n$ son LD (o LI), en vez de decir
+        que $S$ es LD (o LI, respectivamente).
+\end{defbox}
+\begin{obbox}{Observación}
+    En  general,  en $\mathds{K}^m$, si queremos determinar si  $v_1,\ldots,v_n$ es LI, planteamos la ecuación  
+    \begin{equation*}
+    \lambda_1v_1+\cdots+\lambda_nv_n=(0,\ldots,0),
+    \end{equation*}
+    que, viéndola coordenada a coordenada, es equivalente a un sistema de $m$ ecuaciones lineales con  $n$ incógnitas (que son $\lambda_1,\ldots,\lambda_n$). Si  la única solución es la trivial entonces $v_1,\ldots,v_n$ es LI. Si hay alguna solución no trivial, entonces $v_1,\ldots,v_n$ es LD. 
+\end{obbox}
+\subsubsection{Punto A}
+De la obsevación se deduce que: Para $A\in\mathds{K}^{m\times n}$, las filas $\{ 
+f1,...,f_m \}$ de $A$ son vectores de $\mathds{K}^n$ y si $A$ es una matriz escalonada, los vectores son LI, si se anula alguna fila son LD.
+\newline Entonces planteo la matriz:
+$$
+\begin{bmatrix}
+1 & 0 & -1\\ 
+1 & 2 & 1\\ 
+0 & -3 & 2 
+\end{bmatrix}
+\xrightarrow[]{f_2-f_1}
+\begin{bmatrix}
+1 & 0 & -1\\ 
+0 & 2 & 2\\ 
+0 & -3 & 2 
+\end{bmatrix}
+\xrightarrow[]{f_3-(3/2)f_2}
+\begin{bmatrix}
+1 & 0 & -1\\ 
+0 & 2 & 2\\ 
+0 & 0 & 5 
+\end{bmatrix}
+$$
+Como se llega a una matriz escalonada, \textbf{los vectores son Linealmente independientes}.
+\subsubsection{Punto B}
+Planteo la matriz con los vectores dados:
+$$
+\begin{bmatrix}
+1 & 3 & -3\\ 
+2 & 3 & -4\\ 
+1 & -3 & 1 
+\end{bmatrix}
+\xrightarrow[]{f_2-2f_1}
+\begin{bmatrix}
+1 & 3 & -3\\ 
+0 & -3 & 2\\ 
+1 & -3 & 1 
+\end{bmatrix}
+\xrightarrow[]{f_3-f_1}
+\begin{bmatrix}
+1 & 3 & -3\\ 
+0 & -3 & 2\\ 
+0 & -6 & 4 
+\end{bmatrix}
+\xrightarrow[]{f_3+2f_2}
+\begin{bmatrix}
+1 & 3 & -3\\ 
+0 & -3 & 2\\ 
+0 & 0 & 8 
+\end{bmatrix}
+$$
+Como se llega a una matriz escalonada, \textbf{los vectores son Linealmente independientes}.
+\subsection{Ejercicio 4}
+Sea $A\in M_{3\times 4}(\mathds{R})$ la matriz dada por:
+$$
+A=\begin{bmatrix}
+2 & 1 & 0 & 3\\ 
+-1 & 0 & 1 & 0\\ 
+0 & -1 & 0 & 1
+\end{bmatrix}
+$$
+\begin{itemize}
+    \item[(a)] Calcular la dimensión del subespacio vectorial de $\mathds{R}^4$ generado por las filas de $A$.
+    \item[(b)] Calcular la dimensión del subespacio vectorial de $\mathds{R}^3$ generado por las columnas de $A$.
+\end{itemize}
+\subsubsection{Conceptos}
+\begin{defbox}{Definición}
+    Sea $V$ un espacio vectorial. Una \textit{base} de $V$ es un conjunto $\mathcal{B} \subseteq V$ tal que
+     \begin{enumerate}
+         \item\label{it.genera} $\mathcal{B}$ genera a $V$, y
+         \item\label{it.li} $\mathcal{B}$ es LI.
+     \end{enumerate}
+      El espacio $V$ es de \textit{dimensión finita} si tiene una base finita,  es decir con  un número finito de elementos.
+\end{defbox}
+\begin{defbox}{Definición}
+    Sea $A = [a_{ij}] \in M_{m \times n}(\mathds{K})$. El \textit{vector fila $i$} es el vector  $(a_{i1},\ldots,a_{in}) \in \mathds{K}^n$. El \textit{espacio fila} de $A$ es el subespacio de $\mathds{K}^n$ generado por los $m$ vectores fila de $A$.  De forma análoga, se define  el vector columna $j$ al vector $(a_{1j},\ldots,a_{mj}) \in \mathds{K}^m$ y  el \textit{espacio columna} de $A$ es el subespacio de $\mathds{K}^m$ generado por los $n$ vectores columna de $A$.
+\end{defbox}
+\begin{teobox}{Colorario}
+    Sean $A$ matriz $m \times n$ y $R$ la MRF equivalente por filas a $A$. Entonces, el espacio fila de $A$ es igual al espacio fila de $R$ y las filas no nulas de $R$ forman una base del espacio fila de $A$. 
+\end{teobox}
+\begin{obbox}{Método}
+    El  corolario  nos provee un método para encontrar una base de un  subespacio de $\mathds{K}^n$ generado por $m$ vectores: si $v_1,\ldots,v_m \in \mathds{K}^n$ y $W = \langle v_1,\ldots,v_m\rangle$, consideramos la matriz 
+    $$
+    A = \begin{bmatrix}
+    v_1 \\ v_2 \\ \vdots \\ v_m
+    \end{bmatrix}
+    $$
+    donde las filas son los vectores $v_1,\ldots,v_m$. Luego calculamos $R$, una MRF equivalente por filas a $A$, y si $R$ tiene $r$ filas no nulas, las $r$ filas no nulas son una base de $W$ y, por consiguiente, $\dim W = r$. 
+\end{obbox}
+\subsubsection{Punto A}
+Sea $W$ el subespacio vectorial de $\mathds{R}^4$ generado por las filas de $A$:
+$$W=\left \langle (2,1,0,3), (-1,0,1,0), (0,-1,0,1) \right \rangle$$
+Hay que reducir la matriz a MRF:
+$$
+\begin{bmatrix}
+2 & 1 & 0 & 3\\ 
+-1 & 0 & 1 & 0\\ 
+0 & -1 & 0 & 1
+\end{bmatrix}
+\xrightarrow[]{(1/2)f_1}
+\begin{bmatrix}
+1 & 1/2 & 0 & 3/2\\ 
+-1 & 0 & 1 & 0\\ 
+0 & -1 & 0 & 1
+\end{bmatrix}
+\xrightarrow[]{f_2+f_1}
+\begin{bmatrix}
+1 & 1/2 & 0 & 3/2\\ 
+0 & 1/2 & 1 & 3/2\\ 
+0 & -1 & 0 & 1
+\end{bmatrix}
+\xrightarrow[]{2f_2}
+\begin{bmatrix}
+1 & 1/2 & 0 & 3/2\\ 
+0 & 1 & 2 & 3\\ 
+0 & -1 & 0 & 1
+\end{bmatrix}
+$$
+$$
+\xrightarrow[]{f_3+f_2}
+\begin{bmatrix}
+1 & 1/2 & 0 & 3/2\\ 
+0 & 1 & 2 & 3\\ 
+0 & 0 & 2 & 4
+\end{bmatrix}
+\xrightarrow[]{(1/2)f_3}
+\begin{bmatrix}
+1 & 1/2 & 0 & 3/2\\ 
+0 & 1 & 2 & 3\\ 
+0 & 0 & 1 & 2
+\end{bmatrix}
+$$
+Sea $R$ la matriz reducida por filas obtenida de $A$, la cantidad de filas no nulas $r$ en este caso $3$, es una base de $W$, y por consiguiente, $dim \ W = r$, es decir $dim \ W = 3$.
+\subsubsection{Punto B}
+Sea $V$ el subespacio vectorial de $\mathds{R}^3$ generado por las columnas de $A$:
+$$
+V=\left \langle (2,-1,0), (1,0,-1), (0,1,0), (3,0,1) \right \rangle
+$$
+Hay que colocarlos en una matriz, y reducirla:
+$$
+\begin{bmatrix}
+2 & -1 & 0\\ 
+1 & 0 & -1\\ 
+0 & 1 & 0 \\
+3 & 0 & 1
+\end{bmatrix}
+\xrightarrow[]{(1/2)f_1}
+\begin{bmatrix}
+1 & -1/2 & 0\\ 
+1 & 0 & -1\\ 
+0 & 1 & 0 \\
+3 & 0 & 1
+\end{bmatrix}
+\xrightarrow[]{(f_2-f_1}
+\begin{bmatrix}
+1 & -1/2 & 0\\ 
+0 & 1/2 & -1\\ 
+0 & 1 & 0 \\
+3 & 0 & 1
+\end{bmatrix}
+\xrightarrow[]{(f_4-3f_1}
+\begin{bmatrix}
+1 & -1/2 & 0\\ 
+0 & 1/2 & -1\\ 
+0 & 1 & 0 \\
+0 & 3/2 & 1
+\end{bmatrix}
+$$
+$$
+\xrightarrow[]{(f_4-(3/2)f_3}
+\begin{bmatrix}
+1 & -1/2 & 0\\ 
+0 & 1/2 & -1\\ 
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+\xrightarrow[f_2-(1/2)f_3]{f_1+(1/2)f_3}
+\begin{bmatrix}
+1 & 0 & 0\\ 
+0 & 0 & -1\\ 
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+\xrightarrow[]{f_2+f_4}
+\begin{bmatrix}
+1 & 0 & 0\\ 
+0 & 0 & 0\\ 
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+$$
+Sea $R$ la matriz reducida por filas obtenida de las columnas de $A$, la cantidad de filas no nulas $r$ en este caso $3$, es una base de $W$, y por consiguiente, $dim \ V = r$, es decir $dim \ V = 3$.
+\subsection{Ejercicio 5}
+Sea $A\in M_{3\times 4}$ la matriz dada por
+$$
+A = \begin{bmatrix}
+2 & 1 & 0 & 0\\ 
+0 & 0 & 1 & 0 \\ 
+0 & -1 & 0 & 1
+\end{bmatrix}
+$$
+Sea $W\subseteq \mathds{R}^4 $ el subespacio vectorial que consta de aquellos $X\in\mathds{R}^4$ tales que $AX=0$. Encontrar un conjunto de vectores que generen a $W$. \newline
+Sea $AX=0$ la ecuación para la cual se deben buscar soluciones, se forma el siguiente sistema de ecuaciones:
+$$
+\begin{cases}
+    2x+y = 0 & \\
+    z = 0 & \\
+    -y + w = 0 
+\end{cases}
+$$
+Reduzco la matriz:
+$$
+\begin{bmatrix}
+2 & 1 & 0 & 0\\ 
+0 & 0 & 1 & 0 \\ 
+0 & -1 & 0 & 1
+\end{bmatrix}
+\xrightarrow[]{(-1)f_3}
+\begin{bmatrix}
+2 & 1 & 0 & 0\\ 
+0 & 0 & 1 & 0 \\ 
+0 & 1 & 0 & -1
+\end{bmatrix}
+\xrightarrow[]{f_1-f_3}
+\begin{bmatrix}
+2 & 0 & 0 & 1\\ 
+0 & 0 & 1 & 0 \\ 
+0 & 1 & 0 & -1
+\end{bmatrix}
+\xrightarrow[]{(1/2)f_1}
+\begin{bmatrix}
+1 & 0 & 0 & 1/2\\ 
+0 & 0 & 1 & 0 \\ 
+0 & 1 & 0 & -1
+\end{bmatrix}
+$$
+El sistema queda:
+$$
+\begin{cases}
+    x = -1/2w & \\
+    z = 0 & \\
+    y = w 
+\end{cases}
+$$
+Por lo tanto las soluciones son de la forma $\{ w(-1/2,1,0,1) \}$ y por definición de espacio generado, el conjunto de vectores que generan a $W$ es:
+$$
+W = \left \langle (-1/2,1,0,1) \right \rangle
+$$
+\subsection{Ejercicio 6}
+Demostrar las siguientes afirmaciones:
+\begin{itemize}
+    \item[(a)] Todo subconjunto de un conjunto LI es LI.
+    \item[(b)] Todo conjunto que contiene a un conjunto LD es también LD.
+    \item[(c)] Todo conjunto que contiene al vector 0 es LD.
+    \item[(d)] Un conjunto es LI si y sólo si todos sus subconjuntos \textit{finitos} son LI
+    \item[(e)] Probar que un conjunto de vectores $\{v_1,..,v_n\}$ es LD si y sólo si alguno de los vectores está en el generado por los otros, esto es: existe $i: \ 1\leq i\leq n $ tal que $v_i\in\left \langle v_1,...,v_{i-1},v_{i+1},...,v_n \right \rangle $.
+\end{itemize}
+\subsubsection{Demostración A}
+\textsc{Todo subconjunto de un conjunto LI es LI} \\
+Sea $L$ un subconjunto \textit{linealmente dependiente}, es decir existen vectores $l_1,l_2,...,l_n\in L$ y escalares $\lambda_1,\lambda_2,...,\lambda_n$ pertenecientes a un cuerpo $\mathds{K}$, no todos nulos, tales que: $\lambda_1l1+\lambda_2l_2+...+\lambda_nl_n=0$. Entonces, si se le agregan vectores con coeficientes 0, el conjunto seguiría siendo LD ya que la combinación lineal seguiría dando 0, con sus escalares no todos nulos. \\
+Supongamos que se tiene un conjunto $V$ LI y un subconjunto $W$ linealmente LD, entonces agregando todos los vectores que faltan para formar el conjunto inicial seguiría siendo LD, y eso es una contradicción, por lo tanto, los subconjuntos que se tomen de un conjunto LI son necesariamente LI. $\square$
+\subsubsection{Demostración B}
+\textsc{Todo conjunto que contiene a un conjunto LD es tambien LD}. \\
+Sea $L$ un subconjunto \textit{linealmente dependiente}, es decir existen vectores $l_1,l_2,...,l_n\in L$ y escalares $\lambda_1,\lambda_2,...,\lambda_n$ pertenecientes a un cuerpo $\mathds{K}$, no todos nulos, tales que: $\lambda_1l1+\lambda_2l_2+...+\lambda_nl_n=0$. Entonces, si se le agregan vectores con coeficientes 0, el conjunto seguiría siendo LD ya que la combinación lineal seguiría dando 0, con sus escalares no todos nulos. \\
+Entonces cualquier subconjunto LD de un conjunto mas grande arbitrario, al agregarle los elementos restantes para el conjunto original, seguirá siendo LD, por consecuencia, todo conjunto que contiene a un conjunto LD también será LD. $\square$
+\subsubsection{Demostración C}
+\textsc{Todo conjunto que contiene al vector 0 es LD} \\
+Sea $V$ un conjunto con vectores $v_1,v_2,...,v_n,0_v$ con el vector nulo. Va a existir una combinación lineal 
+$$
+0v_1+0v_2+...+0v_n+\lambda0_v=0
+$$
+Es decir, con cualquier $\lambda\in\mathds{K}$ va a existir una combinación lineal que da 0 con no todos los escalares nulos, por lo tanto, el conjunto será LD. $\square$
+\subsubsection{Demostración D}
+\textsc{Un conjunto es LI si y sólo si todos sus subconjuntos finitos son LI}
+\begin{itemize}
+    \item[($\Rightarrow$)] Supongamos que se tiene un conjunto $V$ LI y un subconjunto finito $W$ linealmente LD, entonces agregando todos los vectores que faltan para formar el conjunto inicial seguiría siendo LD, y eso es una contradicción, por lo tanto, los subconjuntos finitos que se tomen de un conjunto LI son necesariamente LI.
+    \item[($\Leftarrow$)] Supongamos que se tiene un subconjunto finito $W$ LI de un conjunto $V$. Es decir la ecuación $\lambda_1w_1+\lambda_2w_2+...+\lambda_nw_n=0$ tiene solución únicamente con los escalares $\lambda_1,...,\lambda_n=0$. Al agregarle los vectores faltantes para el conjunto $V$, (sean $w_{m1},w_{m2},...,w_{mn}$ dichos vectores) la ecuación queda de la forma: $\lambda_1w_1+\lambda_2w_2+...+\lambda_nw_n + \lambda´_1w_{m1}+\lambda'_2w_{m2}+...+\lambda'_nw_{mn}=0$. Por hipótesis, todos los subconjuntos finitos son LI, por lo tanto la ecuación seguirá teniendo solución cuando los escalares $\lambda_1,...,\lambda_n,\lambda'_1,...,\lambda'_n$ son 0, por consecuencia, el conjunto también es LI. $\square$
+\end{itemize}
+\subsubsection{Demostración E}
+\textsc{Probar que un conjunto de vectores $\{v_1,..,v_n\}$ es LD si y sólo si alguno de los vectores está en el generado por los otros, esto es: existe $i: \ 1\leq i\leq n $ tal que $v_i\in\left \langle v_1,...,v_{i-1},v_{i+1},...,v_n \right \rangle $.} \\
+Se puede afirmar que si $v_i\in \left \langle v_1,...,v_{i-1},v_{i+1},...,v_n \right \rangle$, entonces \\ $\left \langle v_1,...,v_i,...,v_n \right \rangle = \left \langle v_1,...,v_{i-1},v_{i+1},...,v_n \right \rangle$.
+\begin{bbox}
+    Se tiene que $v_i \in \left \langle v_1,...,v_{i-1},v_{i+1},...,v_n \right \rangle$ entonces $v_i$ puede escribirse como $v_i=\lambda_1v_1+...+\lambda_{i-1}v_{i-1}+\lambda_{i+1}v_{i+1}+...+\lambda_nv_n$.
+    \newline Un vector genérico del subespacio generado por $\{v_1,...,v_i,...,v_n \}$ es de la forma
+    $$
+    x = \lambda'_iv_i+\lambda'_1v_1+...+\lambda'_nv_n
+    $$
+    Sustituyendo $v_i$ por $v_i=\lambda_1v_1+...+\lambda_{i-1}v_{i-1}+\lambda_{i+1}v_{i+1}+...+\lambda_nv_n$
+    $$
+    x = \lambda'_i\cdot (\lambda_1v_1+...+\lambda_{i-1}v_{i-1}+\lambda_{i+1}v_{i+1}+...+\lambda_nv_n) + \lambda'_1v_1+...+\lambda'_nv_n 
+    $$
+    $$
+    = \lambda''_1v_1+...+\lambda''_{i-1}v_{i-1}+\lambda''_{i+1}v_{i+1}+...+\lambda''_nv_n
+    $$
+    Coincide con el subespacio generado $\left \langle v_1,...,v_{i-1},v_{i+1},...,v_n \right \rangle$. Queda demostrada la afirmación.
+\end{bbox}
+
+Con esto el problema puede reescribirse como la prueba de que: un conjunto de vectores $\{v_1,v_2,...,v_n\}$ es LD $\Leftrightarrow$ $\left \langle v_1,...,v_i,...v_n \right \rangle = \left \langle v_1,...,v_{i-1},v_{i+1},...,v_n \right \rangle$ con $1\leq i\leq n$.
+\begin{itemize}
+    \item[($\Leftarrow$)] Se tiene que $\left \langle v_1,...,v_i,...v_n \right \rangle = \left \langle v_1,...,v_{i-1},v_{i+1},...,v_n \right \rangle$ con $1\leq i\leq n$ por hipótesis. \\
+    Es decir existen escalares $\lambda_j$ ($j\neq i$), tal que
+    $
+    v_i= \sum_{j=1, j\neq i}^{n} \lambda_jv_j$. 
+    Entonces:
+    $$
+    0 = \sum_{j=1}^{i-1}\lambda_jv_j+(-1)v_i+\sum_{j= i+1}^{n}\lambda_jv_j
+    $$
+    Por lo tanto, el conjunto es \textbf{linealmente dependiente}.
+    \item[($\Rightarrow$)] Si $\{v_1,v_2,...,v_n\}$ es linealmente dependiente, existen $\lambda_1,\lambda_2,...,\lambda_n$ no todos nulos, tales que $\sum_{j=1}^{n}\lambda_jv_j=0$. Sin pérdida de generalidad, suponemos que $\lambda_i\neq 0$. Entonces:
+    $$
+    v_i=\sum_{j=1, j\neq i}^{n}\frac{\lambda_j}{\lambda_i}v_j \in \left \langle v_1,...,v_{i-1},v_{i+1},...,v_n \right \rangle  \ \ \ \ \square
+    $$
+\end{itemize}
+\subsection{Ejercicio 8}
+Dar 3 vectores en $\mathds{R}^3$ que sean LD y tales que dos cualesquiera de ellos sean LI. \\
+Para que el conjunto sea LD, tomo primero el vector $(0,0,0)$ y luego tomo dos vectores que a simple vista sean LI, el conjunto queda: 
+$$
+\{ (0,0,0),(1,1,0), (2,0,1) \}
+$$
+
+\subsection{Ejercicio 9}
+Sea $V$ el $\mathbb{Q}$-espacio vectorial de sucesiones con valores racionales, es decir funciones $a:\mathbb{N}\rightarrow\mathbb{Q}$. Para todo $n\in\mathbb{N}$ encontrar un subconjunto de $V$ de cardinal $n$ que sea $LI$. \\
+En este caso el $\mathbb{Q}$-espacio vectorial está definido como: 
+$$
+V = \{  a:\mathds{N}\rightarrow\mathbb{Q} \}= \{ \{ a_n \} \}
+$$
+Sea $a,b:\mathds{N}\rightarrow\mathbb{Q}$, la suma y el producto por escalar del espacio vectorial están definidos como: $(a+b)(n)=a(n)+b(n)$ y $(\lambda \cdot a) = \lambda \cdot a(n)$ con $\lambda\in\mathbb{Q}$. \\
+Si se tiene $a_i$ se puede escribir como $a_i:\mathds{N}\rightarrow\mathbb{Q}=(a_1,a_2,...)$. Por lo tanto, tomando sucesiones de la forma:
+$$
+e_j:\mathds{N}\rightarrow\mathbb{Q}=(0,0,...,1,...,0,...)
+$$
+Donde
+$$
+e_j(n)=\begin{cases}
+1 & \text{ si } j=n \\ 
+0 & \text{ si } j\neq n 
+\end{cases}
+$$
+El conjunto $\{ e_1,e_2,...,e_m \}$ es LI, para probarlo tomo una combinación lineal
+$$
+\sum_{i=1}^{m}\lambda_ie_i=0
+$$
+Notar que el $0$ es la función 0 tal que $0(n)=0$. Luego tomando la función de ambos lados:
+$$
+\left ( \sum_{i=1}^{m}\lambda_ie_i\right )(n)=0 (n)
+$$
+$$
+= \sum_{i=1}^{m}\lambda_ie_i(n)=0
+$$
+Ahora bien, por definición de $e_i(n)=0$ para todo $i\neq n$, entonces en la sumatoria el único término que va a sobrevivir es donde $i=n$ ya que $e_i(n)=1$ con $i=n$. La ecuación queda:
+$$
+= \lambda_n \cdot 1 = 0
+$$
+Con esto queda probado que $\lambda_n=0$ y por consecuencia, el conjunto es LI.
+\subsection{Ejercicio 11}
+Sea $\mathbb{K}$ un cuerpo. Decidir si las siguientes afirmaciones son verdaderas o falsas. Justificar.
+\begin{itemize}
+    \item[(a)] Si $W_1$ y $W_2$ son subespacios vectoriales de $\mathbb{K}^8$ de dimensión 5, entonces $W_1\cap W_2=0$.
+\end{itemize}
+\subsubsection{Demostración A}
+\textsc{Si $W_1$ y $W_2$ son subespacios vectoriales de $\mathbb{K}^8$ de dimensión 5, entonces $W_1\cap W_2=0$.} \\
+Sea $W_1$ y $W_2$ subespacios vectoriales de $\mathbb{K}^8$ de dimensión 5, entonces $dim(W_1+W_2)\leq 8$ y por teorema, $dim (W_1+W_2)= dim(W_1)+ dim (W_2) - dim(W_1 \cup W_2)$
+y $dim(W_1)+dim(W_2)=10$ por hipótesis y $dim(W_1 \cup W_2)$ si fuese 0, $dim(W_1+W_2)=10$ lo que es absurdo. Entonces la afirmación es falsa. 
+\subsection{Ejercicio 13}
+Dar una base y dimensión de los siguientes subespacios vectoriales:
+\begin{itemize}
+    \item[(a)] $\{ (x,y,z)\in\mathds{R}^3 : z=x+y \}$,
+    \item[(b)] $\{ (x,y,z,w,u)\in\mathds{R}^5:w=x+z, y=x-z, u=2x-3z \}$,
+    \item[(c)] $\{ a_0+a_1x+a_2x^2+a_3x^3 \in\mathds{R}_3[x]:a_0+a_3=a_1+a_2 \}$
+\end{itemize}
+\subsubsection{Punto A}
+Sea $W$ el subespacio vectorial de $\mathds{R}^3$ dado por:
+$$
+W=\{ (x,y,z)\in\mathds{R}^3 : z=x+y \}
+$$
+Reemplazando $z$ en el vector se obtiene: $(x,y,x+y)$, por lo tanto, el conjunto de vectores que generan a $W$ es:
+$$
+W=\left \langle (1,0,1), (0,1,1) \right \rangle
+$$
+Entonces una base de $W$ es $\{(1,0,1), (0,1,1)\}$ y su dimensión es 2.
+\subsubsection{Punto B}
+Sea $W$ el subespacio vectorial de $\mathds{R}^5$ dado por:
+$$
+W=\{ (x,y,z,w,u)\in\mathds{R}^5:w=x+z, y=x-z, u=2x-3z \}
+$$
+Reemplazando $w,y,u$ en el vector se obtiene: $(x,x-z,z,x+z,2x-3z)$, por lo tanto, el conjunto de vectores que generan a $W$ es:
+$$
+W=\left \langle (1,1,0,1,2), (0,-1,1,1,-3) \right \rangle
+$$
+Entonces una base de $W$ es $\{(1,1,0,1,2), (0,-1,1,1,-3)\}$ y su dimensión es 2.
+\subsubsection{Punto C}
+Sea $W$ el subespacio vectorial de $\mathds{R}_3[x]$ dado por:
+$$
+W=\{ a_0+a_1x+a_2x^2+a_3x^3 \in\mathds{R}_3[x]:a_0+a_3=a_1+a_2 \}
+$$
+Primero despejo $a_0$ de la ecuación, $a_0=-a_3+a_1+a_2$ y reemplazo en el polinomio dado:
+$$
+W=\{ (-a_3+a_1+a_2)+a_1x+a_2x^2+a_3x^3 \in\mathds{R}_3[x] \}
+$$
+$$
+=a_1(x+1)+a_2(x^2+1)+a_3(x^3-1)
+$$
+Por lo tanto, el conjunto de vectores que generan a $W$ es:
+$$
+W=\left \langle (x+1),(x^2+1),(x^3-1) \right \rangle
+$$
+Entonces una base de $W$ es $\{(x+1),(x^2+1),(x^3-1)\}$ y su dimensión es 3.
+\subsection{Ejercicio 16}
+Probar que los vectores $v_1=(1,0,-i)$, $v_2=(1+i,1-i,1)$, $v_3=(i,i,i)$ forman una base de $\mathbb{C}^3$. Dar las coordenadas de un vector $(x,y,z)$ en esta base. 
+\subsubsection{Conceptos}
+\begin{defbox}{Definición}
+    Sea $V$ un espacio vectorial. Una \textit{base} de $V$ es un conjunto $\mathcal{B} \subseteq V$ tal que
+     \begin{enumerate}
+         \item $\mathcal{B}$ genera a $V$, y
+         \item $\mathcal{B}$ es LI.
+     \end{enumerate}
+      El espacio $V$ es de \textit{dimensión finita} si tiene una base finita,  es decir con  un número finito de elementos.
+\end{defbox}
+\begin{defbox}{Definición}
+    Sea $V$ espacio vectorial de dimensión finita. Diremos que $n$  es \textit{la dimensión de $V$} y  denotaremos $\dim V =n$,  si existe una base de $V$  de $n$  vectores. Si $V = \{0\}$,  entonces definimos $\dim V =0$.
+\end{defbox}
+\subsubsection{Prueba}
+Para verificar que forman una base de $\mathbb{C}^3$ hay que probar que son LI y generan. Se puede notar que $dim(\mathbb{C}^3)=3$ por lo tanto la cantidad de vectores coincide. \\
+Para que sean LI, no deben existir soluciones no triviales a la ecuación:
+$$
+\lambda_1v_1+\lambda_2v_2+\lambda_3v_3=0
+$$
+Sea $A$ una matriz, podemos plantear $v_1,v_2,v_3$ como las respectivas columnas:
+$$
+\begin{pmatrix}
+1 & 1+i & i\\ 
+0 & 1-i & i\\ 
+-i & 1 & i
+\end{pmatrix}
+$$
+Y al reducirla se llega a:
+$$
+\begin{pmatrix}
+1 & 0 & 0\\ 
+0 & 1 & 0\\ 
+0 & 0 & 1
+\end{pmatrix}
+$$
+Esto quiere decir que ningun vector es combinación lineal del otro, que la ecuación $AX=0$ donde $A$ es la matriz planteada y $X$ es la columna $\lambda_1, \lambda_2, \lambda_3$. Tendrá solución solo cuando $\lambda_1, \lambda_2, \lambda_3=0$, entonces es LI. y por consecuencia \textbf{sí forman una base de $\mathbb{C}^3$}. \\
+Para dar las coordenadas de un vector $(x,y,z)$ en esta base, hay que resolver la ecuación:
+$$
+\lambda_1v_1+\lambda_2v_2+\lambda_3v_3=(x,y,z)
+$$
+Esto es equivalente a resolver el sistema de ecuaciones:
+$$
+\begin{cases}
+    \lambda_1+\lambda_2+\lambda_3=x & \\
+    (1+i)\lambda_1+(1-i)\lambda_2+i\lambda_3=y & \\
+    -i\lambda_1+i\lambda_2+i\lambda_3=z
+\end{cases}
+$$
+Que en forma matricial es:
+$$
+\begin{pmatrix}
+1 & 1+i & i\\
+1 & 1-i & i\\
+-i & 1 & i
+\end{pmatrix}
+\begin{pmatrix}
+\lambda_1\\
+\lambda_2\\
+\lambda_3
+\end{pmatrix}
+=
+\begin{pmatrix}
+x\\
+y\\
+z
+\end{pmatrix}
+$$
+Resolviendo el sistema se obtiene:
+$$
+\begin{pmatrix}
+\lambda_1\\
+\lambda_2\\
+\lambda_3
+\end{pmatrix}
+=
+\begin{pmatrix}
+\frac{1}{2}x-\frac{1}{2}y+\frac{1}{2}z\\
+\frac{1}{2}x+\frac{1}{2}y-\frac{1}{2}z\\
+\frac{1}{2}x-\frac{1}{2}y-\frac{1}{2}z
+\end{pmatrix}
+$$
+Entonces las coordenadas del vector $(x,y,z)$ en la base $\{v_1,v_2,v_3\}$ son:
+\subsection{Ejercicio 17}
+Sean $\lambda_1,...,\lambda_n$ todos distintos y recordemos el $\mathds{R}$-espacio vectorial $F(\mathds{R})$. Demostrar que el conjunto $\{e^{\lambda_1x},...,e^{\lambda_nx}\} \subset F(\mathds{R})$ es LI. Concluir que $\dim_{\mathds{R}} F(\mathds{R})$ es infinita. \\
+Para probar que el conjunto es LI tomo una combinacion lineal:
+$$
+\sum_{i=1}^{n}\lambda_ie^{\lambda_ix}=0
+$$
+Derivo ambos lados:
+$$
+\sum_{i=1}^{n}\lambda_i\lambda_ie^{\lambda_ix}=0
+$$
+$$
+\sum_{i=1}^{n}\lambda_i^2e^{\lambda_ix}=0
+$$
+Derivo nuevamente:
+$$
+\sum_{i=1}^{n}\lambda_i^3e^{\lambda_ix}=0
+$$
+Y así sucesivamente, se puede ver que la derivada de la combinación lineal es la combinación lineal de las derivadas, por lo tanto, si se evalúa en $x=0$ se obtiene:
+$$
+\sum_{i=1}^{n}\lambda_i^ke^{\lambda_i0}=0
+$$
+$$
+\sum_{i=1}^{n}\lambda_i^k=0
+$$
+Esto es una contradicción ya que los $\lambda_i$ son todos distintos, por lo tanto, la combinación lineal es 0 solo cuando los escalares son 0, es decir, el conjunto es LI. \\
+Por definición de dimensión, si un conjunto es LI y tiene infinitos elementos, entonces el espacio vectorial es de dimensión infinita. Por lo tanto, $\dim_{\mathds{R}} F(\mathds{R})$ es infinita.
+\subsection{Ejercicio 20}
+Decidir si es posible extender los siguientes conjuntos a una base de los respectivos espacios vectoriales.
+En caso afirmativo, extender a una base.
+\begin{itemize}
+    \item[(a)] $ \{ (1, 2, 1, 1),(1, 0, 1, 1),(3, 2, 3, 3) \}\subseteq \mathds{R}^4$
+    \item[(b)] $ \{ (1, 2, 0, 0),(1, 0, 1, 0) \} \subseteq \mathds{R}^4$
+    \item[(c)] $\left \{ 
+\begin{bmatrix}
+1 & 0\\ 
+0 & -1
+\end{bmatrix}, 
+\begin{bmatrix}
+1 & 0\\ 
+-2 & 1
+\end{bmatrix}, 
+\begin{bmatrix}
+1 & 2\\ 
+3 & 2
+\end{bmatrix} \right \} \subseteq M_{2\times 2}(\mathds{R})$
+\end{itemize}
+\subsubsection{Conceptos}
+\begin{teobox}{Teorema}
+    Sea $V$ espacio vectorial de dimensión finita $n$ y $S_0$ un subconjunto LI de $V$. Entonces $S_0$  es finito  y existen $w_1,\ldots,w_m$ vectores en  $V$ tal que  $S_0 \cup \{w_1,\ldots,w_m\}$ es una base de $V$. 
+\end{teobox}
+\begin{teobox}{Colorario}
+    Sea $W$ es un subespacio de un espacio vectorial de dimensión finita $n$ y $S_0$ un subconjunto LI de $W$. Entonces, $S_0$ se puede completar a una base de $W$. 
+\end{teobox}
+\subsubsection{Punto A}
+Para ver si es posible exteneder a una base lo primero es probar si el conjunto es LI, ya que de no ser así no se puede extender a base. Para ello coloco los vectores como filas de una matriz y la reduzco:
+$$
+\begin{bmatrix}
+1 & 2 & 1 & 1\\ 
+1 & 0 & 1 & 1\\ 
+3 & 2 & 3 & 3
+\end{bmatrix}
+\xrightarrow[f_3-3f_1]{f_2-f_1}
+\begin{bmatrix}
+1 & 2 & 1 & 1\\ 
+1 & -2 & 0 & 0\\ 
+0 & -4 & 0 & 0
+\end{bmatrix}
+\xrightarrow[]{(1/2)f_2}
+\begin{bmatrix}
+1 & 2 & 1 & 1\\ 
+1 & 1 & 0 & 0\\ 
+0 & -4 & 0 & 0
+\end{bmatrix}
+\xrightarrow[f_3+4f_2]{f_1-2f_2}
+\begin{bmatrix}
+1 & 0 & 1 & 1\\ 
+1 & 1 & 0 & 0\\ 
+0 & 0 & 0 & 0
+\end{bmatrix}
+$$
+Esto quiere decir que el tercer vector es combinación lineal de los restantes, por lo tanto es un conjunto Linealmente Dependiente y por consecuencia \textbf{no se puede extender a base}.
+\subsubsection{Punto B}
+Para ver si es posible exteneder a una base lo primero es probar si el conjunto es LI, ya que de no ser así no se puede extender a base. Para ello coloco los vectores como filas de una matriz y la reduzco:
+$$
+\begin{bmatrix}
+1 & 2 & 0 & 0\\ 
+1 & 0 & 1 & 0
+\end{bmatrix}
+\xrightarrow[]{f_2-f_1}
+\begin{bmatrix}
+1 & 2 & 0 & 0\\ 
+0 & -2 & 1 & 0
+\end{bmatrix}
+\xrightarrow[]{(1/2)f_2}
+\begin{bmatrix}
+1 & 2 & 0 & 0\\ 
+0 & 1 & -1/2 & 0
+\end{bmatrix}
+\xrightarrow[]{f_1-2f_2}
+\begin{bmatrix}
+1 & 0 & 1 & 0\\ 
+0 & 1 & -1/2 & 0
+\end{bmatrix}
+$$
+Esto quiere decir que el conjunto es LI, para que sea una base de $\mathds{R}^4$ debe tener dimensión $4$, por lo tanto se deben agregar dos vectores mas, que pueden ser los vectores pertenecientes a la base canónica de $\mathds{R}^4$ tal que en conjunto con los actuales, sean LI. \\
+Tomando $\{ (1, 2, 0, 0),(1, 0, 1, 0), (0,0,1,0), (0,0,0,1) \}$:
+$$
+\begin{bmatrix}
+1 & 2 & 0 & 0\\ 
+1 & 0 & 1 & 0\\ 
+0 & 0 & 1 & 0\\ 
+0 & 0 & 0 & 1
+\end{bmatrix}
+\xrightarrow[]{}
+\begin{bmatrix}
+1 & 0 & 0 & 0\\ 
+0 & 1 & 0 & 0\\ 
+0 & 0 & 1 & 0\\ 
+0 & 0 & 0 & 1
+\end{bmatrix}
+$$
+Esto quiere decir que ningun vector es combinación lineal del otro, es LI y por lo tanto es base de $\mathds{R}^4$.
+\subsubsection{Punto C}
+Para ver si el conjunto es LI, hay que probar que la única solución a esta ecuación es cuando los coeficientes son 0.
+$$
+\lambda_1\cdot 
+\begin{bmatrix}
+1 & 0\\ 
+0 & -1
+\end{bmatrix}
++ \lambda_2 \cdot
+\begin{bmatrix}
+1 & 0\\ 
+-2 & 1
+\end{bmatrix}
++ \lambda_3 \cdot
+\begin{bmatrix}
+1 & 2\\ 
+3 & 2
+\end{bmatrix}
+= 
+\begin{bmatrix}
+0 & 0\\ 
+0 & 0
+\end{bmatrix}
+$$
+De ahí se forma el siguiente sistema de ecuaciones ya que la igualdad de matrices es coordenada a coordenada:
+$$
+\left\{\begin{matrix}
+\lambda_1 + \lambda_2 + \lambda_3 = 0\\ 
+2\lambda_2 = 0\\ 
+-2\lambda_2 + 3 \lambda_3 = 0\\ 
+-\lambda_1+\lambda_2+2\lambda_3 = 0
+\end{matrix}\right.
+$$
+De la segunda ecuación sale que $\lambda_2=0$ luego usando en la tercera, sale que $\lambda_3=0$ con esos resultados en la primera ecuación sala que $\lambda_1$ también es 0, y queda probado lo que se buscaba. Luego para convertirlo en una base agrego una matriz canónica de la siguiente manera:
+$$
+\left \{ 
+\begin{bmatrix}
+1 & 0\\ 
+0 & -1
+\end{bmatrix}, 
+\begin{bmatrix}
+1 & 0\\ 
+-2 & 1
+\end{bmatrix}, 
+\begin{bmatrix}
+1 & 2\\ 
+3 & 2
+\end{bmatrix},
+\begin{bmatrix}
+0 & 1\\ 
+0 & 0
+\end{bmatrix}
+\right \}
+$$
+Es LI y forma una base de dimensión 2 de $ M_{2\times 2}(\mathds{R})$.
+\newpage
+
+
+
+\section{Práctico 9: Transformaciones lineales. Núcleo e Imágen.}
+\subsection{Ejercicio 1}
+Sean $V$,$W$,$U$ $\mathds{K}$-espacios vectoriales y supongamos que $T:V\rightarrow W, \ S: W \rightarrow U$ son transformaciones lineales. Demostrar que $S\circ T$ y $\lambda T$ son transformaciones lineales. \\
+Para probar que $S\circ T$ es transformación lineal, hay que probar que cumple las dos propiedades de transformación lineal:
+\begin{itemize}
+    \item[(a)] $(S\circ T)(v+v') = (S\circ T)(v)+(S\circ T)(v')$
+    \item[(b)] $(S\circ T)(\lambda v) = \lambda (S\circ T)(v)$
+\end{itemize}
+\subsubsection{Prueba A}
+$$
+(S\circ T)(v+v') = S(T(v+v'))
+$$
+$$
+= S(T(v)+T(v')) = S(T(v))+S(T(v')) = (S\circ T)(v)+(S\circ T)(v')
+$$
+\subsubsection{Prueba B}
+$$
+(S\circ T)(\lambda v) = S(T(\lambda v))
+$$
+$$
+= S(\lambda T(v)) = \lambda S(T(v)) = \lambda (S\circ T)(v)
+$$
+Con esto queda probado que $S\circ T$ \textbf{es transformación lineal}. \\
+
+
+\subsection{Ejercicio 2} 
+¿Cuáles de las siguientes funciones de $\mathds{R}^n\rightarrow\mathds{R}^m$ son transformaciones lineales?
+\begin{itemize}
+    \item[(a)] $T(x,y)=(1+x,y)$.
+    \item[(b)] $T(x,y)=(y,x,x-2y)$.
+    \item[(c)] $T(x,y) = xy$
+    \item[(d)] $T(x,y,z)=3x-2y+7z$
+\end{itemize}
+\subsubsection{Conceptos}
+\begin{defbox}{Definición}
+    Sean $V$ y $W$ dos espacios vectoriales sobre el cuerpo $\mathds{K}$. Una \textit{transformación lineal} de $V$ en $W$ es una función $T:V \to W$  tal que
+    \begin{enumerate}
+        \item $T(v+v') = T(v)+ T(v')$, para $v,v' \in V$,
+        \item $T(\lambda v) = \lambda T(v)$, para $v \in V$, $\lambda \in \mathds{K}$.
+    \end{enumerate}
+\end{defbox}
+\begin{obbox}{Observación}
+    $T:V \to W$ es transformación lineal si y sólo si
+    \begin{enumerate}
+        \item $T(\lambda v+v') = \lambda T(v)+ T(v')$, para $v,v' \in V$, $\lambda \in \mathds{K}$.
+    \end{enumerate}
+    Algunas veces usaremos esto último para comprobar si una aplicación de $V$ en $W$ es una transformación lineal.
+\end{obbox}
+
+\subsubsection{Prueba A}
+$$
+T((x,y)+\lambda(x',y'))=T((x,y)+(\lambda x', \lambda y')) = T (x+\lambda x', y + \lambda y')
+$$
+$$
+= (1+(x+\lambda x'),y + \lambda y') = (1+x, y) + (\lambda x', \lambda y') = T(x,y) + (\lambda x', \lambda y')
+$$
+Como no se llega a $T((x,y)+\lambda(x',y')) = T(x,y)+\lambda T(x,y)$, entonces \textbf{no es una transformación lineal}.
+\subsubsection{Prueba B}
+$$
+T((x,y)+\lambda(x',y'))=T((x,y)+(\lambda x', \lambda y')) = T (x+\lambda x', y + \lambda y')
+$$
+$$
+= (y + \lambda y', x+\lambda x', x+\lambda x'-2(y + \lambda y')) = (y,x,x-2y) + (\lambda y', \lambda x', \lambda x'-2\lambda y')
+$$
+Se llega a $T((x,y)+\lambda(x',y')) = T(x,y)+\lambda T(x,y)$, entonces \textbf{es una transformación lineal}.
+\subsubsection{Prueba C}
+$$
+T((x,y)+\lambda(x',y'))=T((x,y)+(\lambda x', \lambda y')) = T (x+\lambda x', y + \lambda y')
+$$
+$$
+= (x+\lambda x')(y + \lambda y') = xy + \lambda xy' + \lambda x'y + \lambda^2 x'y' = xy + \lambda (xy' + x'y + \lambda xy')
+$$
+Como no se llega a $T((x,y)+\lambda(x',y')) = T(x,y)+\lambda T(x,y)$, entonces \textbf{no es una transformación lineal}.
+\subsubsection{Prueba D}
+$$
+T(x,y,z)+\lambda(x',y',z')=T((x,y,z)+(\lambda x', \lambda y', \lambda z')) = T (x+\lambda x', y + \lambda y', z + \lambda z')
+$$
+$$
+= 3(x+\lambda x')-2(y + \lambda y')+7(z + \lambda z') = 3x-2y+7z + \lambda (3x'-2y'+7z')
+$$
+Se llega a $T((x,y,z)+\lambda(x',y',z')) = T(x,y,z)+\lambda T(x,y,z)$, entonces \textbf{es una transformación lineal}.
+\subsection{Ejercicio 3}
+Consideremos el $\mathds{R}$-espacio vectorial $\mathds{R}_{>0}= \{ x\in\mathds{R} : x>0 \}$ con las operaciones $x \oplus y = x \cdot y$ y $\lambda \odot x = x^{\lambda}$. Demostrar que la función: $$exp:\mathds{R}\rightarrow\mathds{R}_{>0}, \ \ \ \ exp(r) = e^r$$ es una transformación lineal. Donde a $\mathds{R}$ se lo considera con la estructura usuar de $\mathds{R}$-espacio vectorial. \\
+Para que sea una transformación lineal debe cumplir:
+$$
+exp(r+\lambda r')=exp(r)\oplus\lambda exp(r')
+$$
+$$
+= e^{r+\lambda r'} = e^r \cdot e^{\lambda r'}
+$$
+$$
+= e^r \cdot (e^{r'})^{\lambda} = exp(r) \odot \lambda exp(r')
+$$
+Queda probado que \textbf{es una transformación lineal}.
+\subsection{Ejercicio 4}
+Sea $V$ un espacio vectorial y $T:V\rightarrow V$ una transformación lineal \textit{idempotente}, es decir que cumple que $T\circ T=T$. Demostrar que $Im(T)\oplus Nu(T)=V$. \\
+Hay que demostrar las siguientes afirmaciones:
+\begin{itemize}
+    \item $Im(T)\cap Nu(T)=\{0\}$: \\
+    Tomando $v\in Nu(t) \cap Im(T)$, entonces $v\in Nu(T)$ y $v\in Im(T)$. Por definición de núcleo, $T(v)=0$ y por definición de imagen, $T(v)=w$ con $w\in V$. Entonces $T(v)=0=w$, por lo tanto $v=0$ y queda demostrado que $Im(T)\cap Nu(T)=\{0\}$.
+    \item $Im(T)+Nu(T)=V$: \\
+    Tomando $v\in V$ y $v\in Im(T)$, entonces $v\in V$ y $v\in Im(T)$. Por definición de imagen, $T(v)=w$ con $w\in V$. Entonces $T(v)=w$, por lo tanto $v=w$ y queda demostrado que $Im(T)+Nu(T)=V$.
+\end{itemize}
+\subsection{Ejercicio 5}
+Para cada una de las siguientes funciones de $\mathbb{C}$ en $\mathbb{C}$, decidir si son $\mathds{R}$-lineales o $\mathbb{C}$-lineales.
+\begin{itemize}
+    \item[(a)] $T(z)=iz$
+    \item[(b)] $R(z)=\overline{z}$
+    \item[(c)] $S(z)= Re(z)+Im(z)$.  
+\end{itemize}
+\subsubsection{Prueba A}
+$$
+T(z+z')=i(z+z')=iz+iz'=T(z)+T(z')
+$$
+$$
+T(\lambda z)=i(\lambda z)=\lambda iz=\lambda T(z)
+$$
+Con esto queda probado que \textbf{es $\mathbb{C}$-lineal}.
+\subsubsection{Prueba B}
+$$
+R(z+z')=\overline{z+z'}=\overline{z}+\overline{z'}=R(z)+R(z')
+$$
+$$
+R(\lambda z)=\overline{\lambda z}=\overline{\lambda}\overline{z}=\lambda\overline{z}=\lambda R(z)
+$$
+Con esto queda probado que \textbf{es $\mathds{R}$-lineal}.
+\subsubsection{Prueba C}
+$$
+S(z+z')=Re(z+z')+Im(z+z')=Re(z)+Re(z')+Im(z)+Im(z')=S(z)+S(z')
+$$
+$$
+S(\lambda z)=Re(\lambda z)+Im(\lambda z)=\lambda Re(z)+\lambda Im(z)=\lambda (Re(z)+Im(z))=\lambda S(z)
+$$
+Con esto queda probado que \textbf{es $\mathds{R}$-lineal}.
+\subsection{Ejercicio 6}
+En cada caso, si es posible, dar una transformación lineal $T:\mathds{R}^n\to \mathds{R}^m$ que satisfaga las condiciones exigidas. Si existe, estudiar la unicidad, si no existe, explicar porqué no es posible definirla.
+\begin{itemize}
+    \item[(a)] $T(0,1)=(1,2,0,0)$, $T(1,0)= (1,1,0,0)$.
+    \item[(b)] $T(1,1,1)=(0,1,3)$, $T(1,2,1)=(1,1,3)$, $T(2,1,1)=(3,1,0)$.
+\end{itemize}
+\subsubsection{Prueba A}
+Como $\{ (0,1), (1,0) \}$ forman la base canonica de $\mathds{R}^2$, entonces, para hallar $T(x,y)$, planeto lo siguiente:
+$$
+T(x,y) = x\cdot T(e_1) + y\cdot T(e_2)
+$$
+$$
+T(x,y)= x\cdot T(1,0) + y\cdot T(0,1) = x\cdot (1,1,0,0) + y\cdot (1,2,0,0) = (x+y, x+2y, 0, 0)
+$$
+\subsubsection{Prueba B}
+Primero hay que probar que $\{ (1,1,1), (1,2,1), (2,1,1) \}$ sea una base de $\mathds{R}^3$:
+$$
+\begin{bmatrix}
+    1 & 1 & 1 \\
+    1 & 2 & 1 \\
+    2 & 1 & 1
+\end{bmatrix} 
+\xrightarrow[]{\ldots}
+\begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+\end{bmatrix}
+$$
+Son LI y por lo tanto generan y son base de $\mathds{R}^3$. Entonces, para hallar $T(x,y,z)$, planeto lo siguiente:
+$$
+T(x,y,z)= x\cdot T(e_1) + y\cdot T(e_2) + z\cdot T(e_3)
+$$
+Ahora debo obtener $T(e_1)$, $T(e_2)$ y $T(e_3)$ que cumplan las condiciones:
+\begin{itemize}
+    \item[($T(e_1)$)] Sea $e_1=(1,0,0)$, entonces $e_1$ se puede escribir como:
+    $$
+        e_1 = a\cdot (1,1,1) + b\cdot (1,2,1) + c\cdot (2,1,1)
+    $$
+    De ahi se forma el sistema de ecuaciones:
+    $$
+    \begin{cases}
+        a+b+2c=1 \\
+        a+2b+c=0 \\
+        a+b+c=0
+    \end{cases}
+    $$
+    Que al reducirlo se llega a:
+    $$
+    \begin{cases}
+        a=-1 \\
+        b=0 \\
+        c=1
+    \end{cases}
+    $$
+    Entonces $e_1$ se puede escribir como:
+    $$
+        e_1 = (-1)\cdot (1,1,1) + 0\cdot (1,2,1) + 1\cdot (2,1,1)
+    $$
+    Entonces:
+    $$
+        T(e_1) = (-1)\cdot T(1,1,1) + 0\cdot T(1,2,1) + 1\cdot T(2,1,1) = (3,0,-3)
+    $$
+    \item[($T(e_2)$)] Sea $e_2=(0,1,0)$, entonces $e_2$ se puede escribir como:
+    $$
+        e_2 = a\cdot (1,1,1) + b\cdot (1,2,1) + c\cdot (2,1,1)
+    $$
+    De ahi se forma el sistema de ecuaciones:
+    $$
+    \begin{cases}
+        a+b+2c=0 \\
+        a+2b+c=1 \\
+        a+b+c=0
+    \end{cases}
+    $$
+    Que al reducirlo se llega a:
+    $$
+    \begin{cases}
+        a=-1 \\
+        b=1 \\
+        c=0
+    \end{cases}
+    $$
+    Entonces $e_2$ se puede escribir como:
+    $$
+        e_2 = (-1)\cdot (1,1,1) + 1\cdot (1,2,1) + 0\cdot (2,1,1)
+    $$
+    Entonces:
+    $$
+        T(e_2) = (-1)\cdot T(1,1,1) + 1\cdot T(1,2,1) + 0\cdot T(2,1,1) = (1,0,0)
+    $$
+    \item[($T(e_3)$)]
+    Sea $e_3=(0,0,1)$, entonces $e_3$ se puede escribir como:
+    $$
+        e_3 = a\cdot (1,1,1) + b\cdot (1,2,1) + c\cdot (2,1,1)
+    $$
+    De ahi se forma el sistema de ecuaciones:
+    $$
+    \begin{cases}
+        a+b+2c=0 \\
+        a+2b+c=0 \\
+        a+b+c=1
+    \end{cases}
+    $$
+    Que al reducirlo se llega a:
+    $$
+    \begin{cases}
+        a=3 \\
+        b=-1 \\
+        c=-1
+    \end{cases}
+    $$
+    Entonces $e_3$ se puede escribir como:
+    $$
+        e_3 = 3\cdot (1,1,1) + (-1)\cdot (1,2,1) + (-1)\cdot (2,1,1)
+    $$
+    Entonces:
+    $$
+        T(e_3) = 3\cdot T(1,1,1) + (-1)\cdot T(1,2,1) + (-1)\cdot T(2,1,1) = (-4,1,6)
+    $$
+\end{itemize}
+Por lo tanto:
+$$
+T(x,y,z)= x\cdot T(e_1) + y\cdot T(e_2) + z\cdot T(e_3)
+$$
+$$
+= x\cdot (3,0,-3) + y\cdot (1,0,0) + z\cdot (-4,1,6) = (3x+y-4z,z,-3x+6z)
+$$  
+
+\subsection{Ejercicio 7}
+Sea $T:\mathds{R}^6\rightarrow\mathds{R}^2$ una transformación lineal suryectiva y $W\subseteq \mathds{R}^6$ un subespacio de dimensión 3. Demostrar que existe un $w\in W$ con $w\neq 0$ tal que $T(w)=0$. \\
+Por ser $T$ suryectiva, $Im(T)=\mathds{R}^2$, por lo tanto, $dim(Im(T))=2$. Por el teorema de la dimensión, $dim(Nu(T))=dim(\mathds{R}^6)-dim(Im(T))=6-2=4$. \\
+Por otro lado, $dim(W)=3$, entonces $W=\left \langle w_1,w_2,w_3 \right \rangle$. Entonces $w_1,w_2,w_3$ son LI, por lo tanto, $dim(\left \langle w_1,w_2,w_3 \right \rangle)=3$ y $T(w)$ es un subespacio de $ImT$ generado por $\{ T(w_1), T(w_2), T(w_3) \}$, pero $dimImT=2$, entonces, el conjunto $\{ T(w_1), T(w_2), T(w_3) \}$ es LD. Esto quiere decir que: \\
+$$
+\exists \lambda_1,\lambda_2,\lambda_3 \in \mathds{R} \text{ tal que } \lambda_1T(w_1)+\lambda_2T(w_2)+\lambda_3T(w_3)=0
+$$
+Pero como $T$ es transformación lineal, se puede sacar factor común:
+$$
+T(\lambda_1w_1+\lambda_2w_2+\lambda_3w_3)=0
+$$
+Entonces, $\lambda_1w_1+\lambda_2w_2+\lambda_3w_3$ es un vector de $W$ tal que $T(w)=0$ y $w\neq 0$.
+\subsection{Ejercicio 8}
+Dar una transformación lineal $T:\mathds{R}^3\rightarrow\mathds{R}^3$ tal que su imagen sea el subespacio generado por $(1,0,-1)$ y $(1,2,2)$. Hallar $T(x,y,z)$. \\
+Dada $\beta = \{ e_1,e_2,e_3 \}$ base canónica de $\mathds{R}^3$, se puede escribir $T$ como:
+$$
+T(e_1)=(1,0,-1), \ T(e_2)=(1,2,2), \ T(e_3)=(0,0,0)
+$$
+Entonces, $T(x,y,z)$ se puede escribir como:
+$$
+T(x,y,z)=T(xe_1+ye_2+ze_3)=xT(e_1)+yT(e_2)+zT(e_3)
+$$
+$$
+=x(1,0,-1)+y(1,2,2)+z(0,0,0)=(x+y,2y,-x+2y)
+$$
+\subsection{Ejercicio 10}
+Definí una transformación $T:\mathds{R}^3\to\mathds{R}^{2\times 2}$ tal que $Nu(T)= \{ (x,y,z) : z=2x=u \}$ e $Im(T)= \left \{  \begin{bmatrix} a & b \\ c & d \end{bmatrix} : \ b =a-c,  b-d=a+c \right \} $. Hallar $T(x,y,z)$. \\
+La imagen está definida por dos ecuaciones, al despejar $d$ de la segunda ecuación y reemplazando b en la segunda, se obtiene que $d=-2c$. Entonces, la imagen se puede escribir como:
+$$
+Im(T)= \left \{  \begin{bmatrix} a & a-c \\ c & -2c \end{bmatrix} : \ a,c \in \mathds{R} \right \}
+$$
+$$
+= \left \{ a\begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix} + c\begin{bmatrix} 0 & -1 \\ 1 & -2 \end{bmatrix} : \ a,c \in \mathds{R} \right \}
+$$
+$$
+= \left \langle \begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & -1 \\ 1 & -2 \end{bmatrix} \right \rangle
+$$
+El núcleo está definido por dos ecuaciones, reemplazando $y$ y $z$ por dos x se obtiene:
+$$
+Nu(T)= \{ (x,y,z) : z=2x=u \} = \{ (x,2x,2x) : x \in \mathds{R} \}
+$$
+$$
+= \left \langle (1,2,2) \right \rangle
+$$
+Hay que verificar que se cumpla el teorema de las dimensiones, es decir que $dim\mathds{R}^3=dim(NuT)+dim(ImT)$, se cumple ya que $3=1+2$. Entonces, $Nu(T)$ y $Im(T)$ son subespacios de $\mathds{R}^3$ y $\mathds{R}^{2\times 2}$ respectivamente. \\
+Como $NuT = \left \langle (1,2,2) \right \rangle$, hay que tomar una base que contenga al vector $(1,2,2)$. Completo la base con los vectores de la base canónica:
+$$
+\mathcal{B}= \{ (1,2,2), (1,0,0), (0,0,1) \}
+$$
+La transformación $T$ se puede escribir como:
+$$
+T(1,2,2)= \begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}, \ T(1,0,0)= \begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix}, \ T(0,0,1)= \begin{bmatrix} 0 & -1 \\ 1 & -2 \end{bmatrix}
+$$
+Ahora para obtener $T(x,y,z)$ hay que escribir las coordenadas en la base utilizada:
+$$
+(x,y,z)=\lambda_1 (1,0,0) +\lambda_2 (0,0,1) + \lambda_3 (1,2,2)
+$$
+$$
+= (\lambda_1, 0,0) + (0,0,\lambda_2) + (\lambda_3, 2\lambda_3, 2\lambda_3)
+$$
+$$
+= (\lambda_1+\lambda_3, 2\lambda_3, \lambda_2+2\lambda_3)
+$$
+Se forma el siguiente sistema de ecuaciones:
+$$
+\begin{cases}
+    \lambda_1+\lambda_3=x \\
+    2\lambda_3=y \\
+    \lambda_2+2\lambda_3=z
+\end{cases}
+$$
+Que al reducirlo se llega a:
+$$
+\begin{cases}
+    \lambda_1=x-y/2 \\
+    \lambda_2=z-y \\
+    \lambda_3=y/2
+\end{cases}
+$$
+Entonces:
+$$
+T(x,y,z)=T(\lambda_1,\lambda_2,\lambda_3)=T(x-y/2,z-y,y/2)
+$$
+$$
+= (x-y/2)\begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix} + (z-y)\begin{bmatrix} 0 & -1 \\ 1 & -2 \end{bmatrix} + (y/2)\begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}
+$$
+$$
+= \begin{bmatrix} x-y/2 & x-y/2-(z-y) \\ z-y & -2(z-y)  \end{bmatrix}.
+$$
+\subsection{Ejercicio 11}
+Probar que no existe transformació lineal $T:\mathds{R}^3\rightarrow R^{2\times 2}$ tal que $Nu(T)= \{ (x,y,z) : z = 2x = y \}$ e $Im(T)= \left \{ \begin{bmatrix} a & b \\ c & d \end{bmatrix} : \ b-d=a+c \right \}$. \\
+Por el teorema de las dimensiones: $dim\mathds{R}^3=dim(NuT)+dim(ImT)$, en este caso la imagen y el núcleo estan definidos como: 
+$$
+Nu(T)= \{ (x,y,z) : z = 2x = y \} = \{ (x,2x,2x) : x \in \mathds{R} \}
+$$
+$$
+= \left \langle (1,2,2) \right \rangle
+$$
+$$
+Im(T)= \left \{ \begin{bmatrix} a & b \\ c & d \end{bmatrix} : \ b-d=a+c \right \}
+$$
+$$
+\left \langle \begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 1 \\ 0 & 1 \end{bmatrix} \right \rangle
+$$
+Entonces, $dim(NuT)=1$ y $dim(ImT)=3$, pero $dim\mathds{R}^3=3\neq1+3$, por lo tanto, \textbf{no existe transformación lineal} que cumpla las condiciones.
+\subsection{Ejercicio 12}
+Sea $T:M_2(\mathds{R})\to\mathds{R}_3[x]$ la función dada por:
+$$
+T \left ( \begin{bmatrix} a & b \\ c & d \end{bmatrix} \right ) = (a-d)x^2+cz+(a+b+c+d).
+$$
+\begin{itemize}
+    \item[(a)] Probar que $T$ es una transformación lineal.
+    \item[(b)] Calcular la dimensión del núcleo de T.
+\end{itemize}
+\subsubsection{Prueba A}
+Para demostrar que es una transformación lineal debo probar la suma y el producto por escalar:
+$$
+T \left ( \begin{bmatrix} a & b \\ c & d \end{bmatrix} + \begin{bmatrix} a' & b' \\ c' & d' \end{bmatrix} \right ) = T \left ( \begin{bmatrix} a+a' & b+b' \\ c+c' & d+d' \end{bmatrix} \right )
+$$
+$$
+= (a+a'-(d+d'))x^2+(c+c')z+(a+a'+b+b'+c+c'+d+d')
+$$
+$$
+= (a-d)x^2+cz+(a+b+c+d)+(a'-d')x^2+c'z+(a'+b'+c'+d')
+$$
+$$
+= T \left ( \begin{bmatrix} a & b \\ c & d \end{bmatrix} \right ) + T \left ( \begin{bmatrix} a' & b' \\ c' & d' \end{bmatrix} \right )
+$$
+$$
+T \left ( \lambda \begin{bmatrix} a & b \\ c & d \end{bmatrix} \right ) = T \left ( \begin{bmatrix} \lambda a & \lambda b \\ \lambda c & \lambda d \end{bmatrix} \right )
+$$
+$$
+= (\lambda a-\lambda d)x^2+(\lambda c)z+(\lambda a+\lambda b+\lambda c+\lambda d)
+$$
+$$
+= \lambda (a-d)x^2+\lambda cz+\lambda (a+b+c+d)
+$$
+$$
+= \lambda T \left ( \begin{bmatrix} a & b \\ c & d \end{bmatrix} \right )
+$$
+Con esto queda probado que \textbf{es una transformación lineal}.
+\subsubsection{Prueba B}
+Para calcular la dimensión del núcleo, voy a tomar la imagen y calcular una base que la genere, para luego utilizar el teorema de las dimensiones. \\
+Tomando la base canonica que genera a $M_2(\mathds{R})$:
+$$
+\mathcal{B}=\left \{ \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix} \right \}
+$$
+Entonces, aplico la transformación para obtener la salida:
+$$
+T \left ( \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix} \right ) = (1-0)x^2+0x+(1+0+0+0)=x^2+1
+$$
+$$
+T \left ( \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix} \right ) = (0-0)x^2+0x+(0+1+0+0)=1
+$$
+$$
+T \left ( \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix} \right ) = (0-0)x^2+1x+(0+0+1+0)=x+1
+$$
+$$
+T \left ( \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix} \right ) = (0-1)x^2+0x+(0+0+0+1)=-x^2+1
+$$
+Planteando la combinacion lineal:
+$$
+\lambda_1(x^2+1)+\lambda_2(1)+\lambda_3(x+1)+\lambda_4(-x^2+1)=0
+$$
+$$
+(\lambda_1-\lambda_4)x^2+\lambda_3x+(\lambda_1+\lambda_2+\lambda_3+\lambda_4)=0
+$$
+Se forma el sistema de ecuaciones:
+$$
+\begin{cases}
+    \lambda_1-\lambda_4=0 \\
+    \lambda_3=0 \\
+    \lambda_1+\lambda_2+\lambda_3+\lambda_4=0
+\end{cases}
+$$
+Que da como resultado:
+$$
+\begin{cases}
+    \lambda_1=\lambda_4 \\
+    \lambda_3=0 \\
+    \lambda_2=-2\lambda_4 \\
+    \lambda_4=\lambda_4
+\end{cases}
+$$
+Esto quiere decir que el conjunto es linealmente dependiente. Se puede notar que $-x^2+1=(-1)(x^2+1)+2\cdot 1$, por lo tanto, el conjunto se puede reescribir sin el vector que es combinacion lineal de los otros dos:
+$$
+\mathcal{B}=\left \{ \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix} \right \}
+$$
+Luego vuelvo a probar que los vectores resultantes sean linealmente independientes:
+$$
+\lambda_1 (x^2+1) + \lambda_2 (1) + \lambda_3 (x+1) = 0
+$$
+$$
+(\lambda_1)x^2+(\lambda_3)x+(\lambda_1+\lambda_2+\lambda_3)=0
+$$
+Se forma el sistema de ecuaciones:
+$$
+\begin{cases}
+    \lambda_1=0 \\
+    \lambda_3=0 \\
+    \lambda_1+\lambda_2+\lambda_3=0
+\end{cases}
+$$
+Que da como resultado:
+$$
+\begin{cases}
+    \lambda_1=0 \\
+    \lambda_3=0 \\
+    \lambda_2=0
+\end{cases}
+$$
+Entonces, el conjunto es linealmente independiente y por lo tanto, es una base de $Im(T)$. Entonces, $dim(Im(T))=3$. \\
+Ahora bien, aplicando el teorema de las dimensiones, se llega a que:
+$$
+dim(M_2(\mathds{R}))=dim(NuT)+dim(ImT)
+$$
+$$
+dim(M_2(\mathds{R}))=4=dim(NuT)+3 \Rightarrow dim(NuT)=1
+$$
+\textbf{la dimensión del núcleo es 1}.
+\subsection{Ejercicio 13}
+Consideremos $C^2([0,1])$ el $\mathds{R}$-espacio vectorial de funciones $f:[0,1]\to\mathds{R}$ que son dos veces diferenciables con $f^{(2)}$ continua y $C^1([0,1])$ el $\mathds{R}$-espacio vectorial de funciones $f:[0,1]\to\mathds{R}$ que son diferenciables tal que $f'$ continua.
+\begin{itemize}
+    \item[(a)] Demostrar que las funciones $D:C^2([0,1])\to C^1([0,1])$, $I:C^1([0,1])\to C^2([0,1])$ dadas por
+    $$
+    D(f)(x)=f'(x) \ , \ \ \ \ I(f)(x)=\int_0^x f(t)dt
+    $$
+    son transformaciones lineales.
+    \item[(b)] Demostrar que $D\circ I = Id$ pero que $I\circ D \neq Id$.
+\end{itemize}
+\subsubsection{Prueba A}
+Para demostrar que son transformaciones lineales, debo probar la suma y el producto por escalar:
+$$
+D(f+g)(x)=(f+g)'(x)=f'(x)+g'(x)=D(f)(x)+D(g)(x)
+$$
+$$
+D(\lambda f)(x)=(\lambda f)'(x)=\lambda f'(x)=\lambda D(f)(x)
+$$
+$$
+I(f+g)(x)=\int_0^x (f+g)(t)dt=\int_0^x f(t)dt+\int_0^x g(t)dt=I(f)(x)+I(g)(x)
+$$
+$$
+I(\lambda f)(x)=\int_0^x (\lambda f)(t)dt=\lambda \int_0^x f(t)dt=\lambda I(f)(x)
+$$
+Con esto queda probado que \textbf{son transformaciones lineales}.
+\subsubsection{Prueba B}
+$$
+D(I(f))(x)=D(\int_0^x f(t)dt)=\frac{d}{dx} \int_0^x f(t)dt=f(x)
+$$
+$$
+I(D(f))(x)=I(f')(x)=\int_0^x f'(t)dt=f(x)-f(0)
+$$
+Entonces, $D\circ I = Id$ y $I \circ D \neq Id$ \\
+\subsection{Ejercicio 19}
+Dar una base del núcleo y caracterizar por ecuaciones la imagen de las siguientes transformaciones lineales:
+\begin{itemize}
+    \item[(a)] $T:\mathds{K}^3\to\mathds{K}^3$, $T(x,y,z)=(x+2y+3z,y-z,0)$. 
+    \item[(b)] $T:\mathds{R}_3[x]\to \mathds{R}^2$, $T(p(x))= (p(1), p(2))$.
+\end{itemize}
+\subsubsection{Punto A}
+Para hallar el núcleo, hay que plantear la definición:
+$$
+NuT = \{ (x,y,z) \in \mathds{K}^3 : T(x,y,z)=(0,0,0) \}
+$$
+$$
+= \{ (x,y,z) \in \mathds{K}^3 : (x+2y+3z,y-z,0)=(0,0,0) \}
+$$
+$$
+= \{ (x,y,z) \in \mathds{K}^3 : x+2y+3z=0 \text{ y } y-z=0 \}
+$$
+$$
+= \{ (x,y,z) \in \mathds{K}^3 : x+2y+3z=0 \text{ y } y=z \}
+$$
+Despejando $x$ en la primera ecuación y luego reemplazando en el vector:
+$$
+NuT = \{ (-2y-3z,y,z) \in \mathds{K}^3 : y = z \text { y } y,z \in \mathds{K} \}
+$$
+$$
+= \{ z(-2-3,1,1) \in \mathds{K}^3 : z \in \mathds{K} \}
+$$
+$$
+NuT = \left \langle (-5,1,1) \right \rangle
+$$
+Para hallar la imagen, hay que plantear la definición:
+$$
+ImT = \{ y \in \mathds{K}^3 : \exists x \in \mathds{K}^3 \text{ tal que } T(x)=y \}
+$$
+$$
+= \{ y \in \mathds{K}^3 : \exists x \in \mathds{K}^3 \text{ tal que } (x+2y+3z,y-z,0)=y \}
+$$
+Entonces, un elemento de $y$ pertenece a la imagen si y solo si:
+$$
+y = (x+2y+3z,y-z,0) = x(1,0,0) + y(2,1,0) + z(3,-1,0)
+$$
+$$
+ImT = \left \langle (1,0,0), (2,1,0), (3,-1,0) \right \rangle
+$$
+Como $dim(NuT)=1$, entonces el conjunto de arriba es LD:
+$$
+\begin{bmatrix}
+    1 & 0 & 0 \\
+    2 & 1 & 0 \\
+    3 & -1 & 0
+\end{bmatrix}
+\xrightarrow[]{f_2-2f_1}
+\begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    3 & -1 & 0
+\end{bmatrix}
+\xrightarrow[]{f_3-3f_1}
+\begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & -1 & 0
+\end{bmatrix}
+\xrightarrow[]{f_3+f_2}
+\begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 0
+\end{bmatrix}
+$$
+Por lo tanto, la imagen queda definida como:
+$$
+ImT = \left \langle (1,0,0), (2,1,0) \right \rangle
+$$
+Para caracterizar la imagen con ecuaciones, coloco cada vector como columna de una matriz y reduzco:
+$$
+\begin{bmatrix}
+    1 & 2 & | \ x \\
+    0 & 1 & | \ y \\
+    0 & 0 & | \ z
+\end{bmatrix}
+\xrightarrow[]{f_1-2f_2}
+\begin{bmatrix}
+    1 & 0 & | \ x-2y \\
+    0 & 1 & | \ y \\
+    0 & 0 & | \ z
+\end{bmatrix}
+$$
+Entonces, la imagen queda definida como:
+$$
+ImT = \left \{ (x,y,z) \in \mathds{K}^3 : z = 0 \right \}
+$$
+\subsubsection{Punto B}
+Para hallar el nucleo planteo la definición:
+$$
+NuT = \{ p(x) \in \mathds{R}_3[x] : T(p(x))=(0,0) \}
+$$
+$$
+= \{ p(x) \in \mathds{R}_3[x] : (p(1),p(2))=(0,0) \}
+$$
+$$
+= \{ p(x) \in \mathds{R}_3[x] : p(1)=0 \text{ y } p(2)=0 \}
+$$
+$$
+= \{ a_0+a_1x+a_2x^2: a_0+a_1+a_2=0 \text{ y } a_0+2a_1+4a_2=0 \}
+$$
+Con esto, se forma el sistema de ecuaciones homogeneo:
+$$
+\begin{cases}
+    a_0+a_1+a_2=0 \\
+    a_0+2a_1+4a_2=0
+\end{cases}
+$$
+Que al reducirlo se llega a:
+$$
+\begin{cases}
+    a_0-2a_2 = 0 \\
+    a_1+3a_2 = 0
+\end{cases}
+$$
+Entonces el nucleo pasa a ser:
+$$
+NuT = \{ a_0+a_1x+a_2x^2: a_0=2a_2 \text{ y } a_1=-3a_2 \}
+$$
+Reemplazando en el polinomio:
+$$
+NuT = \{ 2a_2-3a_2x+a_2x^2: a_2\in\mathds{R} \}
+$$
+Saco $a_2$ como factor común:
+$$
+NuT = \{ a_2(2-3x+x^2): a_2\in\mathds{R} \}
+$$
+$$
+NuT = \left \langle 2-3x+x^2 \right \rangle
+$$
+Ahora para encontrar la imagen, planteo la definición nuevamente:
+$$
+ImT = \{ (x,y) \in \mathds{R}^2 : \exists p(x) \in \mathds{R}_3[x], T(p(x))=(x,y) \}
+$$
+$$
+= \{ (x,y) \in \mathds{R}^2 : \exists p(x) \in \mathds{R}_3[x], (p(1),p(2))=(x,y) \}
+$$
+$$
+= \{ (a_0+a_1+a_2,a_0+2a_1+4a_2) : a_0,a_1,a_2\in\mathds{R} \}
+$$
+$$
+= \{ a_0(1,1) + a_1(1,2) + a_2(1,4) : a_0,a_1,a_2\in\mathds{R} \}
+$$
+Pero la dimensión de la imagen es 2 por teorema de las dimensiones, entonces el conjunto es LD, para sacar el vector que es comnbinación lineal del resto coloco cada uno como fila de una matriz y reduzco:
+$$
+\begin{bmatrix}
+    1 & 1  \\
+    1 & 2  \\
+    1 & 4
+\end{bmatrix}
+\xrightarrow[]{f_2-f_1}
+\begin{bmatrix}
+    1 & 1  \\
+    0 & 1  \\
+    1 & 4
+\end{bmatrix}
+\xrightarrow[]{f_3-f_1}
+\begin{bmatrix}
+    1 & 1  \\
+    0 & 1  \\
+    0 & 3
+\end{bmatrix}
+\xrightarrow[]{f_3-3f_2}
+\begin{bmatrix}
+    1 & 1  \\
+    0 & 1  \\
+    0 & 0
+\end{bmatrix}
+$$
+Entonces, la imagen queda definida por:
+$$
+ImT = \left \langle (1,1), (1,2) \right \rangle
+$$
+Entonces, la imagen queda definida por todos los pares pertenecientes $\mathds{R}^2$:
+$$
+ImT = \{ (x,y) \in \mathds{R}^2 : x,y\in\mathds{R} \}
+$$
+\newpage
+\section{Práctico 10: Matriz de una transformación lineal. Coordenadas.}
+\subsection{Ejercicio 1}
+Los vectores $v_1=(1,0,-i), \ v_2=(1+i,1-i,1), \ v_3=(i,i,i)$ forman una base de $\mathds{C}^3$. Dar las coordenadas de un vector $(x,y,z)$ en esta base. \\    
+Se tiene la base:
+$$
+\mathcal{B}=\{ (1,0,-i), \ (1+i,1-i,1), \ (i,i,i) \}
+$$
+Para plantear las coordenadas, se debe escribir el vector como combinación lineal de los vectores de la base:
+$$
+(x,y,z)=x(1,0,-i)+y(1+i,1-i,1)+z(i,i,i)
+$$
+$$
+= (x+y(1+i)+iz, y(i-1)+z, -ix+y+iz)
+$$
+Entonces, se forma el sistema de ecuaciones:
+$$
+\begin{cases}
+    x+y(1+i)+iz=x \\
+    y(i-1)+z=y \\
+    -ix+y+iz=z
+\end{cases}
+$$
+Al pasarlo a una matriz ampliada queda:
+$$
+\left ( \left.\begin{matrix}
+    1 & 1+i & i \\ 
+    0 & 1-i & i \\ 
+    -i & 1 & i
+    \end{matrix}\right| \begin{matrix}
+    x \\ 
+    y \\ 
+    z
+    \end{matrix}\right )
+\xrightarrow[]{f_3+if_1}
+\left ( \left.\begin{matrix}
+    1 & 1+i & i \\ 
+    0 & 1-i & i \\ 
+    0 & i & -1+i
+    \end{matrix}\right| \begin{matrix}
+    x \\ 
+    y \\ 
+    z+ix
+\end{matrix}\right )
+\xrightarrow[]{f_2/1-i}
+\left ( \left.\begin{matrix}
+    1 & 1+i & i \\ 
+    0 & 1 & \frac{-1+i}{2} \\ 
+    0 & i & -1+i
+    \end{matrix}\right| \begin{matrix}
+    x \\ 
+    \frac{(1+i)y}{2} \\ 
+    z+ix
+\end{matrix}\right )
+$$
+$$
+\xrightarrow[]{f_3-if_2}
+\left ( \left.\begin{matrix}
+    1 & 1+i & i \\ 
+    0 & 1 & \frac{-1+i}{2} \\ 
+    0 & 0 & \frac{-1+3i}{2}
+    \end{matrix}\right| \begin{matrix}
+    x \\ 
+    \frac{(1+i)y}{2} \\ 
+    \frac{2ix+(1-i)y+2z}{2}
+\end{matrix}\right )
+\xrightarrow[]{f_3/(1-3i)/2}
+\left ( \left.\begin{matrix}
+    1 & 1+i & i \\ 
+    0 & 1 & \frac{-1+i}{2} \\ 
+    0 & 0 & 1
+    \end{matrix}\right| \begin{matrix}
+    x \\ 
+    \frac{(1+i)y}{2} \\ 
+    \frac{(3-i)x-(2+i)y-(1+3i)z}{5}
+\end{matrix}\right )
+$$
+$$
+\xrightarrow[]{f_2-\frac{-1+i}{2}f_3}
+\left ( \left.\begin{matrix}
+    1 & 1+i & i \\ 
+    0 & 1 & 0 \\ 
+    0 & 0 & 1
+    \end{matrix}\right| \begin{matrix}
+    x \\ 
+    \frac{(1-2i)x+(1+3i)y-(2+i)z}{5} \\ 
+    \frac{(3-i)x-(2+i)y-(1+3i)z}{5}
+\end{matrix}\right)
+\xrightarrow[]{f_1-if_3}
+\left ( \left.\begin{matrix}
+    1 & 1+i & 0 \\ 
+    0 & 1 & 0 \\ 
+    0 & 0 & 1
+    \end{matrix}\right| \begin{matrix}
+    \frac{(4-3i)x-(1-2i)y-(3-i)z}{5} \\ 
+    \frac{(1-2i)x+(1+3i)y-(2+i)z}{5} \\ 
+    \frac{(3-i)x-(2+i)y-(1+3i)z}{5}
+\end{matrix}\right)
+$$
+$$
+\xrightarrow[]{f_1-(1+i)f_2}
+\left ( \left.\begin{matrix}
+    1 & 0 & 0 \\ 
+    0 & 1 & 0 \\ 
+    0 & 0 & 1
+    \end{matrix}\right| \begin{matrix}
+    \frac{(1-2i)x-(1-2i)y-(2-4i)z}{5} \\ 
+    \frac{(1-2i)x+(1+3i)y-(2+i)z}{5} \\ 
+    \frac{(3-i)x-(2+i)y-(1+3i)z}{5}
+\end{matrix}\right)
+$$
+El resultado es el vector coordenada $(x,y,z)_{\mathcal{B}}$:
+$$
+\left ( \frac{(1-2i)x-(1-2i)y-(2-4i)z}{5}, \frac{(1-2i)x+(1+3i)y-(2+i)z}{5}, \frac{(3-i)x-(2+i)y-(1+3i)z}{5} \right )
+$$
+\subsection{Ejercicio 2}
+Sea $v=(1,0,-1)\in\mathds{R}^3$ un vector. Hallar $\mathcal{B}$ una base de $\mathds{R}^3$ tal que $[v]_{\mathcal{B}}=(0,1,0)$. \\
+Se tiene el vector $v=(1,0,-1)$ y la base ordenada $\mathcal{B}$:
+$$
+\mathcal{B} = \{ (1,0,0), (1,0,-1), (0,1,0) \}
+$$
+Pruebo que es una base de $\mathds{R}^3$:
+$$
+\begin{bmatrix}
+    1 & 0 & 0 \\
+    1 & 0 & -1 \\
+    0 & 1 & 0
+\end{bmatrix}
+\xrightarrow[]{f_2-f_1}
+\begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 0 & -1 \\
+    0 & 1 & 0
+\end{bmatrix}
+\xrightarrow[]{f_2 \leftrightarrow f_3}
+\begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & -1
+\end{bmatrix}
+\xrightarrow[]{(-1)f_3}
+\begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+\end{bmatrix}
+$$
+Es Linealmente Independiente, genera y $dim\mathds{R}^3=dim\mathcal{B}$ por lo tanto es base de $\mathds{R}^3$. \\
+El vector $v$ se puede escribir como combinación lineal de los vectores de la base:
+$$
+v = 0\cdot(1,0,0)+1\cdot(1,0,-1)+0\cdot(0,1,0)
+$$
+Entonces, el vector coordenada de $v$ en la base $\mathcal{B}$ es $[v]_{\mathcal{B}}=(0,1,0)$.
+\subsection{Ejercicio 3}
+Sea $\mathcal{B}= \{ (1,-2,1),(2,-3,3), (-2,2,-3) \}$ un subconjunto del $\mathds{R}$-espacio vectorial $\mathds{R}^3$.
+\begin{itemize}
+    \item[(a)] Probar que $\mathcal{B}$ es una base de $\mathds{R}^3$.
+    \item[(b)] Hallar la matriz de cambio de base de la base canónica $\mathcal{C}$ a $\mathcal{B}$.
+    \item[(c)] Hallar las coordenadas, respecto de $\mathcal{B}$, de los vectores $(1,0,1)$ y $(-1,2,1)$.
+    \item[(d)] Mas aún, describir $(x,y,z)$ en términos de la base $\mathcal{B}$. 
+\end{itemize}
+\subsubsection{Punto A}
+Para demostrar que $\mathcal{B}$ es una base de $\mathds{R}^3$ debo probar que:
+\begin{itemize}
+    \item Es Linealmente Independiente y por lo tanto genera: \\
+    Para la prueba, coloco cada vector como fila de una matriz y reduzco:
+    $$
+    \begin{bmatrix}
+        1 & -2 & 1 \\
+        2 & -3 & 3 \\
+        -2 & 2 & -3
+    \end{bmatrix}
+    \xrightarrow[]{f_2-2f_1}
+    \begin{bmatrix}
+        1 & -2 & 1 \\
+        0 & 1 & 1 \\
+        -2 & 2 & -3
+    \end{bmatrix}
+    \xrightarrow[]{f_3+2f_1}
+    \begin{bmatrix}
+        1 & -2 & 1 \\
+        0 & 1 & 1 \\
+        0 & -2 & -1
+    \end{bmatrix}
+    \xrightarrow[]{f_3+2f_2}
+    \begin{bmatrix}
+        1 & -2 & 1 \\
+        0 & 1 & 1 \\
+        0 & 0 & 1
+    \end{bmatrix}
+    $$
+    $$
+    \xrightarrow[]{f_2-f_3}
+    \begin{bmatrix}
+        1 & -2 & 1 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1
+    \end{bmatrix}
+    \xrightarrow[]{f_1+2f_2-f_3}
+    \begin{bmatrix}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1
+    \end{bmatrix}
+    $$
+    Entonces, es Linealmente Independiente y genera.
+    \item $dim\mathds{R}^3=dim\mathcal{B}$: \\
+    $dim\mathds{R}^3=3$ y $dim\mathcal{B}=3$, por lo tanto, es base de $\mathds{R}^3$.
+\end{itemize}
+\subsubsection{Punto B}
+Para hallar la matriz de cambio de base de la base canónica $\mathcal{C}$ a $\mathcal{B}$ primero obtengo la matriz de cambio de base de $\mathcal{B}$ a $\mathcal{C}$:
+Se tiene que $[v]_{\mathcal{C}} = P_{\mathcal{B} \mathcal{C}} \cdot [v]_{\mathcal{B}}$. \\
+Primero debo expresar los vectores de $\mathcal{B}$ como combinacion lineal de los vectores de la base canónica para obtener las coordenadas:
+$$
+(1,-2,1) = 1(1,0,0)+(-2)(0,1,0)+1(0,0,1)
+$$
+$$
+(2,-3,3) = 2(1,0,0)+(-3)(0,1,0)+3(0,0,1)
+$$
+$$
+(-2,2,-3) = -2(1,0,0)+2(0,1,0)+(-3)(0,0,1)
+$$
+Entonces, la matriz de cambio de base de $\mathcal{B}$ a $\mathcal{C}$ es:
+$$
+P_{\mathcal{B} \mathcal{C}} = \begin{bmatrix}
+    1 & 2 & -2 \\
+    -2 & -3 & 2 \\
+    1 & 3 & -3
+\end{bmatrix}
+$$
+Ahora, para obtener la matriz de cambio de base de $\mathcal{C}$ a $\mathcal{B}$, debo invertir la matriz anterior, ya que lo que se busca es $[v]_{\mathcal{B}}$:
+planteo la matriz ampliada:
+$$
+\left ( \left.\begin{matrix}
+    1 & 2 & -2 \\ 
+    -2 & -3 & 2 \\ 
+    1 & 3 & -3
+    \end{matrix}\right| \begin{matrix}
+    1 & 0 & 0 \\ 
+    0 & 1 & 0 \\ 
+    0 & 0 & 1
+    \end{matrix}\right )
+\xrightarrow[]{f_2+2f_1}
+\left ( \left.\begin{matrix}
+    1 & 2 & -2 \\ 
+    0 & 1 & -2 \\ 
+    1 & 3 & -3
+    \end{matrix}\right| \begin{matrix}
+    1 & 0 & 0 \\ 
+    2 & 1 & 0 \\ 
+    0 & 0 & 1
+    \end{matrix}\right )
+\xrightarrow[]{f_3-f_1}
+\left ( \left.\begin{matrix}
+    1 & 2 & -2 \\ 
+    0 & 1 & -2 \\ 
+    0 & 1 & -1
+    \end{matrix}\right| \begin{matrix}
+    1 & 0 & 0 \\ 
+    2 & 1 & 0 \\ 
+    -1 & 0 & 1
+    \end{matrix}\right )
+$$
+$$
+\xrightarrow[]{f_3-f_2}
+\left ( \left.\begin{matrix}
+    1 & 2 & -2 \\ 
+    0 & 1 & -2 \\ 
+    0 & 0 & 1
+    \end{matrix}\right| \begin{matrix}
+    1 & 0 & 0 \\ 
+    2 & 1 & 0 \\ 
+    -3 & -1 & 1
+    \end{matrix}\right )
+\xrightarrow[]{f_2+2f_3}
+\left ( \left.\begin{matrix}
+    1 & 2 & -2 \\ 
+    0 & 1 & 0 \\ 
+    0 & 0 & 1
+    \end{matrix}\right| \begin{matrix}
+    1 & 0 & 0 \\ 
+    -4 & -1 & 2 \\ 
+    -3 & -1 & 1
+    \end{matrix}\right )
+$$
+$$
+\xrightarrow[]{f_1+2f_3}
+\left ( \left.\begin{matrix}
+    1 & 2 & 0 \\ 
+    0 & 1 & 0 \\ 
+    0 & 0 & 1
+    \end{matrix}\right| \begin{matrix}
+    -5 & -2 & 2 \\ 
+    -4 & -1 & 2 \\ 
+    -3 & -1 & 1
+    \end{matrix}\right )
+\xrightarrow[]{f_1-2f_2}
+\left ( \left.\begin{matrix}
+    1 & 0 & 0 \\ 
+    0 & 1 & 0 \\ 
+    0 & 0 & 1
+    \end{matrix}\right| \begin{matrix}
+    3 & 0 & -2 \\ 
+    -4 & -1 & 2 \\ 
+    -3 & -1 & 1
+    \end{matrix}\right )
+$$
+Entonces, la matriz de cambio de base de $\mathcal{C}$ a $\mathcal{B}$ es:
+$$
+P_{\mathcal{C} \mathcal{B}} = \begin{bmatrix}
+    3 & 0 & -2 \\ 
+    -4 & -1 & 2 \\ 
+    -3 & -1 & 1
+\end{bmatrix}
+$$
+\subsubsection{Punto C}
+Para hallar las coordenadas de los vectores $(1,0,1)$ y $(-1,2,1)$ en la base $\mathcal{B}$, debo plantear la matriz de cambio de base de $\mathcal{C}$ a $\mathcal{B}$ y multiplicarla por el vector:
+$$
+[(1,0,1)]_{\mathcal{B}} = \begin{bmatrix}
+    3 & 0 & -2 \\ 
+    -4 & -1 & 2 \\ 
+    -3 & -1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+    1 \\ 
+    0 \\ 
+    1
+\end{bmatrix}
+=
+\begin{bmatrix}
+    1 \\ 
+    -2 \\ 
+    -2
+\end{bmatrix}
+$$
+$$
+[(-1,2,1)]_{\mathcal{B}} = \begin{bmatrix}
+    3 & 0 & -2 \\ 
+    -4 & -1 & 2 \\ 
+    -3 & -1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+    -1 \\ 
+    2 \\ 
+    1
+\end{bmatrix}
+=
+\begin{bmatrix}
+    -5 \\ 
+    4 \\ 
+    2
+\end{bmatrix}
+$$
+\subsubsection{Punto D}
+Para describir $(x,y,z)$ en términos de la base $\mathcal{B}$, debo plantear la matriz de cambio de base de $\mathcal{C}$ a $\mathcal{B}$ y multiplicarla por el vector:
+$$
+[(x,y,z)]_{\mathcal{B}} = \begin{bmatrix}
+    3 & 0 & -2 \\ 
+    -4 & -1 & 2 \\ 
+    -3 & -1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+    x \\ 
+    y \\ 
+    z
+\end{bmatrix}
+=
+\begin{bmatrix}
+    3x-2z \\ 
+    -4x-y+2z \\ 
+    -3x-y+z
+\end{bmatrix}
+$$
+\subsection{Ejercicio 4}
+Sea $\mathcal{B} = \left \{ \begin{bmatrix} 0 & 2 \\ -3 & 3 \end{bmatrix}, \begin{bmatrix} 0 & -1 \\ 2 & 0 \end{bmatrix}, \begin{bmatrix} 2 & 1 \\ -2 & 1 \end{bmatrix}, \begin{bmatrix} 4 & -2 \\ 2 & -3 \end{bmatrix} \right \}$.
+\begin{itemize}
+    \item[(a)] Probar que $\mathcal{B}$ es una base de $M_2(\mathds{R})$.
+    \item[(b)] Sea $\mathcal{C} = \left \{ \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix} \right \}$. Hallar la matriz de cambio de base de $\mathcal{B}$ a $\mathcal{C}$ y la matriz de cambio de base de $\mathcal{C}$ a $\mathcal{B}$.
+    \item[(c)] Hallar las coordenadas respecto de $\mathcal{B}$ de las matrices $\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, \begin{bmatrix} 2 & 5 \\ -7 & 3 \end{bmatrix}, \begin{bmatrix} 10 & -1 \\ -4 & 2 \end{bmatrix}$. 
+\end{itemize}
+\subsubsection{Punto A}
+Para demostrar que $\mathcal{B}$ es una base de $M_2(\mathds{R})$ debo probar que:
+\begin{itemize}
+    \item Es Linealmente Independiente y por lo tanto genera: \\
+    Para la prueba, planteo la definición de un conjunto linealmente independiente:
+    $$
+    \{ v_1, v_2, v_3, v_4 \} \text{ es Linealmente Independiente } \Leftrightarrow \alpha_1v_1+\alpha_2v_2+\alpha_3v_3+\alpha_4v_4=0 \Rightarrow \alpha_1=\alpha_2=\alpha_3=\alpha_4=0
+    $$
+    Entonces, coloco cada vector de la matriz como columna de una matriz y reduzco:
+    $$
+    \begin{bmatrix}
+        0 & 0 & 2 & 4 \\
+        -3 & -1 & 1 & -2 \\
+        2 & 2 & -2 & 2 \\
+        3 & 0 & 1 & -3
+    \end{bmatrix}
+    \xrightarrow[]{f_2\leftrightarrow f_1}
+    \begin{bmatrix}
+        -3 & -1 & 1 & -2 \\
+        0 & 0 & 2 & 4 \\
+        2 & 2 & -2 & 2 \\
+        3 & 0 & 1 & -3
+    \end{bmatrix}
+    \xrightarrow[]{f1/(-3)}
+    \begin{bmatrix}
+        1 & \frac{1}{3} & -\frac{1}{3} & \frac{2}{3} \\
+        0 & 0 & 2 & 4 \\
+        2 & 2 & -2 & 2 \\
+        3 & 0 & 1 & -3
+    \end{bmatrix}
+    $$
+    $$
+    \xrightarrow[]{f_3-2f_1}
+    \begin{bmatrix}
+        1 & \frac{1}{3} & -\frac{1}{3} & \frac{2}{3} \\
+        0 & 0 & 2 & 4 \\
+        0 & \frac{4}{3} & -\frac{4}{3} & \frac{2}{3} \\
+        3 & 0 & 1 & -3
+    \end{bmatrix}
+    \xrightarrow[]{f_4-3f_1}
+    \begin{bmatrix}
+        1 & \frac{1}{3} & -\frac{1}{3} & \frac{2}{3} \\
+        0 & 0 & 2 & 4 \\
+        0 & \frac{4}{3} & -\frac{4}{3} & \frac{2}{3} \\
+        0 & -1 & 2 & -5
+    \end{bmatrix}
+    \xrightarrow[]{f_3 \leftrightarrow f_2}
+    \begin{bmatrix}
+        1 & \frac{1}{3} & -\frac{1}{3} & \frac{2}{3} \\
+        0 & \frac{4}{3} & -\frac{4}{3} & \frac{2}{3} \\
+        0 & 0 & 2 & 4 \\
+        0 & -1 & 2 & -5
+    \end{bmatrix}
+    $$
+    $$
+    \xrightarrow[]{f_2/(4/3)}
+    \begin{bmatrix}
+        1 & \frac{1}{3} & -\frac{1}{3} & \frac{2}{3} \\
+        0 & 1 & -1 & \frac{1}{2} \\
+        0 & 0 & 2 & 4 \\
+        0 & -1 & 2 & -5
+    \end{bmatrix}
+    \xrightarrow[]{f_4+f_2}
+    \begin{bmatrix}
+        1 & \frac{1}{3} & -\frac{1}{3} & \frac{2}{3} \\
+        0 & 1 & -1 & \frac{1}{2} \\
+        0 & 0 & 2 & 4 \\
+        0 & 0 & 1 & -\frac{9}{2}
+    \end{bmatrix}
+    \xrightarrow[]{f_3/2}
+    \begin{bmatrix}
+        1 & \frac{1}{3} & -\frac{1}{3} & \frac{2}{3} \\
+        0 & 1 & -1 & \frac{1}{2} \\
+        0 & 0 & 1 & 2 \\
+        0 & 0 & 1 & -\frac{9}{2}
+    \end{bmatrix}
+    $$
+    $$
+    \xrightarrow[]{f_4-f_3}
+    \begin{bmatrix}
+        1 & \frac{1}{3} & -\frac{1}{3} & \frac{2}{3} \\
+        0 & 1 & -1 & \frac{1}{2} \\
+        0 & 0 & 1 & 2 \\
+        0 & 0 & 0 & -\frac{13}{2}
+    \end{bmatrix}
+    \xrightarrow[]{f_4/(-13/2)}
+    \begin{bmatrix}
+        1 & \frac{1}{3} & -\frac{1}{3} & \frac{2}{3} \\
+        0 & 1 & -1 & \frac{1}{2} \\
+        0 & 0 & 1 & 2 \\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+    \xrightarrow[]{f_3-2f_4}
+    \begin{bmatrix}
+        1 & \frac{1}{3} & -\frac{1}{3} & \frac{2}{3} \\
+        0 & 1 & -1 & \frac{1}{2} \\
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+    $$
+    $$
+    \xrightarrow[]{f_2-(1/2)f_4}
+    \begin{bmatrix}
+        1 & \frac{1}{3} & -\frac{1}{3} & \frac{2}{3} \\
+        0 & 1 & -1 & 0 \\
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+    \xrightarrow[]{f_1-(2/3)f_4}
+    \begin{bmatrix}
+        1 & \frac{1}{3} & -\frac{1}{3} & 0 \\
+        0 & 1 & -1 & 0 \\
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+    \xrightarrow[]{f_2+f_3}
+    \begin{bmatrix}
+        1 & \frac{1}{3} & -\frac{1}{3} & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+    $$
+    $$
+    \xrightarrow[]{f_1+(1/3)f_2}
+    \begin{bmatrix}
+        1 & 0 & -\frac{1}{3} & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+    \xrightarrow[]{f_1+(1/3)f_3}
+    \begin{bmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+    $$
+    Entonces, es Linealmente Independiente y genera.
+    \item $dimM_2(\mathds{R})=dim\mathcal{B}$: \\
+    $dimM_2(\mathds{R})=4$ y $dim\mathcal{B}=4$, por lo tanto, es base de $M_2(\mathds{R})$.
+\end{itemize}
+\subsubsection{Punto B}
+Para hallar la matriz de cambio de base de $\mathcal{C}$ a $\mathcal{B}$ primero obtengo la matriz de cambio de base de $\mathcal{B}$ a $\mathcal{C}$:
+Se tiene que $[v]_{\mathcal{C}} = P_{\mathcal{B} \mathcal{C}} \cdot [v]_{\mathcal{B}}$. \\
+Primero debo expresar los vectores de $\mathcal{B}$ como combinacion lineal de los vectores de la base canónica para obtener las coordenadas:
+$$
+\begin{bmatrix}
+    0 & 2 \\
+    -3 & 3
+\end{bmatrix}
+= 0\begin{bmatrix}
+    1 & 0 \\
+    0 & 0
+\end{bmatrix}
++2\begin{bmatrix}
+    0 & 1 \\
+    0 & 0
+\end{bmatrix}
++(-3)\begin{bmatrix}
+    0 & 0 \\
+    1 & 0
+\end{bmatrix}
++3\begin{bmatrix}
+    0 & 0 \\
+    0 & 1
+\end{bmatrix}
+$$
+$$
+\begin{bmatrix}
+    0 & -1 \\
+    2 & 0
+\end{bmatrix}
+= 0\begin{bmatrix}
+    1 & 0 \\
+    0 & 0
+\end{bmatrix}
++(-1)\begin{bmatrix}
+    0 & 1 \\
+    0 & 0
+\end{bmatrix}
++2\begin{bmatrix}
+    0 & 0 \\
+    1 & 0
+\end{bmatrix}
++0\begin{bmatrix}
+    0 & 0 \\
+    0 & 1
+\end{bmatrix}
+$$
+$$
+\begin{bmatrix}
+    2 & 1 \\
+    -2 & 1
+\end{bmatrix}
+= 2\begin{bmatrix}
+    1 & 0 \\
+    0 & 0
+\end{bmatrix}
++1\begin{bmatrix}
+    0 & 1 \\
+    0 & 0
+\end{bmatrix}
++(-2)\begin{bmatrix}
+    0 & 0 \\
+    1 & 0
+\end{bmatrix}
++1\begin{bmatrix}
+    0 & 0 \\
+    0 & 1
+\end{bmatrix}
+$$
+$$
+\begin{bmatrix}
+    4 & -2 \\
+    2 & -3
+\end{bmatrix}
+= 4\begin{bmatrix}
+    1 & 0 \\
+    0 & 0
+\end{bmatrix}
++(-2)\begin{bmatrix}
+    0 & 1 \\
+    0 & 0
+\end{bmatrix}
++2\begin{bmatrix}
+    0 & 0 \\
+    1 & 0
+\end{bmatrix}
++(-3)\begin{bmatrix}
+    0 & 0 \\
+    0 & 1
+\end{bmatrix}
+$$
+Entonces, la matriz de cambio de base de $\mathcal{B}$ a $\mathcal{C}$ es:
+$$
+P_{\mathcal{B} \mathcal{C}} = \begin{bmatrix}
+    0 & 0 & 2 & 4 \\
+    2 & -1 & 1 & -2 \\
+    -3 & 2 & -2 & 2 \\
+    3 & 0 & 1 & -3
+\end{bmatrix}
+$$
+Ahora, para obtener la matriz de cambio de base de $\mathcal{C}$ a $\mathcal{B}$, debo invertir la matriz anterior, ya que lo que se busca es $[v]_{\mathcal{B}}$:
+planteo la matriz ampliada:
+$$
+\left ( \left.\begin{matrix}
+    0 & 0 & 2 & 4 \\ 
+    2 & -1 & 1 & -2 \\ 
+    -3 & 2 & -2 & 2 \\
+    3 & 0 & 1 & -3
+    \end{matrix}\right| \begin{matrix}
+    1 & 0 & 0 & 0 \\ 
+    0 & 1 & 0 & 0 \\ 
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+    \end{matrix}\right )
+\xrightarrow[]{f_1 \leftrightarrow f_2}
+\left ( \left.\begin{matrix}
+    2 & -1 & 1 & -2 \\ 
+    0 & 0 & 2 & 4 \\ 
+    -3 & 2 & -2 & 2 \\
+    3 & 0 & 1 & -3
+    \end{matrix}\right| \begin{matrix}
+    0 & 1 & 0 & 0 \\ 
+    1 & 0 & 0 & 0 \\ 
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+    \end{matrix}\right )
+$$
+$$
+\xrightarrow[]{f_1/2}
+\left ( \left.\begin{matrix}
+    1 & -\frac{1}{2} & \frac{1}{2} & -1 \\ 
+    0 & 0 & 2 & 4 \\ 
+    -3 & 2 & -2 & 2 \\
+    3 & 0 & 1 & -3
+    \end{matrix}\right| \begin{matrix}
+    0 & \frac{1}{2} & 0 & 0 \\ 
+    1 & 0 & 0 & 0 \\ 
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+    \end{matrix}\right )
+\xrightarrow[]{f_3+3f_1}
+\left ( \left.\begin{matrix}
+    1 & -\frac{1}{2} & \frac{1}{2} & -1 \\ 
+    0 & 0 & 2 & 4 \\ 
+    0 & \frac{1}{2} & -\frac{1}{2} & -1 \\
+    3 & 0 & 1 & -3
+    \end{matrix}\right| \begin{matrix}
+    0 & \frac{1}{2} & 0 & 0 \\ 
+    1 & 0 & 0 & 0 \\ 
+    0 & \frac{3}{2} & 1 & 0 \\
+    0 & 0 & 0 & 1
+    \end{matrix}\right )
+$$
+$$
+\xrightarrow[]{f_4-3f_1}
+\left ( \left.\begin{matrix}
+    1 & -\frac{1}{2} & \frac{1}{2} & -1 \\ 
+    0 & 0 & 2 & 4 \\ 
+    0 & \frac{1}{2} & -\frac{1}{2} & -1 \\
+    0 & \frac{3}{2} & -\frac{1}{2} & 0
+    \end{matrix}\right| \begin{matrix}
+    0 & \frac{1}{2} & 0 & 0 \\ 
+    1 & 0 & 0 & 0 \\ 
+    0 & \frac{3}{2} & 1 & 0 \\
+    0 & -\frac{3}{2} & 0 & 1
+    \end{matrix}\right )
+\xrightarrow[]{f_3 \leftrightarrow f_2}
+\left ( \left.\begin{matrix}
+    1 & -\frac{1}{2} & \frac{1}{2} & -1 \\ 
+    0 & \frac{1}{2} & -\frac{1}{2} & -1 \\
+    0 & 0 & 2 & 4 \\ 
+    0 & \frac{3}{2} & -\frac{1}{2} & 0
+    \end{matrix}\right| \begin{matrix}
+    0 & \frac{1}{2} & 0 & 0 \\ 
+    0 & \frac{3}{2} & 1 & 0 \\
+    1 & 0 & 0 & 0 \\ 
+    0 & -\frac{3}{2} & 0 & 1
+    \end{matrix}\right )
+$$
+$$
+\xrightarrow[]{f_2/(1/2)}
+\left ( \left.\begin{matrix}
+    1 & -\frac{1}{2} & \frac{1}{2} & -1 \\ 
+    0 & 1 & -1 & -2 \\
+    0 & 0 & 2 & 4 \\ 
+    0 & \frac{3}{2} & -\frac{1}{2} & 0
+    \end{matrix}\right| \begin{matrix}
+    0 & \frac{1}{2} & 0 & 0 \\ 
+    0 & 3 & 2 & 0 \\
+    1 & 0 & 0 & 0 \\ 
+    0 & -\frac{3}{2} & 0 & 1
+    \end{matrix}\right )
+\xrightarrow[]{f_4-(3/2)f_2}
+\left ( \left.\begin{matrix}
+    1 & -\frac{1}{2} & \frac{1}{2} & -1 \\ 
+    0 & 1 & -1 & -2 \\
+    0 & 0 & 2 & 4 \\ 
+    0 & 0 & 1 & 3
+    \end{matrix}\right| \begin{matrix}
+    0 & \frac{1}{2} & 0 & 0 \\ 
+    0 & 3 & 2 & 0 \\
+    1 & 0 & 0 & 0 \\ 
+    0 & -6 & -3 & 1
+    \end{matrix}\right )
+$$
+$$
+\xrightarrow[]{f_3/2}
+\left ( \left.\begin{matrix}
+    1 & -\frac{1}{2} & \frac{1}{2} & -1 \\ 
+    0 & 1 & -1 & -2 \\
+    0 & 0 & 1 & 2 \\ 
+    0 & 0 & 1 & 3
+    \end{matrix}\right| \begin{matrix}
+    0 & \frac{1}{2} & 0 & 0 \\ 
+    0 & 3 & 2 & 0 \\
+    \frac{1}{2} & 0 & 0 & 0 \\ 
+    0 & -6 & -3 & 1
+    \end{matrix}\right )
+\xrightarrow[]{f_4-f_3}
+\left ( \left.\begin{matrix}
+    1 & -\frac{1}{2} & \frac{1}{2} & -1 \\ 
+    0 & 1 & -1 & -2 \\
+    0 & 0 & 1 & 2 \\ 
+    0 & 0 & 0 & 1
+    \end{matrix}\right| \begin{matrix}
+    0 & \frac{1}{2} & 0 & 0 \\ 
+    0 & 3 & 2 & 0 \\
+    \frac{1}{2} & 0 & 0 & 0 \\ 
+    -\frac{1}{2} & -6 & -3 & 1
+    \end{matrix}\right )
+$$
+$$
+\xrightarrow[]{f_3-2f_4}
+\left ( \left.\begin{matrix}
+    1 & -\frac{1}{2} & \frac{1}{2} & -1 \\ 
+    0 & 1 & -1 & -2 \\
+    0 & 0 & 1 & 0 \\ 
+    0 & 0 & 0 & 1
+    \end{matrix}\right| \begin{matrix}
+    0 & \frac{1}{2} & 1 & 0 \\ 
+    0 & 3 & 2 & 0 \\
+    \frac{3}{2} & 12 & 6 & -2 \\ 
+    -\frac{1}{2} & -6 & -3 & 1
+    \end{matrix}\right )
+\xrightarrow[]{f_2+2f_4}
+\left ( \left.\begin{matrix}
+    1 & -\frac{1}{2} & \frac{1}{2} & -1 \\ 
+    0 & 1 & -1 & 0 \\
+    0 & 0 & 1 & 0 \\ 
+    0 & 0 & 0 & 1
+    \end{matrix}\right| \begin{matrix}
+    0 & \frac{1}{2} & 1 & 0 \\ 
+    -1 & -9 & -4 & 2 \\
+    \frac{3}{2} & 12 & 6 & -2 \\ 
+    -\frac{1}{2} & -6 & -3 & 1
+    \end{matrix}\right )
+$$
+$$
+\xrightarrow[]{f_1+f_4}
+\left ( \left.\begin{matrix}
+    1 & -\frac{1}{2} & \frac{1}{2} & 0 \\ 
+    0 & 1 & -1 & 0 \\
+    0 & 0 & 1 & 0 \\ 
+    0 & 0 & 0 & 1
+    \end{matrix}\right| \begin{matrix}
+    -\frac{1}{2} & -\frac{11}{2} & -3 & 1 \\ 
+    -1 & -9 & -4 & 2 \\
+    \frac{3}{2} & 12 & 6 & -2 \\ 
+    -\frac{1}{2} & -6 & -3 & 1
+    \end{matrix}\right )
+\xrightarrow[]{f_2+f_3}
+\left ( \left.\begin{matrix}
+    1 & -\frac{1}{2} & 0 & 0 \\ 
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\ 
+    0 & 0 & 0 & 1
+    \end{matrix}\right| \begin{matrix}
+    -\frac{1}{2} & -\frac{11}{2} & -3 & 1 \\ 
+    \frac{1}{2} & 3 & 2 & 0 \\
+    \frac{3}{2} & 12 & 6 & -2 \\ 
+    -\frac{1}{2} & -6 & -3 & 1
+    \end{matrix}\right )
+$$
+$$
+\xrightarrow[]{f_1-\frac{1}{2}f_3}
+\left ( \left.\begin{matrix}
+    1 & -\frac{1}{2} & 0 & 0 \\ 
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\ 
+    0 & 0 & 0 & 1
+    \end{matrix}\right| \begin{matrix}
+    -\frac{5}{4} & -\frac{23}{2} & -3 & 1 \\ 
+    \frac{1}{2} & 3 & 2 & 0 \\
+    \frac{3}{2} & 12 & 6 & -2 \\ 
+    -\frac{1}{2} & -6 & -3 & 1
+    \end{matrix}\right )
+\xrightarrow[]{f_1+\frac{1}{2}f_2}
+\left ( \left.\begin{matrix}
+    1 & 0 & 0 & 0 \\ 
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\ 
+    0 & 0 & 0 & 1
+    \end{matrix}\right| \begin{matrix}
+    -1 & -10 & -5 & 2 \\ 
+    \frac{1}{2} & 3 & 2 & 0 \\
+    \frac{3}{2} & 12 & 6 & -2 \\ 
+    -\frac{1}{2} & -6 & -3 & 1
+    \end{matrix}\right )
+$$
+Entonces, la matriz de cambio de base de $\mathcal{C}$ a $\mathcal{B}$ es:
+$$
+P_{\mathcal{B} \mathcal{C}} = \begin{bmatrix}
+    -1 & -10 & -5 & 2 \\ 
+    \frac{1}{2} & 3 & 2 & 0 \\
+    \frac{3}{2} & 12 & 6 & -2 \\ 
+    -\frac{1}{2} & -6 & -3 & 1
+\end{bmatrix}
+$$
+\subsubsection{Punto C}
+Para hallar las coordenadas de las matrices $\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, \begin{bmatrix} 2 & 5 \\ -7 & 3 \end{bmatrix}, \begin{bmatrix} 10 & -1 \\ -4 & 2 \end{bmatrix}$ en la base $\mathcal{B}$, debo plantear la matriz de cambio de base de $\mathcal{C}$ a $\mathcal{B}$ y multiplicarla por el vector: \\
+Los vectores coordenada de cada matriz con respecto a la base canonica son:
+$$
+\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} = \begin{bmatrix} 1 \\ 0 \\ 0 \\ 1 \end{bmatrix}
+$$
+$$
+\begin{bmatrix} 2 & 5 \\ -7 & 3 \end{bmatrix} = \begin{bmatrix} 2 \\ 5 \\ -7 \\ 3 \end{bmatrix}
+$$
+$$
+\begin{bmatrix} 10 & -1 \\ -4 & 2 \end{bmatrix} = \begin{bmatrix} 10 \\ -1 \\ -4 \\ 2 \end{bmatrix}
+$$
+Ahora multiplicado por la matriz de cambio de base de $\mathcal{C}$ a $\mathcal{B}$:
+$$
+\left [  \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \right ]_{\mathcal{B}} =
+\begin{bmatrix}
+    -1 & -10 & -5 & 2 \\ 
+    \frac{1}{2} & 3 & 2 & 0 \\
+    \frac{3}{2} & 12 & 6 & -2 \\ 
+    -\frac{1}{2} & -6 & -3 & 1
+\end{bmatrix}
+\begin{bmatrix} 1 \\ 0 \\ 0 \\ 1 \end{bmatrix}
+=
+\begin{bmatrix} 1 \\ \frac{1}{2} \\ -\frac{1}{2} \\ \frac{1}{2} \end{bmatrix}
+$$
+$$
+\left [  \begin{bmatrix} 2 & 5 \\ -7 & 3 \end{bmatrix} \right ]_{\mathcal{B}} =
+\begin{bmatrix}
+    -1 & -10 & -5 & 2 \\ 
+    \frac{1}{2} & 3 & 2 & 0 \\
+    \frac{3}{2} & 12 & 6 & -2 \\ 
+    -\frac{1}{2} & -6 & -3 & 1
+\end{bmatrix}
+\begin{bmatrix} 2 \\ 5 \\ -7 \\ 3 \end{bmatrix}
+=
+\begin{bmatrix} -11 \\ 2 \\ 15 \\ -7 \end{bmatrix}
+$$
+$$
+\left [  \begin{bmatrix} 10 & -1 \\ -4 & 2 \end{bmatrix} \right ]_{\mathcal{B}} =
+\begin{bmatrix}
+    -1 & -10 & -5 & 2 \\ 
+    \frac{1}{2} & 3 & 2 & 0 \\
+    \frac{3}{2} & 12 & 6 & -2 \\ 
+    -\frac{1}{2} & -6 & -3 & 1
+\end{bmatrix}
+\begin{bmatrix} 10 \\ -1 \\ -4 \\ 2 \end{bmatrix}
+=
+\begin{bmatrix} 24 \\ -6 \\ -25 \\ 15 \end{bmatrix}
+$$
+    
+\end{document}

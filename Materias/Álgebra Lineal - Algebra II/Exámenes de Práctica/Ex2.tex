@@ -1,0 +1,187 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Do not alter this block (unless you're familiar with LaTeX
+\documentclass{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, fancyhdr, color, comment, graphicx, environ}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{background}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+\setlength{\headheight}{1.5cm}
+
+
+\pagestyle{fancy}
+
+\SetBgContents{https://github.com/PedroMVillar}
+\SetBgScale{3} % Escala de la marca de agua
+\SetBgColor{gray!80} % Color de la marca de agua
+\SetBgAngle{45} % Ángulo de inclinación de la marca de agua
+\SetBgOpacity{0.2} % Opacidad de la marca de agua
+
+
+\newenvironment{problem}[2][Ejercicio]
+    { \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{definition}[2][Definición]
+    { \begin{mdframed}[backgroundcolor=red!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{theorem}[2][Teorema]
+    { \begin{mdframed}[backgroundcolor=green!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{lemma}[2][Lema]
+    { \begin{mdframed}[backgroundcolor=green!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{proposition}[2][Proposición]
+    { \begin{mdframed}[backgroundcolor=green!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{corollary}[2][Corolario]
+    { \begin{mdframed}[backgroundcolor=green!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{example}[2][Ejemplo]
+    { \begin{mdframed}[backgroundcolor=yellow!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{remark}[2][Observación]
+    { \begin{mdframed}[backgroundcolor=yellow!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{note}
+    {\textit{Nota:}}
+    {}
+
+\newenvironment{conclusion}
+    {\textit{Conclusión:}}
+    {}
+
+\newenvironment{notation}
+    {\textit{Notación:}}
+    {}
+
+\newenvironment{question}
+    {\textit{Pregunta:}}
+    {}
+
+\newenvironment{answer}
+    {\textit{Respuesta:}}
+    {}
+
+% Define solution environment
+\newenvironment{solution}
+    {\textit{Solución:}}
+    {}
+
+\renewcommand{\qed}{\quad\qedsymbol}
+
+% prevent line break in inline mode
+\binoppenalty=\maxdimen
+\relpenalty=\maxdimen
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Header Configuarción
+\lhead{Pedro Villar}
+\rhead{Álgebra Lineal} 
+\chead{\textbf{Examen 2}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Preguntas
+\begin{problem}{1}
+    Justificar apropiadamente.
+    \begin{enumerate}
+        \item[(a)] (\textit{5pts.}) Sea $A$ una matriz $n \times n$. Probar que si $A$ tiene dos filas iguales o una nula, entonces $det(A)=0$.
+        \item[(b)] (\textit{5pts.}) Probar la falsedad o no de la siguiente afirmación: si $A$ y $B$ son matrices invertibles, entonces $A+B$ es invertible.
+        \item[(c)] (\textit{5pts.}) Sean $A,B$ y $C$ matrices $n\times n $ tales que $det(A)=-1$, $det(B)=2$ y $det(C)=3$. Calcular $det(A^2BC^tB^{-1})$.  
+        \item[(d)] (\textit{5pts.}) Dar la Definición del núcleo de una transformación lineal.
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}{2}
+    (\textit{20pts.}) Sean $a,b,c \in \mathbb{R}$. Consideremos las siguientes matrices:
+    $$
+    A = 
+    \begin{pmatrix}
+        1 & -1 & 0 & 0 & 0 \\
+        1 & 3 & 0 & 0 & 0 \\
+        0 & 0 & a & b & c \\
+        0 & 0 & -2 & 0 & 1 \\
+        0 & 0 & 1 & 1 & 1 
+    \end{pmatrix} \ \ \ \ \ 
+    B =
+    \begin{pmatrix}
+        c & -1 & 0 & 0 & 0 \\
+        1 & 3 & 0 & 0 & 0 \\
+        0 & 0 & a & b & 1 \\
+        0 & 0 & -2 & 0 & 1 \\
+        0 & 0 & 1 & 1 & 1
+    \end{pmatrix}
+    $$
+    Calcular $det(A)$ y $det(B)$ en función de $a,b$ y $c$.
+\end{problem}
+
+\begin{problem}{3}
+    (\textit{20pts.}) Decidir si existe y si es así darlo, un vector ortogonal a $(1,2,2)$, $(0,1,0)$ y $(0,0,1)$.  
+\end{problem}
+
+\begin{problem}{4}
+    (\textit{10pts.}) Sea $T: M_{2\times 3} \to \mathbb{R}^7$ una transformación lineal tal que su núcleo es generado por las matrices
+    $$
+    \begin{pmatrix}
+        1 & 0 & 2  \\ 0 & 3 & 0 
+    \end{pmatrix}, \ \ \ \ 
+    \begin{pmatrix}
+        0 & 1 & 0  \\ 2 & 0 & 3 
+    \end{pmatrix}, \ \ \ \
+    \begin{pmatrix}
+        1 & 1 & 2  \\ 2 & 3 & 3 
+    \end{pmatrix}
+    $$
+    \begin{itemize}
+        \item[(a)] (\textit{5pts.}) Determinar la dimensión de la imagen de $T$.  
+    \end{itemize}
+\end{problem}
+
+\begin{problem}{5}
+    Sea $T: \mathbb{R}^2 \to \mathbb{R}^2$ la transformación lineal definida como
+    $$
+    T(x,y) = (4x-y,3x+2y)
+    $$
+    \begin{itemize}
+        \item[(a)] (\textit{10pts.}) Dar $[T]_{\mathcal{BB'}}$ con $\mathcal{B}\mathcal{B'}= \{ (-1,1),(4,3) \}$.
+        \item[(b)] (\textit{5pts.}) Determinar el núcleo e imagen de $T$.
+    \end{itemize}
+\end{problem}
+
+\newpage
+\begin{problem}{6}
+    Considere la transformaciónlineal $T: \mathbb{R}_2[x] \to \mathbb{R}_3[x]$ definida como
+    $$
+    T(p(x)) = x \cdot p(x) + p(0)
+    $$
+    \begin{itemize}
+        \item[(a)] (\textit{10pts.}) Determinar el nuceo e imagen de $T$.
+        \item[(b)] (\textit{5pts.}) Decidir si $T$ es inyectiva y/o sobreyectiva.
+        \item[(c)] (\textit{10pts.}) Decidir si $T$ es diagonizable. 
+    \end{itemize}
+\end{problem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}

@@ -1,0 +1,1645 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Do not alter this block (unless you're familiar with LaTeX
+\documentclass{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, fancyhdr, color, comment, graphicx, environ}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{background}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+\setlength{\headheight}{1.5cm}
+
+
+\pagestyle{fancy}
+
+\SetBgContents{https://github.com/PedroMVillar}
+\SetBgScale{3} % Escala de la marca de agua
+\SetBgColor{gray!80} % Color de la marca de agua
+\SetBgAngle{45} % Ángulo de inclinación de la marca de agua
+\SetBgOpacity{0.2} % Opacidad de la marca de agua
+
+\newenvironment{problem}[2][Ejercicio]
+    { \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+% Define solution environment
+\newenvironment{solution}
+    {\textit{Solución:}}
+    {}
+
+\renewcommand{\qed}{\quad\qedsymbol}
+
+% prevent line break in inline mode
+\binoppenalty=\maxdimen
+\relpenalty=\maxdimen
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Fill in the appropriate information below
+\lhead{Pedro Villar}
+\rhead{Álgebra Lineal} 
+\chead{\textbf{Ejercicios Resueltos de Álgebra Lineal}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\begin{mdframed}[backgroundcolor=blue!20]
+Ejercicios resueltos sacados de \href{https://github.com/ExamenesViejos-FaMAF-Computacion/ExamenesViejos_Algebra_FaMAF}{GitHub - Exámenes Álgebra Lineal} y de diferentes libros.
+\end{mdframed}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Rectas y planos
+\section{Rectas y Planos}\label{sec:rectas-y-planos}
+
+\begin{problem}{1.1}
+    \emph{Halla las ecuaciones de la recta $L$ que pasa por los puntos $P = (1,0,-1)$ y $Q = (2,1-3)$:}
+    \end{problem}
+    \begin{solution}
+    $Q-P$ forman un vector director, $Q-P = (1,1,-2)$, con esto podemos dar la forma paramétrica:
+    \[
+    L = (1,0,-1) + t(1,1,-2)
+    \]
+    Para hallar la representación implícita planteo un punto genérico:
+    \[
+    (x,y,z) = (1,0,-1) + t(1,1,-2) \Rightarrow 
+    \begin{cases}
+    x = 1 + t \\
+    y = t \\
+    z = -1-2t
+    \end{cases}
+    \]
+    Despejo $t$ de cada ecuación para hacer la igualdad:
+    \[
+    \begin{cases}
+    x = 1 + t \\
+    y = t \\
+    z = -1-2t
+    \end{cases} =
+    \begin{cases}
+    t = x-1 \\
+    t = y \\
+    t = -\frac{z+1}{2}
+    \end{cases} \Rightarrow
+    x-1 = y = -\frac{z+1}{2}
+    \]
+    Entonces así se define implícitamente la recta tomando dos ecuaciones:
+    \[
+    L = 
+    \begin{cases}
+    x-y = 1 \\
+    -2x - z = -1
+    \end{cases}
+    \]
+    \end{solution}
+    
+    \begin{problem}{1.2}
+    \emph{Hallar las ecuaciones del plano $P$ que pasa por los puntos $A=(0,1,-1),$ $B=(2,3,-5)$ y $C=(1,4,3)$.}
+    \end{problem}
+    \begin{solution}
+    Para las ecuaciones necesitamos primero un punto y dos vectores generadores del plano, para el punto tomo uno cualquiera de los que da el enunciado, luego los vectores generadores se forman con los puntos dados, tomando dos pares no colineales:
+    \begin{itemize}
+    \item 
+    $B-A = (2,2,-4)$
+    \item 
+    $C-A=(1,3,4)$
+    De acá la ecuación paramétrica es
+    \end{itemize}
+    \[
+    P = (0,1,-1) + s (2,2,-4)+ t(1,3,4)
+    \]
+    Un vector perpendicular para la ecuación normal se obtiene a partir de los dos vectores generadores:
+    \[
+    (2,2,-4) \times (1,3,4) = 
+    \begin{vmatrix}
+    e_1 & e_2 & e_3 \\
+    2 & 2 & -4 \\
+    1 & 3 & 4
+    \end{vmatrix} = e_1\cdot 20 - e_2 \cdot12+e_3\cdot 4 = (20,-12,4)
+    \]
+    De acá la forma normal es:
+    \[
+    \langle (x,y,z) - (0,1,-1), (20,-12,4) \rangle = 0
+    \]
+    Y la representación implícita:
+    \[
+    P = \{ (x,y,z) : 20x-12y+4z = -16 \}
+    \]
+    \end{solution}
+    
+    \begin{problem}{1.3}
+    \emph{Comprueba si existe alguna recta que pase por los puntos $P=(3,1,0)$, $Q=(0,-5,1)$, $R=(6,-5,1)$}.
+    \end{problem}
+    \begin{solution}
+    Para esto vamos a hallar la recta que pasa por $P$ y $Q$, y comprobamos si R pertenece a la recta, formo el vector con $Q$ y $P$: $Q-P=(-3,-6,1)$ entonces la ecuación paramétrica es $(3,1,0) + t(-3,-6,1)$, de acá las ecuaciones que lo definen son:
+    \[
+    (x,y,z) = (3,1,0) + t(-3,-6,1) \Rightarrow 
+    \begin{cases}
+    x = 3-3t \\
+    y = 1-6t \\
+    z = t
+    \end{cases} \ \  \sim \ \ 
+    \begin{cases}
+    \frac{x-3}{-3} = t \\
+    \frac{y-1}{-6} = t \\
+    z = t
+    \end{cases}
+    \]
+    Ahora para ver si $R$ está probamos el punto en la igualdad:
+    \[
+    \frac{x-3}{-3} = \frac{y-1}{-6} = z \Rightarrow \frac{6-3}{-3} = \frac{-5-1}{-6} = 1 \equiv -1 = 1 = 1
+    \]
+    Lo que es Falso, entonces no existe ninguna recta que pase por los puntos P, Q y R a la vez.
+    \end{solution}
+    
+    \begin{problem}{1.4}
+    \emph{Halla todas las ecuaciones del plano $\Pi$ Determinado por el punto $A=(1,-3,2)$ y por los vectores $u=(2,1,0)$, $v=(-1,0,3)$}.
+    \end{problem}
+    \begin{solution}
+    La forma paramétrica es directa:
+    \[
+    \Pi = (-1,-3,2) + s(2,1,0) + t(-1,0,3)
+    \]
+    Luego para la ecuación normal obtengo un vector perpendicular a los generadores:
+    \[
+    (2,1,0) \times (-1,0,3) = 
+    \begin{vmatrix}
+    e_1 & e_2 & e_3 \\
+    2 & 1 & 0 \\
+    -1 & 0 & 3
+    \end{vmatrix} = 3e_1-6e_2+e_3 = (3,-6,1)
+    \]
+    Entonces la forma normal es
+    \[
+    \langle (x,y,z)-(1,-3,2), (3,-6,1) \rangle  = 0
+    \]
+    Y la forma implícita
+    \[
+    \Pi = \{ (x,y,z) :3x-6y+z = 17 \}
+    \]
+    \end{solution}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Sistemas lineales
+\section{Sistemas lineales}\label{sec:sist-lineales}
+\begin{problem}{2.1}
+
+Para que valores del parámetro $k$, el siguiente sistema de ecuaciones lineales:
+\begin{itemize}
+\item 
+i) tiene solución única.
+\item 
+ii) no tiene solución.
+\item 
+iii) tiene soluciones infinitas.
+\end{itemize}
+\[
+\begin{cases}
+kx + y + z = 1 \\
+x + ky + z = 1 \\
+x + y + kz = 1
+\end{cases}
+\]
+\end{problem}
+\begin{solution}
+Primero lo expreso como matriz para reducir:
+\[
+\begin{bmatrix}
+k & 1 & 1 & 1 \\
+1 & k & 1 & 1 \\
+1 & 1 & k & 1
+\end{bmatrix} \xrightarrow{f_1 <-> f_3}
+\begin{bmatrix}
+1 & 1 & k & 1 \\
+1 & k & 1 & 1 \\
+k & 1 & 1 & 1
+\end{bmatrix} \xrightarrow{f_2-f_1}
+\begin{bmatrix}
+1 & 1 & k & 1 \\
+0 & k-1 & 1-k & 0 \\
+k & 1 & 1 & 1
+\end{bmatrix} \xrightarrow{f_3-kf_1}
+\begin{bmatrix}
+1 & 1 & k & 1 \\
+0 & k-1 & 1-k & 0 \\
+0 & 1-k & 1-k^2 & 1-k
+\end{bmatrix} 
+\]\[
+\xrightarrow{f_3+f_2}
+\begin{bmatrix}
+1 & 1 & k & 1 \\
+0 & k-1 & 1-k & 0 \\
+0 & 0 & (1-k^2)+(1-k) & 1-k
+\end{bmatrix} \xrightarrow{-f_3}
+\begin{bmatrix}
+1 & 1 & k & 1 \\
+0 & k-1 & 1-k & 0 \\
+0 & 0 & k^2+k-2 & 1-k
+\end{bmatrix}
+\]
+De esta última ecuación inferimos los siguientes resultados para la solución:
+\[
+(k^2+k-2)z = 1-k \Rightarrow (k+2)(k-1)z=k-1
+\]\begin{itemize}
+\item 
+\textbf{i)} Tiene solución única si $(k+2)(k-1) \neq 0 \Rightarrow k\neq -2$ y $k\neq 1$.
+\item 
+\textbf{ii)} No tiene solución si $(k+2)(k-1) = 0$ y $1-k \neq 0$ $\Rightarrow k=-2$ y $k\neq 1$.
+\item 
+\textbf{iii)} Tiene soluciones infinitas si $(k+2)(k-1) = 0$ y $1-k = 0$ $\Rightarrow k=-2$ y $k = 1$.
+\end{itemize}
+\end{solution}
+
+\begin{problem}{2.2}
+Encuentre el determinante de las siguientes matrices, usando únicamente las propiedades de los determinantes:
+\[
+A = \begin{bmatrix}
+1 & a & b+c \\
+1 & b & c+a \\
+1 & c & a+b
+\end{bmatrix} \ \ \ \ \ \ \ \ \
+B = \begin{bmatrix}
+a_1^2 & a_1 & 1 \\
+a_2^2 & a_2 & 1 \\
+a_3^2 & a_3 & 1
+\end{bmatrix}
+\]
+\end{problem}
+\begin{solution}	
+    \textbf{Matriz A}
+    A la columna $3$ le sumo la columna $2$
+    \[
+    \begin{bmatrix}
+    1 & a & a+b+c \\
+    1 & b & a+b+c \\
+    1 & c & a+b+c
+    \end{bmatrix} =
+    \begin{bmatrix}
+    1 & a & (a+b+c)\cdot 1 \\
+    1 & b & (a+b+c)\cdot 1 \\
+    1 & c & (a+b+c) \cdot 1
+    \end{bmatrix}
+    \]
+    Columna $3$ multiplicada por un factor común
+    \[
+    | A | = (a + b + c) \cdot 
+    \begin{vmatrix}
+    1 & a & 1 \\
+    1 & b & 1 \\
+    1 & c & 1
+    \end{vmatrix} = 0
+    \]
+    Ya que tiene dos columnas iguales.
+    
+    \textbf{Matriz B}
+    \[
+    B = \begin{bmatrix}
+    a_1^2 & a_1 & 1 \\
+    a_2^2 & a_2 & 1 \\
+    a_3^2 & a_3 & 1
+    \end{bmatrix} \xrightarrow{f_2-f_1} \xrightarrow{f_3-f_1}
+    \begin{bmatrix}
+    a_1^2 & a_1 & 1 \\
+    a_2^2-a_1^2 & a_2-a_1 & 0 \\
+    a_3^2 - a_1^2 & a_3 - a_1 & 0
+    \end{bmatrix}
+    \]
+    Filas $2$ y $3$ multiplicadas por un factor común:
+    \[
+    \begin{aligned}
+    | B | &= (a_2- a_1) (a_3-a_1)
+    \begin{vmatrix}
+    a_1^2 & a_1 & 1 \\
+    a_2+a_1 & 1 & 0 \\
+    a_3 + a_1 & 1 & 0
+    \end{vmatrix} = f_3-f_2 \rightarrow \\ \\ 
+    &= (a_2- a_1) (a_3-a_1)
+    \begin{vmatrix}
+    a_1^2 & a_1 & 1 \\
+    a_2+a_1 & 1 & 0 \\
+    a_3 - a_2 & 0 & 0
+    \end{vmatrix} = f_1 \leftrightarrow f_3 \rightarrow \\ \\ 
+    &= (a_2- a_1) (a_3-a_1) (-1)
+    \begin{vmatrix}
+    a_3 - a_2 & 0 & 0 \\
+    a_2+a_1 & 1 & 0 \\
+    a_1^2 & a_1 & 1
+    \end{vmatrix} \\ \\
+    &= (a_2- a_1) (a_3-a_1) (a_2-a_3)
+    \end{aligned}
+    \]
+\end{solution}
+\begin{problem}{2.3}	
+    Considere el valor del siguiente determinante
+\[
+\begin{vmatrix}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33} 
+\end{vmatrix} = 8
+\]
+en base a este resultado, encuentre el valor de
+\[
+\begin{vmatrix}
+-3a_{11} & -3a_{12} & -3a_{13} \\
+2a_{31} & 2a_{32} & 2a_{33} \\
+5a_{21} & 5a_{22} & 5a_{23}
+\end{vmatrix}
+\]
+\end{problem}
+\begin{solution}
+Aplico las propiedades del determinante con respecto a las operaciones elementales:
+\[
+\begin{aligned}
+\begin{vmatrix}
+-3a_{11} & -3a_{12} & -3a_{13} \\
+2a_{31} & 2a_{32} & 2a_{33} \\
+5a_{21} & 5a_{22} & 5a_{23}
+\end{vmatrix} &= (-3)
+\begin{vmatrix}
+a_{11} & a_{12} & a_{13} \\
+2a_{31} & 2a_{32} & 2a_{33} \\
+5a_{21} & 5a_{22} & 5a_{23}
+\end{vmatrix} = (-3)(2)  
+\begin{vmatrix}
+a_{11} & a_{12} & a_{13} \\
+a_{31} & a_{32} & a_{33} \\
+5a_{21} & 5a_{22} & 5a_{23}
+\end{vmatrix} \\ \\
+&= (-3)(2)(5)
+\begin{vmatrix}
+a_{11} & a_{12} & a_{13} \\
+a_{31} & a_{32} & a_{33} \\
+a_{21} & a_{22} & a_{23}
+\end{vmatrix} = (-3)(2)(5)(-1) 
+\begin{vmatrix}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33}
+\end{vmatrix} \\ \\
+&= (-3)(2)(5)(-1)(8) = 30\cdot 8 = 240
+\end{aligned}
+\]
+\end{solution}
+\begin{problem}{2.4}
+    
+    Demuestra que si $a\neq b$ entonces el siguiente determinante de $n\times n$
+    \[
+    \begin{vmatrix}
+    a+ b & ab & 0 & \dots & 0 & 0 \\
+    1 & a+b & ab & \dots & 0 & 0 \\
+    0 & 1 & a+b & \dots & 0 & 0 \\
+    \vdots & \ddots & \ddots & \dots & \vdots & \vdots \\
+    0 & 0 & 0 & \dots & a+b & ab \\
+    0 & 0 & 0 & \dots & 1 & a+b
+    \end{vmatrix} =
+    \frac{a^{n+1}-b^{n+1}}{a-b}
+    \]
+\end{problem}
+\begin{solution}
+    Para esto haremos inducción fuerte sobre $n$:
+    \textbf{Caso base}
+    Tomando $n=2$, probaremos que $\begin{vmatrix} a+b & ab \\ 1 &  a+b \end{vmatrix} =  \frac{a^3-b^3}{a-b}$:
+    $$
+    \begin{aligned}
+    \begin{vmatrix} a+b & ab \\ 1 &  a+b \end{vmatrix} &= (a+b)^2 - ab = a^2 +2ab + b^2 - ab = a^2 + ab + b^2 \\
+    &= \frac{(a-b)\cdot (a^2 + ab + b^2)}{(a-b)} = \frac{a^3-b^3}{a-b}
+    \end{aligned}
+    $$
+    \textbf{Paso inductivo}
+Ahora supongamos que el determinante vale para $n\leq k$ y con esto probar que vale para $n=k+1$ el determinante:
+\[
+\begin{vmatrix}
+a+ b & ab & 0 & \dots & 0 & 0 \\
+1 & a+b & ab & \dots & 0 & 0 \\
+0 & 1 & a+b & \dots & 0 & 0 \\
+\vdots & \ddots & \ddots & \dots & \vdots & \vdots \\
+0 & 0 & 0 & \dots & a+b & ab \\
+0 & 0 & 0 & \dots & 1 & a+b
+\end{vmatrix}_{(k+1)\times(k+1)} =
+\frac{a^{k+2}-b^{k+2}}{a-b}
+\]
+Calculo el determinante expandiendo por la fila 1:
+\[
+\begin{aligned}
+& \begin{vmatrix}
+a+ b & ab & 0 & \dots & 0 & 0 \\
+1 & a+b & ab & \dots & 0 & 0 \\
+0 & 1 & a+b & \dots & 0 & 0 \\
+\vdots & \ddots & \ddots & \dots & \vdots & \vdots \\
+0 & 0 & 0 & \dots & a+b & ab \\
+0 & 0 & 0 & \dots & 1 & a+b
+\end{vmatrix} \\ \\ \\
+&= (a+b) \cdot
+\begin{vmatrix}
+a+ b & ab & 0 & \dots & 0 & 0 \\
+1 & a+b & ab & \dots & 0 & 0 \\
+0 & 1 & a+b & \dots & 0 & 0 \\
+\vdots & \ddots & \ddots & \dots & \vdots & \vdots \\
+0 & 0 & 0 & \dots & a+b & ab \\
+0 & 0 & 0 & \dots & 1 & a+b
+\end{vmatrix}_{k\times k} - ab \cdot
+\begin{vmatrix}
+1 & ab & 0 & \dots & 0 & 0 \\
+0 & a+b & ab & \dots & 0 & 0 \\
+0 & 1 & a+b & \dots & 0 & 0 \\
+\vdots & \ddots & \ddots & \dots & \vdots & \vdots \\
+0 & 0 & 0 & \dots & a+b & ab \\
+0 & 0 & 0 & \dots & 1 & a+b
+\end{vmatrix}_{k\times k} \\
+\\
+\\
+&=(a+b) \cdot \frac{a^{k+1}-b^{k+1}}{a-b} - ab \cdot
+\begin{vmatrix}
+1 & ab & 0 & \dots & 0 & 0 \\
+0 & a+b & ab & \dots & 0 & 0 \\
+0 & 1 & a+b & \dots & 0 & 0 \\
+\vdots & \ddots & \ddots & \dots & \vdots & \vdots \\
+0 & 0 & 0 & \dots & a+b & ab \\
+0 & 0 & 0 & \dots & 1 & a+b
+\end{vmatrix}_{k\times k} \\
+\\
+\\
+\end{aligned}
+\]
+\[
+\begin{aligned}
+&= (a+b) \cdot \frac{a^{k+1}-b^{k+1}}{a-b} - ab \cdot1
+\begin{vmatrix}
+a+b & ab & \dots & 0 & 0 \\
+1 & a+b & \dots & 0 & 0 \\
+\ddots & \ddots & \dots & \vdots & \vdots \\
+0 & 0 & \dots & a+b & ab \\
+0 & 0 & \dots & 1 & a+b
+\end{vmatrix}_{(k-1)\times (k-1)} \\
+\\
+\\
+&= (a+b) \cdot \frac{a^{k+1}-b^{k+1}}{a-b} - ab \cdot \frac{a^k-b^k}{a-b} = \frac{a^{k+2}-ab^{k+1}+ba^{k+1}-b^{k+2}}{a-b} - \frac{ba^{k+1}-ab^{k+1}}{a-b} \\
+\\
+\\
+&= \frac{a^{k+2}-b^{k+2}}{a-b}
+\end{aligned}
+\]
+Con esto queda probado que vale para todo $n$.
+\end{solution}
+
+
+\begin{problem}{2.5}
+    Encuentre la forma general de las matrices $A \in M_{2\times 2}$ tales que conmuten con la matriz $B$, esto es, $AB = BA$ donde
+\[
+B = \begin{bmatrix}
+2 & -1 \\
+1 & 1
+\end{bmatrix}
+\]
+\end{problem}
+\begin{solution}
+    Como a es una matriz de $2 \times 2$, es de la forma $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$, y luego se tienen los productos
+\[
+AB = 
+\begin{bmatrix} a & b \\ c & d \end{bmatrix}\cdot
+\begin{bmatrix} 2 & -1 \\ 1 & 1 \end{bmatrix} = 
+\begin{bmatrix} 2a+b & -a+b \\ 2c+d & -c+d \end{bmatrix}
+\]\[
+BA = 
+\begin{bmatrix} 2 & -1 \\ 1 & 1 \end{bmatrix} \cdot
+\begin{bmatrix} a & b \\ c & d \end{bmatrix} = 
+\begin{bmatrix} 2a-b & 2b-d \\ a+c & b+d \end{bmatrix}
+\]
+Se forma el siguiente sistema de ecuaciones:
+\[
+\begin{cases}
+2a + b = 2a-b \\
+-a+b = 2b-d \\
+2c+d = a+c \\
+-c+d = b+d
+\end{cases} \Rightarrow
+\begin{cases}
+b+c = 0 \\
+-a-b+d = 0 \\
+-a+c+d = 0 \\
+-b-c = 0
+\end{cases}
+\]
+Lo transformo a matriz para resolverlo:
+\[
+\begin{bmatrix}
+0 & 1 & 1 & 0 \\
+-1 & -1 & 0 & 1 \\
+-1 & 0 & 1 & 1 \\
+0 & -1 & -1 & 0
+\end{bmatrix} \sim
+\begin{bmatrix}
+1 & 0 & -1 & -1 \\
+0 & 1 & 1 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{bmatrix} \Rightarrow a -c-d = 0, \ \ \ b+c = 0 \Rightarrow
+\begin{cases}
+a = c+d \\
+b = -c \\
+c = c \\
+d = d
+\end{cases}
+\]
+Entonces las matrices que buscamos son de la forma
+\[
+A = \begin{bmatrix}
+\lambda + \alpha & -\alpha \\
+\alpha & \lambda
+\end{bmatrix}
+\]
+Con $\lambda, \alpha \in \mathbb{R}$.
+\end{solution}
+
+\begin{problem}{2.6}
+    Muestre que si $A$ es una matriz de tamaño $n\times n$, entonces el determinante de su adjunta es igual al determinante de $A$ elevado a la $(n - 1)$, esto es
+\[
+|adj(A)| = (|A|)^{n-1}
+\]
+\end{problem}
+\begin{solution}
+    La relación para obtener la matriz inversa está dada por
+\[
+A^{-1} = \frac{adj(A)}{|A|}
+\]
+ahora multiplico a derecha por $A$ de ambos lados:
+\[
+A^{-1} A = \frac{adj(A)}{|A|} A \Rightarrow Id_n = \frac{1}{|A|}adj(A)A
+\]
+como el determinante de $A$ es un escalar, se puede multiplicar a ambos lados por $A$ para simplificar:
+\[
+|A| Id_n = adj(A)A
+\]
+ahora tomo determinante de ambos lados:
+\[
+||A| Id_n | = |adj(A)A| = |adj(A)| \cdot |A|
+\]
+para el determinante izquierdo queda:
+\[
+ ||A| Id_n | = 
+\begin{vmatrix}
+|A| & 0 & \cdots & 0 \\
+0 & |A| & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \dots & |A|
+\end{vmatrix} = |A|^n
+\]
+entonces
+\[
+|A|^n = |adj(A)| \cdot |A| \Rightarrow |adj(A)| = \frac{|A|^n}{|A|} 
+\]
+por lo tanto
+\[
+|adj(A)| = (|A|)^{n-1}
+\]
+\end{solution}
+
+\begin{problem}{2.7}
+    Sea $A_n = \begin{pmatrix} 2 & -1 & 0 & \dots & 0 & 0 \\ -1 & 2 & -1 & \dots & 0 & 0 \\ 0 & -1 & 2 & \dots & 0 & 0 \\ \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\ 0 & 0 & 0 & \dots & 2 & -1 \\ 0 & 0 & 0 & \dots & -1 & 2 \end{pmatrix} \in M_{n\times n}(\mathbb{R})$ probar que $det(A_n)=n+1$ para todo $n\in \mathbb{N}$.
+\end{problem}
+\begin{solution}
+    Para la prueba hacemos inducción fuerte sobre $n$, para el caso base, tomamos $n=1$ y $n=2$:
+\[
+\begin{vmatrix}
+2
+\end{vmatrix} = 2 = 1+1, \ \ \ \ \ 
+\begin{vmatrix}
+2 & -1 \\
+-1 & 2
+\end{vmatrix} = 4-1 = 3 = 2+1
+\]
+Ahora supongamos que el determinante vale para $n\leq k$ y con esto probar que vale para $n=k+1$ el determinante:
+\[
+\begin{vmatrix} 2 & -1 & 0 & \dots & 0 & 0 \\ -1 & 2 & -1 & \dots & 0 & 0 \\ 0 & -1 & 2 & \dots & 0 & 0 \\ \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\ 0 & 0 & 0 & \dots & 2 & -1 \\ 0 & 0 & 0 & \dots & -1 & 2 \end{vmatrix}_{(k+1)\times(k+1)} = k+2
+\]
+Calculo el determinante expandiendo por la fila 1:
+\[
+\begin{aligned}
+\begin{vmatrix} 2 & -1 & 0 & \dots & 0 & 0 \\ -1 & 2 & -1 & \dots & 0 & 0 \\ 0 & -1 & 2 & \dots & 0 & 0 \\ \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\ 0 & 0 & 0 & \dots & 2 & -1 \\ 0 & 0 & 0 & \dots & -1 & 2 \end{vmatrix}_{(k+1)\times(k+1)} &= 2 \cdot 
+\begin{vmatrix} 2 & -1 & 0 & \dots & 0 & 0 \\ -1 & 2 & -1 & \dots & 0 & 0 \\ 0 & -1 & 2 & \dots & 0 & 0 \\ \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\ 0 & 0 & 0 & \dots & 2 & -1 \\ 0 & 0 & 0 & \dots & -1 & 2 \end{vmatrix}_{k\times k} + 1 \cdot 
+\begin{vmatrix} -1 & -1 & \dots & 0 & 0 \\ 0 & 2 & \dots & 0 & 0 \\ \vdots  & \vdots & \ddots & \vdots & \vdots \\ 0 & 0 & \dots & 2 & -1 \\ 0 & 0 & \dots & -1 & 2 \end{vmatrix}_{k\times k}  \\ \\
+&= 2 (k+1) + (-1) 
+\begin{vmatrix} 2 & -1 &  \dots & 0 & 0 \\  -1 & 2 & \dots & 0 & 0 \\ \vdots & \vdots & \ddots & \vdots & \vdots \\ 0 & 0 & \dots & 2 & -1 \\ 0 &0& \dots & -1 & 2 \end{vmatrix}_{(k-1)\times (k-1)}  \\ \\
+&= 2 (k+1) + (-1)k = 2k+2-k = k+2
+\end{aligned}
+\]
+Con esto queda probado que $det(A_n)=n+1$ vale para todo $n$ natural. \newline
+\end{solution}
+\newpage
+\begin{problem}{2.8} 
+    Determinar para que valores de $x\in \mathbb{R}$ la siguiente matriz es invertible
+\[
+A = \begin{pmatrix}
+1 & 0 & 9 & 0 \\
+3 & 1 & 2 & 3 \\
+3 & 0 & -1 & 0 \\
+3 & 1 & 2 & x
+\end{pmatrix}
+\]
+\end{problem}
+\begin{solution}
+    Si $det(A)\neq 0$, entonces $A$ es invertible, entonces comenzamos calculando el determinante expandiendo por la fila $1$:
+\[
+\begin{aligned}
+\begin{vmatrix}
+1 & 0 & 9 & 0 \\
+3 & 1 & 2 & 3 \\
+3 & 0 & -1 & 0 \\
+3 & 1 & 2 & x
+\end{vmatrix} &= 1 
+\begin{vmatrix}
+1 & 2 & 3 \\
+0 & -1 & 0 \\
+1 & 2 & x
+\end{vmatrix} + 9
+\begin{vmatrix}
+3 & 1 & 3 \\
+3 & 0 & 0 \\
+3 & 1 & x
+\end{vmatrix} \\ \\
+&= 
+\begin{vmatrix}
+-1 & 0 \\
+2 & x
+\end{vmatrix} + 
+\begin{vmatrix}
+2 & 3 \\
+-1 & 0
+\end{vmatrix} + 27
+\begin{vmatrix}
+0 & 0 \\
+1 & x
+\end{vmatrix} -9
+\begin{vmatrix}
+3 & 0 \\
+3 & x
+\end{vmatrix} + 27
+\begin{vmatrix}
+3 & 0 \\
+3 & 1
+\end{vmatrix} \\ \\
+&= -x + 3 -27x + 81 = 84-28x
+\end{aligned}  
+\]
+Esto quiere decir que cuando $x=3$ la matriz no va a ser invertible, por lo tanto $A$ es invertible siempre que $x\neq 3$.
+\end{solution}
+
+\begin{problem}{2.9}
+    Sea $A =  \begin{pmatrix} x & a & b & c & d \\ x & x & a & b & c \\ x & x & x & a & b \\  x & x & x & x & a \\ x & x & x & x & x \end{pmatrix}$ calcular $det(A).$
+\end{problem}
+\begin{solution}
+    Con un determinante de esta forma, vamos a intentar la triangulación, ya que el determinante se obtendría simplemente realizando el producto de la diagonal.
+Restando a cada columna la columna siguiente:
+\[
+\begin{vmatrix} x-a & a-b & b-c & c-d & d \\ 0 & x-a & a-b & b-c & c \\ 0 & 0 & x-a & a-b & b \\  0 & 0 & 0 & x-a & a \\ 0 & 0 & 0 & 0 & x \end{vmatrix} = (x-a)^4x
+\]
+\end{solution}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Espacios Vectoriales
+\section{Espacios Vectoriales}\label{sec:esp-vectoriales}
+
+\begin{problem}{3.1}
+    Sea $M$ el conjunto de todas las matrices invertibles de tamaño $3 \times 3$, muestre que este conjunto no es un espacio vectorial.
+\end{problem}
+\begin{solution}
+    Consideremos las siguientes matrices $A,B +\in M$:
+\[
+A= \begin{pmatrix} 1 & 0 & 0 \\0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix} \Rightarrow |A| = 1
+\]
+y
+\[
+B= \begin{pmatrix} -1 & 0 & 0 \\0 & -1 & 0 \\ 0 & 0 & -1 \end{pmatrix} \Rightarrow |B| = -1
+\]
+Ambas matrices son invertibles ya que sus determinantes son distintos de cero, que es la condici¶on que debe cumplir una matriz para que tenga inversa. De estas matrices tenemos que
+\[
+A+B = \begin{pmatrix} 1 & 0 & 0 \\0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix} +
+\begin{pmatrix} -1 & 0 & 0 \\0 & -1 & 0 \\ 0 & 0 & -1 \end{pmatrix} = 
+\begin{pmatrix} 0 & 0 & 0 \\0 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix} \Rightarrow |A+B| = 0
+\]
+Esta matriz no es invertible ya que su determinante es igual a cero, por lo tanto, no se cumple la propiedad de cerradura aditiva, esto es,
+\[
+A,B\in M \ \ \ \text{pero} \ \ \ A+B\notin M
+\]
+Por lo tanto $M$ no es un espacio vectorial.
+\end{solution}
+
+\begin{problem}{3.2}
+    Cuales de los siguientes subconjuntos de $R_3[x]$ (espacio vectorial de polinomios de grado < 3) son subespacios vectoriales. Con las operaciones de suma y producto normales que conocemos.
+\begin{itemize}
+\item 
+\textbf{a.} $V = \{ a_0 + a_1t + a_2t^2 \ \ | \ \ a_0 = 0 \}$
+\item 
+\textbf{b.} $V = \{ a_0 + a_1t + a_2t^2 \ \ | \ \ a_2 = a_1 + 1 \}$
+\end{itemize}
+\end{problem}
+
+\begin{solution}
+    \emph{Recordemos que para veriflcar si un subconjunto de un espacio vectorial, es un subespacio vectorial, solo tenemos que comprobar las dos propiededes de cerradura.}
+\textbf{Prueba a}
+Consideremos dos vectores $p(t), q(t) \in V$, donde ambos son de la forma $p(t) = a_1t + a_2t^2$ y $q(t) = b_1t + b_2t^2$, ya que $a_0 = 0$ en ambos casos por definición y además consideremos un escalar $\lambda \in \mathbb{R}$: Entonces tenemos
+\begin{itemize}
+\item 
+Cerradura aditiva: $p(t) + q(t) = (a_1t + a_2t^2) + (b_1t + b_2t^2) = (a_1 + b_1) t + (a_2 + b_2) t^2 \in V$
+\item 
+Cerradura multiplicativa: $\lambda \cdot p(t) = \lambda [(a_1 + a_2) + a_1t + a_2t^2] = (\lambda \cdot a_1 + \lambda \cdot a_2) + \lambda \cdot a_1t + \lambda \cdot a_2t^2 \in V$.
+\end{itemize}
+
+Tenemos que $V$ es cerrado bajo la suma y producto, por lo tanto, $V$ es un subespacio vectorial de $R_3[x]$
+
+\textbf{Prueba b}
+Consideremos dos vectores tales que $p(t), q(t) \in V$, donde ambos son de la forma $p(t) = a_0 + a_1t + (a_1 + 1) t^2$ y $q(t) = b_0 + b_1t + (b_1 + 1) t^2$, ya que $a_2 = a_1 + 1$ en ambos casos por definición y además consideremos un escalar $\lambda \in \mathbb{R}$. Entonces tenemos
+\begin{itemize}
+\item 
+Cerradura aditiva: $[a_0 + a_1t + (a_1 + 1) t^2] + [b_0 + b_1t + (b_1 + 1) t^2] = (a_0 + b_0) + (a_1 + b_1) t + (a_1 + b_1 + 2) t^2 \notin V$ ya que $a2 = a1 + 2$.
+\end{itemize}
+
+Observamos que $V$ no es cerrado bajo la suma, por lo tanto, $V$ es no es un subespacio vectorial de  $R_3[x]$.
+\end{solution}
+
+\begin{problem}{3.3}
+    Determine si los siguientes conjuntos $W$ son subespacios vectoriales o no del espacio vectorial $M_n$ (espacio vectorial de las matrices de tamaño $n \times n$)
+\begin{itemize}
+\item 
+\textbf{a.} $\{ W = A \in M_n \ \ | \  \ A^t = A \}$
+\item 
+\textbf{b.} $\{ A \in M_n \ \ | \ \ A \text{ es triangular superior} \}$
+\end{itemize}
+\end{problem}
+\begin{solution}
+    \textbf{Punto a}
+Consideremos dos vectores $A,B \in W$, donde ambos son de la forma $A^t = A$ y $B^t = B$ por definición (la transpuesta de una matriz es igual a la matriz) y además consideremos un escalar $\lambda \in \mathbb{R}$. Entonces
+\begin{itemize}
+\item 
+Cerradura aditiva: $(A + B)^t = A^t + B^t = A + B \in W$
+\item 
+Cerradura multiplicativa: $(\lambda \cdot A)^t = \lambda \cdot A^t = \lambda \cdot A \in W$
+\end{itemize}
+
+Tenemos que $W$ es cerrado bajo la suma y producto, por lo tanto, $W$ es un subespacio vectorial de $Mn_n$.
+
+\textbf{Punto b}
+Consideremos dos vectores $A,B \in W$, donde ambos son matrices triangulares superiores, por definición $\begin{cases} a_{ij}=0 \text{ si } i >j \\ a_{ij}\neq 0 \text{ si } i<j \end{cases}$ y además consideremos un escalar $\lambda \in \mathbb{R}$. Entonces:
+\begin{itemize}
+\item 
+Cerradura aditiva:
+\end{itemize}
+\[
+A+B = 
+\begin{pmatrix}
+a_{11} & a_{12} & \dots & a_{1n} \\
+0 & a_{22} & \dots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \dots & a_{nn}
+\end{pmatrix} +
+\begin{pmatrix}
+b_{11} & b_{12} & \dots & b_{1n} \\
+0 & b_{22} & \dots & b_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \dots & b_{nn}
+\end{pmatrix} = 
+\begin{pmatrix}
+a_{11} +b_{11} & a_{12} + b_{12} & \dots & a_{1n}+ b_{1n} \\
+0 & a_{22}+b_{22} & \dots & a_{2n}+b_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \dots & a_{nn}+b_{nn} 
+\end{pmatrix} \in W
+\]\begin{itemize}
+\item 
+Cerradura multiplicativa:
+\end{itemize}
+\[
+\lambda \cdot A = \lambda \cdot
+\begin{pmatrix}
+a_{11} & a_{12} & \dots & a_{1n} \\
+0 & a_{22} & \dots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \dots & a_{nn}
+\end{pmatrix} =
+\begin{pmatrix}
+\lambda \cdot a_{11} & \lambda \cdot a_{12} & \dots & \lambda \cdot a_{1n} \\
+0 & \lambda \cdot a_{22} & \dots & \lambda \cdot a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \dots & \lambda \cdot a_{nn}
+\end{pmatrix} \in W
+\]
+Tenemos que $W$ es cerrado bajo la suma y producto, por lo tanto, $W$ es un subespacio vectorial de $M_n$.
+\end{solution}
+
+\begin{problem}{3.4}
+    Muestre que el conjunto de todos los puntos del plano $ax +by +cz = 0$ es un subespacio vectorial de $\mathbb{R}^3$.
+\end{problem}
+\begin{solution}
+    Reescribimos los puntos del plano como el conjunto $H = \{ (x, y, z) \ | \ ax + by + cz = 0 \}$. Sean $u,v\in H$ y $\lambda \in \mathbb{R}$ es un escalar, entonces
+\begin{itemize}
+\item 
+Cerradura aditiva:
+\end{itemize}
+\[
+u = (x_1, y_1, z_1) \in H ) \Rightarrow ax_1 + by_1 + cz_1 = 0
+\]\[
+v = (x_2, y_2, z_2) \in H ) \Rightarrow ax_2 + by_2 + cz_2 = 0
+\]
+sumando y factorizando las ecuaciones anteriores, se tiene que
+\[
+(ax_1 + by_1 + cz_1) + (ax_2 + by_2 + cz_2) = 0
+\]\[
+\Rightarrow a (x_1 + x_2) + b(y_1 + y_2) + c (z_1 + z_2) = 0
+\]\[
+\Rightarrow (x_1 + x_2, y_1 + y_2, z_1 + z_2) = u + v \in H
+\]\begin{itemize}
+\item 
+Cerradura multiplicativa:
+\end{itemize}
+\[
+u = (x_1, y_1, z_1) \in H ) \Rightarrow ax_1 + by_1 + cz_1 = 0
+\]
+multiplicamos la ecuación anterior por el escalar fi, obtenemos
+\[
+\lambda \cdot ax_1 + \lambda \cdot by_1 + \lambda \cdot cz_1 = 0
+\]\[
+a (\lambda \cdot x_1) + b(\lambda \cdot y_1) + c(\lambda \cdot z_1) = 0
+\]\[
+\Rightarrow (\lambda x_1, \lambda y_1,  \lambda z_1) = \lambda\cdot u \in H
+\]
+Por lo tanto, el subconjunto $H$ que contiene a todos los puntos del plano $ax + by + cz = 0$, es cerrado bajo las operaciones de suma de vectores y multiplicación por un escalar, esto es, $H$ es un subespacio vectorial de $\mathbb{R}^3$.
+\end{solution}
+
+\begin{problem}{3.5}
+    Determine si $\{ 1 - 2x, x - x^2\}$ forma una base para $R_3[x]$.
+\end{problem}
+\begin{solution}
+    \emph{Recordemos que un conjunto de vectores es una base de un espacio vectorial, si este conjunto es linealmente independiente y además genera al espacio vectorial. Entonces para cada conjunto debemos verificar ambas condiciones.}
+Veamos primero si este conjunto es linealmente independiente, entonces consideremos la ecuación
+\[
+\lambda_1 (1 - 2x) + \lambda_2 (x - x^2) = 0 + 0x + 0x^2
+\]\[
+\Rightarrow \lambda_1 + (-2\lambda_1 + \lambda_2) x - \lambda_2x^2 = 0 + 0x + 0x^2
+\]
+esta ecuación nos lleva al siguiente sistema de ecuaciones lineales homogéneo
+\[
+\begin{cases}
+\lambda_1 = 0 \\
+-2\lambda_1 + \lambda_2 = 0 \\
+-\lambda_2 = 0
+\end{cases}
+\]
+esto implica que $\lambda_1 = \lambda_2 = 0$, por lo tanto los vectores son linealmente independientes. Ahora verifiquemos si generan a $\mathbb{R}_3[x]$. Para esto consideremos la forma mas general de un vector de espacio, eso es, sea $p(x) = a + bx + cx^2$, así este vector se debe poder escribir como:
+\[
+\beta_1 (1 - 2x) + \beta_2 (x - x^2) = a + bx + c^2
+\]\[
+\Rightarrow \beta_1 + (-2\beta_1 + \beta_2) x - \beta_2x^2 = a + bx + c2
+\]
+lo cual conduce al siguiente sistema de ecuaciones:
+\[
+\begin{cases}
+\beta_1 = a \\
+-2\beta_1 + \beta_2 = b \\
+-\beta_2 = c
+\end{cases}
+\]
+al resolver con la matriz aumentada tenemos
+\[
+\begin{bmatrix}
+1 & 0 & a \\
+-2 & 1 & b \\
+0 & -1 & c
+\end{bmatrix} \xrightarrow[f_3+f_2]{f_2+2f_1}
+\begin{bmatrix}
+1 & 0 & a \\
+0 & 1 & 2a+b \\
+0 & 0 & 2a+b+c
+\end{bmatrix}
+\]
+Este sistema solamente tiene solución si se cumple que $2a + b + c = 0$, esto significa que solamente los polinomios que cumplen la condición podrán ser generados por el conjunto, por lo tanto no generan al espacio.
+\end{solution}
+
+\begin{problem}{3.6}
+    Encuentre una base para el espacio solución del sistema de ecuaciones lineales homogéneo siguiente,
+\[
+\begin{cases}
+2x-6y+4z = 0 \\
+-x+3y-2z = 0 \\
+-3x+9y-6z = 0
+\end{cases}
+\]
+\end{problem}
+\begin{solution}
+    Tenemos que encontrar los vectores que generan a la solución del sistema, entonces primero resolvemos el sistema:
+\[
+\begin{pmatrix}
+2 & -6 &4 \\
+-1 & 3 & -2 \\
+-3 & 9 & -6
+\end{pmatrix} \xrightarrow{f_1/2}
+\begin{pmatrix}
+1 & -3 &2 \\
+-1 & 3 & -2 \\
+-3 & 9 & -6
+\end{pmatrix} \xrightarrow[f_3+3f_1]{f_2+f_1}
+\begin{pmatrix}
+1 & -3 &2 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{pmatrix}
+\]
+de donde la solución esta dada por
+\[
+R_1 \Rightarrow x = 3y - 2z \Rightarrow x = 3\lambda - 2\beta \text{ donde } \lambda,\beta \in \mathbb{R},\text{ son parametros libres}
+\]
+Entonces podemos escribir la solución del sistema como
+\[
+(x, y, z) = (3\lambda - 2\beta, \lambda, \beta) = \lambda(3, 1, 0) + \beta(-2, 0, 1)
+\]
+esto significa que cualquier solución del sistema se puede escribir como combinación de los vectores $\{ (3,1,0), (-1,0,1)  \}$, entonces dicho conjunto es una base para la solución del sistema.
+\end{solution}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Transformaciones Lineales
+\section{Transformaciones Lineales}\label{sec:trans-lineales}
+
+\begin{problem}{4.1}
+    Sea $T : \mathbb{R}^3 \to \mathbb{R}_3[x]$ definida por
+\[
+T(a,b,c) = (a+b)x^2+(2a+4c)x+a-b+4c
+\]\begin{itemize}
+\item 
+(a) Dar la dimensión del núcleo de $T$. Justifique apropiadamente.
+\item 
+(b) Calcular la matriz de la transformación $T$ con respecto a la base canónica ordenada $\mathcal{C}= \{ e_1,e_2,e_3\}$ de $\mathbb{R}^3$ y la base ordenada $\mathcal{B} = \{1,1+x,1+x+x^2\}$.
+\item 
+(c) Calcular los autovalores reales y complejos de la matriz $[T]_{\mathcal{CB}}$.
+\end{itemize}
+\end{problem}
+\begin{solution}
+    \textbf{Punto a}
+El núcleo está formado por definición, por los vectores $(a,b,c)$ tal que $T(a,b,c) = 0$, entonces podemos formar la siguiente ecuación
+\[
+(a+b)x^2+(2a+4c)x+a-b+4c = 0x^2 + 0x+0
+\]
+Que deriva al siguiente sistema de ecuaciones, ya que la igualdad de polinomios es una igualdad coeficiente a coeficiente:
+\[
+\begin{cases}
+a+b = 0 \\
+2a+4c = 0 \\
+0-b+4c = 0
+\end{cases}
+\]
+De la primera ecuación $a=-b$, luego reemplazo en la segunda $-2b + 4c =0 \Rightarrow c = \frac{1}{2}b$, por lo tanto el núcleo queda definido como:
+\[
+Nu(T) = \left \{ (-b,b,\frac{1}{2}b) : b \in \mathbb{R} \right \} = \left \langle (-1,1,\frac{1}{2}) \right \rangle
+\]
+Probemos un ejemplo, tomando $v = 2 \cdot (-1,1,\frac{1}{2}) = (-2,2,1)$:
+\[
+T((-2,2,1)) = (-2+2)x^2+(-4+4)x-2-2+4 = 0
+\]
+\textbf{Punto b}
+
+Para hallar $[T]_{\mathcal{CB}}$ primero aplico $T$ a los vectores que conforman la base $\mathcal{C}$ y luego busco las coordenadas de dichos resultados en $\mathcal{B}$:
+\begin{itemize}
+\item 
+$T(1,0,0) = x^2+2x+1$
+\item 
+$T(0,1,0) = x^2-1$
+\item 
+$T(0,0,1) = 4x + 4$
+\end{itemize}
+
+Para hallar los vectores coordenada con respecto a la base $\mathcal{B}$ se forman los siguientes problemas:
+\begin{enumerate}
+\item 
+$[T(1,0,0)]_{\mathcal{B}} = [x^2+2x+1]_{\mathcal{B}} = \begin{bmatrix} a \\ b \\c \end{bmatrix}$ donde $a,b$ y $c$ se obtienen de:
+
+\begin{align*}
+x^2+2x+1 &= a \cdot (1) + b\cdot (1+x) + c \cdot (1+x+x^2) \\
+&= a + b + bx + c + cx + cx^2 \\
+&= cx^2 + (b+c)x+(a+b+c) 
+\end{align*}
+Se arma el sistema
+\[
+\begin{cases}
+c = 1 \\
+b+c = 2 \\
+a+b+c = 1
+\end{cases}
+\]
+Reemplazando $c$ en la segunda ecuación se obtiene $b=1$ y luego con ambos valores en la tercera ecuación, $a = -1$, esto quiere decir que:
+\[
+x^2+2x+1 = (-1) \cdot (1) + 1\cdot (1+x) + 1 \cdot (1+x+x^2) = -1+1+x+1+x+x^2 = x^2+2x+1
+\]
+\item 
+$[T(0,1,0)]_{\mathcal{B}} = [x^2-1]_{\mathcal{B}} = \begin{bmatrix} a \\ b \\c \end{bmatrix}$ donde $a,b$ y $c$ se obtienen de:
+\begin{align*}
+x^2-1 &= a \cdot (1) + b\cdot (1+x) + c \cdot (1+x+x^2) \\
+&= a + b + bx + c + cx + cx^2 \\
+&= cx^2 + (b+c)x+(a+b+c) 
+\end{align*}
+Se arma el sistema
+\[
+\begin{cases}
+c = 1 \\
+b+c = 0 \\
+a+b+c = -1
+\end{cases}
+\]
+Reemplazando $c$ en la segunda ecuación se obtiene $b=-1$ y luego con ambos valores en la tercera ecuación, $a = -1$, esto quiere decir que:
+\[
+x^2-1 = (-1) \cdot (1) + (-1)\cdot (1+x) + 1 \cdot (1+x+x^2) = -1 -1 - x + 1 + x + x^2 = x^2-1
+\]
+\item 
+$[T(0,0,1)]_{\mathcal{B}} = [4x+4]_{\mathcal{B}} = \begin{bmatrix} a \\ b \\c \end{bmatrix}$ donde $a,b$ y $c$ se obtienen de:
+\begin{align*}
+4x+4 &= a \cdot (1) + b\cdot (1+x) + c \cdot (1+x+x^2) \\
+&= a + b + bx + c + cx + cx^2 \\
+&= cx^2 + (b+c)x+(a+b+c) 
+\end{align*}
+Se arma el sistema
+\[
+\begin{cases}
+c = 0 \\
+b+c = 4 \\
+a+b+c = 4
+\end{cases}
+\]
+Reemplazando $c$ en la segunda ecuación se obtiene $b=4$ y luego con ambos valores en la tercera ecuación, $a = 0$, esto quiere decir que:
+\[
+4x+4 = 0 \cdot (1) + 4\cdot (1+x) + 0 \cdot (1+x+x^2) = 4x + 4
+\]
+\end{enumerate}
+Los 3 vectores coordenadas obtenidos son, $[T(1,0,0)]_{\mathcal{B}} = \begin{bmatrix} -1 \\ 1 \\ 1 \end{bmatrix}$, $[T(0,1,0)]_{\mathcal{B}} = \begin{bmatrix} -1 \\ -1 \\ 1 \end{bmatrix}$ y $[T(0,0,1)]_{\mathcal{B}} = \begin{bmatrix} 0 \\ 4 \\ 0 \end{bmatrix}$  , al colocarlos como columnas se obtiene $[T]_{\mathcal{CB}}$:
+\[
+[T]_{\mathcal{CB}} = \begin{bmatrix}
+-1 & -1 & 0 \\
+1 & -1 & 4 \\
+1 & 1 & 0
+\end{bmatrix}
+\]
+\textbf{Punto c}
+
+Para hallar los autovalores planteo el polinomio característico:
+\[
+\chi (x) = det(A-xId) = 
+\begin{vmatrix}
+-1-x & -1 & 0 \\
+1 & -1-x & 4 \\
+1 & 1 & -x
+\end{vmatrix}
+\]
+Simplifico un poco la matriz:
+\[
+\begin{bmatrix}
+-1-x & -1 & 0 \\
+1 & -1-x & 4 \\
+1 & 1 & -x
+\end{bmatrix} \xrightarrow{C_1-(x+1)C_2}
+\begin{bmatrix}
+0 & -1 & 0 \\
+(x-1)^2+1 & -1-x & 4 \\
+-x & 1 & -x
+\end{bmatrix}
+\]
+Ahora calculo el polinomio expandiendo por la fila $1$:
+\[
+\begin{vmatrix}
+0 & -1 & 0 \\
+(x-1)^2+1 & -1-x & 4 \\
+-x & 1 & -x
+\end{vmatrix} = 
+\begin{vmatrix}
+(x-1)^2+1 & 4 \\
+-x & -x
+\end{vmatrix} = ((x-1)^2+1)(-x)-4(-x)= -x^3-2x^2+2x = x (-x^2-2x+2)
+\]
+Un autovalor es $x=0$ y para los demás, factorizo el polinomio $-x^2-2x+2$ usando bhaskara:
+\[
+\frac{2\pm \sqrt{4+4\cdot2}}{-2} = \frac{2\pm \sqrt{12}}{-2} = -1 \pm \frac{\sqrt{12}}{-2} = -1 \pm \frac{\sqrt{2^2\cdot 3}}{2} = -1 \pm \frac{2\sqrt{3}}{2} = -1 \pm \sqrt{3}
+\]
+Los autovalores son $x=0$, $x = -1+\sqrt{3}$ y $x=-1-\sqrt{3}$
+\end{solution}
+
+\begin{problem}{4.2}
+    Definir una transformación lineal $T:\mathbb{R}^3 \to M_2(\mathbb{R})$ que verifique que
+\[
+Nu(T) = \{ (x,y,z) : z = x = 3y \}
+\]\[
+Im(T) = \left \{  \begin{pmatrix} a & b \\ c & d \end{pmatrix}  \in M_2(\mathbb{R}) \ | \ b=a-c, \ b-d = c \right \}
+\]
+Escribir explícitamente $T(x,y,z)$ para cualquier $(x,y,z) \in \mathbb{R}^3$. Justifique cada paso.
+\end{problem}
+\begin{solution}
+    \begin{itemize}
+        \item 
+        El núcleo está definido como
+        \end{itemize}
+        \[
+        Nu(T) = \{ (x,y,z) : z = x = 3y \}
+        \]
+        Que es lo mismo que
+        \[
+        = \{ (3y,y,3y) : y \in \mathbb{R} \} = \langle (3,1,3) \rangle
+        \]\begin{itemize}
+        \item 
+        La imagen está definida como
+        \end{itemize}
+        \[
+        Im(T) = \left \{  \begin{pmatrix} a & b \\ c & d \end{pmatrix}  \in M_2(\mathbb{R}) \ | \ b=a-c, \ b-d = c \right \}
+        \]
+        Que es lo mismo que
+        \[
+        = \left \{  \begin{pmatrix} a & a-c \\ c & a-2c \end{pmatrix}  \in M_2(\mathbb{R}) \ | a,c \in \mathbb{R} \right \} = \left \langle  \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}, \begin{pmatrix} 0 & -1 \\ 1 & -2 \end{pmatrix} \right \rangle
+        \]
+        Por teorema, si se tiene un vector $v_0$ que pertenece al núcleo y expandimos el conjunto a $\{v_0, v_1, v_2, v_3 \}$ de forma tal que formen una base de $\mathbb{R}^3$, entonces $T(v_1), T(v_2), T(v_3)$ generaran a la imagen de $T$.
+        Por lo tanto completo la base
+        \[
+        \{ (3,1,3), (1,0,0), (0,1,0) \}
+        \]
+        Y planteo las transformaciones:
+        \begin{itemize}
+        \item 
+        $T(1,0,0) = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$
+        \item 
+        $T(0,1,0) = \begin{pmatrix} 0 & -1 \\ 1 & -2 \end{pmatrix}$
+        \item 
+        $T(3,1,3) = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}$
+        \end{itemize}
+        
+        Ahora obtengo el vector coordenada de $(x,y,z)$ con respecto a la base anterior:
+        \begin{align*}
+        (x,y,z) &= a\cdot (1,0,0) + b\cdot (0,1,0) + c \cdot (3,1,3) \\
+        &= (a,0,0) + (0,b,0) + (3c,c,3c) \\
+        &= (a+3c, b+c, 3c)
+        \end{align*}
+        Acá se forma el sistema
+        \[
+        \begin{cases}
+        a + 3c = x \\
+        b+c = y \\
+        3c = z
+        \end{cases}
+        \]
+        De la tercera ecuación, $c = \frac{1}{3}z$, reemplazando en la primera y segunda ecuación: $a + 3\frac{1}{3}z = x$ y $b+\frac{1}{3}z = y$, implica que $a = x-z$ y $b= y-\frac{1}{3}z$.
+        
+        Esto quiere decir que
+        \[
+        (x,y,z) = (x-z) \cdot (1,0,0) + (y-\frac{1}{3}z) \cdot (0,1,0) + \frac{1}{3}z \cdot (3,1,3) 
+        \]
+        Aplico transformación lineal de cada lado de la ecuación
+        \begin{align*}
+        T(x,y,z) &= T((x-z) \cdot (1,0,0) + (y-\frac{1}{3}z) \cdot (0,1,0) + \frac{1}{3}z \cdot (3,1,3)) \\
+        &= (x-z) \cdot T(1,0,0) + (y-\frac{1}{3}z) \cdot T(0,1,0) + \frac{1}{3}z \cdot T(3,1,3) \\
+        &= (x-z) \cdot \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix} + (y-\frac{1}{3}z) \cdot \begin{pmatrix} 0 & -1 \\ 1 & -2 \end{pmatrix} + \frac{1}{3}z \cdot \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} \\
+        &= \begin{pmatrix} x-z & x-z \\ 0 & x-z \end{pmatrix} + \begin{pmatrix} 0 &  \frac{1}{3}z - y\\ y - \frac{1}{3}z & \frac{2}{3}z-2y \end{pmatrix} \\
+        &= \begin{pmatrix} x-z & x-z + \frac{1}{3}z - y \\ y - \frac{1}{3}z & x-z+ \frac{2}{3}z-2y \end{pmatrix}
+        \end{align*}
+        Para corroborar el resultado, podemos verificar que el vector $(3,1,3)$ pertenezca al núcleo:
+        \[
+        T(3,1,3) = \begin{pmatrix} 3-3 & 3-3+\frac{1}{3}3-1 \\ 1-\frac{1}{3}3 & 3-3+\frac{2}{3}3-2 \end{pmatrix} = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}
+        \]
+        Por lo tanto la transformación queda definida como:
+        \[
+        T(x,y,z) = \begin{pmatrix} x-z & x-z + \frac{1}{3}z - y \\ y - \frac{1}{3}z & x-z+ \frac{2}{3}z-2y \end{pmatrix}
+        \]
+\end{solution}
+
+\begin{problem}{4.3}
+    Definir una transformación lineal $T : R^2 \to \mathbb{R}^2$ tal que: $T(1, 1) = (1, -2)$ y $T(-1, 1) = (2, 3)$.
+\end{problem}
+\begin{solution}
+    Como $\{ (1,1), (-1,1) \}$ es una base de $\mathbb{R}^2$, tenemos que:
+\[
+(x,y) = a_1(1,1)+a_2(-1,1)= (a_1-a_2, a_1+a_2) \Rightarrow \begin{cases}
+a_1-a_2 = x \\
+a_1+a_2 = y
+\end{cases} \Rightarrow
+\begin{cases}
+a_1= \frac{x+y}{2} \\
+a_2 = \frac{y-x}{2}
+\end{cases}
+\]
+así escribimos el vector
+\[
+(x,y) = \left ( \frac{x+y}{2} \right ) (1,1) + \left ( \frac{y-x}{2} \right )(-1,1)
+\]
+Al aplicar transformación lineal de cada lado obtenemos
+\[
+\begin{aligned}
+T(x,y) &= T\left( \left ( \frac{x+y}{2} \right ) (1,1) + \left ( \frac{y-x}{2} \right )(-1,1) \right) \\
+&= \left ( \frac{x+y}{2} \right ) T(1,1) + \left ( \frac{y-x}{2} \right ) T(-1,1) \\
+&= \left ( \frac{x+y}{2} \right ) (1,-2) + \left ( \frac{y-x}{2} \right ) (2,3) \\
+&= \left( \frac{x}{2}+\frac{y}{2}, -x-y \right ) + \left ( y-x, \frac{3y}{2}-\frac{3x}{2} \right ) \\
+&= \frac{1}{2} \left( -x+3y, -5x+y \right)
+\end{aligned}
+\]
+en las igualdades anteriores se aplico el hecho de que la transformación es lineal.
+\end{solution}
+
+\begin{problem}{4.4}
+    Dada la siguiente transformación lineal $T : M_2 \to \mathbb{R}_3[x]$ definida como
+\[
+T  \begin{pmatrix} a & b \\ c & d \end{pmatrix} = 
+a+b+c+(b+c+d)x+(a-d)x^2+(a+2b+2c+d)x^3
+\]
+determinar
+\begin{itemize}
+\item 
+El núcleo de la transformación y decir si es inyectiva,
+\item 
+la imagen de la transformación y decir si es sobreyectiva.
+\end{itemize}
+\end{problem}
+\begin{solution}
+    Un vector $u \in Nu(T)$ si $T(u)=0$ , entonces:
+\[
+T  \begin{pmatrix} a & b \\ c & d \end{pmatrix} = 
+a+b+c+(b+c+d)x+(a-d)x^2+(a+2b+2c+d)x^3 = 0
+\]
+esto genera el siguiente sistema de ecuaciones lineales homogéneo
+\[
+\begin{cases}
+a+b+c =0 \\
+b+c+d = 0 \\
+a-d = 0 \\
+a+2b+2c+d = 0
+\end{cases}
+\]
+cuya matriz es
+\[
+\begin{pmatrix}
+1 & 1 & 1 & 0 \\
+0 & 1 & 1 & 1 \\
+1 & 0 & 0 & -1 \\
+1 & 2 & 2 & 1
+\end{pmatrix} \xrightarrow[f_4-f_1]{f_3-f_1}
+\begin{pmatrix}
+1 & 1 & 1 & 0 \\
+0 & 1 & 1 & 1 \\
+0 & -1 & -1 & -1 \\
+0 & 1 & 1 & 1
+\end{pmatrix} \xrightarrow[f_4-f_2]{f_3+f_2}
+\begin{pmatrix}
+1 & 1 & 1 & 0 \\
+0 & 1 & 1 & 1 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix} \xrightarrow{f_1+f_2}
+\begin{pmatrix}
+1 & 0 & 0 & -1 \\
+0 & 1 & 1 & 1 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix}
+\]
+entonces
+\[
+\begin{cases}
+a - d = 0 \\
+b + c + d = 0
+\end{cases} \Rightarrow
+\begin{cases}
+a = d \\
+d = -b-c
+\end{cases}
+\]
+Así, el núcleo de la transformación contiene a todas las matrices que tienen la forma anterior, es decir,
+\[
+Nu(T) = \left\{ \begin{pmatrix} -b-c & b \\ c & -b-c \end{pmatrix} \ : \ b,c\in \mathbb{R} \right \}
+\]
+Con esto sacamos una base del núcleo $\left \{ \begin{pmatrix} -1 & 1 \\ 0 & -1 \end{pmatrix}, \begin{pmatrix} -1 & 0 \\ 1 & -1 \end{pmatrix} \right \}$, y así tenemos que $dim(Nu(T))=2$. Y una transformación lineal se dice inyectiva si la dimensión del núcleo es $0$, por lo tanto $T$ no es inyectiva.
+
+Un vector $v\in Im(T)$ si $T(u) = v$, entonces:
+\[
+T  \begin{pmatrix} a & b \\ c & d \end{pmatrix} = 
+a+b+c+(b+c+d)x+(a-d)x^2+(a+2b+2c+d)x^3 \in Im(T)
+\]
+tenemos que encontrar una base para la imagen, sacamos factor común $a,b,c,d$
+\[
+a+b+c+(b+c+d)x+(a-d)x^2+(a+2b+2c+d)x^3
+\]\[
+= a(1+x^2+x^3)+b(1+x+2x^3)+c(1+x+2x^3)+d(x-x^2+x^3)
+\]
+esto significa que el conjunto de vectores $\{ 1+x^2+x^3, 1+x+2x^3, x-x^2+x^3 \}$ genera la imagen de la transformación. Ahora necesitamos solo los vectores que son linealmente independientes.
+Colocamos los coeficientes de cada uno los polinomios, de mayor a menor grado, en columnas dentro de una matriz y reducimos la matriz, es decir,
+\[
+\begin{pmatrix}
+1 & 2 & 1 \\
+1 & 0 & -1 \\
+0 & 1 & 1 \\
+1 & 1 & 0
+\end{pmatrix} \xrightarrow[f_4-f_1]{f_2-f_1}
+\begin{pmatrix}
+1 & 2 & 1 \\
+0 & -2 & -2 \\
+0 & 1 & 1 \\
+0 & -1 & -1
+\end{pmatrix} \xrightarrow[f_4-2f_2]{f_3-2f_2}
+\begin{pmatrix}
+1 & 2 & 1 \\
+0 & -2 & -2 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{pmatrix} \xrightarrow{f_1+f_2}
+\begin{pmatrix}
+1 & 0 & -1 \\
+0 & -2 & -2 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{pmatrix} \xrightarrow{f_2/(-2)}
+\begin{pmatrix}
+1 & 0 & -1 \\
+0 & 1 & 1 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{pmatrix}
+\]
+las columnas con unos principales, corresponden a los polinomios que son linealmente independientes, en este caso los polinomios son $\{ 1+x^2+x^3, 1+x+2x^3 \}$ Así, esta sería una base para la imagen de la transformación, entonces $dim(Im(T)=2$.
+Una transformación lineal $T:V\to W$ es sobreyectiva si $dim(Im(T))=dim(W)$. Para la transformación que estamos considerando tenemos que $dim(Im(T))=2 \neq dim(W) = 4$, por lo tanto la transformación lineal no es sobreyectiva.
+\end{solution}
+
+\begin{problem}{4.5}
+    Sea $T:\mathcal{C}^4 \to \mathcal{C}^3$ una transformación lineal cuyo núcleo esta generado por los vectores
+\[
+(i,0,-1,i) \ \ \ \ (2,1,-1,0) \ \ \ \ (1,1,-1-i,1)
+\]
+Determinar la dimensión de la imagen de $T$.
+\end{problem}
+\begin{solution}
+    Primero busquemos una base del núcleo para obtener la dimensión, para ello nos quedamos con los vectores linealmente independientes del conjunto que lo genera, planteo la ecuación
+\[
+a(i,0,-1,i)+b(2,1,-1,0)+c(1,1,-1-i,1) = (0,0,0,0)
+\]\[
+(ai+2b+c,b+c,-a-b-c-ci,ai+c)
+\]
+Se forma el sistema de ecuaciones
+\[
+\begin{cases}
+ai+2b+c = 0 \\
+b+c = 0 \\
+-a-b-c-ci = 0 \\
+ai+c = 0
+\end{cases}
+\]
+Pasándolo a matriz y resolviendo, llegamos a que $a,b,c=0$, por lo tanto los $3$ vectores son linealmente independientes, la dimensión del núcleo es $3$ y por teorema de las dimensiones, $dim(Im(T))=1$.
+\end{solution}
+
+\begin{problem}{4.6}
+    Considere la siguiente transformación lineal $T : \mathbb{R}^3 \to \mathbb{R}^2$ dada por
+\[
+T(x,y,z) = (x+y,3x-z)
+\]
+Sean $\mathcal{B}_1 \{ (1, 1, 2), (-3, 0, 1), (2, 4, 3) \}$ y $\mathcal{B}_2 = \{ (4, 1) , (3, 1) \}$ Encuentre la matriz de $T$ asociada a las bases dadas.
+\end{problem}
+\begin{solution}
+    Para determinar la matriz asociada a la transformación lineal seguimos el procedimiento siguiente, transformamos los vectores de la base $\mathcal{B}_1$, y estos los escribirlos en términos de la base $\mathcal{B}_2$, esto es,
+\[
+T(1, 1, 2) = (2, 1) = a_{11} (4, 1) + a_{21} (3, 1) = (4a_{11} + 3a_{21}, a_{11} + a_{21})
+\]\[
+T(-3, 0, 1) = (-3, -10) = a_{12} (4, 1) + a_{22} (3, 1) = (4a_{12} + 3a_{22}, a_{12} + a_{22})
+\]\[
+T(2, 4, 3) = (6, 3) = a_{13} (4, 1) + a_{23} (3, 1) = (4a_{13} + 3a_{23}, a_{13} + a_{23})
+\]
+con lo cual se generan los siguientes sistemas de ecuaciones lineales, con sus correspondientes soluciones,
+\[
+\begin{cases}
+4a_{11} + 3a_{21}  = 2 \\
+a_{11} + a_{21} = 1
+\end{cases} \Rightarrow
+\begin{cases}
+a_{11} = -1 \\
+a_{21} = 2
+\end{cases}
+\]\[
+\begin{cases}
+4a_{12} + 3a_{22}  = -3 \\
+a_{12} + a_{22} = -10
+\end{cases} \Rightarrow
+\begin{cases}
+a_{12} = 27 \\
+a_{22} = -37
+\end{cases}
+\]\[
+\begin{cases}
+4a_{13} + 3a_{23}  = 6 \\
+a_{13} + a_{23} = 3
+\end{cases} \Rightarrow
+\begin{cases}
+a_{13} = -3 \\
+a_{23} = 6
+\end{cases}
+\]
+Por lo tanto, la matriz de la transformación respecto a las bases $\mathcal{B}_1$ y $\mathcal{B}_2$ es,
+\[
+[T]_{\mathcal{B}_1\mathcal{B}_2} = \begin{pmatrix}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23}
+\end{pmatrix} = 
+\begin{pmatrix}
+-1 & 27 & -3 \\
+2 & -37 & 6
+\end{pmatrix}
+\]
+\end{solution}
+
+\begin{problem}{4.7}
+    Sea $T : M_2 \to M_2$ una transformación lineal definida como
+\[
+T(A) = AM - MA
+\]
+donde $M=\begin{pmatrix} 1 & 2 \\ 0 & 3 \end{pmatrix}.$
+\begin{itemize}
+\item 
+Determinar el núcleo y la imagen de $T$.
+\item 
+Encontrar la matriz asociada a $T$.
+\end{itemize}
+\end{problem}
+
+\begin{solution}
+    Primero tenemos $A=\begin{pmatrix} a & b \\ c & d \end{pmatrix}$, entonces
+\[
+\begin{aligned}
+T(A) &= AM - MA \\ \\
+&= \begin{pmatrix} a & b \\ c & d \end{pmatrix}\begin{pmatrix} 1 & 2 \\ 0 & 3 \end{pmatrix} - \begin{pmatrix} 1 & 2 \\ 0 & 3 \end{pmatrix} \begin{pmatrix} a & b \\ c & d \end{pmatrix} \\ \\
+&= \begin{pmatrix} a & 2a+3b \\ c & 2c+3d \end{pmatrix} - \begin{pmatrix} a+2c & b+2d \\ 3c & 3d \end{pmatrix} \\ \\
+&= \begin{pmatrix} -2c & 2a+2b-2d \\ -2c & 2c \end{pmatrix}
+\end{aligned}
+\]
+El núcleo se obtiene igualando la transformación con cero, esto es,
+\[
+T(A)=\begin{pmatrix} -2c & 2a+2b-2d \\ -2c & 2c \end{pmatrix}
+\]\[
+\Rightarrow \begin{cases}
+-2c = 0 \\
+2a+2b-2d = 0 \\
+-2c = 0 \\
+2c = 0
+\end{cases} \Rightarrow
+\begin{cases}
+c = 0 \\
+a = -b+d
+\end{cases}
+\]
+Entonces tenemos que
+\[
+Nu(T) = \left \{ \begin{pmatrix} -b-d & b \\ 0 & d \end{pmatrix} \ : \ b,d \in \mathbb{R}\right\}
+\]
+La imagen de la transformación la obtenemos parametrizando la matriz, es decir
+\[
+\begin{aligned}
+T(A)&=\begin{pmatrix} -2c & 2a+2b-2d \\ -2c & 2c \end{pmatrix} \\
+&= a \begin{pmatrix} 0 & 2 \\ 0 & 0 \end{pmatrix} +
+b\begin{pmatrix} 0 & 2 \\ 0 & 0 \end{pmatrix} + c \begin{pmatrix} -2 & 0 \\ -2 & 2 \end{pmatrix} + d\begin{pmatrix} 0 & -2 \\ 0 & 0 \end{pmatrix}
+\end{aligned}
+\]
+De esta manera el conjunto $\left \{ \begin{pmatrix} 0 & 2 \\ 0 & 0 \end{pmatrix}, \begin{pmatrix} -2 & 0 \\ -2 & 2 \end{pmatrix}, \begin{pmatrix} 0 & -2 \\ 0 & 0 \end{pmatrix} \right \}$ genera a la imagen de $T$, pero se puede observar directamente que, solo dos matrices de ese conjunto son linealmente independientes, así una base de la imagen es $\left \{ \begin{pmatrix} 0 & 2 \\ 0 & 0 \end{pmatrix}, \begin{pmatrix} -2 & 0 \\ -2 & 2 \end{pmatrix} \right \}$ .
+\[
+Im(T) = \left \langle \begin{pmatrix} 0 & 2 \\ 0 & 0 \end{pmatrix}, \begin{pmatrix} -2 & 0 \\ -2 & 2 \end{pmatrix}  \right \rangle
+\]
+y se verifica que $dim(Im(T))+dim(Nu(T))=4=dim(M_2)$.
+\end{solution}
+
+\begin{problem}{4.8}
+    Sea $T: \mathbb{R}^3 \to \mathbb{R}^3$ la transformación lineal definida por
+\[
+T(x,y,z) = (x+y,x-z,-y+z)
+\]\begin{itemize}
+\item 
+Calcular los autovalores de $T$.
+\item 
+¿$T$ es diagonizable? Justificar.
+\end{itemize}
+\end{problem}
+\begin{solution}
+    Para calcular los autovalores de $T$ primero debemos hallar la matriz asociada a $T$, para ello calculamos $[T]_{\mathcal{C}}$.
+\begin{itemize}
+\item 
+$T(1,0,0) = (1,1,0)$
+\item 
+$T(0,1,0)=(1,0,-1)$
+\item 
+$T(0,0,1)=(0,-1,1)$
+\end{itemize}
+
+Con esto:
+\[
+[T]_{\mathcal{C}} = 
+\begin{pmatrix}
+1 & 1 & 0 \\
+1 & 0 & -1 \\
+0 & -1 & 1
+\end{pmatrix}
+\]
+Ahora planteo el polinomio característico
+\[
+\begin{aligned}
+\chi_x &= |[T]_{\mathcal{C}}-xId_3| =
+\begin{vmatrix}
+1-x & 1 & 0 \\
+1 & -x & -1 \\
+0 & -1 & 1-x
+\end{vmatrix}=(1-x)
+\begin{vmatrix}
+-x & -1 \\
+-1 & 1-x
+\end{vmatrix} - 
+\begin{vmatrix}
+1 & 0 \\
+-1 & 1-x
+\end{vmatrix} \\
+&= (1-x)(-x+x^2-1)-(1-x) = -x+x^2-1+x^2-x^3+x -1+x \\ \\
+&= -x^3+2x^2+x-2 = (x-2)(x-1)(x+1)
+\end{aligned}
+\]
+Las raíces del polinomio característico serán los autovalores que buscamos: $x=2,x=1$ y $x=-1$.
+$T$ si es diagonizable, ya que posee $3$ autovalores distintos, la matriz diagonal es
+\[
+D = \begin{pmatrix}
+2 & 0 & 0  \\
+0 & 1 & 0 \\
+0 & 0 & -1 \\
+\end{pmatrix}
+\]
+y la matriz $P$ será formada por los autovectores asociados a cada autovalor
+\[
+P = \begin{pmatrix}
+\vdots & \vdots & \vdots \\
+v_2 & v_1 & v_{-1} \\
+\vdots & \vdots & \vdots
+\end{pmatrix}
+\]
+donde $v_i$ es el autovector asociado al autovalor $i$.
+\end{solution}
+
+\begin{problem}{4.9}
+    Hallar una transformación lineal $T : R_3[x] \to \mathbb{R}^4$ tal que $Nu(T) = \{ a_1x + a_1x^2 \ | \ a_1 \in \mathbb{R} \}$.
+\end{problem}
+\begin{solution}
+    Podemos extender la base del núcleo $\{x+x^2 \}$ a una base de $R_3[x]$, por ejemplo tomando los vectores canónicos $\{1,x,x+x^2\}$. Entonces, si queremos definir una transformación cuyo núcleo sea el dado en el enunciado, es obvio que $T(x+x^2)=(0,0,0,0)$ y además podemos definir $T(1)$ y $T(x)$ de forma que formen un conjunto linealmente independiente: $T(1) = (1,0,0,0)$, $T(x)=(0,1,0,0)$.
+Entonces hay que expresar $a+bx+cx^2$ en la base obtenida y luego aplicar transformación lineal:
+\[
+a+bx+cx^2 = \lambda_1 + \lambda_2 x + \lambda_3 (x+x^2) = \lambda_1+(\lambda_2+\lambda_3)x+\lambda_3x^2
+\]
+Se forma el sistema:
+\[
+\begin{cases}
+\lambda_1 = a \\
+\lambda_2+\lambda_3 = b \\
+\lambda_3 = c
+\end{cases} \Rightarrow
+\begin{cases}
+\lambda_1 = a \\
+\lambda_2 = b-c \\
+\lambda_3 = c
+\end{cases}
+\]
+Entonces tomando transformación de cada lado
+\[
+a+bx+cx^2 = a + (b-c)x + c (x+x^2)
+\]\[
+T(a+bx+cx^2) = T(a + (b-c)x + c (x+x^2))
+\]\[
+T(a+bx+cx^2) = aT(1) + (b-c)T(x) + c T(x+x^2)
+\]\[
+T(a+bx+cx^2) = a(1,0,0,0) + (b-c)(0,1,0,0) + c(0,0,0,0)
+\]\[
+T(a+bx+cx^2) = (a,b-c,0,0)
+\]
+\end{solution}
+
+\begin{problem}{4.10}
+    Sea $T:V\to W$ una transformación lineal, demostrar que el núcleo es un subespacio de $V$ y la imagen un subespacio de $W$.
+\end{problem}
+\begin{solution}
+    Como $T$ es lineal, $T(0)=0$, luego $0\in Nu(T)$. Sean $v,w \in Nu(T)$, entonces
+\[
+T(v+w) = T(v)+T(w) = 0+0 = 0 \Rightarrow v+w \in Nu(T)
+\]
+Sea $\lambda \in \mathbb{K}$ y $w \in Nu(T)$, entonces
+\[
+T(\lambda w) = \lambda T(w) = 0 \Rightarrow \lambda w \in Nu(T)
+\]
+Con esto se prueba que $Nu(T)$ es un subespacio vectorial de $V$.
+Ahora, como $T$ es lineal $0=T(0)$, luego $0\in Im(T)$. Si $y_1,y_2 \in Im(T)$ existen $x_1,x_2 \in V$ tales que $y_1=T(x_1)$, $y_2=T(x_2)$. Entonces
+\[
+y_1+y_2 = T(x_1)+T(x_2) = T(x_1+x_2) \Rightarrow y_1+y_2\in Im(T)
+\]
+Sea $\lambda \in \mathbb{K}$ e $y \in Im(T)$ , existe $x\in V$ tal que $y=T(x)$. Entonces
+\[
+\lambda y = \lambda T(x) = T(\lambda x) \Rightarrow \lambda y \in Im(T)
+\]
+Concluimos que $Im(T)$ es un subespacio vectorial de $W$.
+\end{solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

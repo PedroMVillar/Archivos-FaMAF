@@ -1,0 +1,157 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Do not alter this block (unless you're familiar with LaTeX
+\documentclass{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, fancyhdr, color, comment, graphicx, environ}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{background}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+\setlength{\headheight}{1.5cm}
+
+
+\pagestyle{fancy}
+
+\SetBgContents{https://github.com/PedroMVillar}
+\SetBgScale{3} % Escala de la marca de agua
+\SetBgColor{gray!80} % Color de la marca de agua
+\SetBgAngle{45} % Ángulo de inclinación de la marca de agua
+\SetBgOpacity{0.2} % Opacidad de la marca de agua
+
+
+\newenvironment{problem}[2][Ejercicio]
+    { \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{definition}[2][Definición]
+    { \begin{mdframed}[backgroundcolor=red!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{theorem}[2][Teorema]
+    { \begin{mdframed}[backgroundcolor=green!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{lemma}[2][Lema]
+    { \begin{mdframed}[backgroundcolor=green!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{proposition}[2][Proposición]
+    { \begin{mdframed}[backgroundcolor=green!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{corollary}[2][Corolario]
+    { \begin{mdframed}[backgroundcolor=green!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{example}[2][Ejemplo]
+    { \begin{mdframed}[backgroundcolor=yellow!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{remark}[2][Observación]
+    { \begin{mdframed}[backgroundcolor=yellow!20] \textbf{#1 #2} \\}
+    {  \end{mdframed}}
+
+\newenvironment{note}
+    {\textit{Nota:}}
+    {}
+
+\newenvironment{conclusion}
+    {\textit{Conclusión:}}
+    {}
+
+\newenvironment{notation}
+    {\textit{Notación:}}
+    {}
+
+\newenvironment{question}
+    {\textit{Pregunta:}}
+    {}
+
+\newenvironment{answer}
+    {\textit{Respuesta:}}
+    {}
+
+% Define solution environment
+\newenvironment{solution}
+    {\textit{Solución:}}
+    {}
+
+\renewcommand{\qed}{\quad\qedsymbol}
+
+% prevent line break in inline mode
+\binoppenalty=\maxdimen
+\relpenalty=\maxdimen
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Header Configuarción
+\lhead{Pedro Villar}
+\rhead{Álgebra Lineal} 
+\chead{\textbf{Examen 4}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Preguntas
+
+\begin{problem}{1}
+    Justificar cada respuesta.
+    \begin{itemize}
+        \item[(a)] (\textit{5pts.}) ¿Qué es un monomorfismo?
+        \item[(b)] (\textit{5pts.}) ¿Qué son las coordenadas de un vector con respecto a una base? 
+        \item[(c)] (\textit{5pts.}) ¿Qué es una transformación lineal?
+        \item[(d)] (\textit{10pts.}) ¿Qué es el núcleo de una transformación lineal?  
+    \end{itemize}
+\end{problem}
+
+\begin{problem}{2}
+    (\textit{10pts.}) Sea $A= \begin{pmatrix} 3 & 2 & 1 \\ -3 & -2 & t \\ 6 & 4 & 2 \end{pmatrix}$ con $t \in \mathbb{R}$, hallar el valor de $t$ para el cual $A$ posee un autovalor igual a $2$.
+\end{problem}
+
+\begin{problem}{3}
+    (\textit{15pts.}) Hallar todas las ecuaciones del plano que pasa por $(-1,2,3)$ y $(2,1,1)$ y es perpendicular al plano $\pi_1$ descripto implícitamente por la ecuación $2x-y+3z=10$.
+\end{problem}
+
+\begin{problem}{4}
+    Sea $T: M_{2 \times 2} \to M_{2 \times 2}$ la transformación lineal dada por $T(A)=A+A^t$.
+    \begin{itemize}
+        \item[(a)] (\textit{5pts.}) Hallar el polinomio característico de $T$.
+        \item[(b)] (\textit{5pts.}) Hallar sus autovalores y autovectores.
+        \item[(c)] (\textit{10pts.}) ¿Es $T$ diagonalizable? Justificar.   
+    \end{itemize} 
+\end{problem}
+
+\begin{problem}{5}
+    Sea $T: \mathbb{R}^3 \to \mathbb{R}^3$ la transformación lineal tal que
+    $$
+    T(e_1) = e_1+e_2+e_3, \quad T(e_2) = -2e_1+2e_3, \quad T(e_3) = 5e_2+10e_3
+    $$
+    donde $\mathcal{B} = \{e_1, e_2, e_3\}$ es la base canónica de $\mathbb{R}^3$.
+    \begin{itemize}
+        \item[(a)] (\textit{5pts.}) Dar una base del núcleo de $T$.
+        \item[(b)] (\textit{5pts.}) Dar una base de la imagen de $T$.
+        \item[(c)] (\textit{10pts.}) Dar la matriz de $T$ con respecto a las bases ordenadas $\mathcal{B}$ y $\mathcal{B}'=\{ 2e_3,-e_1,3e_2 \}$.  
+    \end{itemize}
+\end{problem}
+
+\begin{problem}{6}
+    Sea $T:\mathbb{R}^3 \to M_{3\times 3}$ la transformación lineal dada por $T(x,y,z) = \begin{pmatrix} 3y-z & 2z \\ x-y & y \end{pmatrix}$.
+    \begin{itemize}
+        \item[(a)] (\textit{10pts.}) Hallar una base de $Im(T)$ y decidir si $\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$ pertenece a $Im(T)$.
+        \item[(b)] (\textit{15pts.}) ¿Es $T$ inyectiva? Justificar. 
+    \end{itemize}
+\end{problem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}
