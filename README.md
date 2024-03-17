@@ -13,6 +13,23 @@ Este repositorio tiene como objetivo consolidar y organizar de manera sistemáti
 # Índice de Contenido
 1. [Navegación - Cómo usar el repositorio](#navegación)
 2. [Materias](#materias) 
+    - [Álgebra Lineal - Álgebra II - Álgebra](#álgebra-lineal---álgebra-ii---álgebra)
+      - [Apuntes - Resúmenes](#apuntes---resúmenes)
+      - [Ejercicios Resueltos](#ejercicios-resueltos)
+      - [Parciales de práctica](#parciales-de-práctica)
+      - [Exámenes resueltos paso a paso](#exámenes-resueltos-paso-a-paso)
+    - [Algoritmos y Estructuras de Datos 1](#algoritmos-y-estructuras-de-datos-1)
+      - [Apuntes - Resúmenes](#apuntes---resúmenes-1)
+      - [Proyectos](#proyectos)
+    - [Algoritmos y Estructuras de Datos 2](#algoritmos-y-estructuras-de-datos-2)
+      - [Teórico - Práctico](#teórico---práctico)
+        - [Análisis de Algoritmos](#análisis-de-algoritmos)
+          - [Ordenación Elemental](#ordenación-elemental)
+            - [Práctico 1](#práctico-1)
+      - [Laboratorio](#laboratorio)
+        - [Lab00](#lab00)
+        - [Lab01](#lab01)
+    - [Organización del Computador](#organización-del-computador)
 
 ## Navegación
 ### Acceso rápido a archivos
