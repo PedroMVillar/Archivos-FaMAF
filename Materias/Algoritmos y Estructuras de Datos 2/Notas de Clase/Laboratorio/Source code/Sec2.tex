@@ -1,0 +1,205 @@
+\section{Arreglos, archivos y módulos}
+\subsection{Abrir un Archivo (\texttt{fopen})}
+
+La función \texttt{fopen()} se utiliza para abrir un archivo en C. Toma dos argumentos principales: el nombre del archivo y el modo en el que se desea abrirlo (lectura, escritura, etc.). Por ejemplo:
+
+\begin{lstlisting}[language=C]
+FILE *archivo;
+archivo = fopen("archivo.txt", "r"); // Abre el archivo en modo lectura
+if (archivo == NULL) {
+    printf("No se pudo abrir el archivo\n");
+    return 1;
+}
+\end{lstlisting}
+
+\subsubsection{Modos de Apertura de Archivo para \texttt{fopen()} en C}
+
+La función \texttt{fopen()} en C admite varios modos de apertura de archivo, que se especifican como el segundo parámetro. Aquí tienes una lista de los modos más comunes que puedes utilizar:
+
+\begin{itemize}[label=--,leftmargin=*]
+    \item \texttt{"r"}: Abre el archivo en modo lectura. El archivo debe existir, de lo contrario, \texttt{fopen()} devolverá \texttt{NULL}.
+    
+    \item \texttt{"w"}: Abre el archivo en modo escritura. Si el archivo no existe, se crea. Si el archivo existe, su contenido se sobrescribe.
+    
+    \item \texttt{"a"}: Abre el archivo en modo anexar (append). Si el archivo no existe, se crea. Si el archivo existe, los datos se agregan al final del archivo sin sobrescribir el contenido existente.
+    
+    \item \texttt{"r+"}: Abre el archivo en modo lectura/escritura. El archivo debe existir, de lo contrario, \texttt{fopen()} devolverá \texttt{NULL}. El puntero de archivo está al principio del archivo.
+    
+    \item \texttt{"w+"}: Abre el archivo en modo lectura/escritura. Si el archivo no existe, se crea. Si el archivo existe, su contenido se sobrescribe.
+    
+    \item \texttt{"a+"}: Abre el archivo en modo lectura/escritura. Si el archivo no existe, se crea. Si el archivo existe, los datos se agregan al final del archivo sin sobrescribir el contenido existente.
+\end{itemize}
+
+Además de estos modos básicos, también hay modos adicionales que pueden ser útiles en ciertas situaciones específicas.
+
+\begin{itemize}[label=--,leftmargin=*]
+    \item \texttt{"rb"}, \texttt{"wb"}, \texttt{"ab"}: Modos de apertura de archivo en modo binario (para archivos binarios en lugar de archivos de texto).
+    
+    \item \texttt{"rU"}, \texttt{"wU"}, \texttt{"aU"}: Modos de apertura de archivo en modo universal (universal newline mode), que permite manejar diferentes estilos de saltos de línea en archivos de texto.
+\end{itemize}
+
+\subsection{Leer Datos desde un Archivo (\texttt{fscanf})}
+
+Una vez que el archivo está abierto, puedes leer datos desde él utilizando \texttt{fscanf()} u otras funciones como \texttt{fgets()} o \texttt{fread()}. \texttt{fscanf()} lee datos formateados desde el archivo, similar a \texttt{scanf()} pero con el archivo como fuente en lugar de la entrada estándar. Por ejemplo:
+
+\begin{lstlisting}[language=C]
+int num;
+fscanf(archivo, "%d", &num); // Lee un entero del archivo
+\end{lstlisting}
+
+\subsection{Cerrar un Archivo (\texttt{fclose})}
+
+Es importante cerrar un archivo después de haber terminado de trabajar con él para liberar los recursos del sistema operativo. Esto se hace con la función \texttt{fclose()}. Por ejemplo:
+
+\begin{lstlisting}[language=C]
+fclose(archivo); // Cierra el archivo
+\end{lstlisting}
+
+\subsection{Punteros y Direcciones de Memoria}
+
+\begin{itemize}
+    \item En C, los punteros son variables que almacenan direcciones de memoria.
+    \item Cuando abres un archivo en C, \texttt{fopen()} devuelve un puntero de tipo \texttt{FILE*}. Este puntero apunta a una estructura de datos interna que representa el archivo abierto.
+    \item Cuando lees o escribes en un archivo utilizando funciones como \texttt{fscanf()} o \texttt{fprintf()}, proporcionas la dirección de memoria donde se deben almacenar o desde donde se deben leer los datos.
+\end{itemize}
+
+\subsection{Ejemplo Completo}
+
+Aquí tienes un ejemplo completo que lee un archivo de texto llamado "datos.txt", que contiene números enteros separados por espacios, los suma y muestra el resultado:
+
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+int main() {
+    FILE *archivo;
+    int num, suma = 0;
+    
+    archivo = fopen("datos.txt", "r");
+    if (archivo == NULL) {
+        printf("No se pudo abrir el archivo\n");
+        return 1;
+    }
+
+    while (fscanf(archivo, "%d", &num) != EOF) {
+        suma += num;
+    }
+
+    printf("La suma de los numeros en el archivo es: %d\n", suma);
+    
+    fclose(archivo);
+
+    return 0;
+}
+\end{lstlisting}
+
+\subsection{Función \texttt{array\_from\_file()}}
+
+A continuación, se muestra una función que lee un archivo de texto que contiene números enteros separados por espacios y los almacena en un arreglo dinámico. La función toma el nombre del archivo como argumento y devuelve un puntero al arreglo dinámico que contiene los números leídos.
+
+\begin{lstlisting}[language=C]
+unsigned int array_from_file(int array[],
+           unsigned int max_size,
+           const char *filepath) {
+    //your code here!!!
+	unsigned int array_size;
+	FILE *f = fopen(filepath,"r");
+	fscanf(f,"%u",&array_size);
+	
+	if(array_size > max_size){
+		//Accederia a memoria no habilitada
+		array_size = max_size;
+	}
+	
+	for(unsigned int i = 0;i<array_size;i++){
+		fscanf(f,"%d",&array[i]);
+	}
+	
+	return array_size;
+}
+\end{lstlisting}
+
+\begin{enumerate}
+    \item \textbf{Apertura del archivo}: El código comienza abriendo el archivo especificado por \texttt{filepath} en modo lectura (\texttt{"r"}) utilizando la función \texttt{fopen()}. Se utiliza un puntero de tipo \texttt{FILE} para manejar el archivo.
+    
+    \item \textbf{Lectura del tamaño del array desde el archivo}: Utilizando \texttt{fscanf()}, se lee el primer valor del archivo, que representa el tamaño del array. Este valor se almacena en la variable \texttt{array\_size}.
+    
+    \item \textbf{Verificación del tamaño del array}: Se compara \texttt{array\_size} con \texttt{max\_size} para asegurarse de que el tamaño del array no exceda el límite especificado por el parámetro \texttt{max\_size}. Si \texttt{array\_size} es mayor que \texttt{max\_size}, significa que el tamaño del array excede el límite y se ajusta \texttt{array\_size} a \texttt{max\_size} para evitar acceder a memoria no permitida.
+    
+    \item \textbf{Lectura de elementos del array desde el archivo}: Se utiliza un bucle \texttt{for} para leer \texttt{array\_size} elementos del archivo y almacenarlos en el array \texttt{array[]}. En cada iteración del bucle, se utiliza \texttt{fscanf()} para leer un entero desde el archivo y almacenarlo en la posición correspondiente del array.
+    
+    \item \textbf{Cierre del archivo}: Una vez que se han leído todos los elementos del archivo y se han almacenado en el array, se cierra el archivo utilizando \texttt{fclose()} para liberar los recursos asociados al mismo.
+    
+    \item \textbf{Retorno del tamaño del array leído}: Se devuelve \texttt{array\_size}, que representa el número de elementos que se han leído y almacenado en el array \texttt{array[]}.
+\end{enumerate}
+
+Por lo tanto, esta función se encarga de leer un array de enteros desde un archivo especificado por \texttt{filepath}, asegurándose de que el tamaño del array no exceda un límite dado por \texttt{max\_size}, y luego devuelve el número de elementos leídos y almacenados en el array.
+
+\newpage
+\subsection{Función \texttt{array\_dump()}}
+
+La función \texttt{array\_dump()} se encarga de imprimir en la consola los elementos de un array de enteros \texttt{a[]} junto con su longitud \texttt{length}. 
+
+\begin{lstlisting}[language=C]
+void array_dump(const int a[], unsigned int length) {
+    printf("[");
+    for(unsigned int i = 0;i<length;i++){
+        if(i != 0){
+            printf(", ");
+        }
+        printf("%d",a[i]);
+    }
+    printf("]\n");
+}
+\end{lstlisting}
+
+A continuación, se explica paso a paso la lógica de la función:
+
+\begin{enumerate}
+    \item \textbf{Impresión del encabezado del array}: La función comienza imprimiendo el carácter '[' utilizando \texttt{printf()} para indicar el comienzo del array en el formato de salida.
+    
+    \item \textbf{Iteración a través del array}: Se utiliza un bucle \texttt{for} para iterar sobre cada elemento del array \texttt{a[]} desde el índice 0 hasta \texttt{length - 1}.
+    
+    \item \textbf{Impresión de los elementos del array}: Dentro del bucle, se utiliza \texttt{printf()} para imprimir cada elemento del array. Antes de imprimir cada elemento, se verifica si es el primer elemento del array (\texttt{i != 0}). Si no es el primer elemento, se imprime una coma y un espacio para separar los elementos del array.
+    
+    \item \textbf{Impresión del pie del array}: Una vez que se han impreso todos los elementos del array, se imprime el carácter ']' utilizando \texttt{printf()} para indicar el final del array en el formato de salida. Además, se añade un salto de línea (\texttt{\textbackslash n}) para que la próxima salida en la consola esté en una nueva línea.
+\end{enumerate}
+
+Por lo tanto, esta función se encarga de imprimir en la consola los elementos de un array de enteros \texttt{a[]} junto con su longitud \texttt{length} en un formato legible.
+
+\subsection{Implementación de las funciones en un programa principal}
+
+\begin{lstlisting}[language=C]
+int main(int argc, char *argv[]) {
+    char *filepath = NULL;
+
+    // Verificar si se proporciono un argumento de linea de comandos
+    filepath = parse_filepath(argc, argv);
+    
+    // Crear un array de enteros
+    int array[MAX_SIZE];
+    
+    // Leer los elementos del archivo al array
+    unsigned int length = array_from_file(array, MAX_SIZE, filepath);
+    
+    // Imprimir los elementos del array
+    array_dump(array, length);
+    
+    return EXIT_SUCCESS;
+}
+\end{lstlisting}
+
+El código principal (\texttt{main()}) utiliza las funciones \texttt{parse\_filepath}, \texttt{array\_from\_file} y \texttt{array\_dump} de la siguiente manera:
+
+\begin{enumerate}
+    \item \textbf{Análisis de la ruta del archivo}: Se llama a la función \texttt{parse\_filepath} para analizar los argumentos de la línea de comandos (\texttt{argc} y \texttt{argv[]}). Su objetivo es extraer la ruta del archivo del cual se leerá el array. El resultado se asigna a la variable \texttt{filepath}.
+    
+    \item \textbf{Creación del array}: Se declara un array de enteros llamado \texttt{array} con un tamaño máximo definido por \texttt{MAX\_SIZE}.
+    
+    \item \textbf{Lectura de los elementos del archivo al array}: Se llama a la función \texttt{array\_from\_file} para leer los elementos del array desde el archivo especificado por \texttt{filepath}. Los elementos se almacenan en el array \texttt{array[]} y el número real de elementos leídos se devuelve como \texttt{length}.
+    
+    \item \textbf{Impresión de los elementos del array}: Después de llenar el array con los datos del archivo, se llama a la función \texttt{array\_dump} para imprimir los elementos del array junto con su longitud.
+    
+    \item \textbf{Retorno del programa}: Finalmente, se devuelve \texttt{EXIT\_SUCCESS} al sistema operativo para indicar que el programa se ejecutó correctamente.
+\end{enumerate}
+
+\subsection{Función \texttt{array\_from\_stdin()}}

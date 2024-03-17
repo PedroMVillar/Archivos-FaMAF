@@ -1,0 +1,514 @@
+\section{Repaso de Arreglos}
+
+\subsection{Arreglos multidimensionales}
+Los arreglos multidimensionales en C son estructuras de datos que permiten almacenar elementos en más de una dimensión. Por ejemplo, un arreglo unidimensional es similar a una lista, mientras que un arreglo bidimensional es similar a una tabla o una matriz.
+
+\subsubsection{Declaración}
+
+1. \textbf{Declaración directa:}
+\begin{verbatim}
+int matriz[3][3];
+\end{verbatim}
+Esto declara una matriz de enteros de 3x3. Los elementos de la matriz no se inicializan y contendrán valores basura hasta que se les asigne un valor explícitamente.
+
+2. \textbf{Inicialización explícita:}
+\begin{verbatim}
+int matriz[3][3] = {
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
+};
+\end{verbatim}
+Aquí se declara e inicializa una matriz de 3x3 con valores específicos.
+
+3. \textbf{Usando typedef:}
+\begin{verbatim}
+typedef int ArregloBidimensional[3][3];
+ArregloBidimensional matriz;
+\end{verbatim}
+Esto declara un tipo `ArregloBidimensional`, que luego se usa para declarar una matriz de 3x3 llamada `matriz`.
+
+4. \textbf{Arreglo de punteros:}
+\begin{verbatim}
+int *matriz[3];
+for (int i = 0; i < 3; i++) {
+    matriz[i] = malloc(3 * sizeof(int));
+}
+\end{verbatim}
+En este caso, se declara un arreglo de punteros a enteros. Luego, en un bucle, se asigna memoria dinámica para cada fila de la matriz.
+
+5. \textbf{Usando punteros dobles:}
+\begin{verbatim}
+int **matriz;
+matriz = malloc(3 * sizeof(int *));
+for (int i = 0; i < 3; i++) {
+    matriz[i] = malloc(3 * sizeof(int));
+}
+\end{verbatim}
+Aquí, `matriz` es un puntero doble que apunta a un bloque de memoria que contiene punteros a enteros. Luego, en un bucle, se asigna memoria dinámica para cada fila de la matriz.
+
+Es importante tener en cuenta que las diferentes formas de declarar arreglos multidimensionales tienen implicaciones diferentes, especialmente en lo que respecta a la asignación de memoria y la gestión de punteros. Selecciona el método que mejor se adapte a tus necesidades y ten en cuenta la gestión adecuada de la memoria para evitar fugas de memoria y comportamientos inesperados.
+
+\subsection{Acceso a elementos}
+Por ejemplo, un arreglo bidimensional se puede visualizar como una tabla con filas y columnas. Para acceder a un elemento específico en un arreglo multidimensional, necesitas especificar los índices correspondientes a cada dimensión del arreglo.
+
+\begin{verbatim}
+#include <stdio.h>
+
+int main() {
+    // Declaración e inicialización de un arreglo bidimensional 2x3
+    int arreglo[2][3] = {
+        {1, 2, 3},
+        {4, 5, 6}
+    };
+
+    // Acceso a elementos individuales
+    printf("Elemento en la fila 0, columna 0: %d\n", arreglo[0][0]);
+    printf("Elemento en la fila 1, columna 2: %d\n", arreglo[1][2]);
+
+    return 0;
+}
+\end{verbatim}
+
+En este ejemplo, \texttt{arreglo} es un arreglo bidimensional de tamaño 2x3. Para acceder a un elemento específico, utilizamos la sintaxis \texttt{arreglo[i][j]}, donde \texttt{i} representa el índice de la fila y \texttt{j} representa el índice de la columna. Recuerda que en C, los índices comienzan desde cero, por lo que el primer elemento de la matriz tiene índices \texttt{[0][0]}.
+
+El mismo concepto se aplica a arreglos multidimensionales con más de dos dimensiones. Por ejemplo, para un arreglo tridimensional, necesitarías especificar tres índices: \texttt{arreglo[i][j][k]}, donde \texttt{i}, \texttt{j} y \texttt{k} representan las coordenadas en cada dimensión respectivamente.
+
+\subsection{Paso de arreglos multidimensionales a funciones}
+Cuando pasas un arreglo multidimensional a una función en C, debes tener en cuenta que la función no recibe un puntero a un arreglo multidimensional, sino un puntero a un arreglo unidimensional. Esto se debe a que los arreglos multidimensionales en C se almacenan en memoria de forma contigua, lo que significa que se pueden tratar como arreglos unidimensionales.
+
+\begin{verbatim}
+#include <stdio.h>
+
+// Función que recibe un puntero a un arreglo multidimensional
+void imprimirMatriz(int (*matriz)[3]) {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            printf("%d ", matriz[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int matriz[3][3] = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    };
+
+    // Llamada a la función
+    imprimirMatriz(matriz);
+
+    return 0;
+}
+\end{verbatim}
+
+En este ejemplo, la función \texttt{imprimirMatriz} recibe un puntero a un arreglo multidimensional de 3x3. La sintaxis \texttt{int (*matriz)[3]} indica que la función recibe un puntero a un arreglo de 3 elementos (es decir, una fila de la matriz). Dentro de la función, podemos tratar el puntero como un arreglo unidimensional de 3 elementos, lo que nos permite acceder a los elementos de la matriz.
+
+\subsection{Juego del gato (Tic-Tac-Toe) en C}
+
+\subsubsection{Inclusión de Bibliotecas:}
+
+\begin{verbatim}
+#include <stdio.h>
+#include <stdbool.h>
+\end{verbatim}
+
+Se incluyen las bibliotecas estándar de C, \texttt{<stdio.h>} para entrada/salida estándar y \texttt{<stdbool.h>} para usar el tipo de datos booleano y los valores \texttt{true} y \texttt{false}.
+
+\subsubsection{Declaración de Funciones:}
+
+\begin{verbatim}
+bool has_free_cell(char board[3][3]);
+bool get_winner(char board[3][3]);
+\end{verbatim}
+
+Se declaran las funciones \texttt{has\_free\_cell} y \texttt{get\_winner}, que son responsables de verificar si hay celdas libres en el tablero y de determinar si hay un ganador, respectivamente.
+
+\subsubsection{Función Principal (\texttt{main()}):}
+
+\begin{verbatim}
+int main() {
+    char board[3][3] = {
+        {'-', '-', '-'}, 
+        {'-', '-', '-'}, 
+        {'-', '-', '-'}};
+    char player = 'X'; // Jugador actual (inicia con 'X')
+
+    while (has_free_cell(board) && !get_winner(board)) {
+        // ...
+    }
+
+    // Verificación del ganador o empate
+    // ...
+    return 0;
+}
+\end{verbatim}
+
+Se declara e inicializa una matriz \texttt{board} de 3x3 que representa el tablero del juego, inicializando todas las celdas con el carácter \texttt{'-'}. Se declara la variable \texttt{player} para almacenar el símbolo del jugador actual, que comienza con \texttt{'X'}. Se inicia un bucle \texttt{while} que continuará mientras haya celdas libres en el tablero y no haya un ganador. Dentro del bucle, se imprime el tablero, se solicita al jugador que ingrese su jugada y se actualiza el tablero con la jugada del jugador actual. Luego se cambia el jugador. Después de salir del bucle, se verifica si hay un ganador o si hay un empate y se imprime el resultado correspondiente.
+
+\subsubsection{Función \texttt{has\_free\_cell()}:}
+
+\begin{verbatim}
+bool has_free_cell(char board[3][3]) {
+    // ...
+}
+\end{verbatim}
+
+Esta función recibe el tablero como argumento y verifica si hay alguna celda libre (\texttt{'-'}) en el tablero. Utiliza dos bucles \texttt{while} anidados para iterar sobre todas las celdas del tablero. Si encuentra al menos una celda libre, devuelve \texttt{true}; de lo contrario, devuelve \texttt{false}.
+
+\subsubsection{Función \texttt{get\_winner()}:}
+
+\begin{verbatim}
+bool get_winner(char board[3][3]) {
+    // ...
+}
+\end{verbatim}
+
+Esta función recibe el tablero como argumento y verifica si hay un ganador. Comprueba todas las filas, columnas y diagonales para ver si tienen el mismo símbolo (\texttt{'X'} o \texttt{'O'}) y no son \texttt{'-'}. Si encuentra un ganador, devuelve \texttt{true}; de lo contrario, devuelve \texttt{false}.
+
+\subsubsection{Código completo}
+
+\begin{verbatim}
+    #include <stdio.h>
+    #include <stdbool.h>
+    
+    bool has_free_cell(char board[3][3]);
+    bool get_winner(char board[3][3]);
+    
+    int main() {
+        char board[3][3] = {
+            {'-', '-', '-'}, 
+            {'-', '-', '-'}, 
+            {'-', '-', '-'}};
+        // Cruz y círculo para jugar
+        char player = 'X';
+        
+        while (has_free_cell(board) && !get_winner(board)) {
+            // Imprimir el tablero
+            printf("Tablero:\n");
+            int i = 0;
+            while (i < 3) {
+                int j = 0;
+                while (j < 3) {
+                    printf("%c ", board[i][j]);
+                    j++;
+                }
+                printf("\n");
+                i++;
+            }
+            // Pedir la jugada
+            int pos, x, y;
+            printf("Ingrese la posición de la jugada: ");
+            scanf("%d", &pos);
+            switch (pos)
+            {
+            case 0:
+                x = 0;
+                y = 0;
+                break;
+            case 1:
+                x = 0;
+                y = 1;
+                break;
+            case 2:
+                x = 0;
+                y = 2;
+                break;
+            case 3:
+                x = 1;
+                y = 0;
+                break;
+            case 4:
+                x = 1;
+                y = 1;
+                break;
+            case 5:
+                x = 1;
+                y = 2;
+                break;
+            case 6:
+                x = 2;
+                y = 0;
+                break;
+            case 7:
+                x = 2;
+                y = 1;
+                break;
+            case 8:
+                x = 2;
+                y = 2;
+                break;        
+            default:
+                printf("Posición inválida\n");
+            }
+            if (board[x][y] != '-') {
+                printf("Posición ocupada\n");
+                continue;
+            }
+            board[x][y] = player;
+            // Cambiar de jugador
+            if (player == 'X') {
+                player = 'O';
+            } else {
+                player = 'X';
+            }
+        } 
+        if (get_winner(board)) {
+            if (player == 'X') {
+                player = 'O';
+            } else {
+                player = 'X';
+            }
+            printf("¡Felicidades! Ganó el jugador %c\n", player);
+        } else {
+            printf("¡Empate!\n");
+        }
+    
+        return 0;
+    }
+    
+    bool has_free_cell(char board[3][3]) {
+        int i = 0;
+        int j = 0;
+        while (i < 3) {
+            while (j < 3) {
+                if (board[i][j] == '-') {
+                    return true;
+                }
+                j++;
+            }
+            i++;
+        }
+        return false;
+    }
+    
+    bool get_winner(char board[3][3]) {
+        int i = 0;
+        while (i < 3) {
+            if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != '-') {
+                return true;
+            }
+            if (board[0][i] == board[1][i] && board[1][i] == board[2][i] && board[0][i] != '-') {
+                return true;
+            }
+            i++;
+        }
+        if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] != '-') {
+            return true;
+        }
+        if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != '-') {
+            return true;
+        }
+        return false;
+    }    
+\end{verbatim}
+
+Este es un ejemplo de un juego del gato (Tic-Tac-Toe) en C. El programa utiliza una matriz de 3x3 para representar el tablero del juego y permite a dos jugadores alternar turnos para marcar las celdas del tablero. El programa verifica si hay un ganador o si hay un empate después de cada jugada. El juego continúa hasta que haya un ganador o hasta que no haya celdas libres en el tablero. El código utiliza funciones para verificar si hay celdas libres en el tablero y para determinar si hay un ganador. También incluye la lógica para imprimir el tablero y solicitar las jugadas de los jugadores.
+
+\newpage
+\subsection{Tic-Tac-Toe para tamaño n}
+Ahora vamos a ver una posible solución al ejercicio de crear un programa que emule un tictactoe para un tablero de tamaño n. La solución que se presenta a continuación es una de las muchas posibles, y se basa en la implementación de un tablero de tamaño n x n, y en la verificación de las condiciones de victoria para un tablero de tamaño variable.
+
+\subsubsection{Inclusión de Bibliotecas:}
+\begin{verbatim}
+#include <stdbool.h>
+#include <stdio.h>
+\end{verbatim}
+
+Se incluyen las bibliotecas estándar de C necesarias para el programa, una para el tipo de dato booleano (\texttt{<stdbool.h>}) y otra para entrada/salida estándar (\texttt{<stdio.h>}). 
+
+\subsubsection{Declaración de Constantes:}
+\begin{verbatim}
+#define SIZE 4
+\end{verbatim}
+Se define una constante \texttt{SIZE} que representa el tamaño del tablero. En este caso, el tablero será de tamaño 4x4, pero se podrá cambiar y sigue funcionando para cualquier tamaño.
+
+\subsubsection{Función \texttt{has\_free\_cell()}:}
+\begin{verbatim}
+bool has_free_cell(char board[SIZE][SIZE]) {
+    int i = 0;
+    while(i < SIZE) {
+        int j = 0;
+        while(j < SIZE) {
+            if(board[i][j] == '-') {
+                return true;
+            }
+            j++;
+        }
+        i++;
+    }
+    return false;
+}
+\end{verbatim}
+
+La función busca una celda libre en la matriz \texttt{board}, representada por el carácter `'-'`. La lógica de funcionamiento es la siguiente:
+
+\begin{enumerate}
+    \item Se inicializa un contador $i$ en 0.
+    \item Se inicia un bucle \texttt{while} exterior que itera mientras $i$ sea menor que \texttt{SIZE}. Esto permite recorrer todas las filas de la matriz.
+    \item Dentro de este bucle exterior, se inicializa un contador $j$ en 0.
+    \item Se inicia un bucle \texttt{while} interior que itera mientras $j$ sea menor que \texttt{SIZE}. Esto permite recorrer todas las columnas de la matriz para la fila actual.
+    \item Dentro de este bucle interior, se verifica si el elemento en la posición $(i, j)$ de la matriz \texttt{board} es igual a `'-'`. Si lo es, significa que hay una celda libre, por lo que la función devuelve \texttt{true}.
+    \item Si no se encuentra una celda libre en la fila actual, se incrementa $j$ para pasar a la siguiente columna.
+    \item Una vez que se ha recorrido toda la fila actual, se incrementa $i$ para pasar a la siguiente fila y se reinicia $j$ a 0 para empezar a recorrer las columnas de esa fila.
+    \item Este proceso se repite hasta que se recorren todas las filas y columnas de la matriz.
+    \item Si no se encuentra ninguna celda libre en toda la matriz, la función devuelve \texttt{false} al final.
+\end{enumerate}
+
+\subsubsection{Función \texttt{get\_winner()}:}
+
+\begin{verbatim}
+    bool get_winner(char board[SIZE][SIZE]) {
+        int i = 0;
+        while(i < SIZE) {
+            int j = 0;
+            char first = board[i][0];
+            while(j < SIZE) {
+                if(board[i][j] != first || first == '-') {
+                    break;
+                }
+                j++;
+            }
+            if(j == SIZE) {
+                return true;
+            }
+            i++;
+        }
+    
+        i = 0;
+        while(i < SIZE) {
+            int j = 0;
+            char first = board[0][i];
+            while(j < SIZE) {
+                if(board[j][i] != first || first == '-') {
+                    break;
+                }
+                j++;
+            }
+            if(j == SIZE) {
+                return true;
+            }
+            i++;
+        }
+    
+        char first = board[0][0];
+        i = 0;
+        while(i < SIZE) {
+            if(board[i][i] != first || first == '-') {
+                break;
+            }
+            i++;
+        }
+        if(i == SIZE) {
+            return true;
+        }
+    
+        first = board[0][SIZE - 1];
+        i = 0;
+        while(i < SIZE) {
+            if(board[i][SIZE - 1 - i] != first || first == '-') {
+                break;
+            }
+            i++;
+        }
+        if(i == SIZE) {
+            return true;
+        }
+    
+        return false;
+    }
+\end{verbatim}
+
+La función \texttt{get\_winner}, busca determinar si hay un ganador en el juego representado por la matriz \texttt{board} de tamaño \texttt{SIZE} por \texttt{SIZE} (donde \texttt{SIZE} es una constante definida en otro lugar del código). La función busca ganadores en tres posibles direcciones: horizontal, vertical y diagonal.
+
+\begin{enumerate}
+    \item La función comienza recorriendo todas las filas de la matriz \texttt{board}. En cada fila, verifica si todos los elementos son iguales al primer elemento de la fila y si ese elemento es diferente de '-' (que indica una celda vacía). Si esto es cierto, devuelve \texttt{true}, indicando que hay un ganador.
+    \item Luego, la función recorre todas las columnas de la matriz \texttt{board}. En cada columna, verifica si todos los elementos son iguales al primer elemento de la columna y si ese elemento es diferente de '-'. Si se cumple esta condición, devuelve \texttt{true}.
+    \item Después, la función verifica la diagonal principal de la matriz, es decir, los elementos donde el índice de fila es igual al índice de columna. Si todos los elementos en esta diagonal son iguales al primer elemento de la matriz y ese elemento es diferente de '-', devuelve \texttt{true}.
+    \item Finalmente, la función verifica la otra diagonal de la matriz (de arriba a la derecha hacia abajo a la izquierda). Si todos los elementos en esta diagonal son iguales al primer elemento de la matriz y ese elemento es diferente de '-', devuelve \texttt{true}.
+\end{enumerate}
+
+Si en ninguno de estos casos se encuentra un ganador, la función devuelve \texttt{false}, indicando que no hay un ganador en el juego.
+
+\subsubsection{Función Principal (\texttt{main()}):}
+
+\begin{verbatim}
+    int main(){
+    char board[SIZE][SIZE];
+    int i = 0;
+    while(i < SIZE) {
+        int j = 0;
+        while(j < SIZE) {
+            board[i][j] = '-';
+            j++;
+        }
+        i++;
+    }
+    // Cruz y círculo para jugar
+    char player = 'X';
+
+    while(has_free_cell(board) && !get_winner(board)) {
+        // Imprimir el tablero
+        i = 0;
+        while(i < SIZE) {
+            int j = 0;
+            while(j < SIZE) {
+                printf("%c ", board[i][j]);
+                j++;
+            }
+            printf("\n");
+            i++;
+        }
+
+        // Pedir la jugada
+        int position;
+        printf("Jugador %c, ingrese la posición: ", player);
+        scanf("%d", &position);
+
+        // Verificar que se inserte una posición válida
+        int x = position / SIZE;
+        int y = position % SIZE;
+        if(x < 0 || x >= SIZE || y < 0 || y >= SIZE || board[x][y] != '-') {
+            printf("Posición inválida o ya ocupada, intente de nuevo.\n");
+            continue;
+        }
+
+        // Realizar la jugada y cambiar de jugador
+        board[x][y] = player;
+        player = (player == 'X') ? 'O' : 'X';
+    }
+    
+    // Corroborar si hay ganador
+    if (get_winner(board)) {
+        if (player == 'X') {
+            player = 'O';
+        } else {
+            player = 'X';
+        }
+        printf("¡Felicidades! Ganó el jugador %c\n", player);
+    } else {
+        printf("¡Empate!\n");
+    }
+    return 0;
+}
+\end{verbatim}
+
+La función principal (\texttt{main()}) es el punto de entrada del programa. En este caso, el programa implementa un juego de tres en raya (Tic-Tac-Toe). A continuación se explica la lógica de la función:
+
+\begin{enumerate}
+    \item Se declara una matriz bidimensional \texttt{board} de tamaño \texttt{SIZE} por \texttt{SIZE} para representar el tablero del juego.
+    \item Se inicializa el tablero, rellenándolo con el carácter `'-'`, indicando que todas las celdas están vacías.
+    \item Se establece el jugador actual como `'X'`, que será el primer jugador en realizar una jugada.
+    \item Se inicia un bucle que continuará mientras haya celdas libres en el tablero y no haya un ganador.
+    \item Dentro del bucle, se imprime el tablero actual.
+    \item Se solicita al jugador actual que ingrese la posición donde desea realizar su jugada.
+    \item Se verifica que la posición ingresada sea válida y esté libre en el tablero. Si no lo es, se muestra un mensaje de error y se solicita una nueva posición.
+    \item Si la posición es válida, se realiza la jugada colocando el símbolo del jugador actual en la posición correspondiente del tablero.
+    \item Se cambia el jugador actual para que el otro jugador pueda realizar su jugada en el siguiente ciclo del bucle.
+    \item Una vez que el bucle termina (debido a un ganador o un empate), se verifica si hay un ganador en el tablero. Si hay un ganador, se imprime un mensaje felicitando al jugador ganador. Si no hay ganador, se imprime un mensaje indicando que hubo un empate.
+    \item La función retorna 0 para indicar que el programa se ejecutó correctamente.
+\end{enumerate}
+
+Esta función implementa la lógica principal del juego, gestionando las jugadas de los jugadores, la validación de las posiciones y la determinación del ganador o empate.

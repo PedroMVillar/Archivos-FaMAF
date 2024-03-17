@@ -1,0 +1,302 @@
+\section{Introducción al lenguaje de programación Pascal-like}
+
+El lenguaje a utilizar está inspirado en el lenguaje imperativo \textit{Pascal}, al cual se le han ido realizando modificaciones de acuerdo a las necesidades did´acticas de la
+materia. Se utilizará principalmente para la incorporación de conceptos tales como análisis de algoritmos, definición de tipos abstractos de datos, o la comprensión de distintas técnicas de programación. 
+
+\subsection{Tipos de datos}
+En este lenguaje, existen varios tipos de datos, incluyendo:
+\begin{itemize}
+    \item \texttt{int}: para valores enteros,
+    \item \texttt{real}: para valores decimales,
+    \item \texttt{bool}: para valores de verdad (verdadero o falso),
+    \item \texttt{char}: para caracteres.
+\end{itemize}
+Además, se pueden crear estructuras de datos más complejas como arreglos para agrupar elementos del mismo tipo.
+
+\subsection{Declaración de variables}
+Las variables se declaran utilizando la palabra clave \texttt{var}, seguida de una lista de variables separadas por comas. Cada variable debe tener un tipo asociado. Por ejemplo:
+\begin{pascallike}
+    {- Variable entera -}
+    var i : int
+    i := 10
+    {- Variable real -}
+    var x : real
+    x := 3.14
+    {- Variable booleana -}
+    var b : bool
+    b := true
+    {- Variable caracter -}
+    var c : char
+    c := 'a'
+\end{pascallike}
+
+\subsection{Operadores}
+Los operadores aritméticos básicos son \texttt{+}, \texttt{-}, \texttt{*} y \texttt{/}. Además, se pueden utilizar los operadores de comparación \texttt{<}, \texttt{>}, \texttt{<=}, \texttt{>=}, \texttt{==} y \texttt{!=}.
+\begin{pascallike}
+    {- Operadores aritmeticos -}
+    var a : int
+    a := 10 + 5
+    a := 10 - 5
+    a := 10 * 5
+    a := 10 / 5
+    {- Operadores de comparacion -}
+    var b : bool
+    b := 10 < 5
+    b := 10 > 5
+    b := 10 <= 5
+    b := 10 >= 5
+    b := 10 == 5
+    b := 10 != 5
+\end{pascallike}
+Junto con las constantes lógicas \texttt{true} y \texttt{false}, se pueden utilizar los operadores lógicos \texttt{\&\&}, \texttt{||} y \texttt{!}.
+\begin{pascallike}
+    {- Operadores logicos -}
+    var b : bool
+    b := true && false
+    b := true || false
+    b := !true
+\end{pascallike}
+
+\textbf{No hay operadores definidos para el tipo \texttt{char}.}
+
+\subsection{Tipos de datos estructurados}
+Un tipo estructurado permite representar colecciones de otros tipos de datos. De manera similar a los tipos básicos, se definen operaciones específicas para acceder a los elementos que conforman al tipo. En el lenguaje solo tenemos definidos de forma nativa a los arreglos.
+
+Para definir un arreglo es necesario detallar el tipo de sus componentes y los tamaños para cada una de sus dimensiones, los cuales deberán ser mayores a cero.
+
+\begin{pascallike}
+    {- Arreglo de enteros -}
+    var a : array [1..10] of int
+    a[1] := 10
+    {- Arreglo de reales -}
+    var b : array [1..10] of real
+    b[1] := 3.14
+    {- Arreglo de booleanos -}
+    var c : array [1..10] of bool
+    c[1] := true
+    {- Arreglo de caracteres -}
+    var d : array [1..10] of char
+    d[1] := 'a'
+\end{pascallike}
+En este ejemplo, se declaran arreglos de 10 elementos de distintos tipos. Luego, se asigna un valor a la primera posición de cada arreglo.
+
+\subsection{Definición de tipos}
+El lenguaje permite definir tipos de datos personalizados. Esto es útil para abstraer la representación de un concepto y facilitar la comprensión del código. Por ejemplo, se puede definir un tipo \texttt{punto} para representar un punto en el plano cartesiano.
+
+\begin{pascallike}
+type punto = tuple
+                x : real
+                y : real
+                end tuple
+\end{pascallike}
+En este ejemplo, se define un tipo \texttt{punto} que contiene dos campos \texttt{x} e \texttt{y} de tipo \texttt{real}. Luego, se pueden declarar variables de tipo \texttt{punto} y asignarles valores.
+\subsubsection{Tipos enumerados}
+Un tipo enumerado representa un conjunto finito de valores. Cada valor está definido mediante un identificador único. Para declarar un tipo enumerado se emplean las palabras claves \textbf{enumerate} y \textbf{end enumerate}. Por ejemplo, definamos un tipo enumerado para los días de la semana.
+
+\begin{pascallike}
+type day = enumerate
+           Lunes
+           Martes
+           Miercoles
+           Jueves
+           Viernes
+           Sabado
+           Domingo
+           end enumerate
+\end{pascallike}
+
+Ya una vez definido el tipo enumerado, se pueden declarar variables de este tipo y asignarles valores.
+
+\begin{pascallike}
+var d : day
+d := Lunes
+\end{pascallike}
+
+\subsubsection{Sinónimos de tipos}
+Un sinónimo de tipo es una forma de referirse a un tipo de datos con un nombre diferente. Por ejemplo, se puede definir un sinónimo de tipo \texttt{real} para representar la temperatura en grados Celsius.
+
+\begin{pascallike}
+type celsius = real
+\end{pascallike}
+
+No necesariamente los sinónimos de tipo deben ser de tipos básicos, también se pueden definir sinónimos de tipos estructurados.
+
+\begin{pascallike}
+type matrizdereales = array [1..10] of real
+\end{pascallike}
+
+Una expresión de este tipo, es útil cuando se utiliza una función donde se espera un valor de uno de los sinónimos de su tipo. En el siguiente ejemplo se declara una variable \texttt{mR} del tipo \texttt{matrizdereales}, y se opera de manera transparente como si fuese un arreglo tradicional.
+
+\begin{pascallike}
+var mR : matrizdereales
+for i := 0 to 9 do
+    for j := 0 to 9 do
+        mR[i, j] := 0.0
+    od
+od
+\end{pascallike}
+
+\subsubsection{Tuplas}
+Una tupla es un tipo de dato estructurado que permite agrupar un número finito de elementos de distintos tipos. Para definir una tupla se emplean las palabras claves \textbf{tuple} y \textbf{end tuple}. Por ejemplo, definamos una tupla para representar los datos de una persona.
+
+\begin{pascallike}
+type persona = tuple
+                nombre : string
+                edad : int
+                altura : real
+                end tuple
+\end{pascallike}
+
+Y para darle valor a una variable de tipo \texttt{persona} se hace de la siguiente manera.
+
+\begin{pascallike}
+var p : persona
+p.nombre := "Juan"
+p.edad := 20
+p.altura := 1.80
+\end{pascallike}
+
+\newpage
+\subsection{Funciones y procedimientos}
+Las funciones y procedimientos son bloques de código que pueden ser invocados desde otros bloques de código. La diferencia entre ambos radica en que las funciones devuelven un valor, mientras que los procedimientos no. La sintaxis para definir funciones y procedimientos es la siguiente:
+
+\begin{pascallike}
+fun nombre (p1 : T1, p2 : T2, ... , pn : Tn) ret r : T
+    {- Cuerpo de la funcion -}
+end fun 
+\end{pascallike}
+Esta función toma los parametros \texttt{p1}, \texttt{p2}, ..., \texttt{pn} de tipos \texttt{T1}, \texttt{T2}, ..., \texttt{Tn} respectivamente, y devuelve un valor de tipo \texttt{T}. Por ejemplo, definamos una función que sume dos números enteros.
+
+\begin{pascallike}
+fun suma (a : int, b : int) ret r : int
+    ret := a + b
+end fun
+\end{pascallike}
+
+En el siguiente ejemplo se muestra la implementación de la función \texttt{factorial}, que calcula el factorial de un número entero positivo \texttt{n}. La variable de retorno fact almacena la productoria de números, y al finalizar la ejecución de la función, se retorna su valor al contexto donde se efectuó la llamada. El comentario simplemente indica la precondición ha satisfacer para garantizar el comportamiento esperado de la función.
+
+\begin{pascallike}
+{- PRE : n >= 0 -}
+fun factorial (n : int) ret fact : int
+    fact := 1
+    for i := 2 to n do
+        fact := fact * i
+    od
+end fun
+\end{pascallike}
+
+Un procedimiento realiza una computación de acuerdo a un conjunto de parámetros de lectura, para modificar un conjunto de parámetros de escritura. Su comportamiento es determinado solamente por los parámetros que recibe donde cada uno lleva un decorado que indica si es de lectura \texttt{in}, de escritura \texttt{out}, o ambas \texttt{in/out}. Un procedimiento no modifica el estado de los parámetros de lectura, y tampoco consulta el estado de los parámetros de escritura.
+
+En el siguiente ejemplo se implementa el procedimiento initialize, el cual se encarga de inicializar un arreglo de enteros según un valor determinado. Lo interesante a destacar en este ejemplo es la forma en que se manejan los parámetros de lectura y escritura. El parámetro de lectura solo ocurre del lado derecho de la asignación, mientras que el parámetro de escritura solo ocurre del lado izquierdo. Esto significa que al llamar a la función initialize, se pasarán los parámetros como argumentos de lectura (para ser utilizados dentro de la función) y como argumentos de escritura (para almacenar el resultado de la función).
+
+\begin{pascallike}
+proc initialize ( in e : int , out a : array [ 10 ] of int )
+    for i := 9 downto 0 do
+        a [ i ] := e
+    od
+end proc
+\end{pascallike}
+
+\newpage
+\subsubsection{Recursión}
+El lenguaje soporta la recursión, es decir, una función o procedimiento puede llamarse a sí mismo. Por ejemplo, definamos una función que calcule el factorial de un número de manera recursiva. Por ejemplo definamos la función factorial de la siguiente manera.
+
+\begin{pascallike}
+{- PRE : n >= 0 -}
+fun factorial (n : int) ret fact : int
+    if n >= 2 then
+        fact := n * factorial(n - 1)
+    else
+        fact := 1
+    fi
+end fun
+\end{pascallike}
+
+\subsubsection{Polimorfismo paramétrico}
+El lenguaje soporta el polimorfismo paramétrico, es decir, la capacidad de definir funciones y procedimientos que operan sobre un rango de tipos. Por ejemplo, definamos una función que intercambie los valores de dos variables de cualquier tipo.
+
+\begin{pascallike}
+proc swap ( in / out a : array [ n ] of T , in i , j : int )
+    var temp : T
+    temp := a[i]
+    a[i] := a[j] 
+    a[j] := temp
+end fun
+\end{pascallike}
+
+\subsubsection{Polimorfismo \textit{Ad Hoc}}
+El lenguaje soporta el polimorfismo \textit{Ad Hoc}, es decir, la capacidad de definir funciones y procedimientos que podrían ser implementados de manera genérica pero no para cualquier tipo de datos, sino para ciertos tipos que comparten alguna característica, en consecuencia no es posible utilizar polimorfismo paramétrico.
+Consideremos las siguientes implementaciones de \texttt{belongs} y \texttt{selectionSort}. La primera decide si un valor determinado pertenece a un arreglo y la segunda permite ordenar un arreglo de menor a mayor.
+
+\begin{pascallike}
+fun belongs ( e : int , a : array [ n ] of int ) ret b : bool
+var i : int
+i : = 0
+b : = false
+    while ! b && i < n do
+        b : = a [ i ] = = e
+        i : = i + 1
+    od
+end fun    
+\end{pascallike}
+
+\begin{pascallike}
+proc selectionSort ( in / out a : array [ n ] of int )
+var minPos : int
+    for i : = 0 to n - 1 do
+        minPos : = i
+        for j : = i + 1 to n - 1 do
+            if a [ j ] < a [ minPos ] then minPos : = j fi
+        od
+        swap ( a , i , minPos )
+    od
+end proc
+\end{pascallike}
+En ambas implementaciones los elementos son de tipo entero. Sin embargo podríamos definir las mismas operaciones para otros tipos de datos, como por ejemplo, caracteres. Se tendrían que redefinir las anteriores con los nombres \texttt{belongsInt} y \texttt{selectionSortInt}, y declarar de manera idéntica las operaciones \texttt{belongsChar} y \texttt{selectionSortChar} donde solo cambiaríamos int por char en los tipos de los parámetros. Con un trabajo tediosamente repetitivo se podrían dar declaraciones para todos los tipos que tengan definidas las operaciones de comparación; aunque no sería posible para aquellos que no las tengan definidas. El \textit{polimorfismo ad hoc} nos permite escribir de manera genérica una función o un procedimiento donde la tarea que realiza sólo está bien definida para algunos tipos. Además esta tarea puede no ser la misma dependiendo del tipo.
+\newline
+En el lenguaje se definen una serie de clases las cuales pueden ser pensadas como una especie de interfaz que caracteriza algún comportamiento. Un tipo es una instancia de una clase, cuando implementa el comportamiento que la clase describe. El lenguaje sólo incorpora de forma nativa las clases \textbf{Eq} y \textbf{Ord}, y no existe posibilidad de declarar nuevas clases. La primera representa a los tipos que tienen alguna noción de igualdad, y sus operaciones definidas comprenden al \texttt{==} y \texttt{!=}. La segunda representa a los tipos que poseen alguna relación de orden, y sus operaciones definidas comprenden al \texttt{<}, \texttt{<=}, \texttt{>=}, \texttt{>}.
+
+\subsection{Memoria dinámica}
+El lenguaje permite manipular explícitamente la memoria dinámica mediante un tipo de datos especial, que llamaremos puntero. Supongamos que deseamos definir el tipo correspondiente a las listas. Una lista permite representar una colección ordenada de elementos de algún tipo de datos, cuyo tamaño es variable; lo cual significa que su tamaño crece tanto como sea necesario, de acuerdo a la cantidad de elementos almacenados. Todos los tipos presentados hasta el momento utilizan una cantidad fija de memoria, la cual no puede ser modificada en tiempo de ejecución. Recordemos una vez más que los arreglos implementados en el lenguaje tienen un tamaño fijo al momento de la ejecución. En este aspecto el uso de punteros resulta fundamental, ya que permiten reservar y liberar memoria en la medida que sea necesario durante la ejecución del programa.
+
+\subsubsection{Punteros}
+Un puntero es una variable que almacena la dirección de memoria de otra variable. En el lenguaje, los punteros se representan con el tipo \textbf{pointer}, indica el lugar de memoria donde se encuentra almacenado el valor de la variable. La sintaxis para declarar un puntero es la siguiente:
+
+\begin{pascallike}
+var p : pointer of int
+\end{pascallike}
+
+\subsubsection{Ejemplo}
+
+\begin{pascallike}
+type node of ( T ) = tuple
+                     elem : T ,
+                     next : pointer of node of ( T )
+                     end tuple
+
+type list of ( T ) = pointer of node of ( T )
+\end{pascallike}
+
+En el ejemplo anterior se declara una lista enlazada denominada list, la cual se compone de una sucesión de nodos node que se integran por los campos elem de cierto tipo paramétrico T, y next el cual referencia al siguiente nodo en la lista.
+
+\subsubsection{Operaciones con punteros}
+En el lenguaje se definen tres operaciones para manipular punteros. El procedimiento nativo \texttt{alloc} toma una variable de tipo puntero, y le asigna la dirección de un nuevo bloque de memoria, cuyo tamaño estará determinado por el tipo de la variable. El operador \texttt{\#} permite acceder al bloque de memoria apuntado por el puntero. El procedimiento nativo \textbf{free} toma una variable de tipo puntero, y libera el respectivo bloque de memoria referenciado.
+\newline Retomando el ejemplo de la lista enlazada, los procedimientos \texttt{empty} y \texttt{addL} son utilizados para construir valores del tipo en cuestión.
+
+\begin{pascallike}
+proc empty ( out l : list of ( T ) )
+    l : = null
+end proc
+\end{pascallike}
+
+El procedimiento empty construye una lista vacía. La constante null representa un puntero que no referencia un lugar de memoria válido. En el ejemplo, la constante representa una lista que no posee ningín nodo.
+
+\begin{pascallike}
+proc addL ( in e : T , in / out l : list of ( T ) )
+    var p : pointer of node of ( T )
+    alloc ( p )
+    p - > elem : = e
+    p - > next : = l
+    l : = p
+end proc
+\end{pascallike}
