@@ -45,6 +45,7 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 - [Algoritmos y Estructuras de Datos 1](#algoritmos-y-estructuras-de-datos-1)
 - [Algoritmos y Estructuras de Datos 2](#algoritmos-y-estructuras-de-datos-2)
 
+---
 
 <div style="text-align:center;">
   <h3>Álgebra Lineal - Álgebra II - Álgebra</h3>
@@ -54,7 +55,6 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 ![Static Badge](https://img.shields.io/badge/Carrera-Matem%C3%A1tica%20Aplicada-yellow)
 ![Static Badge](https://img.shields.io/badge/Archivos%20pdf%20-%20brown)
 
----
 
 <div style="text-align:center;">
   <h4>Apuntes - Resúmenes</h4>
@@ -64,7 +64,6 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 |:---:|:---:|:---:|:---:|
 | [Cambio de Base](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Apuntes%20-%20Documentos/Cambio%20de%20Base/cambiodebase.pdf) | [Determinantes por inducción](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Apuntes%20-%20Documentos/Determinantes%20de%20orden%20n/detordenn.pdf) | [Diagonalización](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Apuntes%20-%20Documentos/Diagonalizaci%C3%B3n/diagonalizacion.pdf) | [Planos](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Apuntes%20-%20Documentos/Planos/planos.pdf) |
 
----
 
 <div style="text-align:center;">
   <h4>Ejercicios Resueltos</h4>
@@ -73,7 +72,6 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 - [Ejercicios de finales y libros varios](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Ejercicios%20Resueltos/Ejercicios%20de%20finales%20y%20libros%20varios/EjerciciosResueltos-Algebra.pdf)
 - [Ejercicios de guías de práctica](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Ejercicios%20Resueltos/Ejercicios%20de%20gu%C3%ADas/Ejerciciosp2.pdf)
 
----
 
 <div style="text-align:center;">
   <h4>Parciales de práctica</h4>
@@ -84,7 +82,6 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 - [Parcial 3](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Ex%C3%A1menes%20de%20Pr%C3%A1ctica/Ex3.pdf)
 - [Parcial 4](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Ex%C3%A1menes%20de%20Pr%C3%A1ctica/Ex4.pdf)
 
----
 
 <div style="text-align:center;">
   <h4>Exámenes resueltos paso a paso</h4>
@@ -98,6 +95,8 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 |:---:|:---:|
 | [Recuperatorio 1er Parcial](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Ex%C3%A1menes%20Resueltos/Recuperatorio%201er%20Parcial/Recuperatorio%201er%20Parcial.pdf) | [2do Parcial - Mañana](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Ex%C3%A1menes%20Resueltos/Segundo%20Parcial%20-%20Turno%20Ma%C3%B1ana/2do%20Parcial%20Ma%C3%B1ana.pdf) |
 
+---
+
 <div style="text-align:center;">
   <h3>Algoritmos y Estructuras de Datos 1</h3>
 </div>
@@ -107,8 +106,6 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 ![Static Badge](https://img.shields.io/badge/Archivos%20haskell%20-%20purple)
 ![Static Badge](https://img.shields.io/badge/Archivos%20c%20-%20green)
 
----
-
 <div style="text-align:center;">
   <h4>Apuntes - Resúmenes</h4>
 </div>
@@ -116,8 +113,6 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 | [![Compilación](./assets/readme.imgs/comp.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Funcional/Compilaci%C3%B3n/compilacion.pdf) | [![Interpretación de errores](./assets/readme.imgs/erro.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Apuntes%20-%20Documentos/Determinantes%20de%20orden%20n/detordenn.pdf) | [![Pattern Matching](./assets/readme.imgs/pm.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Funcional/Pattern%20Matching/patternMatching.pdf) | [![Arreglos en C](./assets/readme.imgs/aec.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Imperativa/Arreglos%20en%20C/ArraysC.pdf) |
 |:---:|:---:|:---:|:---:|
 | [Compilación](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Funcional/Compilaci%C3%B3n/compilacion.pdf) | [Interpretación de errores](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Funcional/Interpretaci%C3%B3n%20de%20errores/errores.pdf) | [Pattern Matching](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Funcional/Pattern%20Matching/patternMatching.pdf) | [Arreglos en C](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Imperativa/Arreglos%20en%20C/ArraysC.pdf) |
-
----
 
 <div style="text-align:center;">
   <h4>Proyectos</h4>
@@ -132,6 +127,8 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 - [Proyecto 3](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programación%20Imperativa/Proyecto%203/Archivos%20C/)
 - [Proyecto 4](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programación%20Imperativa/Proyecto%204/Archivos%20C/)
 
+---
+
 <div style="text-align:center;">
   <h3>Algoritmos y Estructuras de Datos 2</h3>
 </div>
@@ -140,7 +137,6 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 ![Static Badge](https://img.shields.io/badge/Archivos%20pdf%20-%20brown)
 ![Static Badge](https://img.shields.io/badge/Archivos%20c%20-%20green)
 
----
 
 <div style="text-align:center;">
   <h3>Teórico - Práctico</h3>
