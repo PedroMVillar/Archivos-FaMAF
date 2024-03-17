@@ -135,3 +135,32 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 
 ---
 
+<div style="text-align:center;">
+  <h3>Teórico - Práctico</h3>
+</div>
+
+[![Static Badge](https://img.shields.io/badge/Acceso%20a%20notas%20de%20clase%20-%20pink)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Notas%20de%20Clase/Te%C3%B3rico%20Pr%C3%A1ctico/Source%20code/NotasdeClase.pdf)
+
+**Análisis de Algoritmos**
+- [Ordenación Elemental](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Análisis%20de%20Algoritmos/Ordenación%20Elemental/)
+  - [Filminas de Clase](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Análisis%20de%20Algoritmos/Ordenación%20Elemental/01.ordenacion.elemental.pdf)
+  - [Práctico 1](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Análisis%20de%20Algoritmos/Ordenación%20Elemental/Práctico/)
+    - [Enunciado](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Análisis%20de%20Algoritmos/Ordenación%20Elemental/Práctico/practico.01.ordenacion.elemental.pdf)
+    - [Solución](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Análisis%20de%20Algoritmos/Ordenación%20Elemental/Práctico/Solución/tp01sol.pdf)
+
+
+<div style="text-align:center;">
+  <h3>Laboratorio</h3>
+</div>
+
+[![Static Badge](https://img.shields.io/badge/Acceso%20a%20notas%20de%20clase%20-%20pink)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Notas%20de%20Clase/Laboratorio/Source%20code/NotasdeClase.pdf)
+
+> La explicación de los laboratorios esta incluida en las notas de clase.
+
+- [Lab00](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Laboratorio/Lab00/)
+  - [Código](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Laboratorio/Lab00/Solución/)
+  - [Enunciado](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Laboratorio/Lab00/lab00-2023.pdf)
+
+- [Lab01](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Laboratorio/Lab01)
+  - [Código](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Laboratorio/Lab01/Solución/)
+  - [Enunciado](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Laboratorio/Lab01/lab01-2023.pdf)
