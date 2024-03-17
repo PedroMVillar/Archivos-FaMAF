@@ -32,6 +32,11 @@ Este comando creará una carpeta llamada "Archivos-FaMAF" en el directorio actua
 ¡Listo! Ahora tienes una copia local del repositorio en tu máquina y puedes comenzar a trabajar con los archivos.
 
 ## Materias
+Cada materia cursada se encuentra organizada en una carpeta específica, que contiene todos los recursos académicos correspondientes a la asignatura. A continuación, se presenta un listado de las materias disponibles en el repositorio.
+
+- [Álgebra Lineal - Álgebra II - Álgebra](#algebra-lineal---algebra-ii---algebra)
+
+
 <div style="text-align:center;">
   <h3>Álgebra Lineal - Álgebra II - Álgebra</h3>
 </div>
@@ -55,8 +60,8 @@ Este comando creará una carpeta llamada "Archivos-FaMAF" en el directorio actua
   <h4>Ejercicios Resueltos</h4>
 </div>
 
-- [Ejercicios de finales y libros varios]()
-- [Ejercicios de guías de práctica]()
+- [Ejercicios de finales y libros varios](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Ejercicios%20Resueltos/Ejercicios%20de%20finales%20y%20libros%20varios/EjerciciosResueltos-Algebra.pdf)
+- [Ejercicios de guías de práctica](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Ejercicios%20Resueltos/Ejercicios%20de%20gu%C3%ADas/Ejerciciosp2.pdf)
 
 ---
 
@@ -64,10 +69,10 @@ Este comando creará una carpeta llamada "Archivos-FaMAF" en el directorio actua
   <h4>Parciales de práctica</h4>
 </div>
 
-- [Parcial 1]()
-- [Parcial 2]()
-- [Parcial 3]()
-- [Parcial 4]()
+- [Parcial 1](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Ex%C3%A1menes%20de%20Pr%C3%A1ctica/Ex1.pdf)
+- [Parcial 2](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Ex%C3%A1menes%20de%20Pr%C3%A1ctica/Ex2.pdf)
+- [Parcial 3](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Ex%C3%A1menes%20de%20Pr%C3%A1ctica/Ex3.pdf)
+- [Parcial 4](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Ex%C3%A1menes%20de%20Pr%C3%A1ctica/Ex4.pdf)
 
 ---
 
@@ -75,33 +80,29 @@ Este comando creará una carpeta llamada "Archivos-FaMAF" en el directorio actua
   <h4>Exámenes resueltos paso a paso</h4>
 </div>
 
-| [![Final 06-12-2023](./assets/readme.imgs/final06.png)](https://enlace1.com) | [![Final 21-12-2023](./assets/readme.imgs/final21.png)](https://enlace2.com) |
+| [![Final 06-12-2023](./assets/readme.imgs/final06.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Ex%C3%A1menes%20Resueltos/Final%20%C3%81lgebra%2006-12-2023/Final%2006-12-2023%20-%20Soluci%C3%B3n.pdf) | [![Final 21-12-2023](./assets/readme.imgs/final21.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Ex%C3%A1menes%20Resueltos/Final%20%C3%81lgebra%2021-12-2023/Final%2021-12-2023%20-%20Soluci%C3%B3n.pdf) |
 |:---:|:---:|
-| [Final 06-12-2023](https://enlace1.com) | [Final 21-12-2023](https://enlace2.com) |
+| [Final 06-12-2023](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Ex%C3%A1menes%20Resueltos/Final%20%C3%81lgebra%2006-12-2023/Final%2006-12-2023%20-%20Soluci%C3%B3n.pdf) | [Final 21-12-2023](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Ex%C3%A1menes%20Resueltos/Final%20%C3%81lgebra%2021-12-2023/Final%2021-12-2023%20-%20Soluci%C3%B3n.pdf) |
 
-| [![Recuperatorio 1er Parcial](./assets/readme.imgs/recu1.png)](https://enlace3.com) | [![2do Parcial - Mañana](./assets/readme.imgs/segundop.png)](https://enlace4.com) |
+| [![Recuperatorio 1er Parcial](./assets/readme.imgs/recu1.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Ex%C3%A1menes%20Resueltos/Recuperatorio%201er%20Parcial/Recuperatorio%201er%20Parcial.pdf) | [![2do Parcial - Mañana](./assets/readme.imgs/segundop.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Ex%C3%A1menes%20Resueltos/Segundo%20Parcial%20-%20Turno%20Ma%C3%B1ana/2do%20Parcial%20Ma%C3%B1ana.pdf) |
 |:---:|:---:|
-| [Recuperatorio 1er Parcial](https://enlace3.com) | [2do Parcial - Mañana](https://enlace4.com) |
+| [Recuperatorio 1er Parcial](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Ex%C3%A1menes%20Resueltos/Recuperatorio%201er%20Parcial/Recuperatorio%201er%20Parcial.pdf) | [2do Parcial - Mañana](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Ex%C3%A1menes%20Resueltos/Segundo%20Parcial%20-%20Turno%20Ma%C3%B1ana/2do%20Parcial%20Ma%C3%B1ana.pdf) |
 
-## Apuntes Notas de Clase
+<div style="text-align:center;">
+  <h3>Algoritmos y Estructuras de Datos 1</h3>
 </div>
-<div align="center">
-  <a href="https://enlace1.com" target="_blank">
-    <img src="https://via.placeholder.com/150" alt="Imagen 1" width="150">
-  </a>
-  <a href="https://enlace2.com" target="_blank">
-    <img src="https://via.placeholder.com/150" alt="Imagen 2" width="150">
-  </a>
-  <a href="https://enlace3.com" target="_blank">
-    <img src="https://via.placeholder.com/150" alt="Imagen 3" width="150">
-  </a>
-  <a href="https://enlace3.com" target="_blank">
-    <img src="https://via.placeholder.com/150" alt="Imagen 3" width="150">
-  </a>
-  <a href="https://enlace3.com" target="_blank">
-    <img src="https://via.placeholder.com/150" alt="Imagen 3" width="150">
-  </a>
-  <a href="https://enlace3.com" target="_blank">
-    <img src="https://via.placeholder.com/150" alt="Imagen 3" width="150">
-  </a>
+
+![Static Badge](https://img.shields.io/badge/Carrera-Cs%20de%20la%20Computaci%C3%B3n-blue)
+![Static Badge](https://img.shields.io/badge/Archivos%20pdf%20-%20brown)
+![Static Badge](https://img.shields.io/badge/Archivos%20haskell%20-%20purple)
+![Static Badge](https://img.shields.io/badge/Archivos%20c%20-%20green)
+
+---
+
+<div style="text-align:center;">
+  <h4>Apuntes - Resúmenes</h4>
 </div>
+
+| [![Compilación](./assets/readme.imgs/comp.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Funcional/Compilaci%C3%B3n/compilacion.pdf) | [![Interpretación de errores](./assets/readme.imgs/erro.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Apuntes%20-%20Documentos/Determinantes%20de%20orden%20n/detordenn.pdf) | [![Pattern Matching](./assets/readme.imgs/pm.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Funcional/Pattern%20Matching/patternMatching.pdf) | [![Arreglos en C](./assets/readme.imgs/aec.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Imperativa/Arreglos%20en%20C/ArraysC.pdf) |
+|:---:|:---:|:---:|:---:|
+| [Compilación](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Funcional/Compilaci%C3%B3n/compilacion.pdf) | [Interpretación de errores](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Funcional/Interpretaci%C3%B3n%20de%20errores/errores.pdf) | [Pattern Matching](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Funcional/Pattern%20Matching/patternMatching.pdf) | [Arreglos en C](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Imperativa/Arreglos%20en%20C/ArraysC.pdf) |
