@@ -4,7 +4,8 @@
 Este repositorio tiene como objetivo consolidar y organizar de manera sistemática el material académico correspondiente a cada asignatura cursada. En él se encuentran recopilados apuntes de clase, presentaciones, tareas, prácticas, ejercicios y cualquier otro recurso didáctico utilizado durante el desarrollo de los respectivos programas de estudio. De esta manera, se constituye un acervo ordenado y de fácil acceso para futuras consultas o revisiones.
 
 # Índice de Contenido
-1. [Navegación - Cómo usar el repositorio](#navegacion)
+1. [Navegación - Cómo usar el repositorio](#navegación)
+2. [Materias](#materias) 
 
 ## Navegación
 ### Acceso rápido a archivos
@@ -29,6 +30,49 @@ Este comando creará una carpeta llamada "Archivos-FaMAF" en el directorio actua
    cd Archivos-FaMAF
 
 ¡Listo! Ahora tienes una copia local del repositorio en tu máquina y puedes comenzar a trabajar con los archivos.
+
+## Materias
+<div style="text-align:center;">
+  <h3>Álgebra Lineal - Álgebra II - Álgebra</h3>
+</div>
+
+![Static Badge](https://img.shields.io/badge/Carrera-Cs%20de%20la%20Computaci%C3%B3n-blue)
+![Static Badge](https://img.shields.io/badge/Archivos%20pdf%20-%20brown)
+
+---
+
+<div style="text-align:center;">
+  <h4>Apuntes - Resúmenes</h4>
+</div>
+<div align="center" style="display: flex; flex-wrap: wrap; justify-content: center;">
+  <div style="margin: 10px; text-align: center;">
+    <a href="https://enlace1.com" target="_blank">
+      <img src="./assets/readme.imgs/cambiodebase.png" alt="Imagen 1" width="150">
+    </a>
+    <div style="font-size: 14px;">Cambio de Base</div>
+  </div>
+
+  <div style="margin: 10px; text-align: center;">
+    <a href="https://enlace2.com" target="_blank">
+      <img src="./assets/readme.imgs/detinduc.png" alt="Imagen 2" width="150">
+    </a>
+    <div style="font-size: 14px;">Determinantes por inducción</div>
+  </div>
+
+  <div style="margin: 10px; text-align: center;">
+    <a href="https://enlace2.com" target="_blank">
+      <img src="./assets/readme.imgs/diagonal.png" alt="Imagen 2" width="150">
+    </a>
+    <div style="font-size: 14px;">Diagonalización</div>
+  </div>
+
+  <div style="margin: 10px; text-align: center;">
+    <a href="https://enlace2.com" target="_blank">
+      <img src="./assets/readme.imgs/planos.png" alt="Imagen 2" width="150">
+    </a>
+    <div style="font-size: 14px;">Planos</div>
+  </div>
+</div>
 
 ## Apuntes Notas de Clase
 </div>
