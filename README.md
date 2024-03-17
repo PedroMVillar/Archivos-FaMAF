@@ -36,6 +36,7 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 
 - [Álgebra Lineal - Álgebra II - Álgebra](#algebra-lineal---algebra-ii---algebra)
 - [Algoritmos y Estructuras de Datos 1](#algoritmos-y-estructuras-de-datos-1)
+- [Algoritmos y Estructuras de Datos 2](#algoritmos-y-estructuras-de-datos-2)
 
 
 <div style="text-align:center;">
@@ -43,6 +44,7 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 </div>
 
 ![Static Badge](https://img.shields.io/badge/Carrera-Cs%20de%20la%20Computaci%C3%B3n-blue)
+![Static Badge](https://img.shields.io/badge/Carrera-Matem%C3%A1tica%20Aplicada-yellow)
 ![Static Badge](https://img.shields.io/badge/Archivos%20pdf%20-%20brown)
 
 ---
@@ -107,3 +109,22 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 | [![Compilación](./assets/readme.imgs/comp.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Funcional/Compilaci%C3%B3n/compilacion.pdf) | [![Interpretación de errores](./assets/readme.imgs/erro.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Apuntes%20-%20Documentos/Determinantes%20de%20orden%20n/detordenn.pdf) | [![Pattern Matching](./assets/readme.imgs/pm.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Funcional/Pattern%20Matching/patternMatching.pdf) | [![Arreglos en C](./assets/readme.imgs/aec.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Imperativa/Arreglos%20en%20C/ArraysC.pdf) |
 |:---:|:---:|:---:|:---:|
 | [Compilación](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Funcional/Compilaci%C3%B3n/compilacion.pdf) | [Interpretación de errores](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Funcional/Interpretaci%C3%B3n%20de%20errores/errores.pdf) | [Pattern Matching](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Funcional/Pattern%20Matching/patternMatching.pdf) | [Arreglos en C](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Imperativa/Arreglos%20en%20C/ArraysC.pdf) |
+
+---
+
+<div style="text-align:center;">
+  <h4>Proyectos</h4>
+</div>
+
+- [Proyecto 1](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programación%20Funcional/Proyecto%201/)
+  - [Código](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programación%20Funcional/Proyecto%201/proyecto1.hs)
+  - [Explicación](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programación%20Funcional/Proyecto%201/Explicación%20Teórica/Proyecto1.pdf)
+- [Proyecto 2](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programación%20Funcional/Proyecto%202/)
+  - [Código](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programación%20Funcional/Proyecto%202/Proyecto2.hs)
+  - [Explicación](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programación%20Funcional/Proyecto%202/Explicación%20Teórica/Proyecto%202%20-%20Slides.pdf)
+- [Proyecto 3](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programación%20Imperativa/Proyecto%203/Archivos%20C/)
+- [Proyecto 4](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programación%20Imperativa/Proyecto%204/Archivos%20C/)
+
+<div style="text-align:center;">
+  <h3>Algoritmos y Estructuras de Datos 2</h3>
+</div>
