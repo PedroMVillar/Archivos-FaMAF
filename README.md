@@ -35,6 +35,7 @@ Este comando creará una carpeta llamada "Archivos-FaMAF" en el directorio actua
 Cada materia cursada se encuentra organizada en una carpeta específica, que contiene todos los recursos académicos correspondientes a la asignatura. A continuación, se presenta un listado de las materias disponibles en el repositorio.
 
 - [Álgebra Lineal - Álgebra II - Álgebra](#algebra-lineal---algebra-ii---algebra)
+- [Algoritmos y Estructuras de Datos 1](#algoritmos-y-estructuras-de-datos-1)
 
 
 <div style="text-align:center;">
