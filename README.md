@@ -128,3 +128,10 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 <div style="text-align:center;">
   <h3>Algoritmos y Estructuras de Datos 2</h3>
 </div>
+
+![Static Badge](https://img.shields.io/badge/Carrera-Cs%20de%20la%20Computaci%C3%B3n-blue)
+![Static Badge](https://img.shields.io/badge/Archivos%20pdf%20-%20brown)
+![Static Badge](https://img.shields.io/badge/Archivos%20c%20-%20green)
+
+---
+
