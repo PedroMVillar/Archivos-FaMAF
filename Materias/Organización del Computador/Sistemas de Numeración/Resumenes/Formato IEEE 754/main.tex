@@ -1,0 +1,116 @@
+\documentclass[20pt,margin=1in,innermargin=-4.5in,blockverticalspace=-0.25in]{tikzposter}
+\geometry{paperwidth=42in,paperheight=30in}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage[backend=biber,style=numeric]{biblatex}
+\usepackage{emory-theme}
+\usepackage{emory-theme}
+\usepackage{mwe} % for placeholder images
+\usepackage{booktabs}
+% set theme parameters
+\tikzposterlatexaffectionproofoff
+\usetheme{EmoryTheme}
+\usecolorstyle{EmoryStyle}
+
+\title{Sistemas de Numeración}
+\author{Sistema IEEE 754 - Precisión Simple}
+\institute{Organización del Computador - Primer Cuatrimestre 2024}	
+\titlegraphic{\adjustbox{left=0.35\textwidth}{\includegraphics[width=0.3\textwidth]{famaf-logo.jpg}}}
+
+% begin document
+\begin{document}
+\maketitle
+\centering
+\block{¿Qué es el sistema IEEE 754?}{
+        El sistema IEEE 754 es un estándar para la representación de números en punto flotante. Este sistema establece las caracteristicas de las tres partes de un número en punto flotante: el \textbf{signo}, \textbf{exponente} y \textbf{fracción (mantisa)}. Se enfoca en el método de precisión simple que utiliza 32 bits.
+    }
+\begin{columns}
+    \column{0.5}
+    \block{Características}{
+        \begin{center} \textbf{Bit de signo:} \end{center}
+        El bit de signo es el primer bit del número en punto flotante. \textbf{Si el bit de signo es 0}, el número es \textbf{positivo}, \textbf{si es 1}, el número es \textbf{negativo}.    
+        \begin{center} \textbf{Exponente:} \end{center}
+        Indica cuántos “lugares” se debe desplazar hacia la derecha o hacia la izquierda la coma binaria de la parte significativa. El exponente de un número puede ser tanto positivo como negativo. En el caso de la precisión simple, el exponente se representa con 8 bits y se suma 127 al valor del exponente para obtener el valor.
+        \begin{center} \textbf{Mantisa o parte fraccionaria:} \end{center}
+        La mantisa es la parte fraccionaria del número en punto flotante. En el caso de la precisión simple, la mantisa se representa con 23 bits. Debe ser normalizada, eso se logra moviendo la coma binaria a la izquierda hasta que el primer bit sea 1.
+        \begin{equation*}
+            1,xxxxx \times 2^{yyyy}
+        \end{equation*}
+        Al hacer esto, se debe adaptar el exponente para que el valor no se modifique, es decir, el exponente será ahora \textbf{la cantidad de veces que se movió la coma binaria a la izquierda}.
+    }
+
+    \block{Convertir de decimal a IEEE 754}{
+        \begin{enumerate}
+            \item Determinar el bit de signo.
+            \item Convertir la parte entera y la parte fraccionaria a binario.
+            \item Normalizar.
+            \item Encontrar el exponente moviendo la coma y sumando 127, expresado en binario.
+            \item Encontrar la parte fraccionaria.
+            \item Conformar el número en punto flotante.
+        \end{enumerate}
+    }
+    \block{Convertir de IEEE 754 a decimal}{
+        \begin{enumerate}
+            \item Dividir el número en punto flotante en sus tres partes.
+            \item Encontrar el bit de signo.
+            \item Encontrar el exponente y restarle 127.
+            \item Desnormalizar el número y pasarlo a decimal.
+        \end{enumerate}
+    }
+    
+    \column{0.5}
+    \block{Ejemplo de conversión de decimal a IEEE 754}{
+        Se busca convertir el número $723.125_{10}$ a IEEE 754.
+        \begin{enumerate}
+            \item El bit de signo es 0, ya que el número es positivo.
+            \item Se convierte la parte entera y la parte fraccionaria a binario.
+            \begin{itemize}
+                \item Parte entera:
+                \begin{align*}
+                    723 \div 2 &= 361 \text{ residuo } 1 \\
+                    361 \div 2 &= 180 \text{ residuo } 1 \\
+                    180 \div 2 &= 90 \text{ residuo } 0 \\
+                    90 \div 2 &= 45 \text{ residuo } 0 \\
+                    45 \div 2 &= 22 \text{ residuo } 1 \\
+                    22 \div 2 &= 11 \text{ residuo } 0 \\
+                    11 \div 2 &= 5 \text{ residuo } 1 \\
+                    5 \div 2 &= 2 \text{ residuo } 1 \\
+                    2 \div 2 &= 1 \text{ residuo } 0 \\
+                    1 \div 2 &= 0 \text{ residuo } 1 \\
+                \end{align*}
+                Por lo que la parte entera en binario es $1011010011$.
+                \item Parte fraccionaria:
+                \begin{align*}
+                    0.125 \times 2 &= 0.25 \\
+                    0.25 \times 2 &= 0.5 \\
+                    0.5 \times 2 &= 1
+                \end{align*}
+                Por lo que la parte fraccionaria en binario es $001$.
+            \end{itemize}
+            El número en binario es $1011010011.001$.
+            \item Para normalizar movemos la coma tantos lugares como sea necesario para que quede un uno seguido por una parte fraccionaria.
+            \begin{itemize}
+                \item \textbf{Sin normalizar:} $1011010011.001 \times 2^0$
+                \item \textbf{Normalizado:} $1.011010011001 \times 2^{10}$
+            \end{itemize}
+            \item El exponente es la cantidad de veces que se movió la coma binaria a la izquierda, en este caso, 10 veces. Por lo que el exponente es $127 + 10 = 137_{10} = 10001001_2$.
+            \item La parte fraccionaria se compone por los 23 bits que siguen a la coma decimal del número normalizado.
+            \begin{equation*}
+                01101001100100000000000
+            \end{equation*}
+            \item Para conformar el número en punto flotante, se coloca el bit de signo, el exponente y la parte fraccionaria.
+            \begin{equation*}
+                0 \ 10001001 \ 01101001100100000000000
+            \end{equation*}
+        \end{enumerate}   
+    }
+\end{columns}
+
+\end{document}

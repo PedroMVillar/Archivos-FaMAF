@@ -1,0 +1,431 @@
+\section{Sistemas Binarios de Numeración}
+
+Un número decimal, como por ejemplo $4543$, representa una cantidad igual a 4 millares, 5 centenas, 4 decenas y 3 unidades. En general, un número decimal se puede expresar como una suma de potencias de 10, multiplicadas por los dígitos que lo componen. Por ejemplo, el número 4543 se puede expresar como:
+\begin{equation*}
+    4543 = \textcolor{blue}{4} \cdot 10^3 + \textcolor{blue}{5} \cdot 10^2 + \textcolor{blue}{4} \cdot 10^1 + \textcolor{blue}{3} \cdot 10^0
+\end{equation*}
+
+\begin{observacion}
+    En general un número decimal se puede expresar como:
+    \begin{equation*}
+        \textcolor{blue}{a_n} \cdot 10^n + \textcolor{blue}{a_{n-1}} \cdot 10^{n-1} + \ldots + \textcolor{blue}{a_1} \cdot 10^1 + \textcolor{blue}{a_0} \cdot 10^0
+    \end{equation*}
+    donde $a_i$ es un dígito decimal y $n$ es el número de dígitos menos uno.
+    \newline Los coeficientes $a_i$ son números enteros no negativos menores que 10. El valor $i$ indica la posición del dígito en el número, comenzando por la derecha con $i = 0$ y por tanto, la potencia de 10 correspondiente es $10^i$.
+\end{observacion}
+
+Decimos que un sistema numérico decimal es base $10$ porque usa diez dígitos: $0, 1, 2, 3, 4, 5, 6, 7, 8, 9$. En general, un sistema numérico de base $b$ usa $b$ dígitos, que son los números enteros no negativos menores que $b$. Por ejemplo, el \textbf{sistema binario} es base $2$ porque usa dos dígitos: $0$ y $1$.
+
+\begin{defi}[Sistema Binario]
+    El sistema binario es un sistema de numeración en el que los números se representan utilizando solamente dos dígitos: 0 y 1.
+\end{defi}
+
+En este sistema, cada coeficiente $a_i$ es un dígito binario, es decir, un $0$ o un $1$ y se multiplica por una potencia de $2$ en lugar de $10$. Por ejemplo, el número binario $1011$ se puede expresar como:
+\begin{equation*}
+    1011 = \textcolor{blue}{1} \cdot 2^3 + \textcolor{blue}{0} \cdot 2^2 + \textcolor{blue}{1} \cdot 2^1 + \textcolor{blue}{1} \cdot 2^0
+\end{equation*}
+O tomando un número con punto decimal, por ejemplo $11010.11$, se puede expresar como:
+\begin{equation*}
+    11010.11 = \textcolor{blue}{1} \cdot 2^4 + \textcolor{blue}{1} \cdot 2^3 + \textcolor{blue}{0} \cdot 2^2 + \textcolor{blue}{1} \cdot 2^1 + \textcolor{blue}{0} \cdot 2^0 + \textcolor{blue}{1} \cdot 2^{-1} + \textcolor{blue}{1} \cdot 2^{-2}
+\end{equation*}
+
+\begin{observacion}
+    En general, un número expresado en base $r$ consiste en una secuencia de dígitos $a_i$ que se multiplican por potencias de $r$:
+    \begin{equation*}
+        \textcolor{blue}{a_n} \cdot r^n + \textcolor{blue}{a_{n-1}} \cdot r^{n-1} + \ldots + \textcolor{blue}{a_1} \cdot r^1 + \textcolor{blue}{a_0} \cdot r^0 + \textcolor{blue}{a_{-1}} \cdot r^{-1} + \textcolor{blue}{a_{-2}} \cdot r^{-2} + \ldots
+    \end{equation*}
+    Donde el valor de los coeficientes $a_i$ es un número entero que varía entre $0$ y $r-1$.
+\end{observacion}
+
+Se acostumbra tomar del sistema decimal los $r$ dígitos requeridos si la base es menor que $10$, y utilizar las letras del alfabeto para representar los dígitos adicionales. Por ejemplo, en el sistema hexadecimal, que es base $16$, se utilizan los dígitos del $0$ al $9$ y las letras del alfabeto $A, B, C, D, E, F$ para representar los dígitos $10, 11, 12, 13, 14, 15$ respectivamente. Por ejemplo, en la base hexadecimal, el número $2A3F$ se puede expresar como:
+\begin{equation*}
+    2A3F = \textcolor{blue}{2} \cdot 16^3 + \textcolor{blue}{10} \cdot 16^2 + \textcolor{blue}{3} \cdot 16^1 + \textcolor{blue}{15} \cdot 16^0
+\end{equation*}
+
+\begin{defi}[Sistema hexadecimal]
+    El sistema hexadecimal es un sistema de numeración en el que los números se representan utilizando dieciséis dígitos: $0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F$.
+\end{defi}
+
+\subsection{Operaciones en el sistema binario}
+
+\begin{metodo}[Conversión de binario a decimal]
+    Para convertir un número binario a decimal, se multiplica cada dígito binario (\textit{bit}) por la potencia de $2$ correspondiente a su posición y se suman los resultados.
+    \begin{equation*}
+        \textcolor{blue}{a_n} \cdot 2^n + \textcolor{blue}{a_{n-1}} \cdot 2^{n-1} + \ldots + \textcolor{blue}{a_1} \cdot 2^1 + \textcolor{blue}{a_0} \cdot 2^0
+    \end{equation*}
+    Notar que si el bit es $0$, su contribución a la suma es $0$, y si el bit es $1$, su contribución a la suma es $2^i$.
+\end{metodo}
+
+A continuación, se muestra una tabla con las potencias de $2$ y su valor en decimal:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Potencia de 2} & \textbf{Valor en decimal} \\ \hline
+        $2^0$                 & 1                        \\ \hline
+        $2^1$                 & 2                        \\ \hline
+        $2^2$                 & 4                        \\ \hline
+        $2^3$                 & 8                        \\ \hline
+        $2^4$                 & 16                       \\ \hline
+        $2^5$                 & 32                       \\ \hline
+        $2^6$                 & 64                       \\ \hline
+        $2^7$                 & 128                      \\ \hline
+        $2^8$                 & 256                      \\ \hline
+        $2^9$                 & 512                      \\ \hline
+        $2^{10}$              & 1024                     \\ \hline
+    \end{tabular}
+\end{table}
+
+\begin{metodo}[Suma de números binarios]
+    La suma de dos números binarios se realiza de la misma forma que la suma de dos números decimales, pero con la diferencia de que el acarreo se produce cuando el resultado de la suma de dos bits es $2$ o más. En este caso, el bit de la suma se coloca en la posición correspondiente y se lleva un acarreo a la posición siguiente.
+    Por ejemplo, la suma de $1011$ y $1101$ se realiza de la siguiente forma:
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{cccccc}
+            & 1 & 0 & 1 & 1 & (11) \\
+            + & 1 & 1 & 0 & 1 & (13) \\ \hline
+            1 & 0 & 0 & 0 & 0 & (24)
+        \end{tabular}
+    \end{table}
+    El resultado es $10000$ en binario, que es igual a $16$ en decimal.
+    Hay que tener en cuenta las siguientes reglas:
+    \begin{itemize}
+        \item $0 + 0 = 0$
+        \item $0 + 1 = 1$
+        \item $1 + 0 = 1$
+        \item $1 + 1 = 10$
+    \end{itemize}
+\end{metodo}
+
+\begin{metodo}[Resta de números binarios]
+    La resta de dos números binarios se realiza de la misma forma que la resta de dos números decimales, pero con la diferencia de que el préstamo se produce cuando el resultado de la resta de dos bits es negativo. En este caso, se toma prestado un bit de la posición siguiente.
+    Por ejemplo, la resta de $1101$ y $1011$ se realiza de la siguiente forma:
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{cccccc}
+            & 1 & 1 & 0 & 1 & (13) \\
+            - & 1 & 0 & 1 & 1 & (11) \\ \hline
+            0 & 1 & 0 & 0 & 0 & (2)
+        \end{tabular}
+    \end{table}
+    El resultado es $100$ en binario, que es igual a $4$ en decimal.
+    Hay que tener en cuenta las siguientes reglas:
+    \begin{itemize}
+        \item $0 - 0 = 0$
+        \item $0 - 1 = 1$ (y llevamos 1 )
+        \item $1 - 0 = 1$
+        \item $1 - 1 = 0$
+    \end{itemize}
+\end{metodo}
+
+\begin{metodo}[Multiplicación de números binarios]
+    La multiplicación de dos números binarios se realiza teniendo en cuenta dos reglas, la primera regla dice. \textbf{Todo número multiplicado por cero es igual a cero} y la segunda, que \textbf{uno por uno, es igual a uno.} Luego, el producto se puede hacer de la misma forma a la que se hace en el sistema decimal, esto consiste en multiplicar el multiplicando por cada uno de los dígitos del multiplicador y luego se realiza la suma de los productos.
+    Por ejemplo, la multiplicación de $110$ y $10$ se realiza de la siguiente forma:
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{ccccc}
+            &   & 1 & 1 & 0 \\
+            & x &   & 1 & 0 \\ \hline
+            &   & 0 & 0 & 0 \\
+            + & 1 & 1 & 0 &  \\ \hline
+            & 1 & 1 & 0 & 0
+        \end{tabular}
+    \end{table}
+\end{metodo}
+
+\subsection{Conversiones de base numérica}
+El proceso de convertir un número de un sistema numérico a otro se realiza plantenado el número en el sistema original y luego se divide sucesivamente por la base del sistema al que se quiere convertir, tomando el residuo de cada división. El resultado se obtiene tomando los residuos en orden inverso. Por ejemplo, para convertir el número $23$ en base $10$ a base $2$, se realiza el siguiente proceso:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c|c}
+        \textbf{División} & \textbf{Cociente} & \textbf{Residuo} \\ \hline
+        23                & 11                & 1                \\
+        11                & 5                 & 1                \\
+        5                 & 2                 & 1                \\
+        2                 & 1                 & 0                \\
+        1                 & 0                 & 1
+    \end{tabular}
+\end{table}
+Por lo tanto el número $23$ en base $10$ es igual a $10111$ en base $2$. Para convertir un número de base $2$ a base $10$, se realiza el proceso inverso, multiplicando cada dígito por la potencia de $2$ correspondiente a su posición y sumando los resultados.
+
+\begin{observacion}
+    La conversión de enteros decimales a cualquier base $r$ se puede realizar mediante el algoritmo de la división sucesiva. El algoritmo consiste en dividir el número decimal por la base $r$ y tomar el residuo. Luego, se divide el cociente obtenido por la base $r$ y se toma el residuo. Este proceso se repite hasta que el cociente sea cero. El número en base $r$ se obtiene tomando los residuos en orden inverso.
+\end{observacion}
+
+\begin{ejemplo}[Conversión de base $10$ a base $2$]
+    Convertir el número $47$ en base $10$ a base $2$.
+\end{ejemplo}
+\begin{solution}
+    Se realiza el algoritmo de la división sucesiva:
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|c|c}
+            \textbf{División} & \textbf{Cociente} & \textbf{Residuo} \\ \hline
+            47                & 23                & 1                \\
+            23                & 11                & 1                \\
+            11                & 5                 & 1                \\
+            5                 & 2                 & 1                \\
+            2                 & 1                 & 0                \\
+            1                 & 0                 & 1
+        \end{tabular}
+    \end{table}
+    Por lo tanto, el número $47$ en base $10$ es igual a $101111$ en base $2$.
+\end{solution}
+
+\begin{ejemplo}[Conversión de base $2$ a base $10$]
+    Convertir el número $101110$ en base $2$ a base $10$.
+\end{ejemplo}
+\begin{solution}
+    Se realiza el proceso inverso, multiplicando cada dígito por la potencia de $2$ correspondiente a su posición y sumando los resultados:
+    \begin{equation*}
+        101110 = 1 \cdot 2^5 + 0 \cdot 2^4 + 1 \cdot 2^3 + 1 \cdot 2^2 + 1 \cdot 2^1 + 0 \cdot 2^0 = 32 + 0 + 8 + 4 + 2 + 0 = 46
+    \end{equation*}
+    Por lo tanto, el número $101110$ en base $2$ es igual a $46$ en base $10$.
+\end{solution}
+
+\begin{ejemplo}[Conversión de base $10$ a base $8$]
+    Convertir $153$ decimal a octal.
+\end{ejemplo}
+\begin{solution}
+    Se realiza el algoritmo de la división sucesiva:
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|c|c}
+            \textbf{División} & \textbf{Cociente} & \textbf{Residuo} \\ \hline
+            153               & 19                & 1                \\
+            19                & 2                 & 3                \\
+            2                 & 0                 & 2
+        \end{tabular}
+    \end{table}
+    Por lo tanto, el número $153$ en base $10$ es igual a $231$ en base $8$.
+\end{solution}
+Ahora veamos como se tratan las fracciones decimales. \newline
+La conversión de una \textit{fracción} decimal a binario se efectúa con un método similar al que se utiliza con enteros decimales, pero se multiplica en lugar de dividir y se acumulan enteros en vez de residuos.
+Por ejemplo, se tiene que convertir el número $(0.6875)_{10}$ a binario. Se multiplica el número por $2$ y se toma la parte entera del resultado, luego se multiplica la parte decimal del resultado por $2$ y se toma la parte entera del resultado, y así sucesivamente. El resultado se obtiene tomando las partes enteras en orden
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c|c}
+        \textbf{Multiplicación} & \textbf{Parte entera} & \textbf{Parte decimal} \\ \hline
+        $0.6875 \cdot 2 = 1.375$ & 1                     & 0.375                  \\
+        $0.375 \cdot 2 = 0.75$   & 0                     & 0.75                   \\
+        $0.75 \cdot 2 = 1.5$     & 1                     & 0.5                    \\
+        $0.5 \cdot 2 = 1.0$      & 1                     & 0
+    \end{tabular}
+\end{table}
+Por lo tanto la respuesta es $(0.1011)_{2}$.
+
+\begin{observacion}
+    Para convertir una fracción decimal a un número en base $r$, seguimos un procedimiento similar, multiplicando por $r$ y tomando la parte entera del resultado, y luego multiplicando la parte decimal del resultado por $r$ y tomando la parte entera del resultado, y así sucesivamente. El resultado se obtiene tomando las partes enteras en orden.
+\end{observacion}
+
+\begin{ejemplo}[Conversión de fracción decimal a octal]
+    Convertir $(0.513)_{10}$ a octal. 
+\end{ejemplo}
+\begin{solution}
+    Se multiplica el número por $8$ y se toma la parte entera del resultado, luego se multiplica la parte decimal del resultado por $8$ y se toma la parte entera del resultado, y así sucesivamente. El resultado se obtiene tomando las partes enteras en orden.
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|c|c}
+            \textbf{Multiplicación} & \textbf{Parte entera} & \textbf{Parte decimal} \\ \hline
+            $0.513 \cdot 8 = 4.104$ & 4                     & 0.104                  \\
+            $0.104 \cdot 8 = 0.832$ & 0                     & 0.832                  \\
+            $0.832 \cdot 8 = 6.656$ & 6                     & 0.656                  \\
+            $0.656 \cdot 8 = 5.248$ & 5                     & 0.248                  \\
+            $0.248 \cdot 8 = 1.984$ & 1                     & 0.984                  \\
+            $0.984 \cdot 8 = 7.872$ & 7                     & 0.872                  \\
+        \end{tabular}
+    \end{table}
+    Por lo tanto, la respuesta es $(0.406517)_{8}$.
+\end{solution}
+
+\subsection{Conversión entre octal y hexadecimal}
+Las conversiones entre binario, octal y hexadecimal desempeñan un papel importante en las computadoras digitales. Puesto que $2^3=8$ y $2^4=16$, cada dígito octal corresponde a tres dígitos binarios y cada dígito hexadecimal corresponde a cuatro dígitos binarios. En la siguiente tabla se presentan los primeros $16$ números de los sistemas binario, octal y hexadecimal.
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|} % Se agregó una columna adicional para los números hexadecimales
+        \hline
+        \textbf{Decimal (base 10)} & \textbf{Binario (base 2)} & \textbf{Octal (base 8)} & \textbf{Hexadecimal (base 16)} \\ \hline
+        0                           & 0000                      & 0                       & 0                              \\ \hline
+        1                           & 0001                      & 1                       & 1                              \\ \hline
+        2                           & 0010                      & 2                       & 2                              \\ \hline
+        3                           & 0011                      & 3                       & 3                              \\ \hline
+        4                           & 0100                      & 4                       & 4                              \\ \hline
+        5                           & 0101                      & 5                       & 5                              \\ \hline
+        6                           & 0110                      & 6                       & 6                              \\ \hline
+        7                           & 0111                      & 7                       & 7                              \\ \hline
+        8                           & 1000                      & 10                      & 8                              \\ \hline
+        9                           & 1001                      & 11                      & 9                              \\ \hline
+        10                          & 1010                      & 12                      & A                              \\ \hline
+        11                          & 1011                      & 13                      & B                              \\ \hline
+        12                          & 1100                      & 14                      & C                              \\ \hline
+        13                          & 1101                      & 15                      & D                              \\ \hline
+        14                          & 1110                      & 16                      & E                              \\ \hline
+        15                          & 1111                      & 17                      & F                              \\ \hline
+    \end{tabular}
+\end{table}
+
+\begin{metodo}[Conversión de binario a octal]
+    La conversión de binario a octal se efectúa facilmente acomodando los dígitos del número binario en grupos de tres, partiendo del punto binario tanto a la izquierda como a la derecha. Luego, se asigna el dígito octal correspondiente a cada grupo. Así se ilustra el proceso de conversión de binario a octal:
+    \begin{equation*}
+        \underbrace{101}_{5} \underbrace{110}_{6} \Rightarrow (101.110)_2 = (5.6)_8
+    \end{equation*}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|c|c}
+            \textbf{Binario} & \textbf{Octal} & \textbf{Decimal} \\ \hline
+            101              & 5              & 5                \\
+            110              & 6              & 6                \\
+            101.110          & 5.6            & 5.75
+        \end{tabular}
+    \end{table}
+\end{metodo}
+
+\begin{metodo}[Conversión de octal o hexadecimal a binario]
+    La conversión de octal o hexadecimal a binario se hace invirtiendoel procedimiento anterior. Cada dígito octal se convierte a su equivalente binario de tres dígitos. Asimismo, cada dígito hexadecimal se convierte en su equivalente binario de cuatro dígitos. Por ejemplo, el número $(5.6)_8$ se convierte a binario de la siguiente forma:
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|c|c}
+            \textbf{Octal} & \textbf{Binario} & \textbf{Decimal} \\ \hline
+            5              & 101              & 5                \\
+            6              & 110              & 6                \\
+            5.6            & 101.110          & 5.75
+        \end{tabular}
+    \end{table}
+    Y el número $306.D_{16}$ se convierte a binario de la siguiente forma:
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|c|c}
+            \textbf{Hexadecimal} & \textbf{Binario} & \textbf{Decimal} \\ \hline
+            3                    & 0011             & 3                \\
+            0                    & 0000             & 0                \\
+            6                    & 0110             & 6                \\
+            D                    & 1101             & 13               \\
+            306.D                & 001100000110.1101 & 774.8125
+        \end{tabular}
+    \end{table}
+\end{metodo}
+
+\subsection{Complementos}
+
+\begin{defi}[Complemento a la base disminuida]
+    Dado un número $N$ en base $r$ que tiene $n$ dígitos, el complemento $(r-1)$ de $N$ se define como el número $(r^n - 1) - N$. En el caso de los números decimales $(r=10)$, el complemento $(r-1)$ de $N$ se define como el número $(10^n - 1) - N$. En este caso, $10^n$ representa un número que consiste en un uno seguido de $n$ ceros. $10^n -1$ es un número que consiste en $n$ nueves. 
+\end{defi}
+
+\begin{ejemplo}[Complemento $(r-1)$ de un número decimal]
+    Por ejemplo en la base decimal, se tiene $n=4$, tenemos $10^4 = 10000$ y $10^4 - 1 = 9999$. Entonces, el complemento $(10-1)$ de $1234$ es $9999 - 1234 = 8765$.
+\end{ejemplo}
+
+\begin{ejemplo}[Complemeto $(r-1)$ de un número decimal]
+    Se tiene $N= 546700$ y se quiere calcular el complemento $(10-1)$ de $N$. Se tiene que $10^6 = 1000000$ y $10^6 - 1 = 999999$. Entonces, el complemento $(10-1)$ de $546700$ es $999999 - 546700 = 453299$.
+\end{ejemplo}
+
+\begin{ejemplo}[Complemento $(r-1)$ de un número decimal]
+    Se tiene $N = 012398$ y se quiere calcular el complemento $(10-1)$ de $N$. Se tiene que $10^6 = 1000000$ y $10^6 - 1 = 999999$. Entonces, el complemento $(10-1)$ de $012398$ es $999999 - 12398 = 987601$.
+\end{ejemplo}
+
+\begin{observacion}[Complemento de números binarios]
+    El complemento $(2-1)$ de un número binario se define como el número $(2^n - 1) - N$. En este caso, $2^n$ representa un número que consiste en un uno seguido de $n$ ceros. $2^n -1$ es un número que consiste en $n$ unos.
+\end{observacion}
+
+\begin{ejemplo}[Complemento $(2-1)$ de un número binario]
+    Si se tiene $n=4$, tenemos $2^4 = 10000$ y $2^4 - 1 = 1111$. Entonces, el complemento $(2-1)$ de $1010$ es $1111 - 1010 = 0101$.
+\end{ejemplo}
+Con esto podriamos decir que el complemento a uno de un número binario se obtiene restando cada dígito a uno. Sin embargo, al restar números binarios a uno podemos tener $1-0=1$ o bien $1-1=0$, lo que hace que el bit cambie de $0$ a $1$ o de $1$ a $0$. Por lo tanto, \textbf{el complemento a uno de un número binario se obtiene cambiando cada dígito $0$ por $1$ y cada dígito $1$ por $0$.}
+
+\begin{defi}[Complemento a la base]
+    El complemento a $r$ de un número $N$ de $n$ dígitos en base $r$ se define como $r^n-N$, para $N\neq 0$, y 0 para $N=0$.
+\end{defi}
+
+\begin{observacion}
+    Puesto que $10^n$ es un número que se representa con un uno seguido de $n$ ceros, $10^n-N$, que se define como el complemento $10$ de $N$, tambien puede formarse dejando como están todos los ceros menos significativos, restando a $10$ el primer dígito menos significativo distinto de cero, y restando $9$ a los demas dígitos de la izquierda.
+\end{observacion}
+
+\begin{ejemplo}[Complemento a $10$ de un número decimal]
+    Se tiene que buscar el complemento a $10$ de $N=012398$ en base $10$. Se tiene que $10^6 = 1000000$. Entonces, el complemento a $10$ de $012398$ es $1000000 - 12398 = 987602$.
+\end{ejemplo}
+
+\begin{ejemplo}[Complemento a $10$ de un número decimal]
+    Se tiene que buscar el complemento a $10$ de $N=546700$ en base $10$. Se tiene que $10^6 = 1000000$. Entonces, el complemento a $10$ de $546700$ es $1000000 - 546700 = 453300$.
+\end{ejemplo}
+
+\subsection{Complemento con punto}
+Si el número $N$ original lleva punto, deberá quitarse temporalmente para formar el complemento a $r$o a $(r-1)$, y volver a colocarlo despues del número complementado en la misma posición relativa. También vale la pena mencionar que el complemento del complemento restablece el valor original del número. El complemento a $r$ de $N$ es $r^n-N$.
+
+\subsection{Solución del Práctico 1}
+\begin{ejer}
+    Convertir los siguientes números en hexadecimal a binario de 32 bits:
+    \begin{itemize}
+        \item[a)] $0xABCDEF00$
+        \item[b)] $0x123456$
+        \item[c)] $0x8E3FC581$
+        \item[d)] $0x10A6F2B$
+    \end{itemize}
+\end{ejer}
+
+\begin{solution}
+    \textbf{Punto a:} Se tiene que $0xABCDEF00 = 10101011110011011110111100000000$.
+    \begin{equation*}
+        \underbrace{A}_{1010} \underbrace{B}_{1011} \underbrace{C}_{1100} \underbrace{D}_{1101} \underbrace{E}_{1110} \underbrace{F}_{1111} \underbrace{0}_{0000} \underbrace{0}_{0000}
+    \end{equation*}
+    \textbf{Punto b:} Se tiene que $0x123456 = 000100100011010001010110$.
+    \begin{equation*}
+        \underbrace{1}_{0001} \underbrace{2}_{0010} \underbrace{3}_{0011} \underbrace{4}_{0100} \underbrace{5}_{0101} \underbrace{6}_{0110}
+    \end{equation*}
+    \textbf{Punto c:} Se tiene que $0x8E3FC581 = 10001110001111111100010110000001$.
+    \begin{equation*}
+        \underbrace{8}_{1000} \underbrace{E}_{1110} \underbrace{3}_{0011} \underbrace{F}_{1111} \underbrace{C}_{1100} \underbrace{5}_{0101} \underbrace{8}_{1000} \underbrace{1}_{0001}
+    \end{equation*}
+    \textbf{Punto d:} Se tiene que $0x10A6F2B = 000100001010011011110010101011$.
+    \begin{equation*}
+        \underbrace{1}_{0001} \underbrace{0}_{0000} \underbrace{A}_{1010} \underbrace{6}_{0110} \underbrace{F}_{1111} \underbrace{2}_{0010} \underbrace{B}_{1011}
+    \end{equation*}
+\end{solution}
+
+\begin{ejer}
+    Convertir los siguientes números en binario a decimal y a hexadecimal:
+    \begin{itemize}
+        \item[a)] $1110011110000011$
+        \item[b)] $10110111001101000101111$
+        \item[c)] $10110011011011.11000010000$
+        \item[d)] $10001111110100011111.000001101$
+    \end{itemize}
+\end{ejer}
+
+\begin{solution}
+    \textbf{Punto a:} Se tiene que:
+    \begin{equation*}
+        1110011110000011 = 1 \cdot 2^{15} + 1 \cdot 2^{14} + 1 \cdot 2^{13} + 1 \cdot 2^{10} + 1 \cdot 2^9 + 1 \cdot 2^8 + 1 \cdot 2^7 + 1 \cdot 2^2 + 1 \cdot 2^1 + 1 \cdot 2^0 = 59267
+    \end{equation*}
+    Para pasar a hexadecimal hay que tomar de a cuatro dígitos:
+    \begin{equation*}
+        \underbrace{1110}_{E} \underbrace{0111}_{7} \underbrace{1000}_{8} \underbrace{0011}_{3} = 0xE783
+    \end{equation*}
+    \textbf{Punto b:} Se tiene que:
+    \begin{equation*}
+        10110111001101000101111 = 2^{22} + 2^{20} + 2^{19} + 2^{17} + 2^{16} + 2^{15} + 2^{12} + 2^{11} + 2^{9} + 2^{5} + 2^{3} + 2^{2} + 2^{1} + 2^{0} = 6003247 
+    \end{equation*}
+    Para pasar a hexadecimal hay que tomar de a cuatro dígitos:
+    \begin{equation*}
+        \underbrace{0101}_{5} \underbrace{1011}_{B} \underbrace{1001}_{9} \underbrace{1010}_{A} \underbrace{0010}_{2} \underbrace{1111}_{F} = 0x5B9A2
+    \end{equation*}
+    $\dots$
+\end{solution}
+
+\begin{ejer}
+    Suponiendo que se tienen registros de $16$ bits, convertir a binario \textbf{sin} signo los siguientes números en base $10$:
+    \begin{itemize}
+        \item[a)] $123$
+        \item[b)] $59$
+        \item[c)] $255,46$
+        \item[d)] $98.019$
+    \end{itemize}
+\end{ejer}
+
+\begin{solution}
+    \textbf{Punto a:} Se tiene que $123 = 1111011$.
+    \textbf{Punto b:} Se tiene que $59 = 111011$.
+    \textbf{Punto c:} Se tiene que $255 = 11111111$.
+    \textbf{Punto d:} Se tiene que $98.019 = 1100010.0000010011$.
+\end{solution}
+
+...

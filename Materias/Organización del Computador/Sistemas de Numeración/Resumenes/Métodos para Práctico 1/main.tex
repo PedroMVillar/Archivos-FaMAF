@@ -1,0 +1,136 @@
+\documentclass[20pt,margin=1in,innermargin=-4.5in,blockverticalspace=-0.25in]{tikzposter}
+\geometry{paperwidth=42in,paperheight=30in}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage[backend=biber,style=numeric]{biblatex}
+\usepackage{emory-theme}
+\usepackage{emory-theme}
+\usepackage{mwe} % for placeholder images
+\usepackage{booktabs}
+% set theme parameters
+\tikzposterlatexaffectionproofoff
+\usetheme{EmoryTheme}
+\usecolorstyle{EmoryStyle}
+
+\title{Sistemas de Numeración}
+\author{Práctico 1}
+\institute{Organización del Computador - Primer Cuatrimestre 2024}	
+\titlegraphic{\adjustbox{left=0.35\textwidth}{\includegraphics[width=0.3\textwidth]{famaf-logo.jpg}}}
+
+% begin document
+\begin{document}
+\maketitle
+\centering
+
+\begin{columns}
+    \column{0.33}
+    \block{Pasar de Hexadecimal a Binario}{
+        El sistema hexadecimal es una base 16, por lo que cada dígito puede representar 4 bits. Para pasar de hexadecimal a binario, simplemente se reemplaza cada dígito por su representación en 4 bits. La tabla de conversión es la siguiente:
+        
+    \begin{center}
+     \begin{tabular}{cccccc} % Eliminar las líneas verticales
+        \toprule % Línea superior más gruesa
+        Hexadecimal & Binario & Hexadecimal & Binario & Hexadecimal & Binario\\
+        \midrule % Línea intermedia más fina
+        0 & 0000 & 5 & 0101 & A & 1010 \\
+        1 & 0001 & 6 & 0110 & B & 1011 \\
+        2 & 0010 & 7 & 0111 & C & 1100 \\
+        3 & 0011 & 8 & 1000 & D & 1101 \\
+        4 & 0100 & 9 & 1001 & E & 1110 \\
+          &      &   &      & F & 1111 \\
+        \bottomrule % Línea inferior más gruesa
+    \end{tabular}
+    \end{center}
+    Por ejemplo, para pasar de \texttt{0x123456} a binario, simplemente se reemplaza cada dígito por su representación en 4 bits:
+    \begin{center}
+        \texttt{0x123456} $\rightarrow$ \texttt{0001 0010 0011 0100 0101 0110}
+    \end{center}
+    }
+
+    \block{Pasar de Binario a Hexadecimal}{
+        Para pasar de binario a hexadecimal, simplemente se agrupan los bits de a 4 y se reemplaza cada grupo por su representación en hexadecimal, teniendo en cuenta las siguientes consideraciones:
+        \begin{itemize}
+            \item Si el número tiene parte decimal, se agrupan los bits de a 4 a partir del punto decimal y luego se hace la parte entera.
+            \item Si el número de bits no es múltiplo de 4, se agrega un 0 a la izquierda para completar el último grupo.
+            \item En el caso de que en la parte fraccionaria se necesite agregar ceros se agregan a la derecha.
+        \end{itemize}
+        Por ejemplo, para pasar de \texttt{10 1100 1101 1011.1100 0010 000} a hexadecimal:
+        \begin{equation*}
+            \underbrace{0010}_{2}\underbrace{1100}_{C}\underbrace{1101}_{D}\underbrace{1011}_{B} \ \ \ \ \underbrace{1100}_{C}\underbrace{0010}_{2}\underbrace{0000}_{0}
+        \end{equation*}
+        \begin{equation*}
+            (10110011011011.11000010000)_2 = 0x2CDB.C20 
+        \end{equation*}
+    }
+
+    \block{Pasar de Hexadecimal a Decimal}{
+        Para pasar de hexadecimal a decimal, simplemente se reemplaza cada dígito por su representación en decimal y se multiplica por la potencia de 16 correspondiente. Por ejemplo, para pasar de \texttt{0x123456} a decimal:
+        \begin{equation*}
+            0x123456 = 1 \cdot 16^5 + 2 \cdot 16^4 + 3 \cdot 16^3 + 4 \cdot 16^2 + 5 \cdot 16^1 + 6 \cdot 16^0 = 1193046
+        \end{equation*}
+    }
+    
+    \block{Pasar de decimal a binario}{
+        Para pasar de decimal a binario, simplemente se divide el número por 2 y se toma el resto. Luego se divide el cociente por 2 y se toma el resto, y así sucesivamente hasta que el cociente sea 0. Luego se toman los restos en orden inverso. Por ejemplo, para pasar de 59 a binario:
+        \begin{equation*}
+            59 = 1 \cdot 2^5 + 1 \cdot 2^4 + 0 \cdot 2^3 + 1 \cdot 2^2 + 1 \cdot 2^1 + 1 \cdot 2^0 = 111011
+        \end{equation*}
+    }
+
+    \column{0.66}
+    \block{Complemento a 2 para números negativos}{
+        El complemento a 2 es una forma de representar números negativos en binario. Para obtener el complemento a 2 de un número negativo, primero se agregan ceros a la izquierda para \textbf{completar la cantidad de bits} que de el registro, luego se \textbf{invierten todos los bits} y \textbf{se le suma 1 al resultado}.
+        Por ejemplo, para obtener el complemento a 2 de -121 en 8 bits:
+        \begin{align*}
+            121/2 &= 60 \quad \text{residuo } 1\\
+            60/2 &= 30 \quad \text{residuo } 0\\
+            30/2 &= 15 \quad \text{residuo } 0\\
+            15/2 &= 7 \quad \text{residuo } 1 \quad \quad \Rightarrow 01111001 \rightarrow 10000110 + 1 = 10000111 \\
+            7/2 &= 3 \quad \text{residuo } 1\\
+            3/2 &= 1 \quad \text{residuo } 1\\
+            1/2 &= 0 \quad \text{residuo } 1
+        \end{align*}
+    }
+    %\column{0.33}
+    \block{Decimal negativo a binario con complemento a 2}{
+        \begin{enumerate}
+            \item Calcular el valor absoluto del número en binario.
+            \item Completar con ceros a la izquierda para que el número tenga la cantidad de bits que se desea.
+            \item Aplicar el complemento a 2.
+        \end{enumerate}
+    }
+    %\column{0.33}
+    \block{Binario con complemento a 2 a decimal}{
+        \begin{enumerate}
+            \item Si el bit más significativo es 1, el número es negativo. Se aplica el complemento a 2 para obtener el valor absoluto.
+            \item Se multiplica cada bit por la potencia de 2 correspondiente y se suma.
+        \end{enumerate}
+    }
+    \block{Suma binaria}{
+        Para sumar dos números en binario, simplemente se suman los bits de a pares, teniendo en cuenta que:
+        \begin{itemize}
+            \item 0 + 0 = 0
+            \item 0 + 1 = 1
+            \item 1 + 0 = 1
+            \item 1 + 1 = 10
+        \end{itemize}
+        Si la suma de dos bits es 10, se escribe 0 y se lleva 1 al siguiente par de bits.
+    }
+    \block{Resta binaria}{
+        Para restar dos números en binario, se aplica el complemento a 2 al sustraendo y se suma al minuendo. 
+        \newline Es decir si se busca hacer $A - B$, se hace $A + (-B)$. Por ejemplo para restar $10000000 - 11010000$:
+        \begin{align*}
+            10000000 - 11010000 &= 10000000 + 00110000 = 10110000
+        \end{align*}
+        El resultado es $0xB0$ en hexadecimal.
+    }
+\end{columns}
+
+\end{document}
