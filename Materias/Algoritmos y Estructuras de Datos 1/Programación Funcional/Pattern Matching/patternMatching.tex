@@ -1,0 +1,719 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Configuración de Paquetes
+\documentclass{article}
+\input{config_packages} % Incluir configuración de paquetes y encabezado
+\input{config_listings} % Incluir configuración de listings
+\input{config_mdframed} % Incluir configuración de mdframed
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{fancy}
+
+%Configuraciones adicionales
+\binoppenalty=\maxdimen 
+\relpenalty=\maxdimen 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Condiguracion de encabezado y pie de página
+\lhead{Pattern matching en Haskell: Programación Funcional}
+\rhead{Pedro Villar} 
+\chead{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\section{Introducción - Teoría de patrones}
+
+\subsection{¿Que es un patrón?}
+En Haskell, un patrón es una manera de hacer coincidir el valor de una expresión con una estructura específica. Los patrones son utilizados principalmente en las definiciones de funciones para especificar cómo se comportará la función en diferentes casos. Esto es fundamental en Haskell, ya que el lenguaje está basado en la evaluación de expresiones mediante la coincidencia de patrones.
+
+Ahora, hablemos de la importancia de cubrir todos los casos en una función. En Haskell, al definir una función, es crucial considerar todos los posibles casos de entrada y asegurarse de que la función tenga un comportamiento definido para cada uno de ellos. Si no se cubren todos los casos, Haskell lanzará un error de "no exhaustividad" o "no exhaustivo", indicando que la definición de la función no cubre todas las posibilidades.
+
+La importancia de cubrir todos los casos radica en garantizar la totalidad de la función, es decir, asegurarse de que la función pueda manejar cualquier entrada posible de manera predecible. Esto hace que el código sea más robusto y menos propenso a errores.
+
+Aquí tienes un ejemplo que no se trata de calcular el factorial, sino de una función simple que convierte un número a su nombre en español:
+
+\begin{haskell}[caption={Función que convierte un número del 0 al 5 a su nombre en español}]
+numerosEnPalabras :: Int -> String
+numerosEnPalabras 0 = "cero"
+numerosEnPalabras 1 = "uno"
+numerosEnPalabras 2 = "dos"
+numerosEnPalabras 3 = "tres"
+numerosEnPalabras 4 = "cuatro"
+numerosEnPalabras 5 = "cinco"
+numerosEnPalabras n
+    | n < 0     = "negativo"
+    | otherwise = "demasiado grande"
+\end{haskell}
+
+En este ejemplo, la función \texttt{numerosEnPalabras} convierte un número entero en su representación de palabras en español. Se definen patrones para los números del 0 al 5, y luego se utiliza un patrón más general para cubrir cualquier otro número. Es importante notar que se cubren tres casos: números del 0 al 5, números negativos y números mayores que 5. Si no se hubiera incluido el último patrón, Haskell habría lanzado un error de no exhaustividad. Esto demuestra la importancia de cubrir todos los casos en la definición de una función en Haskell.
+
+\subsection{Sintaxis de patrones}
+
+En Haskell, la sintaxis de patrones se utiliza para definir diferentes casos de comportamiento de una función en función de los valores de entrada. La sintaxis básica de patrones se ve así:
+
+\begin{verbatim}
+\begin{verbatim}
+nombreFuncion patrón1 = expresión1
+nombreFuncion patrón2 = expresión2
+...
+nombreFuncion patrónN = expresiónN
+\end{verbatim}
+
+Aquí hay una breve explicación de cada parte:
+
+\begin{itemize}
+    \item \texttt{nombreFuncion}: Es el nombre de la función que estás definiendo.
+    \item \texttt{patrón1}, \texttt{patrón2}, ..., \texttt{patrónN}: Son los patrones que la función coincidirá con la entrada.
+    \item \texttt{expresión1}, \texttt{expresión2}, ..., \texttt{expresiónN}: Son las expresiones que se evaluarán si el patrón correspondiente coincide con la entrada.
+\end{itemize}
+
+Los patrones pueden ser simples, como valores literales o variables, o más complejos, como patrones de lista o tupla. Aquí hay algunos ejemplos de patrones:
+
+\begin{haskell}[caption={Ejemplos de patrones en Haskell}]
+-- Patrones literales:
+f 0 = "Cero"
+f 1 = "Uno"
+
+-- Patrones de variables:
+g x = x * 2
+
+-- Patrones de lista:
+sumarLista [] = 0
+sumarLista (x:xs) = x + sumarLista xs
+
+-- Patrones de tupla:
+getFirstElement (x, _) = x
+
+-- Guardas:
+categorizarEdad edad
+    | edad < 18 = "Menor de edad"
+    | edad >= 18 && edad < 65 = "Adulto"
+    | otherwise = "Adulto mayor"
+\end{haskell}
+
+La coincidencia de patrones se evalúa en orden, de arriba a abajo, y la primera coincidencia se usa. Si ningún patrón coincide, Haskell generará un error en tiempo de ejecución. Es por eso que es importante cubrir todos los casos posibles al definir una función.
+
+\subsection{Patrones literales}
+Los patrones literales en Haskell son una forma de coincidir exactamente con un valor específico de entrada. Esto significa que si la entrada es igual al valor especificado en el patrón, entonces se ejecutará la expresión asociada. Aquí tienes más detalles sobre los patrones literales:
+
+\begin{itemize}
+    \item \textbf{Sintaxis}: Los patrones literales son simplemente valores literales, como números enteros, caracteres, cadenas de texto o valores booleanos.
+    
+    Por ejemplo, en la función:
+    \begin{haskell}
+    esCero 0 = True
+    esCero _ = False
+    \end{haskell}
+    El patrón literal \texttt{0} se utiliza para verificar si la entrada es igual a cero.
+    
+    \item \textbf{Coincidencia exacta}: Los patrones literales coinciden exactamente con los valores dados. Si la entrada no coincide exactamente con el patrón literal, la coincidencia no se producirá.
+    
+    \item \textbf{Prioridad de coincidencia}: Cuando se evalúa una función con múltiples patrones, los patrones literales se evalúan en el orden en que se han definido. El primer patrón que coincida con la entrada se utilizará, y los patrones posteriores no se evaluarán.
+    
+    \item \textbf{Uso en guardas}: Los patrones literales también pueden usarse en combinación con guardas para aplicar condiciones adicionales a la coincidencia.
+\end{itemize}
+
+\subsection{Patrones de variables}
+Los patrones de variables en Haskell son una forma de vincular un nombre a un valor que coincide con el patrón de entrada. Estos patrones coinciden con cualquier valor de entrada y se utilizan para capturar ese valor y utilizarlo en la expresión asociada. Aquí tienes más detalles sobre los patrones de variables:
+
+\begin{itemize}
+    \item \textbf{Sintaxis}: Los patrones de variables son simplemente nombres de variables que se utilizan en lugar de valores específicos en los patrones de coincidencia. Estas variables pueden ser utilizadas en la expresión asociada para realizar cálculos o tomar decisiones basadas en el valor capturado.
+    
+    \item \textbf{Coincidencia con cualquier valor}: Los patrones de variables coinciden con cualquier valor de entrada. Esto significa que la variable en el patrón se vinculará al valor de entrada, independientemente de lo que sea.
+    
+    \item \textbf{Uso en expresiones}: Una vez que se ha vinculado una variable a un valor de entrada, esa variable se puede utilizar en la expresión asociada para realizar cálculos o tomar decisiones.
+    
+    \item \textbf{Nombre de la variable}: El nombre de la variable en el patrón puede ser cualquier identificador válido en Haskell y puede ser utilizado como cualquier otra variable en el ámbito donde se define la función.
+\end{itemize}
+
+Aquí tienes un ejemplo de cómo se utilizan los patrones de variables en Haskell:
+
+\begin{haskell}[caption={Ejemplo de patrones de variables en Haskell}]
+doble x = x * 2
+\end{haskell}
+
+En este ejemplo, el patrón de variable \texttt{x} se utiliza para capturar cualquier valor de entrada que se pase a la función \texttt{doble}. La variable \texttt{x} se vincula al valor de entrada y luego se utiliza en la expresión \texttt{x * 2} para calcular el doble del valor de entrada.
+
+Los patrones de variables son útiles cuando necesitas acceder al valor de entrada dentro de la función para realizar operaciones o tomar decisiones basadas en ese valor.
+
+\subsection{Patrones de lista}
+
+Los patrones de lista en Haskell permiten descomponer una lista en sus elementos individuales para su procesamiento. Estos patrones son especialmente útiles cuando se trabaja con funciones que operan en listas, ya que permiten manejar diferentes casos de manera más concisa y expresiva. Aquí tienes más detalles sobre los patrones de lista:
+
+\begin{itemize}
+    \item \textbf{Sintaxis}: Los patrones de lista se definen entre corchetes \texttt{[ ]}, con los elementos separados por comas. También pueden incluir un patrón para el resto de la lista utilizando el operador \texttt{:}.
+    
+    \item \textbf{Descomposición de listas}: Los patrones de lista permiten descomponer la lista en sus elementos individuales y/o en una cabeza (primer elemento) y una cola (resto de la lista).
+    
+    \item \textbf{Captura de elementos individuales}: Los elementos individuales de la lista pueden ser capturados por patrones específicos.
+    
+    \item \textbf{Patrón de lista vacía}: Es posible definir un patrón para una lista vacía utilizando simplemente \texttt{[]}.
+    
+    \item \textbf{Patrón de lista con un solo elemento}: También se puede definir un patrón para una lista con un solo elemento utilizando la forma \texttt{[x]}, donde \texttt{x} es el elemento.
+    
+    \item \textbf{Patrón de lista con múltiples elementos}: Para descomponer una lista con múltiples elementos, se puede utilizar el operador \texttt{:} para separar el primer elemento (cabeza) del resto de la lista (cola).
+\end{itemize}
+
+Aquí tienes un ejemplo de cómo se utilizan los patrones de lista en Haskell:
+
+\begin{haskell}[caption={Función que calcula la longitud de una lista}]
+longitudLista [] = 0
+longitudLista (x:xs) = 1 + longitudLista xs
+\end{haskell}
+
+En este ejemplo, la función \texttt{longitudLista} calcula la longitud de una lista. En el primer patrón, \texttt{[]} coincide con una lista vacía, por lo que devuelve \texttt{0}. En el segundo patrón, \texttt{(x:xs)} descompone la lista en su primer elemento \texttt{x} y el resto de la lista \texttt{xs}, y se calcula recursivamente la longitud de \texttt{xs}, sumando \texttt{1} para cada elemento de la lista.
+
+Los patrones de lista son una característica poderosa de Haskell que permite expresar operaciones comunes en listas de forma concisa y elegante.
+
+\subsection{Patrones de tupla}
+
+Los patrones de tupla en Haskell permiten descomponer una tupla en sus componentes individuales para su procesamiento. Estos patrones son especialmente útiles cuando se trabaja con funciones que operan en tuplas, ya que permiten manejar los elementos de la tupla de manera más concisa y expresiva. Aquí tienes más detalles sobre los patrones de tupla:
+
+\begin{itemize}
+    \item \textbf{Sintaxis}: Los patrones de tupla se definen utilizando paréntesis \texttt{( )}, con los patrones para cada componente separados por comas.
+  
+    \item \textbf{Descomposición de tuplas}: Los patrones de tupla permiten descomponer la tupla en sus componentes individuales, lo que facilita su manipulación dentro de una función.
+  
+    \item \textbf{Captura de componentes individuales}: Los patrones de tupla permiten capturar cada componente de la tupla utilizando patrones específicos para cada uno.
+  
+    \item \textbf{Nombre de las variables}: Los nombres de las variables utilizadas en los patrones de tupla pueden ser cualquier identificador válido en Haskell y se pueden utilizar en la expresión asociada para realizar cálculos o tomar decisiones basadas en los componentes de la tupla.
+\end{itemize}
+
+Aquí tienes un ejemplo de cómo se utilizan los patrones de tupla en Haskell:
+
+\begin{haskell}
+getFirstElement (x, _) = x
+\end{haskell}
+
+En este ejemplo, la función \texttt{getFirstElement} toma una tupla como entrada y devuelve el primer elemento de la tupla. El patrón \texttt{(x, \_)} descompone la tupla en su primer componente \texttt{x} y el segundo componente (que se ignora con el patrón comodín \texttt{\_}), y luego simplemente devuelve \texttt{x}.
+
+Los patrones de tupla son útiles cuando necesitas manipular tuplas dentro de una función y acceder a sus componentes de manera individual para realizar operaciones específicas sobre ellos.
+
+\subsection{Guardas}
+Los patrones en guardas en Haskell permiten aplicar condiciones adicionales a los patrones de coincidencia. Esto significa que puedes combinar la coincidencia de patrones con expresiones booleanas (guardas) para determinar si un patrón específico debe aplicarse o no. Aquí tienes más detalles sobre el uso de patrones en guardas:
+
+\begin{itemize}
+    \item \textbf{Sintaxis}: Las guardas se definen utilizando el símbolo \texttt{|} seguido de una expresión booleana (guarda) que se evalúa. Si la guarda es verdadera, el patrón correspondiente se aplica. Si es falsa, Haskell pasa al siguiente patrón.
+    
+    \item \textbf{Condiciones adicionales}: Las guardas permiten especificar condiciones adicionales que deben cumplirse para que se aplique un patrón específico.
+    
+    \item \textbf{Flexibilidad}: Las guardas pueden ser tan simples o tan complejas como se desee, lo que permite una gran flexibilidad en la definición de patrones en funciones.
+    
+    \item \textbf{Orden de evaluación}: Las guardas se evalúan en el orden en que aparecen en la definición de la función. El primer patrón cuya guarda sea verdadera se aplicará y el resto de los patrones se ignorarán.
+\end{itemize}
+
+Aquí tienes un ejemplo de cómo se utilizan los patrones en guardas en Haskell:
+
+\begin{haskell}
+categorizarEdad edad
+    | edad < 18 = "Menor de edad"
+    | edad >= 18 && edad < 65 = "Adulto"
+    | otherwise = "Adulto mayor"
+\end{haskell}
+
+En este ejemplo, la función \texttt{categorizarEdad} toma la edad como entrada y devuelve una cadena que representa la categoría de edad. La primera guarda verifica si la edad es menor que 18, la segunda guarda verifica si la edad está entre 18 y 64 (inclusive) y la última guarda (usando \texttt{otherwise}, que es equivalente a \texttt{True}) captura cualquier otra edad que no haya sido cubierta por los patrones anteriores.
+
+Los patrones en guardas son una herramienta poderosa que permite definir funciones con comportamientos específicos basados en condiciones adicionales más allá de la coincidencia de patrones básica.
+
+\subsection{Patrones con datos algebraicos}
+
+La aplicación de patrones con datos algebraicos en Haskell permite descomponer y manipular valores de tipos de datos definidos algebraicamente. Estos tipos de datos son definidos mediante una suma de productos de tipos, lo que significa que pueden contener variantes diferentes y cada variante puede contener varios campos. Aquí tienes más detalles sobre la aplicación de patrones con datos algebraicos:
+
+\begin{itemize}
+    \item \textbf{Tipos de datos algebraicos}: Los tipos de datos algebraicos en Haskell se definen mediante declaraciones de datos (declaraciones \texttt{data}), donde se enumeran las diferentes variantes del tipo de datos junto con los tipos de sus campos, si los tienen.
+    
+    \item \textbf{Descomposición de datos algebraicos}: Los patrones se pueden utilizar para descomponer valores de tipos de datos algebraicos en sus componentes individuales. Esto permite acceder a los campos de los valores y manipularlos de acuerdo a las necesidades.
+    
+    \item \textbf{Coincidencia de patrones con variantes}: Cada variante de un tipo de datos algebraicos se puede utilizar como un patrón en las definiciones de funciones. Esto permite definir diferentes comportamientos para cada variante del tipo de datos.
+    
+    \item \textbf{Patrones anidados}: Los patrones anidados permiten descomponer tipos de datos algebraicos que contienen otros tipos de datos algebraicos como campos.
+    
+    \item \textbf{Flexibilidad y expresividad}: La aplicación de patrones con datos algebraicos proporciona una gran flexibilidad y expresividad en la definición de funciones en Haskell, permitiendo definir comportamientos específicos para diferentes variantes de tipos de datos.
+\end{itemize}
+
+Aquí tienes un ejemplo de cómo se utilizan los patrones con datos algebraicos en Haskell:
+
+\begin{haskell}
+data Animal = Perro String Int | Gato String
+
+esPerro :: Animal -> Bool
+esPerro (Perro _ _) = True
+esPerro _ = False
+\end{haskell}
+
+En este ejemplo, \texttt{Animal} es un tipo de datos algebraicos que tiene dos variantes: \texttt{Perro}, que tiene un nombre y una edad como campos, y \texttt{Gato}, que solo tiene un nombre. La función \texttt{esPerro} toma un valor de tipo \texttt{Animal} como entrada y devuelve \texttt{True} si es un perro (es decir, si es de la variante \texttt{Perro}), y \texttt{False} en caso contrario.
+
+La aplicación de patrones con datos algebraicos es una característica poderosa de Haskell que permite trabajar de manera eficiente y expresiva con tipos de datos definidos por el usuario.
+
+\subsection{Patrones con datos algebraicos recursivos}
+
+Cuando se trabajan con datos algebraicos recursivos en Haskell, los patrones se utilizan para descomponer y manipular estos tipos de datos de manera eficiente. Los datos algebraicos recursivos son tipos de datos que se definen en términos de sí mismos, lo que permite crear estructuras de datos complejas y recursivas. Aquí tienes más detalles sobre el uso de patrones en datos algebraicos recursivos:
+
+\begin{itemize}
+    \item \textbf{Recursión estructural}: Los datos algebraicos recursivos se definen de manera que una variante del tipo de datos pueda contener uno o más campos que son del mismo tipo que el tipo que se está definiendo. Esto permite la creación de estructuras de datos que pueden ser recursivamente anidadas.
+    
+    \item \textbf{Patrones de datos recursivos}: Los patrones se utilizan para descomponer los datos algebraicos recursivos en sus componentes individuales. Esto implica la aplicación de patrones recursivamente para trabajar con cada nivel de la estructura de datos.
+    
+    \item \textbf{Casos base en la recursión}: En el caso de datos algebraicos recursivos, es importante definir casos base en las funciones que manipulan estos datos. Estos casos base manejan las instancias más simples de la estructura de datos, evitando así la recursión infinita.
+    
+    \item \textbf{Patrones anidados}: Los patrones anidados se utilizan para descomponer datos algebraicos recursivos que contienen otros datos algebraicos recursivos como campos.
+    
+    \item \textbf{Recursión estructural descendente}: En general, la recursión estructural en datos algebraicos recursivos sigue un enfoque descendente, donde se descompone la estructura de datos en sus partes más pequeñas y luego se trabaja en cada parte individualmente.
+\end{itemize}
+
+Aquí tienes un ejemplo de cómo se utiliza el uso de patrones en datos algebraicos recursivos en Haskell:
+
+\begin{haskell}
+data Arbol = Nodo Int Arbol Arbol | Hoja Int | Nulo
+
+sumaArbol :: Arbol -> Int
+sumaArbol Nulo = 0
+sumaArbol (Hoja valor) = valor
+sumaArbol (Nodo valor izquierda derecha) = 
+    valor + sumaArbol izquierda + sumaArbol derecha
+\end{haskell}
+
+En este ejemplo, \texttt{Arbol} es un tipo de datos algebraicos recursivos que representa un árbol binario, donde cada nodo tiene un valor entero y dos hijos (que son árboles). La función \texttt{sumaArbol} calcula la suma de todos los valores en el árbol. Tiene tres patrones: uno para el caso base \texttt{Nulo}, uno para las hojas del árbol y otro para los nodos internos. En el último caso, la función se llama recursivamente sobre los subárboles izquierdo y derecho.
+
+El uso de patrones en datos algebraicos recursivos es una técnica fundamental en Haskell para trabajar con estructuras de datos complejas y recursivas de manera clara y concisa.
+
+\newpage
+\section{Aplicación de patrones en casos prácticos}
+
+\subsection{Ejemplo 1:}
+Vamos a representar un tren de carga usando Haskell y para ello se deben definir nuevos tipos:
+\begin{itemize}
+    \item Primeramente se debe definir el tipo \texttt{Item} que tiene constructores \texttt{Azucar, Cafe, Maiz, Trigo} y \texttt{Yerba}, todos ellos sin parámetros. El tipo \texttt{Item} \textbf{no debe pertenecer} a la clase \texttt{Eq}.
+    \item Luego se debe definir el tipo \texttt{Toneladas} como sinónimo del tipo \texttt{Int}.
+    \item El tipo \texttt{Cargamento} debe tener dos constructores:
+        \begin{itemize}
+            \item Constructor \texttt{SinCarga}: No tiene parámetros y representa el cargamento vacío.
+            \item Constructor \texttt{Carga}: Tiene dos parámetros, el primero de tipo \texttt{Item} (indica el tipo de carga que tien el cargamento) y el segundo parámetro es de tipo \texttt{Toneladas} (indica la cantidad de toneladas de ese tipo de carga).
+        \end{itemize}
+    \item El tipo \texttt{Numeracion} que debe ser un sinónimo del tipo \texttt{Int}.
+    \item El tipo \texttt{Tren} que tiene dos constructores
+        \begin{itemize}
+            \item Constructor \texttt{Vagon}: Tiene tres parámetros, el primero de tipo \texttt{Numeracion} (la numeración del vagón), el segundo de tipo \texttt{Cargamento} (la carga que lleva el vagón) y el tercero de tipo \texttt{Tren} que es el resto del tren.
+            \item Constructor \texttt{Fin}: No tiene parámetros y representa el final del tren.
+        \end{itemize}
+\end{itemize}
+Asegurarse que los tipos \texttt{Tren}, \texttt{Cargamento} e \texttt{Item} estén en la clase \texttt{Show}.
+
+\begin{problem}{1}
+    Programar la función
+    \begin{haskell}
+    vagones_item :: Tren -> Item -> [Numeracion]
+    \end{haskell}
+    que dado un tren \texttt{ts} y un ítem \texttt{i}, devuelve las numeraciones de los vagones del tren \texttt{ts} que transportan el ítem \texttt{i}.
+\end{problem}
+\begin{problem}{2}
+    Dar una expresión de tipo \texttt{Tren} que tenga al menos 3 elementos donde se utilicen los dos constructores de tipo.
+\end{problem}
+
+Primero se deben representar los tipos de datos que se piden en el enunciado:
+\begin{haskell}
+data Item = Azucar | Cafe | Maiz | Trigo | Yerba
+data Cargamento = SinCarga | Carga Item Toneladas
+type Toneladas = Int
+type Numeracion = Int
+data Tren = Vagon Numeracion Cargamento Tren | Fin
+\end{haskell}
+Luego la consigna nos dice que dado un tren \texttt{ts} y un ítem \texttt{i}, se debe devolver las numeraciones de los vagones del tren \texttt{ts} que transportan el ítem \texttt{i}. Para ello se debe programar la función \texttt{vagones\_item} que recibe un tren y un ítem y devuelve una lista de numeraciones. Esto significa que debemos recorrer el tren y verificar si el vagón transporta el ítem que se nos pide. Si es así, debemos agregar la numeración del vagón a la lista de numeraciones. Si no, debemos seguir recorriendo el tren. La función \texttt{vagones\_item} se puede programar de la siguiente manera:
+\begin{itemize}
+    \item Dado que \texttt{Item} no pertenece a la clase \texttt{Eq}, no podemos utilizar la función \texttt{==} para comparar dos ítems. Por lo tanto, debemos programar una función que compare dos ítems y nos diga si son iguales o no. Esta función se puede programar de la siguiente manera:
+    \begin{haskell}
+    son_iguales :: Item -> Item -> Bool
+    son_iguales Azucar Azucar = True
+    son_iguales Cafe Cafe = True
+    son_iguales Maiz Maiz = True
+    son_iguales Trigo Trigo = True
+    son_iguales Yerba Yerba = True
+    son_iguales _ _ = False
+    \end{haskell}
+    En este ejemplo utilizamos patrones literales para comparar dos ítems. Si los ítems son iguales, devolvemos \texttt{True}, si no, devolvemos \texttt{False}.
+    \item Podemos tambien definir una función auxiliar para verificar si tiene un item:
+    \begin{haskell}
+    tiene_item :: Cargamento -> Item -> Bool
+    tiene_item SinCarga _ = False
+    tiene_item (Carga i _) j = son_iguales i j
+    \end{haskell}
+    \item Luego, la función \texttt{vagones\_item} se puede programar de la siguiente manera:
+    \begin{haskell}
+    vagones_item :: Tren -> Item -> [Numeracion]
+    vagones_item Fin _ = []
+    vagones_item (Vagon n c t) i
+        | tiene_item c i = n : vagones_item t i
+        | otherwise = vagones_item t i
+    \end{haskell}
+    En este ejercicio, usamos pattern matching en un tipo de dato algebraico recursivo para recorrer el tren y verificar si cada vagón transporta el ítem que se nos pide. Si es así, agregamos la numeración del vagón a la lista de numeraciones. Si no, seguimos recorriendo el tren.
+\end{itemize}
+El código completo de este ejercicio se puede ver a continuación:
+\begin{haskell}
+-- Definicion de tipos
+data Item = Azucar | Cafe | Maiz | Trigo | Yerba
+data Cargamento = SinCarga | Carga Item Toneladas
+type Toneladas = Int
+type Numeracion = Int
+data Tren = Vagon Numeracion Cargamento Tren | Fin
+
+-- Funciones auxiliares
+son_iguales :: Item -> Item -> Bool
+son_iguales Azucar Azucar = True
+son_iguales Cafe Cafe = True
+son_iguales Maiz Maiz = True
+son_iguales Trigo Trigo = True
+son_iguales Yerba Yerba = True
+son_iguales _ _ = False
+
+tiene_item :: Cargamento -> Item -> Bool
+tiene_item SinCarga _ = False
+tiene_item (Carga i _) j = son_iguales i j
+
+-- Funcion principal
+vagones_item :: Tren -> Item -> [Numeracion]
+vagones_item Fin _ = []
+vagones_item (Vagon n c t) i
+    | tiene_item c i = n : vagones_item t i
+    | otherwise = vagones_item t i
+\end{haskell}
+
+Ahora hay que dar la expresión de tipo \texttt{Tren} que tenga al menos 3 elementos donde se utilicen los dos constructores de tipo. Esto se puede hacer de la siguiente manera:
+\begin{haskell}
+tren_ejemplo :: Tren
+tren_ejemplo = Vagon 1 (Carga Azucar 10) (Vagon 2 (Carga Cafe 5) (Vagon 3 (Carga Maiz 15) Fin))
+\end{haskell}
+En este ejemplo, utilizamos los dos constructores de tipo \texttt{Tren} para crear un tren con al menos 3 elementos. El tren tiene tres vagones, cada uno con un número de vagón, un tipo de carga y el resto del tren. El último vagón tiene el constructor \texttt{Fin} para indicar que es el final del tren.
+Podriamos ejecutar la funcion con este tren:
+\begin{haskell}
+*Main> vagones_item tren_ejemplo Azucar
+[1]
+*Main> vagones_item tren_ejemplo Cafe
+[2]
+*Main> vagones_item tren_ejemplo Maiz
+[3]
+*Main> vagones_item tren_ejemplo Trigo
+[]
+\end{haskell}
+
+\newpage
+\subsection{Ejemplo 2:}
+Se van a representar los elementos de la heladera usando tipos en Haskell. Los productos que tendremos en cuenta son: \texttt{Leche}, \texttt{Carne}, \texttt{Queso}. La idea es poder detallar para cada tipo de producto, las características mas importantes. En tal sentido identificamos las siguientes características de cada uno de estos productos a tener en cuenta:
+\newline \texttt{Leche}:
+\begin{itemize}
+    \item \texttt{TipoDeLeche}, que es un tipo enumerado con las siguientes opciones: \texttt{Descremada}, \texttt{Entera}, \texttt{Condenzada}, \texttt{Polvo}.
+    \item \texttt{UsoDeLeche}, que es un tipo enumerado con las siguientes opciones: \texttt{Bebida}, \texttt{Preparaciones}.
+    \item \texttt{Precio}, que es un sinónimo de \texttt{Int} indicando el precio.
+\end{itemize}
+\texttt{Carne}
+\begin{itemize}
+    \item \texttt{Corte}, que es un tipo enumerado con las siguientes opciones: \texttt{Bife}, \texttt{Molida}, \texttt{Pulpa}.
+    \item \texttt{Peso}, que es un sinónimo de \texttt{Float} indicando el peso.
+    \item \texttt{Precio}, que es un sinónimo de \texttt{Int} indicando el precio.
+\end{itemize}
+\texttt{Queso}
+\begin{itemize}
+    \item \texttt{TipoDeQueso}, que es un tipo enumerado con las siguientes opciones: \texttt{Barra}, \texttt{Cremoso}, \texttt{Duro}.
+    \item \texttt{Peso}, que es un sinónimo de \texttt{Float} indicando el peso.
+    \item \texttt{Precio}, que es un sinónimo de \texttt{Int} indicando el precio.
+\end{itemize}
+Para ello
+
+\begin{problem}{1}
+    Definir el tipo \texttt{Perecedero} que consta de los contructores \texttt{Leche}, \texttt{Carne} y \texttt{Queso}, constructores con parámetros descritos arriba (Se deben tambien definir los tipos enumerados \texttt{TipoDeLeche}, \texttt{UsoDeLeche}, \texttt{Corte}, \texttt{TipoDeQueso} y los sinónimos de \texttt{Precio} y de \texttt{Peso}). \textbf{Los tipos \texttt{Perecedero} y \texttt{TipoDeQueso} no deben estar en la clase Eq ni en la clase Ord}.
+\end{problem}
+\begin{problem}{2}
+    Definir la función \texttt{cuantosQuesos} de la siguiente manera
+    \begin{haskell}
+        cuantosQuesos :: [Perecedero] -> TipoDeQueso -> Int
+    \end{haskell}
+    que dada una lista de \texttt{Perecedero lp} y un valor \texttt{q} de tipo \texttt{TipoDeQueso}, me devuelve un entero indicando la cantidad de quesos que hay en \texttt{lp} con el tipo \texttt{q}.
+    \textbf{Nota:} dejar como comentario un ejemplo donde hayas probado la funcion \texttt{cuantosQuesos} con una lista con al menos 3 \texttt{Perecedero}.
+\end{problem}
+\begin{problem}{3}
+    Definir igualdad para el tipo de \texttt{Perecedero}: de tal manera que, dos elementos de tipo \texttt{Leche} son iguales sólo si tienen el mismo \textbf{tipo de leche} y el mismo \textbf{uso de leche}, dos \texttt{Carne} son iguales solo si tienen el mismo \textbf{corte}, mientras que dos \texttt{Quesos} son iguales si tiene el mismo \textbf{tipo de queso}. Y como es de suponer las \texttt{Leches}, \texttt{Carnes} y \texttt{Quesos} son distintos entre sí. \textbf{Nota:} Dejar como comentario en el código dos ejemplos en los que probaste la igualdad.
+\end{problem}
+
+\newpage
+Primero se deben representar los tipos de datos que se piden en el enunciado:
+\begin{haskell}
+data TipoDeLeche = Descremada | Entera | Condenzada | Polvo
+data UsoDeLeche = Bebida | Preparaciones
+type Precio = Int
+
+data Corte = Bife | Molida | Pulpa
+type Peso = Float
+
+data TipoDeQueso = Barra | Cremoso | Duro
+\end{haskell}
+Luego se debe definir el tipo \texttt{Perecedero} que consta de los contructores \texttt{Leche}, \texttt{Carne} y \texttt{Queso}, constructores con parámetros descritos arriba. Además, se deben definir los tipos enumerados \texttt{TipoDeLeche}, \texttt{UsoDeLeche}, \texttt{Corte}, \texttt{TipoDeQueso} y los sinónimos de \texttt{Precio} y de \texttt{Peso}. Los tipos \texttt{Perecedero} y \texttt{TipoDeQueso} no deben estar en la clase Eq ni en la clase Ord. Esto se puede hacer de la siguiente manera:
+\begin{haskell}
+data Perecedero = Leche TipoDeLeche UsoDeLeche Precio | Carne Corte Peso Precio | Queso TipoDeQueso Peso Precio
+\end{haskell}
+Luego se debe definir la función \texttt{cuantosQuesos} que recibe una lista de \texttt{Perecedero} y un valor de tipo \texttt{TipoDeQueso} y devuelve un entero indicando la cantidad de quesos que hay en la lista con el tipo \texttt{q}. Esto se puede hacer de la siguiente manera:
+\begin{itemize}
+    \item Dado que no podemos comparar los valores de tipo \texttt{TipoDeQueso} con la función \texttt{==}, debemos programar una función que compare dos valores de tipo \texttt{TipoDeQueso} y nos diga si son iguales o no. Esta función se puede programar de la siguiente manera:
+    \begin{haskell}
+    son_iguales_queso :: TipoDeQueso -> TipoDeQueso -> Bool
+    son_iguales_queso Barra Barra = True
+    son_iguales_queso Cremoso Cremoso = True
+    son_iguales_queso Duro Duro = True
+    son_iguales_queso _ _ = False
+    \end{haskell}
+    \item Luego, la función \texttt{cuantosQuesos} se puede programar de la siguiente manera:
+    \begin{haskell}
+    cuantosQuesos :: [Perecedero] -> TipoDeQueso -> Int
+    cuantosQuesos [] _ = 0
+    cuantosQuesos (Queso t _ _ : ps) q
+        | son_iguales_queso t q = 1 + cuantosQuesos ps q
+        | otherwise = cuantosQuesos ps q
+    cuantosQuesos (_ : ps) q = cuantosQuesos ps q
+    \end{haskell}
+    En este ejercicio, usamos pattern matching en un tipo de dato algebraico para recorrer la lista de \texttt{Perecedero} y verificar si cada elemento es un queso del tipo que se nos pide. Si es así, agregamos \texttt{1} a la cantidad de quesos. Si no, seguimos recorriendo la lista.
+\end{itemize}
+\newpage
+Ahora, para definir igualdad para el tipo de \texttt{Perecedero}, debemos programar funciones auxiliares que nos permitan comparar tambien los valores de tipo \texttt{UsoDeLeche}, \texttt{TipoDeLeche} y \texttt{Corte}. Esto se puede hacer de la siguiente manera:
+\begin{haskell}
+son_iguales_uso_leche :: UsoDeLeche -> UsoDeLeche -> Bool
+son_iguales_uso_leche Bebida Bebida = True
+son_iguales_uso_leche Preparaciones Preparaciones = True
+son_iguales_uso_leche _ _ = False
+
+son_iguales_tipo_leche :: TipoDeLeche -> TipoDeLeche -> Bool
+son_iguales_tipo_leche Descremada Descremada = True
+son_iguales_tipo_leche Entera Entera = True
+son_iguales_tipo_leche Condenzada Condenzada = True
+son_iguales_tipo_leche Polvo Polvo = True
+son_iguales_tipo_leche _ _ = False
+
+son_iguales_corte :: Corte -> Corte -> Bool
+son_iguales_corte Bife Bife = True
+son_iguales_corte Molida Molida = True
+son_iguales_corte Pulpa Pulpa = True
+son_iguales_corte _ _ = False
+\end{haskell}
+Luego, la función \texttt{==} para el tipo \texttt{Perecedero} se puede programar de la siguiente manera:
+\begin{haskell}
+instance Eq Perecedero where
+    (Leche t1 u1 _) == (Leche t2 u2 _) = son_iguales_tipo_leche t1 t2 && son_iguales_uso_leche u1 u2
+    (Carne c1 _ _) == (Carne c2 _ _) = son_iguales_corte c1 c2
+    (Queso t1 _ _) == (Queso t2 _ _) = son_iguales_queso    
+\end{haskell}
+Los ejemplos de la funcion \texttt{cuantosQuesos} se pueden ver a continuación:
+\begin{haskell}
+*Main> cuantosQuesos [Queso Barra 10 100, Queso Cremoso 5 50, Queso Duro 15 150, Queso Barra 20 200] Barra
+2
+*Main> cuantosQuesos [Queso Barra 10 100, Queso Cremoso 5 50, Queso Duro 15 150, Queso Barra 20 200] Cremoso
+1
+*Main> cuantosQuesos [Queso Barra 10 100, Queso Cremoso 5 50, Queso Duro 15 150, Queso Barra 20 200] Duro
+1
+*Main> cuantosQuesos [Queso Barra 10 100, Queso Cremoso 5 50, Queso Duro 15 150, Queso Barra 20 200] Polvo
+0
+\end{haskell}
+Y los ejemplos de la igualdad se pueden ver a continuación:
+\begin{haskell}
+*Main> Leche Descremada Bebida 10 == Leche Descremada Bebida 20
+True
+*Main> Leche Descremada Bebida 10 == Leche Descremada Preparaciones 10
+False
+*Main> Carne Bife 10 100 == Carne Bife 10 100
+True
+*Main> Carne Bife 10 100 == Carne Molida 10 100
+False
+*Main> Queso Barra 10 100 == Queso Barra 10 100
+True
+*Main> Queso Barra 10 100 == Queso Cremoso 10 100
+False
+\end{haskell}
+
+\newpage
+El código completo de este ejercicio se puede ver a continuación:
+\begin{haskell}
+-- Definicion de tipos
+data TipoDeLeche = Descremada | Entera | Condenzada | Polvo
+data UsoDeLeche = Bebida | Preparaciones
+type Precio = Int
+
+data Corte = Bife | Molida | Pulpa
+type Peso = Float
+
+data TipoDeQueso = Barra | Cremoso | Duro
+
+data Perecedero = Leche TipoDeLeche UsoDeLeche Precio | Carne Corte Peso Precio | Queso TipoDeQueso Peso Precio
+
+-- Funciones auxiliares
+son_iguales_queso :: TipoDeQueso -> TipoDeQueso -> Bool
+son_iguales_queso Barra Barra = True
+son_iguales_queso Cremoso Cremoso = True
+son_iguales_queso Duro Duro = True
+son_iguales_queso _ _ = False
+
+son_iguales_uso_leche :: UsoDeLeche -> UsoDeLeche -> Bool
+son_iguales_uso_leche Bebida Bebida = True
+son_iguales_uso_leche Preparaciones Preparaciones = True
+son_iguales_uso_leche _ _ = False
+
+son_iguales_tipo_leche :: TipoDeLeche -> TipoDeLeche -> Bool
+son_iguales_tipo_leche Descremada Descremada = True
+son_iguales_tipo_leche Entera Entera = True
+son_iguales_tipo_leche Condenzada Condenzada = True
+son_iguales_tipo_leche Polvo Polvo = True
+son_iguales_tipo_leche _ _ = False
+
+son_iguales_corte :: Corte -> Corte -> Bool
+son_iguales_corte Bife Bife = True
+son_iguales_corte Molida Molida = True
+son_iguales_corte Pulpa Pulpa = True
+son_iguales_corte _ _ = False
+
+-- Funciones principales
+cuantosQuesos :: [Perecedero] -> TipoDeQueso -> Int
+cuantosQuesos [] _ = 0
+cuantosQuesos (Queso t _ _ : ps) q
+    | son_iguales_queso t q = 1 + cuantosQuesos ps q
+    | otherwise = cuantosQuesos ps q
+cuantosQuesos (_ : ps) q = cuantosQuesos ps q
+
+instance Eq Perecedero where
+    (Leche t1 u1 _) == (Leche t2 u2 _) = son_iguales_tipo_leche t1 t2 && son_iguales_uso_leche u1 u2
+    (Carne c1 _ _) == (Carne c2 _ _) = son_iguales_corte c1 c2
+    (Queso t1 _ _) == (Queso t2 _ _) = son_iguales_queso t1 t2
+\end{haskell}
+
+\newpage
+\subsection{Ejemplo 3:}
+Queremos hacer un programa, para que los de una escuela de futbol puedan saber si sus alumnos de una categoria pueden pasar al siguiente nivel o no.
+
+\begin{problem}{1}
+    Definir un tipo recursivo \texttt{NotasDelClub}, que permite guardar las notas que tuvo cada alumno de una categoria en el año. El tipo \texttt{NotasDelClub}, tendrá dos contructores:
+    \begin{itemize}
+        \item \texttt{EvolucionDelJugador}, que tiene 6 parámetros:
+            \begin{itemize}
+                \item \texttt{String}, para el nombre y apellido del alumno.
+                \item \texttt{Division} (tipo enumerado con la \texttt{Categoria} actual del jugador, \texttt{Septima}, \texttt{Sexta}, \texttt{Quinta} y \texttt{Cuarta})
+                \item \texttt{Nota} (Evalúa la capacidad defensiva del jugador, Int entre 1 y 10)
+                \item \texttt{Nota} (Evalúa la capacidad de ataque del jugador, Int entre 1 y 10)
+                \item \texttt{Nota} (Evalúa la calidad de pases, Int entre 1 y 10)
+                \item \texttt{NotasDelClub}, recursión con el resto de las notas
+            \end{itemize}
+        \item \texttt{NoHayMasJugadores}, que es un constructor sin parámetros, similar al de la lista vacía, para indicar que se terminaron las notas. 
+    \end{itemize}
+\end{problem}
+
+\begin{problem}{2}
+    La condición para poder promover a la siguiente división se describen a continuación, basándose en las notas obtenidas:
+    \begin{itemize}
+        \item Si el jugador está en \texttt{Septima} o \texttt{Sexta} división, debe evaluar por sobre 7 en alguna de las capacidades, y haber realizado pases con \texttt{calidad} de al menos 6.
+        \item Si el jugador está en \texttt{Quinta}, debe tener al menos un 7 en cada capacidad, y al menos un 8 de calidad de pases.
+    \end{itemize}
+    Programar la función \texttt{pasaDeDivision}, que toma como primer parametro notas del tipo \texttt{NotasDelClub}, y como segundo parámetro \texttt{nombre} del tipo \texttt{String} y retorna un valor de tipo \texttt{Bool}, indicando si el alumno llamado \texttt{nombre} \textbf{pasa de división o no}.
+    \begin{haskell}
+        pasaDeDivision :: NotasDelClub -> String -> Bool
+    \end{haskell}
+    \textbf{Nota:} dejar como comentario un ejemplo donde hayas probado \texttt{pasaDeDivision} con un parámetro de tipo \texttt{NotasDelClub} con al menos 3 alumnos.
+\end{problem}
+
+\begin{problem}{3}
+    Programar la función \texttt{devolverDivision} con la siguiente declaración.
+    \begin{haskell}
+        devolverDivision :: NotasDelClub -> String -> Maybe Division
+    \end{haskell}
+    que toma una variable de tipo \texttt{NotasDelClub}, y como segundo argumento un \texttt{nombre}, que identifica el alumno, y en caso que el alumno esté en \texttt{notas} (con una division \texttt{d}), retorna \texttt{Just d}, y en caso contrario \texttt{Nothing}.
+    \textbf{Nota:} dejar como comentario un ejemplo donde hayas probado \texttt{devolverDivision}.
+\end{problem}
+
+Primero se deben representar los tipos de datos que se piden en el enunciado:
+\begin{haskell}
+data Division = Septima | Sexta | Quinta | Cuarta  
+type Nota = Int
+data NotasDelClub = EvolucionDelJugador String Division Nota Nota Nota NotasDelClub | NoHayMasJugadores
+\end{haskell}
+
+Luego se debe programar la función \texttt{pasaDeDivision} que toma como primer parametro notas del tipo \texttt{NotasDelClub}, y como segundo parámetro \texttt{nombre} del tipo \texttt{String} y retorna un valor de tipo \texttt{Bool}, indicando si el alumno llamado \texttt{nombre} \textbf{pasa de división o no}. Esto se puede hacer de la siguiente manera:
+\begin{itemize}
+    \item Dado que no podemos comparar los valores de tipo \texttt{Division} con la función \texttt{==}, debemos programar una función que compare dos valores de tipo \texttt{Division} y nos diga si son iguales o no. Esta función se puede programar de la siguiente manera:
+    \begin{haskell}
+    son_iguales_division :: Division -> Division -> Bool
+    son_iguales_division Septima Septima = True
+    son_iguales_division Sexta Sexta = True
+    son_iguales_division Quinta Quinta = True
+    son_iguales_division Cuarta Cuarta = True
+    son_iguales_division _ _ = False
+    \end{haskell}
+    \item Luego, la función \texttt{pasaDeDivision} se puede programar de la siguiente manera:
+    \begin{haskell}
+    pasaDeDivision :: NotasDelClub -> String -> Bool
+    pasaDeDivision NoHayMasJugadores _ = False
+    pasaDeDivision (EvolucionDelJugador n d n1 n2 n3 t) nombre
+        | n == nombre = (son_iguales_division d Septima || son_iguales_division d Sexta) && (n1 > 7 || n2 > 7 || n3 > 7) && n3 > 6
+        | n == nombre = son_iguales_division d Quinta && n1 >= 7 && n2 >= 7 && n3 >= 8
+        | otherwise = pasaDeDivision t nombre
+    \end{haskell}
+    En este ejercicio, usamos pattern matching en un tipo de dato algebraico recursivo para recorrer las notas y luego por guardas cubrimos los casos que nos da la consigna para verificar si el alumno llamado \texttt{nombre} pasa de división o no. Si es así, devolvemos \texttt{True}, si no, seguimos recorriendo las notas.
+\end{itemize}
+Como ejemplos de la función \texttt{pasaDeDivision} se pueden ver a continuación:
+\begin{haskell}
+*Main> let notas = EvolucionDelJugador "Juan" Septima 8 7 6 (EvolucionDelJugador "Pedro" Sexta 7 8 9 (EvolucionDelJugador "Carlos" Quinta 7 7 8 NoHayMasJugadores))
+*Main> pasaDeDivision notas "Juan"
+True
+*Main> pasaDeDivision notas "Pedro"
+True
+*Main> pasaDeDivision notas "Carlos"
+True
+*Main> pasaDeDivision notas "Lucas"
+False
+\end{haskell}
+
+Ahora para programar la función \texttt{devolverDivision} se puede hacer de la siguiente manera:
+\begin{haskell}
+devolverDivision :: NotasDelClub -> String -> Maybe Division
+devolverDivision NoHayMasJugadores _ = Nothing
+devolverDivision (EvolucionDelJugador n d _ _ _ t) nombre
+    | n == nombre = Just d
+    | otherwise = devolverDivision t nombre
+\end{haskell}
+
+Y como ejemplos de la función \texttt{devolverDivision} se pueden ver a continuación:
+\begin{haskell}
+*Main> let notas = EvolucionDelJugador "Juan" Septima 8 7 6 (EvolucionDelJugador "Pedro" Sexta 7 8 9 (EvolucionDelJugador "Carlos" Quinta 7 7 8 NoHayMasJugadores))
+*Main> devolverDivision notas "Juan"
+Just Septima
+*Main> devolverDivision notas "Pedro"
+Just Sexta
+*Main> devolverDivision notas "Carlos"
+Just Quinta
+*Main> devolverDivision notas "Lucas"
+Nothing
+\end{haskell}
+
+El código completo de este ejercicio se puede ver a continuación:
+\begin{haskell}
+-- Definicion de tipos
+data Division = Septima | Sexta | Quinta | Cuarta
+type Nota = Int
+data NotasDelClub = EvolucionDelJugador String Division Nota Nota Nota NotasDelClub | NoHayMasJugadores
+
+-- Funciones auxiliares
+son_iguales_division :: Division -> Division -> Bool
+son_iguales_division Septima Septima = True
+son_iguales_division Sexta Sexta = True
+son_iguales_division Quinta Quinta = True
+son_iguales_division Cuarta Cuarta = True
+son_iguales_division _ _ = False
+
+-- Funciones principales
+pasaDeDivision :: NotasDelClub -> String -> Bool
+pasaDeDivision NoHayMasJugadores _ = False
+pasaDeDivision (EvolucionDelJugador n d n1 n2 n3 t) nombre
+    | n == nombre = (son_iguales_division d Septima || son_iguales_division d Sexta) && (n1 > 7 || n2 > 7 || n3 > 7) && n3 > 6
+    | n == nombre = son_iguales_division d Quinta && n1 >= 7 && n2 >= 7 && n3 >= 8
+    | otherwise = pasaDeDivision t nombre
+
+devolverDivision :: NotasDelClub -> String -> Maybe Division
+devolverDivision NoHayMasJugadores _ = Nothing
+devolverDivision (EvolucionDelJugador n d _ _ _ t) nombre
+    | n == nombre = Just d
+    | otherwise = devolverDivision t nombre
+\end{haskell}
+
+
+\end{document}

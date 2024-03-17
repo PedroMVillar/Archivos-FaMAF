@@ -1,0 +1,107 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Configuración de listings
+\lstdefinelanguage{Haskell}{
+  basicstyle=\small\ttfamily,
+  keywordstyle=\color{blue},         % Estilo para palabras clave (como if, else, etc.)
+  commentstyle=\color{gray},        % Estilo para comentarios
+  stringstyle=\color{purple},       % Estilo para cadenas de texto
+  literate=
+    {->}{{$\rightarrow$}}2
+    {λ}{{$\lambda$}}1
+    {\\\\}{{\char`\\\char`\\}}1
+    {>>}{{>>}}2
+    {>>=}{{>>=}}2
+    {=<<}{{=<<}}2
+    {|}{{$\mid$}}1,
+  morekeywords={class, instance, deriving, data, where, let, in, case, of, do},
+  sensitive=true,
+  morecomment=[l]{--},
+  morecomment=[s]{\{-}{-\}},
+  morestring=[b]'',
+  numbers=left,
+  numberstyle=\tiny\color{gray!70}, % Color y tamaño de los números de línea
+  numbersep=5pt,                    % Separación entre números de línea y código
+  numberstyle=\tiny,
+  frame=tb,
+  breaklines=true,
+  showstringspaces=false,
+  backgroundcolor=\color{blue!10},
+  emph={::},                        % Resaltar ::
+  emphstyle=\color{purple},            % Color para ::
+  emph={[2]String, Int, Bool},      % Resaltar nombres de tipos
+  emphstyle={[2]\color{red}},     % Color para nombres de tipos
+  emph={[3]foldr, map, filter},     % Resaltar nombres de funciones
+  emphstyle={[3]\color{red}}     % Color para nombres de funciones
+}
+\lstnewenvironment{haskell}[1][]
+{
+    \lstset{language=Haskell,#1}
+}
+{}
+
+\lstdefinelanguage{C}{
+  basicstyle=\small\ttfamily,
+  keywordstyle=\color{blue},         % Estilo para palabras clave (como if, else, etc.)
+  commentstyle=\color{gray},        % Estilo para comentarios
+  stringstyle=\color{purple},       % Estilo para cadenas de texto
+  morekeywords={int, char, void, if, else, while, for, return}, % Añade más palabras clave si es necesario
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  numbers=left,
+  numberstyle=\tiny,
+  frame=single,
+  breaklines=true,
+  showstringspaces=false,
+  backgroundcolor=\color{yellow!20},
+}
+\lstnewenvironment{c_code}[1][]
+{
+    \lstset{language=C,#1}
+}
+{}
+
+\lstdefinelanguage{Python}{
+  basicstyle=\small\ttfamily,
+  keywordstyle=\color{blue},         % Estilo para palabras clave (como if, else, etc.)
+  commentstyle=\color{gray},        % Estilo para comentarios
+  stringstyle=\color{purple},       % Estilo para cadenas de texto
+  morekeywords={if, elif, else, while, for, in, def, return, True, False, None, import}, % Añade más palabras clave si es necesario
+  sensitive=true,
+  morecomment=[l]{\#},
+  numbers=left,
+  numberstyle=\tiny,
+  frame=single,
+  breaklines=true,
+  showstringspaces=false,
+  backgroundcolor=\color{yellow!20},
+}
+\lstnewenvironment{python_code}[1][]
+{
+    \lstset{language=Python,#1}
+}
+{}
+
+\lstdefinelanguage{Lean4}{
+  basicstyle=\small\ttfamily,
+  keywordstyle=\color{blue},         
+  commentstyle=\color{gray},        
+  stringstyle=\color{purple},       
+  morekeywords={def, theorem, lemma, example, axioms, constant, variable, inductive, structure, namespace, section, end, import, namespace, export, private, open},
+  sensitive=true,
+  morecomment=[l]{--},
+  morecomment=[s]{\{-}{-\}},
+  morestring=[b]'',
+  numbers=left,
+  numberstyle=\tiny,
+  frame=single,
+  breaklines=true,
+  showstringspaces=false,
+  backgroundcolor=\color{lightgray},
+}
+\lstnewenvironment{lean_code}[1][]
+{
+    \lstset{language=Lean4,#1}
+}
+{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

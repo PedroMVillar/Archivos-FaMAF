@@ -1,0 +1,88 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Configuración de Paquetes
+\documentclass{article}
+\input{config_packages} % Incluir configuración de paquetes y encabezado
+\input{config_listings} % Incluir configuración de listings
+\input{config_mdframed} % Incluir configuración de mdframed
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{fancy}
+
+%Configuraciones adicionales
+\binoppenalty=\maxdimen 
+\relpenalty=\maxdimen 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Condiguracion de encabezado y pie de página
+\lhead{Como cargar archivo de Haskell: Programación Funcional}
+\rhead{Pedro Villar} 
+\chead{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\section{Abrir el CMD (Command Prompt):}
+\subsection{Windows}
+Buscar en el menú de inicio o presionar las teclas \textbf{Win + R} y escribir \textbf{cmd}.
+\begin{verbatim}
+    > Win + R
+    > cmd
+\end{verbatim}
+\subsection{Linux}
+Buscar en el menú de inicio o presionar las teclas \textbf{Ctrl + Alt + T}.
+\begin{verbatim}
+    > Ctrl + Alt + T
+\end{verbatim}
+
+\section{Navegar a la carpeta que contiene tu archivo Haskell:}
+\subsection{Windows}
+Con el comando \textbf{cd} (change directory) puedes navegar a la carpeta que contiene tu archivo Haskell.
+\begin{verbatim}
+    > cd C:\Users\Usuario\Documents\Proyecto1
+\end{verbatim}
+\subsection{Linux}
+Con el comando \textbf{cd} (change directory) puedes navegar a la carpeta que contiene tu archivo Haskell.
+\begin{verbatim}
+    > cd /home/usuario/Documentos/Proyecto1
+\end{verbatim}
+
+\section{Verificar que el archivo Haskell esté en la carpeta:}
+\subsection{Windows}
+Con el comando \textbf{dir} puedes ver los archivos que están en la carpeta.
+\begin{verbatim}
+    > dir
+\end{verbatim}
+\subsection{Linux}
+Con el comando \textbf{ls} puedes ver los archivos que están en la carpeta.
+\begin{verbatim}
+    > ls
+\end{verbatim}
+
+\section{Cargar ghci:}
+Una vez que estés en la carpeta que contiene tu archivo Haskell, se puede cargar ghci con el comando \textbf{ghci}.
+\begin{verbatim}
+    > ghci
+\end{verbatim}
+
+\section{Cargar el archivo Haskell:}
+Con el comando \textbf{:l} (load) puedes cargar el archivo Haskell.
+\begin{verbatim}
+    > :l archivo.hs
+\end{verbatim}
+
+\section{Comandos útiles:}
+\begin{itemize}
+    \item \textbf{:r} (reload): Recarga el archivo Haskell.
+    \item \textbf{:q} (quit): Sale de ghci.
+    \item \textbf{:t} (type): Muestra el tipo de una expresión.
+    \item \textbf{:?} (help): Muestra la lista de comandos.
+    \item \textbf{:!} (shell): Ejecuta un comando del sistema.
+\end{itemize}
+
+\section{Cargar archivo Haskell con warning:}
+Para cargar el archivo con warns, antes de abrir ghci se puede compilar el archivo con el comando \textbf{ghci -Wall archivo.hs}. 
+\begin{verbatim}
+    > ghci -Wall archivo.hs
+\end{verbatim}
+
+\end{document}

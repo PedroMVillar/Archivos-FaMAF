@@ -1,0 +1,1220 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Configuración de Paquetes
+\documentclass{article}
+\input{config_packages} % Incluir configuración de paquetes y encabezado
+\input{config_listings} % Incluir configuración de listings
+\input{config_mdframed} % Incluir configuración de mdframed
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{fancy}
+
+%Configuraciones adicionales
+\binoppenalty=\maxdimen 
+\relpenalty=\maxdimen 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Condiguracion de encabezado y pie de página
+\lhead{Proyecto 1: Programación Funcional}
+\rhead{Pedro Villar} 
+\chead{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\section*{Ejercicio 1}
+\textbf{Programá las siguientes funciones:}
+
+\begin{itemize}
+    \item 
+\verb|esCero :: Int -> Bool|, que verifica si un entero es igual a $0$.
+\begin{haskell}
+esCero :: Int -> Bool
+esCero x = x == 0
+\end{haskell}
+La función recibe un entero, luego devuelve un booleano, está definida como \verb|x == 0|, esta expresión devuelve \verb|True| si \verb|x| es $0$, y \verb|False| en caso contrario.
+    \item 
+\verb|esPositivo :: Int -> Bool|, que verifica si un entero es estrictamente mayor a $0$.
+\begin{haskell}
+esPositivo :: Int -> Bool
+esPositivo x = x > 0
+\end{haskell}    
+La función recibe un entero, luego devuelve un booleano, está definida como \verb|x > 0|, esta expresión devuelve \verb|True| si \verb|x| es mayor a $0$, y \verb|False| en caso contrario.
+    \item 
+\verb|esVocal :: Char -> Bool|, que verifica si un carácter es una vocal en minúscula.
+\begin{haskell}
+esVocal :: Char -> Bool
+esVocal x = x elem ['a', 'e', 'i', 'o', 'u']
+\end{haskell}    
+La función recibe un carácter como entrada y devuelve un valor booleano. Toma un argumento x (carácter) luego verifica mediante la función \verb|elem| si el elemento dado está o no en la lista de vocales en minúscula.
+    \item 
+\verb|valorAbsoluto :: Int -> Int|, que devuelve el valor absoluto de un entero ingresado.
+\begin{itemize}
+    \item 
+    \emph{Opción 1}, se puede definir a la función utilizando la función \verb|abs| nativa:
+    % haskell null
+    \begin{haskell}
+    valorAbsoluto :: Int -> Int
+    valorAbsoluto x = abs x
+    \end{haskell}
+    \item 
+    \emph{Opción 2}, se puede definir la función emulando el funcionamiento de \verb|abs|, haciendo lo siguiente:
+    % haskell null
+    \begin{haskell}
+    valorAbsoluto :: Int -> Int
+    valorAbsoluto x | x >= 0 = x
+                    | otherwise = -x
+    \end{haskell} 
+\end{itemize}
+Esta función toma un entero $x$, luego verifica si este es mayor o igual a $0$, retorna el mismo valor de $x$, en caso contrario devuelve $-x$.
+\end{itemize}
+
+\section*{Ejercicio 2}
+\textbf{Programá las siguientes funciones usando recursión o composición:}
+
+\begin{itemize}
+    \item 
+\verb|paraTodo :: [Bool] -> Bool|, que verifica que \emph{todos} los elementos de una lista sean \verb|True|.
+\begin{haskell}
+paraTodo :: [Bool] -> Bool
+paraTodo [] = True
+paraTodo (x:xs) | (x == True) = paraTodo xs
+                | otherwise = False
+\end{haskell}
+\textbf{Tipo de la función:} \verb|[Bool] -> Bool|. La función toma una lista de valores booleanos y devuelve un valor booleano. La función verifica si todos los elementos de la lista son verdaderos.
+La función \verb|paraTodo| utiliza pattern matching para manejar dos casos: cuando la lista está vacía (\verb|[]|) y cuando la lista tiene al menos un elemento (\verb|(x:xs)|).
+\begin{enumerate}
+\item 
+En el caso base, si la lista está vacía, la función devuelve \verb|True|. Esto implica que todos los elementos (ninguno en este caso) son verdaderos.
+\item 
+En el caso recursivo, se verifica si el primer elemento (\verb|x|) es igual a \verb|True|. Si es así, la función \verb|paraTodo| se llama recursivamente con el resto de la lista (\verb|xs|). Esto se hace para verificar los elementos restantes de la lista.
+\item 
+Si el primer elemento no es \verb|True|, la función devuelve \verb|False|, ya que al menos un elemento no cumple con la condición de ser verdadero.
+\end{enumerate}
+En resumen, la función \verb|paraTodo| verifica si todos los elementos de la lista son \verb|True|, devolviendo \verb|True| solo si la lista está vacía o todos los elementos son \verb|True|.
+
+    \item 
+\verb|sumatoria :: [Int] -> Int|, que calcula la suma de todos los elementos de una lista de enteros.
+\begin{haskell}
+sumatoria :: [Int] -> Int
+sumatoria [] = 0
+sumatoria (x:xs) = x + sumatoria xs
+\end{haskell}
+\textbf{Tipo de la función:} \verb|[Int] -> Int|. La función toma una lista de enteros y devuelve la suma de todos los elementos de la lista.
+La función \verb|sumatoria| utiliza pattern matching para manejar dos casos: cuando la lista está vacía (\verb|[]|) y cuando la lista tiene al menos un elemento (\verb|(x:xs)|).
+\begin{enumerate}
+\item 
+En el caso base, si la lista está vacía, la función devuelve \verb|0|. Esto representa la suma de una lista vacía, que es por definición cero.
+\item 
+En el caso recursivo, la suma se calcula sumando el primer elemento (\verb|x|) al resultado de llamar recursivamente a \verb|sumatoria| con el resto de la lista (\verb|xs|). Esto se hace para sumar todos los elementos de la lista, ya que cada llamada recursiva agrega el siguiente elemento al resultado acumulado.
+\end{enumerate}
+En resumen, la función \verb|sumatoria| calcula la suma de todos los elementos de la lista utilizando recursión.
+
+    \item 
+\verb|productoria :: [Int] -> Int|, que calcula el producto de todos los elementos de la lista de enteros.
+\begin{haskell}
+productoria :: [Int] -> Int
+productoria [] = 1
+productoria (x:xs) = x * productoria xs
+\end{haskell}
+\textbf{Tipo de la función:} \verb|[Int] -> Int|. La función toma una lista de enteros y devuelve el producto de todos los elementos de la lista.
+La función \verb|productoria| utiliza pattern matching para manejar dos casos: cuando la lista está vacía (\verb|[]|) y cuando la lista tiene al menos un elemento (\verb|(x:xs)|).
+\begin{enumerate}
+\item 
+En el caso base, si la lista está vacía, la función devuelve \verb|1|. Esto representa el producto de una lista vacía, que es por definición uno.
+\item 
+En el caso recursivo, el producto se calcula multiplicando el primer elemento (\verb|x|) por el resultado de llamar recursivamente a \verb|productoria| con el resto de la lista (\verb|xs|). Esto se hace para calcular el producto de todos los elementos de la lista, ya que cada llamada recursiva multiplica el siguiente elemento al resultado acumulado.
+\end{enumerate}
+En resumen, la función \verb|productoria| calcula el producto de todos los elementos de la lista utilizando recursión.
+
+    \item 
+\verb|factorial :: Int -> Int|, que toma un número $n$ y calcula $n!$.
+\begin{haskell}
+    factorial :: Int -> Int
+    factorial x | x == 0 = 1
+                | x == 1 = 1
+                | otherwise = x * (factorial (x-1))
+\end{haskell}    
+\textbf{Tipo de la función:} \verb|Int -> Int|. La función toma un número entero y devuelve otro entero.
+La función \verb|factorial| utiliza múltiples ecuaciones con guardias para manejar diferentes casos:
+\begin{enumerate}
+\item 
+En el primer bloque, se manejan los casos base cuando \verb|x| es 0 o 1. En estos casos, el factorial es 1.
+\item 
+En el segundo bloque, se maneja el caso de error. Si \verb|x| es un número negativo, la función lanza un error indicando que el factorial no está definido para números negativos.
+\item 
+En el tercer bloque, se maneja el caso recursivo. Para cualquier otro valor de \verb|x|, el factorial se calcula multiplicando \verb|x| por el factorial de \verb|(x - 1)|.
+\end{enumerate}
+En resumen, la función \verb|factorial| calcula el factorial de un número entero utilizando recursión y maneja casos especiales para 0, 1 y números negativos.
+
+    \item 
+Utiliza la función sumatoria para definir, \verb|promedio : [Int] -> Int|, que toma una lista de números no vacía y calcula el valor promedio (truncando, usando división entera).
+\begin{haskell}
+promedio :: [Int] -> Int
+promedio [] = 0
+promedio xs = (sumatoria xs) div (length xs)
+\end{haskell}
+\textbf{Tipo de la función:} \verb|[Int] -> Int|. La función toma una lista de números enteros y devuelve un número entero.
+\textbf{Cuerpo de la función:}
+- El primer caso base (\verb|[]|) maneja el escenario donde la lista está vacía, y en ese caso, el promedio es 0.
+- El segundo caso toma la lista \verb|xs| y calcula el promedio dividiendo la suma de los elementos de \verb|xs| (\verb|sumatoria xs|) por la longitud de \verb|xs| (\verb|length xs|).
+\textbf{Función utilizada:}
+- La función \verb|sumatoria| se usa para calcular la suma de los elementos de la lista.
+\textbf{Ejemplo de ejecución:}
+- \verb|promedio [2, 4, 6]| calculará la suma de los elementos (12) y la dividirá por la longitud de la lista (3), dando como resultado 4.
+\end{itemize}
+
+\section*{Ejercicio 3}
+
+\textbf{Programa la función pertenece :: Int $\rightarrow$ [Int] $\rightarrow$ Bool , que verifica si un número se encuentra en una lista.}
+\begin{haskell}
+pertenece :: Int -> [Int] -> Bool
+pertenece _ [] = False
+pertenece k (x:xs) = k == x || pertenece k xs
+\end{haskell}    
+    \textbf{Tipo de la función:} \verb|Int -> [Int] -> Bool|. La función toma un entero y una lista de enteros, y devuelve un valor booleano. \newline
+    \textbf{Cuerpo de la función:}
+    \begin{itemize}
+    \item El primer caso base (\verb|_ []|) maneja el escenario donde la lista está vacía. En este caso, la función siempre devuelve \verb|False|.
+    \item El segundo caso toma la lista no vacía \verb|(x:xs)| y verifica si el elemento actual \verb|x| es igual al entero buscado \verb|k|. Si es así, la función devuelve \verb|True|. Si no es igual, la función se llama recursivamente con el resto de la lista \verb|xs|.
+    \end{itemize}
+    \textbf{Observaciones:}
+    \begin{itemize}
+    \item La función está diseñada para verificar si un entero \verb|k| está presente en la lista, el operador \verb| || | nos asegura que cuando encuentre un elemento que cumpla el predicado devolverá \verb|True| ya que es el absorbente de \verb||||.
+    \item Utiliza la recursividad para explorar la lista hasta encontrar una coincidencia o llegar al final de la lista.
+    \end{itemize}
+    \textbf{Ejemplo de ejecución:}
+    \begin{itemize}
+    \item \verb|pertenece 3 [1, 2, 3, 4, 5]| devolverá \verb|True| porque el número 3 está en la lista.
+    \item \verb|pertenece 7 [1, 2, 3, 4, 5]| devolverá \verb|False| porque el número 7 no está en la lista.
+    \end{itemize}
+
+\section*{Ejercicio 4}
+\textbf{Programa las siguientes funciones que implementan los cuantificadores generales. Nota que el segundo parámetro de cada función es otra función.}
+\begin{itemize}
+    \item 
+\verb|paratodo’ :: [a] -> (a -> Bool) -> Bool|, dada una lista xs de tipo \verb|[a]| y un predicado \verb|t :: a -> Bool|, determina si todos los elementos de xs satisfacen el predicado t.
+\begin{haskell}
+paraTodo' :: [a] -> (a -> Bool) -> Bool
+paraTodo' [] f = True
+paraTodo' (x:xs) f = f x && paraTodo' xs f
+\end{haskell}    
+\textbf{Tipo de la función:} \verb|[a] -> (a -> Bool) -> Bool|. La función toma una lista de elementos de tipo \verb|a| y una función \verb|f| que toma un elemento de tipo \verb|a| y devuelve un booleano. La función devuelve un booleano.
+\textbf{Cuerpo de la función:}
+\begin{itemize}
+    \item El primer caso base (\verb|[]|) maneja el escenario donde la lista está vacía. En este caso, la función siempre devuelve \verb|True|.
+    \item El segundo caso toma la lista no vacía \verb|(x:xs)| y verifica si la aplicación de la función \verb|f| al elemento actual \verb|x| es verdadera (\verb|f x|). Si es verdadero, la función se llama recursivamente con el resto de la lista \verb|xs| y el mismo predicado \verb|f|. Si la aplicación de \verb|f| a \verb|x| es falsa, la función devuelve \verb|False|.
+\end{itemize}
+\textbf{Observaciones:}
+\begin{itemize}
+    \item La función está diseñada para verificar si la función \verb|f| es verdadera para todos los elementos de la lista.
+    \item Utiliza la recursividad para aplicar la función a cada elemento de la lista.
+\end{itemize}
+\textbf{Ejemplo de ejecución:}
+\begin{itemize}
+    \item \verb|paraTodo' [2, 4, 6] (\n -> n| mod \verb|2 == 0)| devolverá \verb|True| porque la función \verb|(\n -> n| mod \verb|2 == 0)| es verdadera para todos los elementos de la lista \verb|[2, 4, 6]|.
+\end{itemize}
+
+    \item 
+\verb|existe’ :: [a] -> (a -> Bool) -> Bool|, dada una lista xs de tipo \verb|[a]| y un \verb|predicado t :: a -> Bool|, determina si algún elemento de xs satisface el predicado t.
+\begin{haskell}
+existe' :: [a] -> (a -> Bool) -> Bool
+existe' [] f = False
+existe' (x:xs) f = f x || existe' xs f
+\end{haskell}
+\textbf{Tipo de la función:} \verb|[a] -> (a -> Bool) -> Bool|. La función toma una lista de elementos de tipo \verb|a| y una función \verb|f| que toma un elemento de tipo \verb|a| y devuelve un booleano. La función devuelve un booleano.
+\textbf{Cuerpo de la función:}
+\begin{itemize}
+\item El primer caso base (\verb|[]|) maneja el escenario donde la lista está vacía. En este caso, la función siempre devuelve \verb|False|.
+\item El segundo caso toma la lista no vacía \verb|(x:xs)| y verifica si la aplicación de la función \verb|f| al elemento actual \verb|x| es verdadera (\verb|f x|). Si es verdadero, la función devuelve \verb|True|. Si la aplicación de \verb|f| a \verb|x| es falsa, la función se llama recursivamente con el resto de la lista \verb|xs| y el mismo predicado \verb|f|.
+\end{itemize}
+\textbf{Observaciones:}
+\begin{itemize}
+\item La función está diseñada para verificar si la función \verb|f| es verdadera para al menos un elemento de la lista.
+\item Utiliza la recursividad para buscar a través de la lista y determinar si hay al menos un elemento que satisface la condición.
+\end{itemize}
+\textbf{Ejemplo de ejecución:}
+\begin{itemize}
+\item \verb|existe' [1, 3, 5] (\n -> n| mod \verb|2 == 0)| devolverá \verb|False| porque la función \verb|(\n -> n| mod \verb|2 == 0)| es falsa para todos los elementos de la lista \verb|[1, 3, 5]|.
+\end{itemize}
+
+    \item 
+\verb|sumatoria’ :: [a] -> (a -> Int) -> Int|, dada una lista xs de tipo \verb|[a]| y una función \verb|t :: a -> Int| (toma elementos de tipo a y devuelve enteros), calcula la suma de los valores que resultan de la aplicación de t a los elementos de xs.
+\begin{haskell}
+sumatoria' :: [a] -> (a -> Int) -> Int
+sumatoria' [] f = 0
+sumatoria' (x:xs) f = f x + sumatoria' xs f
+\end{haskell}
+\textbf{Tipo de la función:} \verb|[a] -> (a -> Int) -> Int|. La función toma una lista de elementos de tipo \verb|a|, una función \verb|f| que toma un elemento de tipo \verb|a| y devuelve un entero, y devuelve un entero.
+\textbf{Cuerpo de la función:}
+\begin{itemize}
+\item El primer caso base (\verb|[]|) maneja el escenario donde la lista está vacía. En este caso, la función siempre devuelve \verb|0|.
+\item El segundo caso toma la lista no vacía \verb|(x:xs)| y calcula la suma de la aplicación de la función \verb|f| al elemento actual \verb|x| más la sumatoria del resto de la lista \verb|xs| con la misma función \verb|f|.
+\end{itemize}
+\textbf{Observaciones:}
+\begin{itemize}
+\item La función está diseñada para calcular la suma de los valores resultantes de aplicar la función \verb|f| a cada elemento de la lista.
+\item Utiliza la recursividad para aplicar la función a cada elemento de la lista y sumar los resultados.
+\end{itemize} 
+\textbf{Ejemplo de ejecución:}
+\begin{itemize}
+\item \verb|sumatoria' [1, 2, 3] (\n -> n * 2)| devolverá \verb|12| porque la función \verb|(\n -> n * 2)| se aplica a cada elemento de la lista y se suman los resultados: \verb|2 + 4 + 6 = 12|.
+\end{itemize}
+
+    \item 
+\verb|productoria’ :: [a] -> (a -> Int) -> Int|, dada una lista de xs de tipo \verb|[a]| y una función \verb|t :: a -> Int|, calcula el producto de los valores que resultan de la aplicación de t a los elementos de xs.
+\begin{haskell}
+productoria' :: [a] -> (a -> Int) -> Int
+productoria' [] f = 1
+productoria' (x:xs) f = f x * productoria' xs f
+\end{haskell}
+\textbf{Tipo de la función:} \verb|[a] -> (a -> Int) -> Int|. La función toma una lista de elementos de tipo \verb|a|, una función \verb|f| que toma un elemento de tipo \verb|a| y devuelve un entero, y devuelve un entero.
+\textbf{Cuerpo de la función:}
+\begin{itemize}
+\item El primer caso base (\verb|[]|) maneja el escenario donde la lista está vacía. En este caso, la función siempre devuelve \verb|1|.
+\item El segundo caso toma la lista no vacía \verb|(x:xs)| y calcula el producto de la aplicación de la función \verb|f| al elemento actual \verb|x| por la productoria del resto de la lista \verb|xs| con la misma función \verb|f|.
+\end{itemize}
+\textbf{Observaciones:}
+\begin{itemize}
+\item La función está diseñada para calcular el producto de los valores resultantes de aplicar la función \verb|f| a cada elemento de la lista.
+\item Utiliza la recursividad para aplicar la función a cada elemento de la lista y multiplicar los resultados.
+\end{itemize}
+\textbf{Ejemplo de ejecución:}
+\begin{itemize}
+\item \verb|productoria' [1, 2, 3] (\n -> n * 2)| devolverá \verb|48| porque la función \verb|(\n -> n * 2)| se aplica a cada elemento de la lista y se multiplican los resultados: \verb|2 * 4 * 6 = 48|.
+\end{itemize}
+\end{itemize}
+
+\section*{Ejercicio 5}
+\textbf{Definí nuevamente la función paratodo, pero esta vez usando la función paratodo’ (sin recursión ni analisis por casos!).}
+\begin{haskell}
+esTrue x = x == True
+paratodo'' :: [Bool] -> Bool
+paratodo'' xs = paraTodo' xs esTrue
+\end{haskell}
+\subsection*{Función esTrue}
+    \textbf{Tipo de la función:} \verb|Bool -> Bool|. La función toma un valor booleano y devuelve un valor booleano.
+    \textbf{Cuerpo de la función:}
+    \begin{itemize}
+    \item La función verifica si el valor booleano \verb|x| es igual a \verb|True|. Devuelve \verb|True| si es así, y \verb|False| en caso contrario.
+    \end{itemize}
+\subsection*{Función paratodo''}
+    \textbf{Tipo de la función:} \verb|[Bool] -> Bool|. La función toma una lista de booleanos y devuelve un booleano.
+    \textbf{Cuerpo de la función:}
+    \begin{itemize}
+    \item La función utiliza la función \verb|paraTodo'| con la lista de booleanos \verb|xs| y la función \verb|esTrue| como argumentos.
+    \item Esto significa que \verb|paratodo''| verifica si todos los elementos de la lista son iguales a \verb|True|.
+    \end{itemize}
+    \textbf{Observaciones:}
+    \begin{itemize}
+    \item \verb|esTrue| se utiliza para transformar el problema de verificar si todos los elementos de la lista son \verb|True| en el problema de verificar si todos los elementos son iguales a \verb|True|.
+    \item \verb|paratodo''| delega la verificación real a la función \verb|paraTodo'|.
+    \end{itemize}
+    \textbf{Ejemplo de ejecución:}
+    \begin{itemize}
+    \item \verb|paratodo'' [True, True, True]| devolverá \verb|True| porque todos los elementos de la lista son iguales a \verb|True|.
+    \item \verb|paratodo'' [True, False, True]| devolverá \verb|False| porque al menos un elemento de la lista no es igual a \verb|True|.
+\end{itemize}
+
+\section*{Ejercicio 6}
+\textbf{Utilizando las funciones del ejercicio 4, programá las siguientes funciones por composición, sin usar recursión ni análisis por casos.}
+
+\begin{itemize}
+    \item 
+\verb|todosPares :: [Int] -> Bool| verifica que todos los números de una lista sean pares.
+\begin{haskell}
+todosPares :: [Int] -> Bool
+todosPares xs = paraTodo' xs even
+\end{haskell}
+\textbf{Tipo de la función:} \verb|[Int] -> Bool|. La función toma una lista de enteros y devuelve un booleano.
+\textbf{Cuerpo de la función:}
+\begin{itemize}
+\item La función utiliza la función \verb|paraTodo'| con la lista de enteros \verb|xs| y la función \verb|even| como argumentos.
+\item Esto significa que \verb|todosPares| verifica si todos los elementos de la lista son pares.
+\end{itemize}
+\textbf{Observaciones:}
+\begin{itemize}
+\item \verb|even| es una función predefinida en Haskell que devuelve \verb|True| si el número es par y \verb|False| si es impar.
+\item \verb|todosPares| utiliza \verb|paraTodo'| para verificar si todos los elementos de la lista son pares, utilizando la función \verb|even| como criterio.
+\end{itemize}
+\textbf{Ejemplo de ejecución:}
+\begin{itemize}
+\item \verb|todosPares [2, 4, 6, 8]| devolverá \verb|True| porque todos los elementos de la lista son pares.
+\item \verb|todosPares [2, 3, 4, 6]| devolverá \verb|False| porque hay al menos un elemento impar en la lista.
+\end{itemize}
+
+    \item 
+\verb|hayMultiplo :: Int -> [Int] -> Bool| verifica si existe algun número dentro del segundo parámetro que sea múltiplo del primer parámetro.
+\begin{haskell}
+esMultiplo :: Int -> Int -> Bool
+esMultiplo a b = mod b a == 0
+hayMultiplo :: Int -> [Int] -> Bool
+hayMultiplo n xs = existe' xs (esMultiplo n)
+\end{haskell}
+\textbf{Tipo de la función:} \verb|Int -> Int -> Bool|. La función toma dos enteros y devuelve un booleano.
+\textbf{Cuerpo de la función:}
+\begin{itemize}
+\item La función verifica si \verb|a| es un múltiplo de \verb|b| verificando si el resultado de \verb|mod b a| es igual a \verb|0|.
+\end{itemize}
+\textbf{Tipo de la función:} \verb|Int -> [Int] -> Bool|. La función toma un entero \verb|n| y una lista de enteros \verb|xs|, y devuelve un booleano.
+\textbf{Cuerpo de la función:}
+\begin{itemize}
+\item La función utiliza \verb|existe'| con la lista de enteros \verb|xs| y la función \verb|esMultiplo n| como argumentos.
+\item Esto significa que \verb|hayMultiplo| verifica si hay al menos un elemento en la lista \verb|xs| que es múltiplo de \verb|n|.
+\end{itemize}
+\textbf{Observaciones:}
+\begin{itemize}
+\item \verb|esMultiplo| se utiliza como la función de prueba para la existencia de múltiplos en \verb|hayMultiplo|.
+\item \verb|hayMultiplo| utiliza \verb|existe'| para verificar si al menos un elemento en la lista \verb|xs| es múltiplo de \verb|n|.
+\end{itemize}
+\textbf{Ejemplo de ejecución:}
+\begin{itemize}
+\item \verb|hayMultiplo 3 [1, 2, 3, 4, 5]| devolverá \verb|True| porque al menos un elemento (el 3) es múltiplo de 3.
+\item \verb|hayMultiplo 7 [2, 4, 6, 8]| devolverá \verb|False| porque no hay elementos en la lista que sean múltiplos de 7.
+\end{itemize}
+
+    \item 
+\verb|sumaCuadrados :: Int -> Int|, dado un número no negativo \verb|n|, calcula la suma de los primeros \verb|n| cuadrados, es decir $\langle \sum i : 0 \leq i < n : i^2 \rangle$.
+\begin{haskell}
+cuadrado :: Int -> Int
+cuadrado k = k*k
+sumaCuadrados :: Int -> Int
+sumaCuadrados k = sumatoria' [0..(k-1)] cuadrado 
+\end{haskell}
+\subsection*{Función cuadrado}
+\textbf{Tipo de la función:} \verb|Int -> Int|. La función toma un entero \verb|k| y devuelve el cuadrado de \verb|k|.
+\textbf{Cuerpo de la función:} La función calcula el cuadrado de \verb|k| multiplicando \verb|k| por sí mismo.
+\subsection*{Función sumaCuadrados}
+\textbf{Tipo de la función:} \verb|Int -> Int|. La función toma un entero \verb|k| y devuelve la suma de los cuadrados de los números desde 0 hasta \verb|k-1|.
+\newline \textbf{Cuerpo de la función:}
+\begin{itemize}
+\item La función utiliza \verb|sumatoria'| con la lista de números desde 0 hasta \verb|k-1| y la función \verb|cuadrado| como argumentos.
+\item Esto significa que \verb|sumaCuadrados| calcula la suma de los cuadrados de los números desde 0 hasta \verb|k-1|.
+\end{itemize}
+\textbf{Observaciones:}
+\begin{itemize}
+\item \verb|cuadrado| es una función auxiliar que calcula el cuadrado de un número.
+\item \verb|sumaCuadrados| utiliza \verb|sumatoria'| para calcular la suma de los cuadrados de los números en un rango específico.
+\end{itemize}
+\textbf{Ejemplo de ejecución:} \verb|sumaCuadrados 4| calculará la suma de los cuadrados de los números desde 0 hasta 3: \verb|0^2 + 1^2 + 2^2 + 3^2 = 0 + 1 + 4 + 9 = 14|.
+
+    \item 
+Programar la función \verb|existeDivisor::Int-> [Int] -> Bool|, que dado en entero \verb|n| y una lista \verb|ls| , devuelve \verb|True| si y solo si, existe algún elemento en \verb|ls| que divida a \verb|n|.
+\begin{haskell}
+esDivisor :: Int -> Int -> Bool
+esDivisor n d = n mod d == 0
+existeDivisor :: Int -> [Int] -> Bool
+existeDivisor n ls = existe' ls (esDivisor n)
+\end{haskell}
+\subsection*{Función esDivisor}
+\textbf{Tipo de la función:} \verb|Int -> Int -> Bool|. La función toma dos enteros \verb|n| y \verb|d| y devuelve un booleano.
+\textbf{Cuerpo de la función:} La función verifica si \verb|d| es un divisor de \verb|n| comprobando si el resultado de \verb|mod n d| es igual a \verb|0|.
+\subsection*{Función existeDivisor}
+\textbf{Tipo de la función:} \verb|Int -> [Int] -> Bool|. La función toma un entero \verb|n| y una lista de enteros \verb|ls|, y devuelve un booleano.
+\textbf{Cuerpo de la función:}
+\begin{itemize}
+\item La función utiliza \verb|existe'| con la lista de enteros \verb|ls| y la función \verb|esDivisor n| como argumentos.
+\item Esto significa que \verb|existeDivisor| verifica si hay al menos un elemento en la lista \verb|ls| que es divisor de \verb|n|.
+\end{itemize}
+\textbf{Observaciones:}
+\begin{itemize}
+\item \verb|esDivisor| se utiliza como la función de prueba para la existencia de divisores en \verb|existeDivisor|.
+\item \verb|existeDivisor| utiliza \verb|existe'| para verificar si al menos un elemento en la lista \verb|ls| es divisor de \verb|n|.
+\end{itemize}
+\textbf{Ejemplo de ejecución:}
+\begin{itemize}
+\item \verb|existeDivisor 7 [2, 3, 4, 5]| devolverá \verb|False| porque ningún elemento de la lista es divisor de 7.
+\item \verb|existeDivisor 8 [3, 5, 7]| devolverá \verb|True| porque al menos un elemento (el 4) es divisor de 8.
+\end{itemize}
+
+    \item 
+Utilizando la funcion del apartado anterior, definí la función \verb|esPrimo:: Int -> Bool|, que dado un entero n, devuelve True si y solo si n es primo.
+\begin{haskell}
+esPrimo :: Int -> Bool
+esPrimo n = n > 1 && not (existeDivisor n [2..(n-1)])
+\end{haskell}
+\textbf{Tipo de la función:} \verb|Int -> Bool|. La función toma un entero \verb|n| y devuelve un booleano.
+\textbf{Cuerpo de la función:} La función verifica dos condiciones:
+\begin{enumerate}
+\item \verb|n| es mayor que 1.
+\item No existe ningún divisor en el rango de 2 a \verb|(n-1)| utilizando la función \verb|existeDivisor|.
+\end{enumerate}
+\textbf{Observaciones:}
+\begin{itemize}
+\item La función utiliza la función \verb|existeDivisor| para verificar si hay algún divisor en el rango de 2 a \verb|(n-1)|.
+\item Si ambas condiciones se cumplen, la función devuelve \verb|True|, indicando que \verb|n| es primo. Si alguna de las condiciones no se cumple, devuelve \verb|False|.
+\end{itemize}
+\textbf{Ejemplo de ejecución:}
+\begin{itemize}
+\item \verb|esPrimo 7| devolverá \verb|True| porque 7 es un número primo.
+\item \verb|esPrimo 10| devolverá \verb|False| porque 10 no es un número primo (tiene divisores en el rango de 2 a 9).
+\end{itemize}
+
+    \item 
+¿Se te ocurre como redefinir factorial (ej. 2d ) para evitar usar recursión?
+\begin{haskell}
+factorial :: Int -> Int
+factorial x = productoria [1..x]
+\end{haskell} 
+\textbf{Tipo de la función:} \verb|Int -> Int|. La función toma un entero \verb|x| y devuelve un entero. 
+\textbf{Cuerpo de la función:}
+\begin{itemize}
+\item 
+La función utiliza la función \verb|productoria| con la lista \verb|[1..x]|. Esta lista contiene todos los números desde 1 hasta \verb|x|.
+\item 
+La función \verb|productoria| calcula el producto de los elementos en la lista, que es esencialmente el factorial de \verb|x|.
+\end{itemize}
+\textbf{Ejemplo de ejecución:}
+\begin{itemize}
+\item \verb|factorial 5| devolverá el mismo resultado que antes, calculando el factorial de 5 utilizando la función \verb|productoria|.
+\end{itemize}
+
+    \item 
+Programar la función \verb|multiplicaPrimos :: [Int] -> Int| que calcula el producto de todos los números primos de una lista.
+\begin{haskell}
+multiplicaPrimos :: [Int] -> Int
+multiplicaPrimos xs = productoria' [ x | x <- xs, esPrimo x ] id
+\end{haskell}
+\textbf{Tipo de la función:} \verb|[Int] -> Int|. La función toma una lista de enteros \verb|xs| y devuelve un entero.
+\textbf{Cuerpo de la función:}
+\begin{itemize}
+\item La función utiliza la función \verb|productoria'| con una lista comprensiva \verb|[x | x <- xs, esPrimo x]| y la función identidad \verb|id| como argumentos.
+\item La lista comprensiva filtra solo los números primos de la lista original \verb|xs|.
+\end{itemize}
+\textbf{Observaciones:}
+\begin{itemize}
+\item La función utiliza \verb|esPrimo| para determinar si un número es primo.
+\item La función \verb|productoria'| se utiliza para calcular el producto de los números primos en la lista.
+\end{itemize}
+\textbf{Ejemplo de ejecución:} \verb|multiplicaPrimos [2, 3, 4, 5, 6]| devolverá \verb|30| porque 2, 3 y 5 son primos, y su producto es $2 \cdot 3 \cdot 5 = 30$.
+
+    \item 
+Programar la función \verb|esFib :: Int -> Bool|, que dado un entero \verb|n|, devuelve \verb|True| si y sólo si n está en la sucesión de Fibonacci.
+\begin{haskell}
+fib :: Int -> Int
+fib 0 = 0
+fib 1 = 1
+fib n = fib (n-1) + fib (n-2)
+
+esFib :: Int -> Bool
+esFib n = pertenece n [fib i | i <- [0..n]]
+\end{haskell}
+\subsection*{Función fib}
+\textbf{Tipo de la función:} \verb|Int -> Int|. La función toma un entero \verb|n| y devuelve el n-ésimo número de la secuencia de Fibonacci.
+\textbf{Cuerpo de la función:}
+\begin{itemize}
+\item La función utiliza la recursión para calcular el n-ésimo número de Fibonacci.
+\item Los casos base son \verb|fib 0 = 0| y \verb|fib 1 = 1|.
+\item La definición general utiliza la fórmula de Fibonacci: \verb|fib n = fib (n-1) + fib (n-2)|.
+\end{itemize}
+\subsection*{Función esFib}
+\textbf{Tipo de la función:} \verb|Int -> Bool|. La función toma un entero \verb|n| y devuelve un booleano.
+\textbf{Cuerpo de la función:}
+\begin{itemize}
+\item La función crea una lista de los primeros \verb|n+1| números de Fibonacci utilizando la comprensión de listas \verb|[fib i | i <- [0..n]]|.
+\item Luego, verifica si \verb|n| pertenece a esa lista utilizando la función \verb|pertenece|.
+\end{itemize}
+\textbf{Observaciones:} La función \verb|esFib| utiliza la función \verb|pertenece| para verificar si un número \verb|n| pertenece a la secuencia de Fibonacci.
+\textbf{Ejemplo de ejecución:} \verb|esFib 5| devolverá \verb|True| porque 5 es parte de la secuencia de Fibonacci.
+
+    \item 
+Utilizando la función del apartado anterior, definí la función \verb|todosFib :: [Int] -> Bool| que dada una lista xs de enteros, devuelva si todos los elementos de la lista pertenecen (o no) a la sucesión de Fibonacci.
+\begin{haskell}
+todosFib :: [Int] -> Bool
+todosFib xs = paraTodo' xs esFib
+\end{haskell}
+\textbf{Tipo de la función:} \verb|[Int] -> Bool|. La función toma una lista de enteros \verb|xs| y devuelve un booleano.
+\newline \textbf{Cuerpo de la función:}
+\begin{itemize}
+\item La función utiliza \verb|paraTodo'| con la lista de enteros \verb|xs| y la función \verb|esFib| como argumentos.
+\item Esto significa que \verb|todosFib| verifica si todos los elementos de la lista \verb|xs| son números que pertenecen a la secuencia de Fibonacci.
+\end{itemize}
+\textbf{Observaciones:}
+\begin{itemize}
+\item \verb|esFib| se utiliza como la función de prueba para la verificación en \verb|todosFib|.
+\item \verb|todosFib| utiliza \verb|paraTodo'| para verificar si todos los elementos de la lista \verb|xs| cumplen la propiedad definida por \verb|esFib|.
+\end{itemize}
+\textbf{Ejemplo de ejecución:}
+\begin{itemize}
+\item \verb|todosFib [5, 8, 13]| devolverá \verb|True| porque todos los elementos de la lista son parte de la secuencia de Fibonacci.
+\item \verb|todosFib [5, 8, 14]| devolverá \verb|False| porque el último elemento (14) no es parte de la secuencia de Fibonacci.
+\end{itemize}
+\end{itemize}
+
+\section*{Ejercicio 7}
+\textbf{Indagá en Hoogle sobre las funciones map y filter. También podes consultar su tipo en ghci con el comando :t .}
+
+\subsection*{Función MAP}
+MAP es una f de orden superior que toma una función (que a su vez ésta toma un a y un b,)  y una lista xs y aplica esa función a cada elemento de xs, produciendo una nueva lista.
+\begin{haskell}
+map :: (a -> b) -> [a] -> [b]        
+map f [] = []                        
+map f (x:xs) = f x : map f xs
+\end{haskell}
+
+\subsection*{Función FILTER}
+FILTER es una f que toma un predicado y una lista,  devolviendo una lista con los elementos que satisfacen el predicado. Es decir, si p x se evalua en True, x es incluido a la lista.
+\begin{haskell}
+filter :: (a -> Bool) -> [a] -> [b]          
+filter p [] = []                           
+filter p (x:xs) | p x = x : filter p xs     
+                | otherwise = filter p xs
+\end{haskell}
+
+\subsection*{¿A qué equivale la expresión map succ [1, -4, 6, 2, -8], donde succ n = n+1?}
+Equivale a la lista [2,-3,7,3,-7], donde cada elemento es el siguiente de la lista dada.
+
+\subsection*{¿Y la expresión filter esPositivo [1, -4, 6, 2, -8]?}
+A la lista de los positivos [1,6,2] pertenecientes a la lista dada.
+
+\section*{Ejercicio 8}
+\textbf{Programá una función que dada una lista de números xs, devuelve la lista que resulta de duplicar cada valor de xs.}
+\begin{itemize}
+
+    \item Definila usando recursión:
+\begin{haskell}
+dupLista :: (Num a) => [a] -> [a]
+dupLista [] = []
+dupLista (x:xs) = (2*x) : dupLista xs
+\end{haskell}
+    La función toma una lista de números y devuelve una nueva lista donde cada elemento es el doble del correspondiente elemento en la lista original.
+    La función \verb|dupLista| utiliza patternt matching para manejar dos casos: cuando la lista está vacía (\verb|[]|) y cuando la lista tiene al menos un elemento (\verb|(x:xs)|).
+    \begin{itemize}
+    \item 
+    En el caso base, si la lista está vacía, la función devuelve una lista vacía también.
+    \item 
+    En el caso recursivo, se construye una nueva lista donde el primer elemento es el doble de \verb|x|, y el resto de la lista se obtiene llamando recursivamente a \verb|dupLista| con el resto de la lista original (\verb|xs|). Esto se hace para cada elemento de la lista original.
+    \end{itemize}
+    
+    \item Definila utilizando la función map:
+\begin{haskell}
+dupLista' :: (Num a) => [a] -> [a]
+dupLista' xs = map (*2) xs
+\end{haskell}        
+La función \verb|dupLista'| es otra implementación de la función que duplica cada elemento de una lista, pero utiliza la función \verb|map| para lograrlo de una manera más concisa.
+\begin{itemize}
+\item 
+La función \verb|map| toma una función y una lista, y aplica esa función a cada elemento de la lista, devolviendo una nueva lista con los resultados.
+\item 
+En este caso, la función \verb|(*2)| es la función que se aplica a cada elemento de la lista \verb|xs|. Multiplicar un número por 2 es equivalente a duplicarlo.
+\item 
+Por lo tanto, \verb|map (*2) xs| produce una lista donde cada elemento es el doble del elemento correspondiente en la lista original.
+\end{itemize}
+\end{itemize}
+
+\section*{Ejercicio 9}
+\textbf{Programá una función que dada una lista de números xs, calcula una lista que tiene como elementos aquellos números de xs que son primos.}
+
+\begin{itemize}
+    \item 
+    \textbf{a)} Definila usando recursión:
+    % haskell null
+    \begin{haskell}
+    primListas :: [Int] -> [Int]
+    primListas [] = []
+    primListas (x:xs) | esPrimo x = x : primListas xs
+                      | otherwise = primListas xs
+    \end{haskell}
+    
+    La función \verb|primListas| toma una lista de números enteros y devuelve una nueva lista que contiene solo los números primos de la lista original, utiliza pattern matching para manejar dos casos: cuando la lista está vacía (\verb|[]|) y cuando la lista tiene al menos un elemento (\verb|(x:xs)|).
+    \begin{itemize}
+    \item 
+    En el caso base, si la lista está vacía, la función devuelve una lista vacía también.
+    \item 
+    En el caso recursivo, se utiliza la función \verb|esPrimo| para verificar si el primer elemento (\verb|x|) es primo. Si es primo, se agrega a la lista resultante (\verb|x : primListas xs|) y se llama recursivamente con el resto de la lista (\verb|xs|). Si no es primo, simplemente se llama recursivamente con el resto de la lista.
+    \end{itemize}
+
+
+    \item 
+    \textbf{b)} Definila usando la función Filter:
+        % haskell null
+\begin{haskell}
+primListas' :: [Int] -> [Int]
+primListas' xs = filter esPrimo xs
+\end{haskell}
+        
+        La función \verb|primListas'| es otra implementación de la función que filtra los números primos de una lista, pero utiliza la función \verb|filter| para lograrlo de una manera más concisa.
+        \begin{itemize}
+        \item 
+        La función \verb|filter| toma una función de condición y una lista, y devuelve una nueva lista que contiene solo los elementos que cumplen con la condición.
+        \item 
+        En este caso, \verb|esPrimo| es la función de condición que se aplica a cada elemento de la lista \verb|xs|. La función \verb|filter esPrimo xs| devuelve una lista que contiene solo los números primos de la lista original.
+        \end{itemize}   
+        
+       \item 
+        \textbf{c)} Revisá tu definicián del ejercicio 6g . ¿Cómo podes mejorarla?
+    
+\begin{haskell}
+multiplicaPrimos' :: [Int] -> Int
+multiplicaPrimos' xs = product (filter esPrimo xs)
+\end{haskell}
+            
+            La función \verb|multiplicaPrimos'| toma una lista de números enteros y devuelve el producto de los números primos en esa lista.
+            \begin{itemize}
+            \item 
+            \verb|filter esPrimo xs| filtra la lista original \verb|xs| y devuelve una nueva lista que contiene solo los números primos.
+            \item 
+            \verb|product| toma una lista de números y devuelve su producto. En este caso, se aplica a la lista de números primos para calcular el producto de esos números.
+            \end{itemize}
+            
+            Por lo tanto, la función \verb|multiplicaPrimos'| primero filtra la lista original para obtener solo los números primos y luego calcula el producto de esos números primos.
+        
+\end{itemize}
+    
+\section*{Ejercicio 10}
+La función primIgualesA toma un valor y una lista, y calcula el tramo inicial más largo de la lista cuyos elementos son iguales a ese valor. Por ejemplo:
+\begin{itemize}
+\item 
+primIgualesA 3 [3,3,4,1] = [3,3]
+\item 
+primIgualesA 3 [4,3,3,4,1] = []
+\item 
+primIgualesA 3 [] = []
+\item 
+primIgualesA ’a’ "aaadaa" = "aaa"
+\end{itemize}
+
+\begin{itemize}
+    \item 
+    \textbf{a)} Programá primIguales por recursión.
+    % haskell null
+    \begin{haskell}
+    primIgualesA :: (Eq a) => a -> [a] -> [a]
+    primIgualesA _ []  = []
+    primIgualesA k (x:xs) | k == x = x : primIgualesA k xs
+                          | otherwise = []
+    \end{haskell}
+    
+    La función \verb|primIgualesA| toma un elemento \verb|k| y una lista de elementos, y devuelve una lista que contiene solo los elementos iguales a \verb|k| que están al principio de la lista, utiliza pattern matching para manejar dos casos: cuando la lista está vacía (\verb|[]|) y cuando la lista tiene al menos un elemento (\verb|(x:xs)|).
+    \begin{itemize}
+    \item 
+    En el caso base, si la lista está vacía, la función devuelve una lista vacía también.
+    \item 
+    En el caso recursivo, se verifica si el primer elemento (\verb|x|) es igual a \verb|k|. Si es así, se agrega a la lista resultante (\verb|x : primIgualesA k xs|) y se llama recursivamente con el resto de la lista (\verb|xs|). Si el primer elemento no es igual a \verb|k|, la lista resultante será vacía (\verb|[]|).
+    \end{itemize}
+
+
+    \item 
+\textbf{b)} Programá nuevamente la función utilizando takeWhile.
+% haskell null
+\begin{haskell}
+primIgualesA' :: (Eq a) => a -> [a] -> [a]
+primIgualesA' n = takeWhile (==n)
+\end{haskell}
+\begin{itemize}
+\item 
+\verb|takeWhile| toma una función de condición y una lista, y devuelve la lista de elementos que cumplen con la condición hasta que se encuentre el primer elemento que no la cumple.
+\item 
+En este caso, \verb|takeWhile (==n)| toma elementos de la lista mientras sean iguales a \verb|n|.
+\end{itemize}
+
+Entonces, la función \verb|primIgualesA'| es equivalente a la función \verb|primIgualesA| en términos de resultados, pero utiliza \verb|takeWhile| para lograrlo de manera más concisa.
+
+Ambas funciones, \verb|primIgualesA| y \verb|primIgualesA'|, hacen lo mismo: devuelven una lista que contiene solo los elementos iguales a \verb|n| que están al principio de la lista original.
+
+\end{itemize}
+
+\section*{Ejercicio 11}
+La función primIguales toma una lista y devuelve el mayor tramo inicial de la lista cuyos elementos son todos iguales entre sí.
+
+\begin{itemize}
+    \item[a)] Programá primIguales por recursión:
+\begin{haskell}
+primIguales :: (Eq a) => [a] -> [a] 
+primIguales [] = []
+primIguales (x:xs) | (x == head xs) = x : primIguales xs 
+                   | otherwise = x : []
+\end{haskell}
+
+La función \texttt{primIguales} funciona de la siguiente manera:
+
+\begin{itemize}
+    \item La función toma una lista de elementos de tipo $a$ que es comparable (es decir, $a$ es una instancia de la clase \texttt{Eq}) y devuelve otra lista de elementos del mismo tipo.
+    \item La primera ecuación de patrones maneja el caso base cuando se proporciona una lista vacía como entrada. En este caso, devuelve una lista vacía como salida, ya que no hay elementos para comparar.
+    \item La segunda ecuación de patrones maneja el caso en el que la lista tiene al menos un elemento. Divide la lista en la cabeza (\texttt{x}) y la cola (\texttt{xs}). Luego, verifica si el primer elemento \texttt{x} es igual al primer elemento de la cola, \texttt{head xs}. Si son iguales, agrega \texttt{x} a la lista de salida y llama recursivamente a la función \texttt{primIguales} con la cola \texttt{xs}.
+    \item La guardia \texttt{| otherwise} en la segunda ecuación de patrones significa que si no se cumple la condición anterior (es decir, \texttt{x} no es igual a \texttt{head xs}), se ejecutará el siguiente bloque.
+    \item Dentro de este bloque, agrega el elemento \texttt{x} a una lista unitaria \texttt{[x]}. Esto es lo que hace \texttt{x : []}, donde \texttt{:} se utiliza para agregar un elemento a una lista.
+\end{itemize}
+
+En resumen, la función \texttt{primIguales} toma una lista y devuelve otra lista que contiene solo los elementos iniciales que son iguales entre sí. Si hay una secuencia de elementos iguales al principio de la lista, los recoge y los devuelve en una lista separada. Si no hay elementos iguales consecutivos, simplemente devuelve el primer elemento en una lista.
+
+    \item[b)] Usá cualquier versión de primIgualesA para programar primIguales. Está permitido dividir en casos, pero no usar recursión.
+\begin{haskell}
+primIguales' :: (Eq a) => [a] -> [a]
+primIguales' (x:xs) = primIgualesA' x (x:xs)        
+\end{haskell}
+\end{itemize}
+\newpage
+
+\section*{Ejercicio 12}
+Todas las funciones del ejercicio 4 son similares entre sí: cada una aplica la función término t a todos los elementos de una lista, y luego aplica algún operador entre todos ellos, obteniéndose as ı el resultado final. Para el caso de la lista vacía, se devuelve el elemento neutro. De esa manera cada una de ellas computa una cuantificación sobre los elementos de la lista transformados por t:
+\begin{itemize}
+\item 
+$paratodo'.xs.t = \langle \forall i : 0 \leq i < \#xs : t.xs!i  \rangle $
+\item 
+$existe'.xs.t = \langle \exists i : 0 \leq i < \#xs : t.xs!i  \rangle $
+\item 
+$sumatoria'.xs.t = \langle \sum i : 0 \leq i < \#xs : t.xs!i \rangle $
+\item 
+$productoria'.xs.t = \langle \prod i : 0 \leq i < \#xs : t.xs!i  \rangle $
+\end{itemize}
+Reescribir todas las funciones del punto 4 utilizando el cuantificador generalizado (sin usar inducción y en una línea por función).
+
+\textbf{Guiándote por las observaciones anteriores, definí de manera recursiva la función cuantGen (denota la cuantificación generalizada):}
+% haskell null
+\begin{haskell}
+cuantGen :: (b -> b -> b) -> b -> [a] -> (a -> b) -> b
+cuantGen op z xs t = foldr op z (map t xs)
+\end{haskell}
+
+La función \verb|cuantGen| es una función de orden superior en Haskell que utiliza la función \verb|foldr| para aplicar una operación binaria \verb|op| acumulativamente a los elementos de una lista transformada por la función \verb|t|.
+\begin{itemize}
+\item 
+\verb|map t xs| transforma cada elemento de la lista \verb|xs| aplicando la función de transformación \verb|t|.
+\item 
+\verb|foldr op z| toma la lista transformada y acumula los elementos utilizando la operación binaria \verb|op|, comenzando con el elemento inicial \verb|z|.
+\end{itemize}
+
+Por lo tanto, la función \verb|cuantGen| toma una operación binaria, un elemento inicial, una lista y una función de transformación. Aplica la operación binaria acumulativamente a los elementos transformados de la lista utilizando \verb|foldr|.
+
+\begin{itemize}
+    \item 
+    \textbf{a)} $paratodo'.xs.t = \langle \forall i : 0 \leq i < \#xs : t.xs!i  \rangle $
+    \end{itemize}
+    % haskell null
+    \begin{haskell}
+    paratodo''' :: [a] -> (a -> Bool) -> Bool
+    paratodo''' xs t = cuantGen (&&) True xs t
+    \end{haskell}
+    
+    Esta función se encarga de verificar si todos los elementos de la lista cumplen con una cierta condición dada por la función \verb|t|.
+    \begin{itemize}
+    \item 
+    \verb|cuantGen (&&) True| utiliza \verb|cuantGen| con la operación lógica AND (\verb|&&|) como la operación binaria y el valor inicial \verb|True|. Esto significa que la función \verb|cuantGen| acumulará los resultados usando la operación lógica AND, y el valor inicial es \verb|True|.
+    \item 
+    \verb|xs| es la lista sobre la cual se aplicará la función de condición \verb|t|.
+    \item 
+    La función \verb|cuantGen| aplicará la operación lógica AND acumulativamente a los resultados de \verb|t| aplicados a los elementos de la lista. El resultado final será \verb|True| si todos los elementos cumplen con la condición y \verb|False| en caso contrario.
+\end{itemize}
+\begin{itemize}
+    \item 
+    \textbf{b)} $existe'.xs.t = \langle \exists i : 0 \leq i < \#xs : t.xs!i  \rangle $
+    \end{itemize}
+    % haskell null
+    \begin{haskell}
+    existe''' :: [a] -> (a -> Bool) -> Bool
+    existe''' xs t = cuantGen (||) False xs t
+    \end{haskell}
+    
+    La función \verb|existe'''| es otra función de orden superior en Haskell que utiliza la función \verb|cuantGen| para verificar si al menos un elemento de la lista cumple con una cierta condición dada por la función \verb|t|.
+    \begin{itemize}
+    \item 
+    \verb|cuantGen (||) False| utiliza \verb|cuantGen| con la operación lógica OR (\verb/||/) como la operación binaria y el valor inicial \verb|False|. Esto significa que la función \verb|cuantGen| acumulará los resultados usando la operación lógica OR, y el valor inicial es \verb|False|.
+    \item 
+    \verb|xs| es la lista sobre la cual se aplicará la función de condición \verb|t|.
+    \item 
+    La función \verb|cuantGen| aplicará la operación lógica OR acumulativamente a los resultados de \verb|t| aplicados a los elementos de la lista. El resultado final será \verb|True| si al menos un elemento cumple con la condición y \verb|False| en caso contrario.
+\end{itemize}
+\begin{itemize}
+    \item 
+    \textbf{c)} $sumatoria'.xs.t = \langle \sum i : 0 \leq i < \#xs : t.xs!i \rangle $
+    \end{itemize}
+    % haskell null
+    \begin{haskell}
+    sumatoria''' :: [a] -> (a -> Int) -> Int
+    sumatoria''' xs t = cuantGen (+) 0 xs t
+    \end{haskell}
+    
+    La función \verb|sumatoria'''| es otra función de orden superior en Haskell que utiliza la función \verb|cuantGen| para calcular la sumatoria de los valores resultantes de aplicar una función \verb|t| a cada elemento de la lista.
+    \begin{itemize}
+    \item 
+    \verb|cuantGen (+) 0| utiliza \verb|cuantGen| con la operación de suma (\verb|(+)|) como la operación binaria y el valor inicial \verb|0|. Esto significa que la función \verb|cuantGen| acumulará los resultados usando la operación de suma, y el valor inicial es \verb|0|.
+    \item 
+    \verb|xs| es la lista sobre la cual se aplicará la función de transformación \verb|t|.
+    \item 
+    La función \verb|cuantGen| aplicará la operación de suma acumulativamente a los resultados de \verb|t| aplicados a los elementos de la lista. El resultado final será la sumatoria de los valores transformados.
+\end{itemize}
+\begin{itemize}
+    \item 
+    \textbf{d)} $productoria'.xs.t = \langle \prod i : 0 \leq i < \#xs : t.xs!i  \rangle $
+    \end{itemize}
+    % haskell null
+    \begin{haskell}
+    productoria''' :: [a] -> (a -> Int) -> Int
+    productoria''' xs t = cuantGen (*) 1 xs t
+    \end{haskell}
+    
+    La función \verb|productoria'''| es otra función de orden superior en Haskell que utiliza la función \verb|cuantGen| para calcular la productoria de los valores resultantes de aplicar una función \verb|t| a cada elemento de la lista.
+    \begin{itemize}
+    \item 
+    \verb|cuantGen (*) 1| utiliza \verb|cuantGen| con la operación de multiplicación (\verb|(*)|) como la operación binaria y el valor inicial \verb|1|. Esto significa que la función \verb|cuantGen| acumulará los resultados usando la operación de multiplicación, y el valor inicial es \verb|1|.
+    \item 
+    \verb|xs| es la lista sobre la cual se aplicará la función de transformación \verb|t|.
+    \item 
+    La función \verb|cuantGen| aplicará la operación de multiplicación acumulativamente a los resultados de \verb|t| aplicados a los elementos de la lista. El resultado final será la productoria de los valores transformados.
+\end{itemize}
+        
+\section*{Ejercicio 13}
+Definir una función que se denomina distancia de edición. Que toma como entrada dos strings (lista de caracteres). 
+\begin{haskell}
+distanciaEdicion :: [Char] -> [Char] -> Int
+\end{haskell}. 
+La función distanciaEdicion, se comporta de la siguiente manera:
+\begin{itemize}
+\item 
+Si alguna de las listas es vacía, devuelve la longitud de la otra lista.
+\item 
+Si las dos listas son no vacías, compara los primeros elementos de cada lista:
+\begin{itemize}
+\item 
+Si \verb|x==y|, no suma y sigue computando la distancia para \verb|xs| e \verb|ys| ,
+\item 
+Si \verb|x!=y|, suma 1 y sigue computando la distancia para \verb|xs| e \verb|ys|
+\end{itemize}
+\end{itemize}
+
+La función \begin{haskell}distanciaEdicion\end{haskell} calcula la distancia de edición entre dos cadenas, que es el número mínimo de operaciones de edición (inserciones, eliminaciones o sustituciones) requeridas para transformar una cadena en la otra.
+\begin{haskell}
+minTres :: Int -> Int -> Int -> Int
+minTres a b c = min a (min b c)
+distanciaEdicion :: [Char] -> [Char] -> Int
+distanciaEdicion [] ys = length ys
+distanciaEdicion xs [] = length xs
+distanciaEdicion (x:xs) (y:ys)
+  | x == y = distanciaEdicion xs ys
+  | otherwise = 1 + minTres (distanciaEdicion xs (y:ys)) (distanciaEdicion (x:xs) ys) (distanciaEdicion xs ys)
+\end{haskell}
+\begin{itemize}
+\item 
+La función \verb|minTres| es una función auxiliar que toma tres valores y devuelve el mínimo entre ellos.
+\item 
+En la función \verb|distanciaEdicion|, se manejan tres casos: si la primera cadena está vacía, la distancia es la longitud de la segunda cadena; si la segunda cadena está vacía, la distancia es la longitud de la primera cadena; y el caso recursivo, donde ambas cadenas tienen al menos un elemento.
+\item 
+En el caso recursivo, se verifica si los primeros elementos de las cadenas son iguales. Si es así, no se requiere ninguna operación de edición en esta posición, y la función se llama recursivamente con el resto de las cadenas.
+\item 
+Si los primeros elementos son diferentes, se consideran tres operaciones posibles: insertar y en xs, eliminar x de xs o sustituir x por y en xs. Se utiliza la función \verb|minTres| para determinar cuál de estas operaciones requiere el menor número de ediciones.
+\end{itemize}
+
+\section*{Ejercicio 14}
+Definí una función primeros que cumplen, \verb|primQueCumplen::[a]->(a->Bool)->[a]|, tal que, dada una lista ls y un predicado p, devuelve el tramo inicial de ls que cumple p.
+\begin{haskell}
+primQueCumplen :: [a] -> (a -> Bool) -> [a]
+primQueCumplen [] p = []
+primQueCumplen (l:ls) p | (p l) = l : primQueCumplen ls p
+                        | otherwise = primQueCumplen ls p
+\end{haskell}
+    
+    La función toma una lista \verb|ls| y un predicado \verb|p|, y devuelve el tramo inicial de la lista \verb|ls| que cumple con el predicado \verb|p|. En otras palabras, la función devuelve los primeros elementos de la lista que satisfacen la condición especificada por la función \verb|p|, utiliza pattern matching para manejar dos casos: cuando la lista está vacía (\verb|[]|) y cuando la lista tiene al menos un elemento (\verb|(l:ls)|).
+    \begin{itemize}
+    \item 
+    En el caso base, si la lista está vacía, la función devuelve una lista vacía también.
+    \item 
+    En el caso recursivo, se verifica si el primer elemento (\verb|l|) cumple con la condición dada por la función \verb|p|. Si cumple, se agrega a la lista resultante (\verb|l : primQueCumplen ls p|) y se llama recursivamente con el resto de la lista (\verb|ls|). Si el primer elemento no cumple con la condición, simplemente se llama recursivamente con el resto de la lista.
+\end{itemize}
+
+\section*{Ejercicio 15}
+Para cada uno de los siguientes patrones, decidí si están bien tipados, y en tal caso dá los tipos de cada subexpresión. En caso de estar bien tipado, ¿el patrón cubre todos los casos de deﬁnición?
+
+\begin{itemize}
+    \item 
+    a) \textbf{Bien tipado y cubre todos los casos}
+    \end{itemize}
+\begin{haskell}
+f :: (a, b) -> ... 
+f (x , y) = ...
+\end{haskell}
+    
+    En el patrón \verb|f (x, y) = ...|, la función \verb|f| toma una tupla como argumento.
+    \begin{enumerate}
+    \item 
+    \textbf{Tipo de la función f}:
+    \begin{itemize}
+    \item 
+    La función \verb|f| toma una tupla como argumento. La tupla tiene dos elementos, \verb|x| y \verb|y|.
+    \item 
+    Por lo tanto, el tipo de la función \verb|f| sería \verb|(a, b) -> ...|, donde \verb|a| y \verb|b| son los tipos de \verb|x| e \verb|y| respectivamente.
+    \end{itemize}
+    \item 
+    \textbf{Cobertura de casos}:
+    \begin{itemize}
+    \item 
+    Este patrón cubre todos los casos posibles para tuplas de dos elementos, ya que está desempaquetando ambos elementos \verb|x| e \verb|y| de la tupla.
+    \end{itemize}
+\end{enumerate}
+    
+\begin{itemize}
+    \item 
+    b) \textbf{No está bien tipado y no cubre adecuadamente los casos}
+    \end{itemize}
+    \begin{haskell}
+    f :: [(a, b)] -> ...
+    f (a , b) = ...
+    \end{haskell}
+    \begin{enumerate}
+    \item 
+    \textbf{Tipo de la función f}:
+    \begin{itemize}
+    \item 
+    La función \verb|f| toma una lista de tuplas como argumento. Por lo tanto, el tipo de la función \verb|f| sería \verb|[(a, b)] -> ...|, donde \verb|a| y \verb|b| son los tipos de los elementos de las tuplas en la lista.
+    \end{itemize}
+    \item 
+    \textbf{Cobertura de casos}:
+    \begin{itemize}
+    \item 
+    Este patrón no cubre ningún caso, la función debería tomar una lista de tuplas.
+    \end{itemize}
+\end{enumerate}
+    
+\begin{itemize}
+    \item 
+    c) \textbf{Bien tipado, pero no cubre todos los casos}
+    \end{itemize}
+    \begin{haskell}
+    f :: [(a, b)] -> ...
+    f (x:xs) = ...
+    \end{haskell}
+    \begin{enumerate}
+    \item 
+    \textbf{Tipo de la función f}:
+    \begin{itemize}
+    \item 
+    La función \verb|f| toma una lista de tuplas como argumento. Por lo tanto, el tipo de la función \verb|f| sería \verb|[(a, b)] -> ...|, donde \verb|a| y \verb|b| son los tipos de los elementos de las tuplas en la lista.
+    \end{itemize}
+    \item 
+    \textbf{Cobertura de casos}:
+    \begin{itemize}
+    \item 
+    Este patrón cubre al menos el caso en que la lista no está vacía (\verb|x:xs|). El patrón está utilizando la estructura de cons (\verb|:|) para desempaquetar el primer elemento \verb|x| y el resto de la lista \verb|xs|.
+    \end{itemize}
+    \end{enumerate}
+    
+    Por lo tanto, el patrón \verb|f (x:xs) = ...| está bien tipado y cubre al menos el caso de una lista no vacía. Sin embargo, se el caso de una lista vacía, y se podría hacer de la forma:
+\begin{haskell}
+f :: [(a, b)] -> ...
+f [] = ...     
+f (x:xs) = ... 
+\end{haskell}
+
+\begin{itemize}
+    \item 
+    d) \textbf{Bien tipado, pero no cubre todos los casos}
+    \end{itemize}
+    \begin{haskell}
+    f :: [(a, b)] -> ...
+    f ((x, y) : ((a, b) : xs)) = ...
+    \end{haskell}
+    \begin{enumerate}
+    \item 
+    \textbf{Tipo de la función f}:
+    \begin{itemize}
+    \item 
+    La función \verb|f| toma una lista de tuplas como argumento. El tipo de la función debería ser \verb|[(a, b)] -> ...|, donde \verb|a| y \verb|b| son los tipos de los elementos de las tuplas.
+    \end{itemize}
+    \item 
+    \textbf{Cobertura de casos}:
+    \begin{itemize}
+    \item 
+    Este patrón solo cubrirá casos en los que la lista tiene al menos dos tuplas. No cubre el caso de una lista vacía ni el caso de una lista con una sola tupla.
+    \end{itemize}
+    \end{enumerate}
+    
+    Para que cubra todos los casos, la definición podría ser:
+    \begin{haskell}
+    f :: [(a, b)] -> ...
+    f [] = ...                   
+    f [(x, y)] = ...             
+    f ((x, y) : ((a, b) : xs)) = ... 
+    \end{haskell}
+    
+    \begin{itemize}
+        \item 
+        e) \textbf{Bien tipado, pero no cubre todos los casos}
+        \end{itemize}
+    \begin{haskell}
+    f :: [(Int, a)] -> ...
+    f [(0, a)] = ...
+    \end{haskell}
+        \begin{enumerate}
+        \item 
+        \textbf{Tipo de la función f}:
+        \begin{itemize}
+        \item 
+        La función \verb|f| toma una lista de tuplas donde el primer elemento es de tipo \verb|Int| y el segundo elemento puede ser de cualquier tipo \verb|a|. El tipo de la función sería \verb|[(Int, a)] -> ...|.
+        \end{itemize}
+        \item 
+        \textbf{Cobertura de casos}:
+        \begin{itemize}
+        \item 
+        Este patrón solo cubrirá el caso en el que la lista tenga exactamente un elemento, y ese elemento sea una tupla con el primer elemento igual a \verb|0|. No cubre casos de listas con más de un elemento ni casos de listas vacías.
+        \end{itemize}
+        \end{enumerate}
+        
+        Para que cubra todos los casos, la definición podría ser:
+    \begin{haskell}
+    f :: [(Int, a)] -> ...
+    f [] = ...                 
+    f [(0, a)] = ...           
+    f ((x, y):xs) = ...        
+    \end{haskell}
+        
+        \begin{itemize}
+        \item 
+            f) \textbf{Mal tipado}
+            \end{itemize}
+    \begin{haskell}
+    f :: [(Int, a)] -> ...
+    f ((x, 1) : xs) = ...
+    \end{haskell}
+            \begin{enumerate}
+            \item 
+            \textbf{Tipo de la función f}:
+            \begin{itemize}
+            \item 
+            La función \verb|f| toma una lista de tuplas donde el primer elemento es de tipo \verb|Int| y el segundo elemento es de tipo \verb|a| (pues \verb|1| es un número entero y se puede considerar de cualquier tipo). El tipo de la función sería \verb|[(Int, a)] -> ...|.
+            \end{itemize}
+            \item 
+            \textbf{Cobertura de casos}:
+            \begin{itemize}
+            \item 
+            Este patrón solo cubrirá el caso en el que la lista empiece con una tupla donde el primer elemento es de tipo \verb|Int| y el segundo elemento es \verb|1|. Estaría mal tipado ya que \verb|1| no es del tipo \verb|a|.
+            \end{itemize}
+            \end{enumerate}
+    
+        \begin{itemize}
+            \item 
+            g) \textbf{Bien tipado y cubre todos los casos}
+            \end{itemize}
+    \begin{haskell}
+    f :: (Int -> Int) -> Int -> ...
+    f a b = ...
+    \end{haskell}
+                \begin{enumerate}
+                \item 
+                \textbf{Tipo de la función f}:
+                \begin{itemize}
+                \item 
+                La función \verb|f| toma una función de tipo \verb|Int -> Int| y un entero. Por lo tanto, el tipo de la función \verb|f| sería \verb|(Int -> Int) -> Int -> ...|.
+                \end{itemize}
+                \item 
+                \textbf{Cobertura de casos}:
+                \begin{itemize}
+                \item 
+                Este patrón no tiene un patrón específico de descomposición de datos, ya que toma una función y un entero directamente. Cubre toda posibilidad correctamente.
+                \end{itemize}
+                \end{enumerate}
+                
+                \begin{itemize}
+                    \item 
+                    h) \textbf{Bien tipado, pero no cubre todos los casos}
+                    \end{itemize}
+\begin{haskell}
+f :: (Int -> Int) -> Int -> ...
+f a 3 = ...
+\end{haskell}
+                    \begin{enumerate}
+                    \item 
+                    \textbf{Tipo de la función f}:
+                    \begin{itemize}
+                    \item 
+                    La función \texttt{f} toma una función de tipo \texttt{Int -> Int} y un entero. Por lo tanto, el tipo de la función \texttt{f} sería \texttt{(Int -> Int) -> Int -> ...}.
+                    \end{itemize}
+                    \item 
+                    \textbf{Cobertura de casos}:
+                    \begin{itemize}
+                    \item 
+                    Este patrón cubre específicamente el caso en el que el segundo argumento es \texttt{3}. No cubre otros casos en los que el segundo argumento puede ser diferente de \texttt{3}.
+                    \end{itemize}
+                    \end{enumerate}
+                    
+                    Para que cubra todos los casos, la definición podría ser:
+\begin{haskell}
+f :: (Int -> Int) -> Int -> ...
+f a 3 = ...   
+f a b = ...   
+\end{haskell}
+                    
+\begin{itemize}
+    \item 
+    i) \textbf{Mal tipado}
+    \end{itemize}
+\begin{haskell}
+f :: (Int -> Int) -> Int -> ...
+f 0 1 2 = ...
+\end{haskell}
+    \begin{enumerate}
+    \item 
+    \textbf{Tipo de la función f}:
+    \begin{itemize}
+    \item 
+    La función \texttt{f} toma una función de tipo \texttt{Int -> Int} y un entero. Por lo tanto, el tipo de la función \texttt{f} sería \texttt{(Int -> Int) -> Int -> ...}.
+    \end{itemize}
+    \item 
+    \textbf{Cobertura de casos}:
+    \begin{itemize}
+    \item 
+    Este patrón no cubre ningún caso, la función está mal tipada. \texttt{0} no puede tener el tipo \texttt{Int -> Int}.
+    \end{itemize}
+    \end{enumerate}
+    
+\section*{Ejercicio 16}
+Para las siguientes declaraciones de funciones, da al menos una deﬁnición cuando sea posible. ¿Podés dar alguna otra deﬁnición alternativa a la que diste en cada caso?
+
+\subsection*{Punto A}
+\begin{haskell}
+f :: (a, b) -> b
+\end{haskell}
+
+En este caso, no hay otra posibilidad más que devolver el segundo valor de la tupla:
+\begin{haskell}
+f :: (a, b) -> b
+f (_,y) = y
+\end{haskell}
+
+\subsection*{Punto B}
+\begin{haskell}
+f :: (a, b) -> c
+\end{haskell}
+    
+No podemos construir algo de tipo \verb|c| solo conociendo \verb|a| y \verb|b|, a menos que supongamos que el tipo \verb|c| puede ser una lista con el elemento de tipo \verb|a|, por ejemplo:
+\begin{haskell}
+f :: (a, b) -> c 
+f (x, y) = [x]
+\end{haskell}
+    
+\subsection*{Punto C}
+\begin{haskell}
+f :: (a -> b) -> a -> b
+\end{haskell}
+    
+    En este caso nos obliga a utilizar una función \verb|t|:
+\begin{haskell}
+f :: (a -> b) -> a -> b
+f t x = t x
+\end{haskell}
+    
+    Una alternativa es llamar recursivamente a la función \verb|f|:
+\begin{haskell}
+f :: (a -> b) -> a -> b
+f g x = g (f g x)
+\end{haskell}
+    
+
+\subsection*{Punto D}
+\begin{haskell}
+f :: (a -> b) -> [a] -> [b]
+\end{haskell}
+    
+    En la definición siguiente, se podría utilizar la función \verb|haskell{map}| que cumple con la consigna:
+\begin{haskell}
+f :: (a -> b) -> [a] -> [b]
+f t xs = map t xs
+\end{haskell}
+    
+    También se podría utilizar recursión en vez de la función \verb|haskell{map}|.
+\begin{haskell}
+f :: (a -> b) -> [a] -> [b] 
+f _ [] = [] 
+f t (x:xs) = t x : f t xs
+\end{haskell}
+    
+
+\end{document}

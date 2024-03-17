@@ -1,0 +1,326 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Configuración de Paquetes
+\documentclass{article}
+\input{config_packages} % Incluir configuración de paquetes y encabezado
+\input{config_listings} % Incluir configuración de listings
+\input{config_mdframed} % Incluir configuración de mdframed
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{fancy}
+
+%Configuraciones adicionales
+\binoppenalty=\maxdimen 
+\relpenalty=\maxdimen 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Condiguracion de encabezado y pie de página
+\lhead{Interpretación de errores en Haskell: Programación Funcional}
+\rhead{Pedro Villar} 
+\chead{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\section{Type Mismatch (Coincidencia de tipos):}
+
+\begin{mdframed}[backgroundcolor=red!40,shadow=true,shadowsize=2pt,roundcorner=2pt]
+    Error: "Couldn't match expected type 'X' with actual type 'Y'"
+\end{mdframed}
+
+El error "Couldn't match expected type 'X' with actual type 'Y'" en Haskell indica que hay un conflicto entre el tipo de datos esperado (X) y el tipo de datos real proporcionado (Y) en alguna parte de tu código. Este error es común cuando estás escribiendo código que involucra funciones polimórficas, como funciones de alto orden, funciones que toman tipos de datos genéricos o funciones con tipos de datos complejos.
+
+Aquí hay una explicación detallada de cada parte del mensaje de error:
+
+\begin{itemize}
+    \item \textbf{"Couldn't match"}: Esto indica que el compilador no pudo encontrar una coincidencia entre los tipos de datos esperados y los tipos de datos proporcionados.
+    
+    \item \textbf{"expected type 'X'"}: Se esperaba que el tipo de datos fuera X en cierto contexto del código. X puede ser cualquier tipo de datos específico, como Int, String, Bool, etc., o puede ser un tipo de datos más general, como una lista, un tipo de dato definido por el usuario, etc.
+    
+    \item \textbf{"with actual type 'Y'"}: En cambio, el tipo de datos que se proporcionó realmente fue Y. Y puede ser cualquier tipo de datos que Haskell pueda manejar, como Int, String, Bool, etc., o incluso puede ser otro tipo de datos complejo o definido por el usuario.
+\end{itemize}
+
+Para corregir este error, debes asegurarte de que los tipos de datos coincidan correctamente en todas partes del código. Esto puede implicar revisar las definiciones de funciones, los tipos de datos de entrada y salida, y cualquier otra parte del código donde haya una expectativa sobre el tipo de datos que se está utilizando.
+
+Aquí hay un ejemplo de cómo podría verse este error en código:
+
+\begin{verbatim}
+-- Función que suma dos números
+suma :: Int -> Int -> Int
+suma x y = x + y
+
+-- Llamada a la función suma con tipos de datos incorrectos
+resultado = suma "5" 6
+\end{verbatim}
+
+En este ejemplo, la función \texttt{suma} está definida para tomar dos argumentos de tipo \texttt{Int} y devolver un \texttt{Int}. Sin embargo, se intenta llamar a la función \texttt{suma} con una cadena \texttt{"5"} como primer argumento en lugar de un número entero. Esto resulta en un error "Couldn't match expected type 'Int' with actual type 'String'". Para corregir este error, debes asegurarte de proporcionar argumentos que coincidan con los tipos de datos esperados por la función \texttt{suma}. Por ejemplo, podrías llamar a la función así: \texttt{resultado = suma 5 6}.
+
+\newpage
+\section{Indentation Error (Error de indentación):}
+
+\begin{mdframed}[backgroundcolor=red!40,shadow=true,shadowsize=2pt,roundcorner=2pt]
+    Error: "parse error (possibly incorrect indentation or mismatched brackets)"
+\end{mdframed}
+
+El error ``parse error (possibly incorrect indentation or mismatched brackets)'' en Haskell indica que el compilador encontró un problema al intentar analizar tu código fuente. Este error puede ser causado por uno de los dos problemas principales:
+
+\begin{enumerate}
+    \item \textbf{Indentación incorrecta}: Haskell utiliza la indentación para delimitar bloques de código en lugar de llaves o palabras clave de inicio y fin como en otros lenguajes de programación. Por lo tanto, es importante mantener una indentación coherente en tu código. Si hay una indentación incorrecta, como una línea demasiado indentada o una falta de indentación en un lugar inesperado, Haskell puede arrojar este error.
+    
+    \item \textbf{Paréntesis o corchetes mal cerrados o desbalanceados}: Si tienes paréntesis, corchetes o llaves en tu código, asegúrate de que estén correctamente cerrados y balanceados. Si hay algún paréntesis o corchete que falta o está mal colocado, Haskell no podrá analizar correctamente tu código y te dará este error.
+\end{enumerate}
+
+Aquí hay un ejemplo de cómo podrías encontrarte con este error:
+
+\begin{verbatim}
+miFuncion x = 
+  if x > 0
+  then "Positivo"
+  else "Negativo"
+\end{verbatim}
+
+En este caso, la función \texttt{miFuncion} está definida para devolver una cadena dependiendo del valor de \texttt{x}. Sin embargo, hay un error de indentación: la línea que sigue a \texttt{then} debería estar más indentada para indicar que es parte del bloque \texttt{then}. Para corregir este error, deberías indentar correctamente esa línea:
+
+\begin{verbatim}
+miFuncion x = 
+  if x > 0
+    then "Positivo"
+    else "Negativo"
+\end{verbatim}
+
+Asegúrate de revisar tu código para corregir cualquier problema de indentación o desbalanceo de paréntesis o corchetes que puedas encontrar. Esto debería solucionar el error ``parse error (possibly incorrect indentation or mismatched brackets)''.
+
+\newpage
+\section{Variable Not in Scope (Variable no está en el ámbito):}
+
+\begin{mdframed}[backgroundcolor=red!40,shadow=true,shadowsize=2pt,roundcorner=2pt]
+    Error: "Not in scope: 'variableName'"
+\end{mdframed}
+
+El error "Not in scope: 'variableName'" en Haskell indica que el compilador no puede encontrar una definición válida para la variable 'variableName' en el ámbito actual. Esto puede ocurrir por varias razones:
+
+\begin{enumerate}
+    \item \textbf{Variable no definida}: La variable que estás intentando utilizar no ha sido definida en ningún lugar del código.
+    
+    \item \textbf{Ámbito incorrecto}: La variable puede haber sido definida en otro ámbito o módulo y no está disponible en el ámbito actual donde estás intentando utilizarla.
+    
+    \item \textbf{Error tipográfico}: Puede haber un error tipográfico en el nombre de la variable, por lo que el compilador no puede reconocerla.
+\end{enumerate}
+
+Para corregir este error, debes asegurarte de que la variable 'variableName' esté definida en un ámbito accesible desde el punto donde estás intentando utilizarla. Si la variable debería estar disponible en el ámbito actual, verifica que no haya errores tipográficos en el nombre de la variable.
+
+Aquí hay un ejemplo que muestra cómo podrías encontrarte con este error:
+
+\begin{verbatim}
+main = do
+  putStrLn variableName
+\end{verbatim}
+
+Si 'variableName' no está definida en ningún lugar del código, obtendrás el error "Not in scope: 'variableName'". Para corregirlo, necesitas definir la variable 'variableName' antes de utilizarla, o verificar si debería estar disponible en el ámbito actual.
+
+Haskell es un lenguaje con un ámbito léxico, lo que significa que la visibilidad de las variables está determinada por su posición en el código. Por lo tanto, si una variable está definida dentro de una función, solo estará disponible dentro de esa función, y si está definida fuera de una función, estará disponible en todo el módulo o archivo en el que se encuentra.
+
+
+\section{Infinite Recursion (Recursión infinita):}
+
+\begin{mdframed}[backgroundcolor=red!40,shadow=true,shadowsize=2pt,roundcorner=2pt]
+    Error: El programa no termina y parece estar en un bucle infinito.
+\end{mdframed}
+
+Cuando un programa Haskell no termina y parece estar atrapado en un bucle infinito, se debe a que el código está ejecutando una recursión infinita o un bucle infinito. Esto puede ocurrir debido a varios motivos:
+
+\begin{enumerate}
+    \item \textbf{Recursión infinita}: En Haskell, es común utilizar la recursión para iterar sobre estructuras de datos o realizar cálculos. Sin embargo, si no se proporciona una condición de terminación adecuada, la función recursiva puede llamarse a sí misma indefinidamente, lo que resulta en un bucle infinito. \textbf{En funciones recursivas, este error es muy común cuando no se define adecuadamente el caso base.}
+    
+    \item \textbf{Bucle infinito}: Aunque Haskell no tiene bucles en el sentido tradicional, es posible escribir código que tenga un comportamiento similar a un bucle infinito utilizando la recursión o funciones como \texttt{iterate} o \texttt{repeat} de manera incorrecta.
+    
+    \item \textbf{Evaluación perezosa (lazy evaluation)}: Haskell utiliza la evaluación perezosa, lo que significa que las expresiones no se evalúan hasta que sea necesario. En algunos casos, esto puede resultar en la evaluación infinita de una expresión si no se maneja adecuadamente.
+\end{enumerate}
+
+Para solucionar este problema, debes revisar tu código para identificar dónde se está produciendo el bucle infinito y corregirlo. Algunas estrategias comunes incluyen:
+
+\begin{itemize}
+    \item Agregar una condición de terminación adecuada en las funciones recursivas.
+    \item Utilizar funciones y estructuras de datos que eviten la evaluación infinita.
+    \item Revisar la lógica del código para asegurarse de que no haya errores de lógica que causen bucles infinitos.
+\end{itemize}
+
+\newpage
+\section{Pattern Match Exhaustiveness (Exhaustividad en coincidencia de patrones):}
+
+\begin{mdframed}[backgroundcolor=red!40,shadow=true,shadowsize=2pt,roundcorner=2pt]
+    Advertencia/Error: "Pattern match(es) are non-exhaustive"
+\end{mdframed}
+
+Cuando recibes la advertencia o error "Pattern match(es) are non-exhaustive" en Haskell, significa que has definido una función o una expresión utilizando coincidencias de patrones (pattern matching), pero no has considerado todos los casos posibles para los patrones. Esto es un problema porque Haskell exige que todos los casos posibles estén cubiertos para garantizar que la función sea total y segura.
+
+Veamos un ejemplo para entenderlo mejor. Supongamos que tienes la siguiente función que calcula el factorial de un número:
+
+\begin{verbatim}
+factorial :: Int -> Int
+factorial 0 = 1
+factorial n = n * factorial (n - 1)
+\end{verbatim}
+
+En esta función, has definido dos patrones: \texttt{factorial 0} y \texttt{factorial n}. Sin embargo, te falta considerar el caso cuando \texttt{n} es negativo. Esto significa que la función fallará si se le pasa un número negativo y, por lo tanto, el patrón no es exhaustivo.
+
+Para corregir este error, debes considerar todos los casos posibles para los patrones. En este ejemplo, podrías agregar un patrón para números negativos y manejarlos adecuadamente, quizás lanzando una excepción, devolviendo un valor especial o manejándolos de otra manera dependiendo de los requisitos de tu programa. Por ejemplo:
+
+\begin{verbatim}
+factorial :: Int -> Int
+factorial 0 = 1
+factorial n
+    | n < 0     = error "No se puede calcular el factorial de un número negativo"
+    | otherwise = n * factorial (n - 1)
+\end{verbatim}
+
+Ahora, el patrón es exhaustivo porque cubre todos los casos posibles para la entrada \texttt{n}. Entonces, cuando recibes el error o advertencia "Pattern match(es) are non-exhaustive" en Haskell, debes revisar tus patrones de coincidencia y asegurarte de considerar todos los casos posibles para garantizar que tu función sea total y segura.
+
+\newpage
+\section{Ambiguous Type Variable (Variable de tipo ambigua):}
+
+\begin{mdframed}[backgroundcolor=red!40,shadow=true,shadowsize=2pt,roundcorner=2pt]
+    Error: "Ambiguous type variable 'a' in the constraints"
+\end{mdframed}
+
+El error "Ambiguous type variable 'a' in the constraints" en Haskell ocurre cuando el compilador no puede determinar de manera única el tipo de una variable 'a' basándose en los contextos de uso dentro de una expresión o una función. Esto generalmente sucede cuando hay ambigüedad en la inferencia de tipos.
+
+En Haskell, el sistema de tipos es poderoso pero también puede ser complejo. A menudo, el compilador puede inferir los tipos automáticamente a partir de los contextos en los que se utilizan las variables y las funciones. Sin embargo, en algunos casos, puede haber múltiples opciones válidas para el tipo de una variable 'a', lo que genera ambigüedad.
+
+Por ejemplo, considera la siguiente función que concatena dos listas:
+
+\begin{verbatim}
+concatenar :: [a] -> [a] -> [a]
+concatenar xs ys = xs ++ ys
+\end{verbatim}
+
+En esta función, la variable 'a' se usa tanto en el tipo de entrada \texttt{[a]} como en el tipo de salida \texttt{[a]}. Esto podría llevar a una ambigüedad si las listas de entrada no tienen el mismo tipo. Por ejemplo, si llamamos a la función de la siguiente manera:
+
+\begin{verbatim}
+resultado = concatenar [1,2,3] ['a','b','c']
+\end{verbatim}
+
+El compilador no puede determinar de manera única el tipo de 'a' porque podría ser tanto \texttt{Int} como \texttt{Char}. Esto resulta en el error "Ambiguous type variable 'a' in the constraints".
+
+Para corregir este error, necesitas hacer que el tipo de 'a' sea más específico o proporcionar más información al compilador para ayudarlo a inferir el tipo correctamente. Puedes hacer esto cambiando la función para que solo funcione con un tipo específico, o utilizando anotaciones de tipo explícitas para especificar el tipo de 'a'. Por ejemplo:
+
+\begin{verbatim}
+concatenar :: [Int] -> [Char] -> [a]
+concatenar xs ys = xs ++ ys
+\end{verbatim}
+
+o
+
+\begin{verbatim}
+resultado = concatenar [1,2,3 :: Int] ['a','b','c']
+\end{verbatim}
+
+Entonces, el error "Ambiguous type variable 'a' in the constraints" ocurre cuando el compilador no puede determinar de manera única el tipo de una variable 'a'. Esto suele ser el resultado de una ambigüedad en la inferencia de tipos y se puede corregir haciendo que el tipo de 'a' sea más específico o proporcionando más información al compilador.
+
+\newpage
+\section{Monomorphism Restriction (Restricción de monomorfismo):}
+
+\begin{mdframed}[backgroundcolor=red!40,shadow=true,shadowsize=2pt,roundcorner=2pt]
+    Advertencia/Error: "Monomorphism restriction"
+\end{mdframed}
+
+Cuando recibes la advertencia o error "The monomorphism restriction..." en Haskell, se refiere a una regla de inferencia de tipos que limita la generalización de variables polimórficas en ciertos contextos. Esta restricción se implementa para evitar problemas de rendimiento y ambigüedad en la inferencia de tipos.
+
+La monomorfización es el proceso de restringir variables polimórficas a tipos concretos. Esto significa que las variables polimórficas se especializan a tipos específicos en lugar de permanecer como variables genéricas. La monomorfización se aplica automáticamente por el compilador Haskell en ciertos casos para mejorar el rendimiento y evitar ambigüedades en la inferencia de tipos.
+
+La advertencia o error "The monomorphism restriction..." generalmente ocurre en los siguientes casos:
+
+\begin{enumerate}
+    \item \textbf{Asignaciones de variables}: Cuando defines una función o un valor utilizando asignaciones de variables sin especificar explícitamente su tipo y el tipo de la variable se vuelve ambiguo debido a la monomorfización.
+    
+    \item \textbf{Funciones con tipos de datos polimórficos}: Cuando defines una función que toma argumentos polimórficos pero el compilador no puede generalizar el tipo de la función debido a la monomorfización.
+\end{enumerate}
+
+Por ejemplo, considera el siguiente código:
+
+\begin{verbatim}
+f x = x + 1
+\end{verbatim}
+
+En este caso, la función \texttt{f} toma un argumento \texttt{x} y devuelve \texttt{x + 1}. Si no especificamos el tipo de \texttt{x}, el compilador puede aplicar la monomorfización y deducir un tipo específico para \texttt{x}, lo que podría no ser lo que esperábamos. Para evitar esta advertencia, podríamos especificar explícitamente el tipo de \texttt{x}:
+
+\begin{verbatim}
+f :: Num a => a -> a
+f x = x + 1
+\end{verbatim}
+
+Esto asegura que \texttt{x} sea de tipo numérico (\texttt{Num}) pero sigue siendo polimórfico en el sentido de que puede ser cualquier tipo numérico.
+
+\newpage
+\section{No Instance for (Num a) arising from a use of 'someFunction':}
+
+\begin{mdframed}[backgroundcolor=red!40,shadow=true,shadowsize=2pt,roundcorner=2pt]
+    Error: "No instance for (Num a) arising from a use of 'someFunction'"
+\end{mdframed}
+
+El error "No instance for (Num a) arising from a use of 'someFunction'" en Haskell indica que el compilador no puede encontrar una instancia de la clase de tipos \texttt{Num} para el tipo de dato \texttt{a} en el contexto de uso de la función \texttt{someFunction}.
+
+La clase de tipos \texttt{Num} en Haskell representa los tipos numéricos, como \texttt{Int}, \texttt{Integer}, \texttt{Float}, \texttt{Double}, entre otros. Cuando se encuentra este error, significa que estás utilizando una función que espera que su argumento tenga un tipo que sea una instancia de la clase \texttt{Num}, pero el tipo específico que estás proporcionando no es uno de esos tipos numéricos.
+
+Por ejemplo, considera la siguiente función:
+
+\begin{verbatim}
+doubleValue :: Num a => a -> a
+doubleValue x = x * 2
+\end{verbatim}
+
+Esta función \texttt{doubleValue} espera un argumento de cualquier tipo que sea una instancia de la clase \texttt{Num}, y luego multiplica ese valor por 2. Sin embargo, si intentamos llamar a esta función con un argumento que no es numérico, obtendremos el error "No instance for (Num a) arising from a use of 'doubleValue'".
+
+Por ejemplo:
+
+\begin{verbatim}
+stringValue = doubleValue "hello"
+\end{verbatim}
+
+En este caso, estamos intentando pasar una cadena de caracteres \texttt{"hello"} a la función \texttt{doubleValue}, pero las cadenas de caracteres no son tipos numéricos y, por lo tanto, no son instancias de la clase \texttt{Num}. Esto provoca el error mencionado.
+
+Para corregir este error, debes asegurarte de que el tipo del argumento que estás pasando a la función \texttt{someFunction} sea un tipo numérico, o bien, si la función debería aceptar otros tipos, necesitarás modificar la firma de tipo de la función para que sea más general o proporcionar una implementación específica para los tipos no numéricos.
+
+\newpage
+\section{Undefined Function or Variable (Función o variable no definida):}
+
+\begin{mdframed}[backgroundcolor=red!40,shadow=true,shadowsize=2pt,roundcorner=2pt]
+    Error: "Not in scope: 'functionName'"
+\end{mdframed}
+
+El error "Not in scope: 'functionName'" en Haskell indica que estás intentando utilizar una función llamada 'functionName' que no está definida en el ámbito actual del código. Esto puede ocurrir por varias razones:
+
+\begin{enumerate}
+    \item \textbf{Falta de definición}: No has definido la función 'functionName' en ninguna parte del código.
+    
+    \item \textbf{Ámbito incorrecto}: La función 'functionName' puede haber sido definida en otro módulo o lugar del código que no está accesible desde el punto donde estás intentando utilizarla.
+    
+    \item \textbf{Error tipográfico}: Puede haber un error tipográfico en el nombre de la función, lo que hace que el compilador no la reconozca.
+\end{enumerate}
+
+Veamos un ejemplo para entenderlo mejor. Supongamos que tienes el siguiente código:
+
+\begin{verbatim}
+main = do
+  putStrLn "Hello, world!"
+  result <- someFunction
+  print result
+\end{verbatim}
+
+Si la función \texttt{someFunction} no está definida en ningún lugar del código o en ningún módulo importado, obtendrás el error "Not in scope: 'someFunction'".
+
+Para corregir este error, debes asegurarte de que la función 'functionName' esté definida en un ámbito accesible desde el punto donde estás intentando utilizarla. Esto puede implicar definir la función en el mismo archivo o módulo donde la estás utilizando, o importar el módulo que contiene la definición de la función utilizando una declaración \texttt{import}.
+
+Por ejemplo, si \texttt{someFunction} está definida en el módulo \texttt{Module}, puedes corregir el error importando el módulo en tu archivo Haskell:
+
+\begin{verbatim}
+import Module
+
+main = do
+  putStrLn "Hello, world!"
+  result <- someFunction
+  print result
+\end{verbatim}
+
+
+
+\end{document}

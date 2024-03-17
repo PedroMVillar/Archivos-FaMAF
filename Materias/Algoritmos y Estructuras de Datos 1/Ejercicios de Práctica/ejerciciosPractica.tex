@@ -1,0 +1,283 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Configuración de Paquetes
+\documentclass{article}
+\input{config_packages} % Incluir configuración de paquetes y encabezado
+\input{config_listings} % Incluir configuración de listings
+\input{config_mdframed} % Incluir configuración de mdframed
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{fancy}
+
+%Configuraciones adicionales
+\binoppenalty=\maxdimen 
+\relpenalty=\maxdimen 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Condiguracion de encabezado y pie de página
+\lhead{Ejercicios de práctica para final}
+\rhead{Pedro Villar} %Sección 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\section{Programación Funcional}
+
+\subsection{Ejercicios sobre proyectos} 
+
+\subsubsection{Ejercicio 1}
+Con los siguientes datos, definidos en el \texttt{Ejercicio 4} del \texttt{Proyecto 2}
+\begin{haskell}
+-- Sinonimos de tipo
+type Altura = Int
+type NumCamiseta = Int
+-- Tipos algebraicos sin parametros (aka enumerados)
+data Zona = Arco | Defensa | Mediocampo | Delantera
+data TipoReves = DosManos | UnaMano
+data Modalidad = Carretera | Pista | Monte | BMX
+data PiernaHabil = Izquierda | Derecha
+-- Sinonimo
+type ManoHabil = PiernaHabil
+-- Deportista es un tipo algebraico con constructores parametricos
+data Deportista = Ajedrecista                        -- Constructor sin argumentos
+    | Ciclista Modalidad                             -- Constructor con un argumento
+    | Velocista Altura                               --  Constructor con un argumento
+    | Tenista TipoReves ManoHabil Altura             -- Constructor con tres argumentos
+    | Futbolista Zona NumCamiseta PiernaHabil Altura -- Constructor con ...
+\end{haskell}
+\begin{enumerate}
+    \item Definir las siguientes funciones:
+        \begin{itemize}
+            \item \texttt{esDeportista :: Deportista -> Bool} que dado un deportista, nos dice si es un deportista.
+            \item \texttt{esCiclista :: Deportista -> Bool} que dado un deportista, nos dice si es un ciclista.
+            \item \texttt{esVelocista :: Deportista -> Bool} que dado un deportista, nos dice si es un velocista.
+            \item \texttt{esTenista :: Deportista -> Bool} que dado un deportista, nos dice si es un tenista.
+            \item \texttt{esFutbolista :: Deportista -> Bool} que dado un deportista, nos dice si es un futbolista.
+        \end{itemize}
+    \item Definir las siguientes funciones:
+        \begin{itemize}
+            \item \texttt{contarCiclistas :: [Deportista] -> Int} que dado una lista de deportistas, nos dice cuantos ciclistas hay.
+            \item \texttt{cuantosVelocistasAltos :: [Deportista] -> Int -> Int} que dado una lista de deportistas y una altura, nos dice cuantos velocistas hay de esa altura o mayor.
+            \item \texttt{contarTenistasDiestros :: [Deportista] -> Int} que dado una lista de deportistas, nos dice cuantos tenistas diestros hay.
+            \item \texttt{cuantosZurdosDefensores :: [Deportista] -> Int} que dado una lista de deportistas, nos dice cuantos zurdos defensores hay.
+        \end{itemize}
+\end{enumerate}
+
+\begin{note}
+    Para resolver este ejercicio, utilizar pattern matching y no utilizar igualdad de tipos.
+\end{note}
+
+\newpage
+
+\subsubsection{Ejercicio 2}
+En el ejercicio 6 del \texttt{Proyecto 2}, definimos a la función \texttt{primerElemento} como:
+\begin{haskell}
+primerElemento :: [a] -> Maybe a
+primerElemento [] = Nothing
+primerElemento (x:_) = Just x
+\end{haskell}
+Definir ahora las siguientes funciones:
+\begin{itemize}
+    \item \texttt{tercerElemento :: [a] -> Maybe a} que dado una lista, nos devuelve el tercer elemento de la lista si es que existe.
+    \item \texttt{ultimoElemento :: [a] -> Maybe a} que dado una lista, nos devuelve el último elemento de la lista si es que existe.
+    \item \texttt{elementoEn :: Int -> [a] -> Maybe a} que tome una lista y un índice, y devuelva \texttt{Just x} donde \texttt{x} es el elemento en la posición indicada, o Nothing si el índice está fuera de rango.
+    \item \texttt{maximo :: Ord a => [a] -> Maybe} que devuelva el máximo elemento de una lista no vacía, o \texttt{Nothing} si la lista es vacía.
+    \item \texttt{filtrarYTomar :: (a -> Bool) -> [a] -> Maybe a} que tome una función de predicado y una lista, y devuelva \texttt{Just x} donde \texttt{x} es el primer elemento que cumple el predicado, o \texttt{Nothing} si ningún elemento lo cumple.
+\end{itemize}
+
+\subsubsection{Ejercicio 3}
+Con el tipo definido 
+\begin{haskell}
+data Cola = VaciaC | Encolada Deportista Cola
+\end{haskell}
+Definir las siguientes funciones:
+\begin{itemize}
+    \item \texttt{esVacia :: Cola -> Bool} que dado una cola, nos dice si está vacía.
+    \item \texttt{longitud :: Cola -> Int} que dado una cola, nos devuelve la cantidad de deportistas encolados.
+    \item \texttt{filtrarCola :: (Deportista -> Bool) -> Cola -> Cola} que dado una función de predicado y una cola, nos devuelve una cola con los deportistas que cumplen el predicado.
+\end{itemize}
+
+\subsubsection{Ejercicio 4}
+Con el tipo definido como
+\begin{haskell}
+data Arbol a = Hoja | Rama (Arbol a) a (Arbol a)
+\end{haskell}
+y teniendo en cuenta el ejercicio 10 del \texttt{Proyecto 2++} sobre árboles binarios, definir las siguientes funciones:
+\begin{itemize}
+    \item \texttt{a\_eliminar :: Ord a => a -> Arbol a -> Arbol a} que tome un elemento y un árbol de búsqueda binaria y devuelva un nuevo árbol que no contenga el elemento.
+    \item \texttt{a\_espejo :: Arbol a -> Arbol a} que tome un árbol y devuelva su espejo, es decir, un árbol con todas las ramas reflejadas.
+    \item \texttt{a\_hojaMasProfunda :: Arbol a -> Maybe a} que devuelva el valor almacenado en la hoja más profunda del árbol.
+\end{itemize}
+
+\newpage
+\subsection{Ejercicios extra}
+
+\subsubsection{Ejercicio 1}
+Programar la función
+\begin{haskell}
+estaEnDNI :: Int -> Bool
+\end{haskell}
+que dado un número, devuelve \texttt{True} si es una de las cifras de tu DNI.
+
+\subsubsection{Ejercicio 2}
+Programa mediante composición de funciones la función 
+\begin{haskell}
+sumaDNI :: [Int] -> Int
+\end{haskell}
+que dada una lista de enteros \texttt{xs} suma solo los elementos que son cifras de tu DNI.
+
+\begin{note}
+    Para los ejercicios \texttt{1} y \texttt{2}, el DNI no se toma como entrada de datos, sino que se utiliza directamente.
+    \newline Para el ejercicio \texttt{2}, se puede utilizar la función \texttt{sumatoria'} definida en el \texttt{Proyecto 1}.
+\end{note}
+
+\subsubsection{Ejercicio 3}
+Programar la función
+\begin{haskell}
+    suma_multiplos :: [Int] -> Int -> Int
+\end{haskell}
+que dada una lista de enteros \texttt{xs} y un entero \texttt{n}, devuelve la suma de los elementos de \texttt{xs} que son múltiplos de \texttt{n}.
+La función se debe programar por composición, \textbf{sin utilizar recursión}, eligiendo una de estas alternativas:
+\begin{itemize}
+    \item Usar \texttt{filter} y \texttt{sumatoria} definida en el \texttt{Proyecto 1}.
+    \begin{haskell}
+        sumatoria :: [Int] -> Int
+    \end{haskell}
+    \item Usar \texttt{sumatoria'} definida en el \texttt{Proyecto 1}.
+    \begin{haskell}
+        sumatoria' :: [a] -> (a -> Int) -> Int
+    \end{haskell}
+\end{itemize}
+En ambos casos se pueden definir las funciones auxiliares que consideren necesarias.
+
+\subsubsection{Ejercicio 4}
+Se va a construir una base de datos de estudiantes de la facultad. Para ello se deben definir los tipos de datos:
+\begin{itemize}
+    \item Tipo \texttt{Carrera}: es un tipo que tiene cuatro constructores sin parámetros que son \texttt{Matematica}, \texttt{Astronomia}, \texttt{Fisica} y \texttt{Computacion}.
+    \item Tipo \texttt{Nombre}: es un sinónimo de \texttt{String}.
+    \item Tipo \texttt{Legajo}: es un sinónimo de \texttt{Int}.
+\end{itemize}
+\begin{note}
+    El tipo \texttt{Carrera} no debe pertenecer a la clase \texttt{Eq}.
+\end{note}
+
+Programar utilizando recursión y pattern matching las siguientes funciones:
+\begin{itemize}
+    \item \texttt{esDeComputacion :: Carrera -> Bool} que dado una carrera, nos dice si es de computación.
+    \item \texttt{esDeFisica :: Carrera -> Bool} que dado una carrera, nos dice si es de física.
+    \item \texttt{esDeAstronomia :: Carrera -> Bool} que dado una carrera, nos dice si es de astronomía.
+    \item \texttt{esDeMatematica :: Carrera -> Bool} que dado una carrera, nos dice si es de matemática.
+\end{itemize}
+
+Y luego la función
+\begin{haskell}
+    buscar :: [Estudiante] -> Carrera -> [Nombre]
+\end{haskell}
+que dada una lista de estudiantes \texttt{xs} y una carrera \texttt{c}, devuelve los nombres de los estudiantes en \texttt{xs} que estudian la carrera \texttt{c}.
+
+\section{Programación Imperativa}
+
+\subsection{Ejercicios sobre proyectos}
+
+\subsubsection{Ejercicio 1}
+En el ejercicio 6 del \texttt{Proyecto 3}, definimos la función \texttt{int pedir\_entero (void)} como:
+\begin{c_code}
+int pedir_entero(char name){
+    int x;
+    printf("Ingrese el valor para la variable %c: ", name);
+    scanf("%d", &x);
+    return x;
+}
+\end{c_code}
+Defina ahora las siguientes funciones:
+\begin{itemize}
+    \item \texttt{float pedir\_flotante (char name)} que pida un número flotante.
+    \item \texttt{char pedir\_caracter (char name)} que pida un caracter.
+    \item \texttt{void imprimir\_mensaje (char* mensaje)} que imprima un mensaje.
+\end{itemize}
+
+\subsubsection{Ejercicio 2}
+En el ejercicio 3 del \texttt{Proyecto 4} definimos a la función \texttt{int suma\_hasta(int n)} como
+\begin{c_code}
+int suma_hasta(int n){
+    assert(n > 0);
+    int suma = 0;
+    while(n > 0){
+        suma = n + suma;
+        n--;
+    }
+    printf("La suma es: %d", suma);
+    return suma;
+}
+\end{c_code}
+Defina ahora las siguientes funciones:
+\begin{itemize}
+    \item \texttt{int suma\_hasta\_par(int n)} que sume los números pares hasta \texttt{n}.
+    \item \texttt{int suma\_hasta\_impar(int n)} que sume los números impares hasta \texttt{n}.
+    \item \texttt{int suma\_hasta\_multiplo(int n, int m)} que sume los múltiplos de \texttt{m} hasta \texttt{n}.
+\end{itemize}
+
+\newpage
+\subsubsection{Ejercicio 3}
+En el ejercicio 7 del \texttt{Proyecto 4}, definimos la función \texttt{int sumatoria(int tam, int a[])} como
+\begin{c_code}
+int sumatoria(int tam, int a[]){
+    int suma = 0 ;
+    int i = 0;
+    while(i < tam){
+    suma = a[i] + suma;
+    i = i + 1;
+  }
+  return suma;
+}
+\end{c_code}
+Defina ahora las siguientes funciones:
+\begin{itemize}
+    \item \texttt{int sumatoria\_pares(int tam, int a[])} que sume los números pares de un arreglo.
+    \item \texttt{int sumatoria\_impares(int tam, int a[])} que sume los números impares de un arreglo.
+    \item \texttt{int sumatoria\_multiplos(int tam, int a[], int m)} que sume los múltiplos de \texttt{m} de un arreglo.
+\end{itemize}
+Y luego la función
+\begin{c_code}
+    productoria(int tam, int a[])
+\end{c_code}
+que devuelva el producto de los elementos de un arreglo.
+
+\subsection{Ejercicios extra}
+
+\subsubsection{Ejercicio 1}
+Definir la función
+\begin{c_code}
+    int factorial(int n)
+\end{c_code}
+que devuelva el factorial de un número \texttt{n}.
+
+\subsubsection{Ejercicio 2}
+Definir la función
+\begin{c_code}
+    int fibonacci(int n)
+\end{c_code}
+que devuelva el n-ésimo número de la sucesión de Fibonacci.
+
+\subsubsection{Ejercicio 3}
+Hacer un programa que verifique si el elemento ubicado en el índice \texttt{k} de un arreglo \texttt{a} es máximo o si es el mínimo. Para ello programar la siguiente función:
+\begin{c_code}
+struct s_minmax_t verificar_minmax(int a[], int tam, int k);
+\end{c_code}
+donde la estructura \texttt{struct s\_minmax\_t} es
+\begin{c_code}
+struct s_minmax_t {
+    bool es_maximo;
+    bool es_minimo;
+};
+\end{c_code}
+
+La función toma un arreglo \texttt{a[]}, su tamaño \texttt{tam} y un índice \texttt{k} y debe devolver una estructura con los dos booleanos que respectivamente indican:
+\begin{itemize}
+    \item Todos los elementos de \texttt{a[]} son menores o iguales que \texttt{a[k]}. (se guarda en \texttt{es\_maximo})
+    \item Todos los elementos de \texttt{a[]} son mayores o iguales que \texttt{a[k]}. (se guarda en \texttt{es\_minimo})
+\end{itemize}
+La función debe implementarse con un solo ciclo y \textbf{no debe mostrar mensajes por pantalla ni pedir valores al usuario}.
+
+En la función main se debe solicitar al usuario ingresar un arreglo de longitud \texttt{N}, donde \texttt{N} debe definirse como una constante. \textbf{El usuario no debe elegir el tamaño del arreglo.} Luego se debe pedir el índice \texttt{k} y verificar con \texttt{assert} que \texttt{k} es un número mayor que \texttt{0} y menor que \texttt{N}. Finalmente mostrar el resultado de la función \texttt{verificar\_minmax} por pantalla (los dos valores de la estructura).
+
+\end{document}
