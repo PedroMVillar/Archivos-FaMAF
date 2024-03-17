@@ -1,4 +1,11 @@
 ![Logo](https://www.famaf.unc.edu.ar/documents/3253/Logo-FAMAF_UNC-color-2.jpg)
+
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/PedroMVillar/Archivos-FaMAF)
+![GitHub last commit](https://img.shields.io/github/last-commit/PedroMVillar/Archivos-FaMAF)
+![GitHub repo size](https://img.shields.io/github/repo-size/PedroMVillar/Archivos-FaMAF)
+![GitHub watchers](https://img.shields.io/github/watchers/PedroMVillar/Archivos-FaMAF)
+
+
 ---
 # Archivos FaMAF
 Este repositorio tiene como objetivo consolidar y organizar de manera sistemática el material académico correspondiente a cada asignatura cursada. En él se encuentran recopilados apuntes de clase, presentaciones, tareas, prácticas, ejercicios y cualquier otro recurso didáctico utilizado durante el desarrollo de los respectivos programas de estudio. De esta manera, se constituye un acervo ordenado y de fácil acceso para futuras consultas o revisiones.
