@@ -44,6 +44,7 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 - [Álgebra Lineal - Álgebra II - Álgebra](#algebra-lineal---algebra-ii---algebra)
 - [Algoritmos y Estructuras de Datos 1](#algoritmos-y-estructuras-de-datos-1)
 - [Algoritmos y Estructuras de Datos 2](#algoritmos-y-estructuras-de-datos-2)
+- [Organización del Computador](#organización-del-computador)
 
 ---
 
@@ -134,6 +135,7 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 </div>
 
 ![Static Badge](https://img.shields.io/badge/Carrera-Cs%20de%20la%20Computaci%C3%B3n-blue)
+![Static Badge](https://img.shields.io/badge/Carrera-Matem%C3%A1tica%20Aplicada-yellow)
 ![Static Badge](https://img.shields.io/badge/Archivos%20pdf%20-%20brown)
 ![Static Badge](https://img.shields.io/badge/Archivos%20c%20-%20green)
 
@@ -167,3 +169,27 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 - [Lab01](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Laboratorio/Lab01)
   - [Código](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Laboratorio/Lab01/Solución/)
   - [Enunciado](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Laboratorio/Lab01/lab01-2023.pdf)
+
+---
+
+<div style="text-align:center;">
+  <h3>Organización del Computador</h3>
+</div>
+
+[![Static Badge](https://img.shields.io/badge/Acceso%20a%20notas%20de%20clase%20-%20pink)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Organizaci%C3%B3n%20del%20Computador/Notas%20de%20Clase/Source%20code/NotasdeClase.pdf)
+
+<div style="text-align:center;">
+  <h4>Resúmenes Infografías</h4>
+</div>
+
+| [![Sistemas de Numeración](./assets/readme.imgs/sistnu.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Organizaci%C3%B3n%20del%20Computador/Sistemas%20de%20Numeraci%C3%B3n/Resumenes/M%C3%A9todos%20para%20Pr%C3%A1ctico%201/main.pdf) | [![Formato IEEE 754](./assets/readme.imgs/ieee.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Organizaci%C3%B3n%20del%20Computador/Sistemas%20de%20Numeraci%C3%B3n/Resumenes/Formato%20IEEE%20754/main.pdf) |
+|:---:|:---:|
+| [Sistemas de Numeración](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Organizaci%C3%B3n%20del%20Computador/Sistemas%20de%20Numeraci%C3%B3n/Resumenes/M%C3%A9todos%20para%20Pr%C3%A1ctico%201/main.pdf) | [Formato IEEE 754](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Organizaci%C3%B3n%20del%20Computador/Sistemas%20de%20Numeraci%C3%B3n/Resumenes/Formato%20IEEE%20754/main.pdf) |
+
+<div style="text-align:center;">
+  <h4>Prácticos Resueltos</h4>
+</div>
+
+| [![Práctico 1 - Corroborado](./assets/readme.imgs/tpsist.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Organizaci%C3%B3n%20del%20Computador/Sistemas%20de%20Numeraci%C3%B3n/Pr%C3%A1ctico/Soluci%C3%B3n/tp01sol.pdf) | [![Práctico 2](./assets/readme.imgs/tpbool.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Organizaci%C3%B3n%20del%20Computador/%C3%81lgebra%20de%20Boole/Pr%C3%A1ctico/Soluci%C3%B3n/tp02sol.pdf) |
+|:---:|:---:|
+| [Práctico 1 - Corroborado](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Organizaci%C3%B3n%20del%20Computador/Sistemas%20de%20Numeraci%C3%B3n/Pr%C3%A1ctico/Soluci%C3%B3n/tp01sol.pdf) | [Práctico 2](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Organizaci%C3%B3n%20del%20Computador/%C3%81lgebra%20de%20Boole/Pr%C3%A1ctico/Soluci%C3%B3n/tp02sol.pdf) |
