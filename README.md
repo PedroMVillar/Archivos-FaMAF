@@ -45,9 +45,9 @@ Este comando creará una carpeta llamada "Archivos-FaMAF" en el directorio actua
   <h4>Apuntes - Resúmenes</h4>
 </div>
 
-| [![Cambio de Base](./assets/readme.imgs/cambiodebase.png)](https://enlace1.com) | [![Determinantes por inducción](./assets/readme.imgs/detinduc.png)](https://enlace2.com) | [![Diagonalización](./assets/readme.imgs/diagonal.png)](https://enlace3.com) | [![Planos](./assets/readme.imgs/planos.png)](https://enlace4.com) |
+| [![Cambio de Base](./assets/readme.imgs/cambiodebase.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Apuntes%20-%20Documentos/Cambio%20de%20Base/cambiodebase.pdf) | [![Determinantes por inducción](./assets/readme.imgs/detinduc.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Apuntes%20-%20Documentos/Determinantes%20de%20orden%20n/detordenn.pdf) | [![Diagonalización](./assets/readme.imgs/diagonal.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Apuntes%20-%20Documentos/Diagonalizaci%C3%B3n/diagonalizacion.pdf) | [![Planos](./assets/readme.imgs/planos.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Apuntes%20-%20Documentos/Planos/planos.pdf) |
 |:---:|:---:|:---:|:---:|
-| [Cambio de Base](https://enlace1.com) | [Determinantes por inducción](https://enlace2.com) | [Diagonalización](https://enlace3.com) | [Planos](https://enlace4.com) |
+| [Cambio de Base](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Apuntes%20-%20Documentos/Cambio%20de%20Base/cambiodebase.pdf) | [Determinantes por inducción](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Apuntes%20-%20Documentos/Determinantes%20de%20orden%20n/detordenn.pdf) | [Diagonalización](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Apuntes%20-%20Documentos/Diagonalizaci%C3%B3n/diagonalizacion.pdf) | [Planos](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Apuntes%20-%20Documentos/Planos/planos.pdf) |
 
 ---
 
