@@ -51,6 +51,34 @@ Este comando creará una carpeta llamada "Archivos-FaMAF" en el directorio actua
   <h4>Ejercicios Resueltos</h4>
 </div>
 
+- [Ejercicios de finales y libros varios]()
+- [Ejercicios de guías de práctica]()
+
+---
+
+<div style="text-align:center;">
+  <h4>Parciales de práctica</h4>
+</div>
+
+- [Parcial 1]()
+- [Parcial 2]()
+- [Parcial 3]()
+- [Parcial 4]()
+
+---
+
+<div style="text-align:center;">
+  <h4>Exámenes resueltos paso a paso</h4>
+</div>
+
+| [![Final 06-12-2023](./assets/readme.imgs/final06.png)](https://enlace1.com) | [![Final 21-12-2023](./assets/readme.imgs/final21.png)](https://enlace2.com) |
+|:---:|:---:|
+| [Final 06-12-2023](https://enlace1.com) | [Final 21-12-2023](https://enlace2.com) |
+
+| [![Recuperatorio 1er Parcial](./assets/readme.imgs/recu1.png)](https://enlace3.com) | [![2do Parcial - Mañana](./assets/readme.imgs/segundop.png)](https://enlace4.com) |
+|:---:|:---:|
+| [Recuperatorio 1er Parcial](https://enlace3.com) | [2do Parcial - Mañana](https://enlace4.com) |
+
 ## Apuntes Notas de Clase
 </div>
 <div align="center">
