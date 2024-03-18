@@ -7,98 +7,20 @@ El problema de ordenar un conjunto de elementos es uno de los problemas más est
     \item \textbf{Selecciona} el menor de los restantes, lo intercambia con el elemento que se encuentra en la tercera posición. 
     \item ... y así sucesivamente hasta que el conjunto esté ordenado.  
 \end{enumerate}
-\newpage
+
 \subsection{Recurso gráfico}
 Para ilustrar el funcionamiento del algoritmo de ordenación por selección, se ha desarrollado un recurso gráfico que permite visualizar el estado del conjunto en cada iteración. Supongamos que se tiene la lista:
 \begin{equation*}
-    [ \ 3,44,38,5,40 \ ]
+    [ \ 9,3,1,3,5,27 \ ]
 \end{equation*}
 y lo que se busca es aplicar el algoritmo de ordenación por selección.
 
-\textbf{Paso 1:} Se fija la primera posición:
-
-\begin{figure}[h!]  
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{./Images/oe1.png}
-    \caption{Paso 1 del algoritmo de ordenación por selección.}
-    \label{fig:SelectionSort1}
+    \includegraphics[scale=0.5]{./Images/oedef.png}
+    \caption{Paso a paso de la ordenación por selección.}
 \end{figure}
 
-\textbf{Paso 2:} Se busca un número menor que 3, no se encuentra, por lo que no se intercambia nada.
-
-\begin{figure}[h!]  
-    \centering
-    \includegraphics[width=0.5\textwidth]{./Images/oe2.png}
-    \caption{Paso 2 del algoritmo de ordenación por selección.}
-    \label{fig:SelectionSort2}
-\end{figure}
-
-\newpage
-\textbf{Paso 3:} Se fija la segunda posición, el color amarillo significa que el número ya está ordenado.
-
-\begin{figure}[h!]  
-    \centering
-    \includegraphics[width=0.5\textwidth]{./Images/oe3.png}
-    \caption{Paso 3 del algoritmo de ordenación por selección.}
-    \label{fig:SelectionSort3}
-\end{figure}
-
-\textbf{Paso 4:} Se busca un número menor que 44, luego uno menor que el menor que haya encontrado que es el 38, se encuentra el 5, por lo que se intercambian.
-
-\begin{figure}[h!]  
-    \centering
-    \includegraphics[width=0.5\textwidth]{./Images/oe4.png}
-    \caption{Paso 4 del algoritmo de ordenación por selección.}
-    \label{fig:SelectionSort4}
-\end{figure}
-
-\newpage
-\textbf{Paso 5:} Se fija la tercera posición.
-
-\begin{figure}[h!]  
-    \centering
-    \includegraphics[width=0.5\textwidth]{./Images/oe5.png}
-    \caption{Paso 5 del algoritmo de ordenación por selección.}
-    \label{fig:SelectionSort5}
-\end{figure}
-
-\textbf{Paso 6:} Se busca un número menor que 38, no encuentra ninguno, por lo que no se intercambia nada.
-
-\begin{figure}[h!]  
-    \centering
-    \includegraphics[width=0.5\textwidth]{./Images/oe6.png}
-    \caption{Paso 6 del algoritmo de ordenación por selección.}
-    \label{fig:SelectionSort6}
-\end{figure}
-
-\newpage
-\textbf{Paso 7:} Se fija la cuarta posición.
-
-\begin{figure}[h!]  
-    \centering
-    \includegraphics[width=0.5\textwidth]{./Images/oe7.png}
-    \caption{Paso 7 del algoritmo de ordenación por selección.}
-    \label{fig:SelectionSort7}
-\end{figure}
-
-\textbf{Paso 8:} Se busca un número menor a 44, encuentra el 40, por lo que se intercambian.
-
-\begin{figure}[h!]  
-    \centering
-    \includegraphics[width=0.5\textwidth]{./Images/oe8.png}
-    \caption{Paso 8 del algoritmo de ordenación por selección.}
-    \label{fig:SelectionSort8}
-\end{figure}
-
-\newpage
-\textbf{Final}, el arreglo queda ordenado.
-
-\begin{figure}[h!]  
-    \centering
-    \includegraphics[width=0.5\textwidth]{./Images/oe9.png}
-    \caption{Paso 9 del algoritmo de ordenación por selección.}
-    \label{fig:SelectionSort9}
-\end{figure}
 
 \subsection{Código}
 
@@ -128,4 +50,13 @@ proc swap (in/out a: array[1..n] of T, in i, j: nat)
 end proc
 \end{pascallike}
 
-Para el algoritmo de ordenación por selección, se ha desarrollado un procedimiento \texttt{selection\_sort} que recibe un arreglo de tamaño $n$ y lo ordena. El procedimiento \texttt{selection\_sort} utiliza dos funciones auxiliares: \texttt{min\_pos\_from} y \texttt{swap}. La función \texttt{min\_pos\_from} recibe un arreglo y una posición, y retorna la posición del menor elemento a partir de la posición dada. La función \texttt{swap} recibe un arreglo y dos posiciones, e intercambia los elementos en dichas posiciones. 
+Para el algoritmo de ordenación por selección, se ha desarrollado un procedimiento \texttt{selection\_sort} que recibe un arreglo de tamaño $n$ y lo ordena. El procedimiento \texttt{selection\_sort} utiliza dos funciones auxiliares: \texttt{min\_pos\_from} y \texttt{swap}. La función \texttt{min\_pos\_from} recibe un arreglo y una posición, y retorna la posición del menor elemento a partir de la posición dada. La función \texttt{swap} recibe un arreglo y dos posiciones, e intercambia los elementos en dichas posiciones. Se pueden marcar las siguientes observaciones:
+
+\begin{itemize}
+    \item \texttt{selection\_sort} utiliza un ciclo \texttt{for} que recorre el arreglo desde la primera posición hasta la última. En cada iteración, se busca el menor elemento a partir de la posición actual y se intercambia con el elemento en la posición actual,
+    \item se encuentra una llamada a la función \texttt{min\_pos\_from} que recibe el arreglo y la posición actual, y retorna la posición del menor elemento a partir de la posición actual,
+    \item y se recibe tambien una llamada al procedimiento \texttt{swap} que recibe el arreglo y las posiciones actual y la posición del menor elemento, e intercambia los elementos en dichas posiciones,
+    \item encontramos una \textbf{comparación} entre elementos de un arreglo, y una \textbf{asignación} de elementos de un arreglo,
+    \item la operación que mas se repite es la comparación de elementos de un arreglo, y toda operación se repite a lo sumo de manera proporcional a esa,
+    \item como la celda de un arreglo es constante, su costo no depende de cual es la celda o del tamaño del arreglo, por lo que el costo de la operación es constante.
+\end{itemize}
