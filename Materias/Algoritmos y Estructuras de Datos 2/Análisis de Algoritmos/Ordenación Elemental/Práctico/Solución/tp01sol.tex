@@ -312,6 +312,7 @@ está ordenado o no. Explicá en palabras \textbf{qué} hace el algoritmo. Expli
 \subsection*{Solución}
 \begin{pascallike}
 fun estaOrdenado (a: array [1..n] of nat) ret r: bool
+  r := true
   for i := 1 to n - 1 do
     if a[i] > a[i + 1] then
       r := false
