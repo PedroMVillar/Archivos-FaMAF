@@ -209,3 +209,14 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 
 ---
 
+![Static Badge](https://img.shields.io/badge/Carrera-Cs%20de%20la%20Computaci%C3%B3n-blue)
+![Static Badge](https://img.shields.io/badge/Carrera-Matem%C3%A1tica%20Aplicada-yellow)
+![Static Badge](https://img.shields.io/badge/Archivos%20pdf%20-%20brown)
+
+<div style="text-align:center;">
+  <h4>Apuntes - Resúmenes</h4>
+</div>
+
+| [![Algoritmo de Horner](./assets/readme.imgs/horner.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/An%C3%A1lisis%20Num%C3%A9rico/1%20-%20An%C3%A1lisis%20de%20errores/Algoritmo%20de%20Horner/Horner.pdf) | [![Preliminares Matemáticos](./assets/readme.imgs/prel.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/An%C3%A1lisis%20Num%C3%A9rico/1%20-%20An%C3%A1lisis%20de%20errores/Preliminares%20Matem%C3%A1ticos/PreliminaresMatematicos.pdf) |
+|:---:|:---:|
+| [Algoritmo de Horner](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/An%C3%A1lisis%20Num%C3%A9rico/1%20-%20An%C3%A1lisis%20de%20errores/Algoritmo%20de%20Horner/Horner.pdf) | [Preliminares Matemáticos](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/An%C3%A1lisis%20Num%C3%A9rico/1%20-%20An%C3%A1lisis%20de%20errores/Preliminares%20Matem%C3%A1ticos/PreliminaresMatematicos.pdf) |
