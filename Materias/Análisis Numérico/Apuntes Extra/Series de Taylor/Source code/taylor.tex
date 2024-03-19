@@ -1,0 +1,419 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Configuración de Paquetes
+\documentclass{article}
+\input{config_packages} % Incluir configuración de paquetes y encabezado
+\input{config_listings} % Incluir configuración de listings
+\input{config_mdframed} % Incluir configuración de mdframed
+\usepackage{titletoc}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{fancy}
+
+%Configuraciones adicionales
+\binoppenalty=\maxdimen 
+\relpenalty=\maxdimen 
+\setlength{\parindent}{0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Condiguracion de encabezado y pie de página
+\fancyhf{}
+\fancyhead{} % clear all header fields
+\fancyhead[RO,LE]{\textbf{Series y Polinomios de Taylor}}
+\fancyfoot{} % clear all footer fields
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,CE]{Pedro Villar}
+\fancyfoot[CO,RE]{Repaso de Cálculo de una variable}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\titlecontents{section}
+  [0em]
+  {\vspace{0.5em}} % Espacio antes de cada entrada de sección
+  {\bfseries} % Formato de la etiqueta de sección (número)
+  {} % Espacio entre la etiqueta y el texto del título
+  {\titlerule*[1pc]{.}\contentspage} % Formato del título del contenido
+
+\begin{document}
+
+\begin{center}
+    \huge \textbf{Índice de Contenido}
+\end{center}
+
+\noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
+
+\startcontents
+\printcontents{}{1}{}
+
+\newpage
+
+\section{Serie de Taylor}
+
+\subsection{Teorema}
+    Si $f$ se puede representar como una serie de potencias centrada en $a$, es decir, si 
+    \begin{equation*}
+        f(x) = \sum_{n=0}^{\infty} c_n(x-a)^n
+    \end{equation*}
+    para todo $x$ tal que $|x-a|<R$. Entonces
+    \begin{equation*}
+        c_n = \frac{f^{(n)}(a)}{n!}
+    \end{equation*}
+
+\subsection{Definición}
+    Sea $f(x)$ una función infinitamente diferenciable en un intervalo abierto que contiene a $x=a$. La serie de Taylor para $f(x)$ alrededor de o centrada en $x=a$ es
+    \begin{equation*}
+        f(x) = f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \frac{f'''(a)}{3!}(x-a)^3 + \cdots = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n
+    \end{equation*}
+
+
+\subsection{Observación}
+    Para el caso especial en que $a=0$, la serie de Taylor se llama serie de Maclaurin y queda
+    \begin{equation*}
+        f(x) = f(0) + f'(0)x + \frac{f''(0)}{2!}x^2 + \frac{f'''(0)}{3!}x^3 + \cdots = \sum_{n=0}^{\infty} \frac{f^{(n)}(0)}{n!}x^n
+    \end{equation*}
+
+\subsection{Método de obtención de la serie de Taylor}
+\begin{enumerate}
+    \item Calcular las derivadas de $f(x)$ hasta el orden $n$ en el punto
+    \item Evaluar las derivadas en el punto $a$
+    \item Tratar de encontrar un patrón en las derivadas evaluadas en el punto $a$
+    \item Escribir la serie de Taylor
+\end{enumerate}
+
+\subsection{Ejemplos de series de Maclaurin}
+
+\begin{example}{1}
+    Determine la serie de Maclaurin para $f(x) = e^x$.
+\end{example}
+
+Si $f(x) = e^x$, entonces $f'(x) = e^x$, $f''(x) = e^x$, $f'''(x) = e^x$, $\cdots$. Evaluando en $x=0$ se tiene que $f(0) = 1$, $f'(0) = 1$, $f''(0) = 1$, $f'''(0) = 1$, $\cdots$. Entonces la serie de Maclaurin para $f(x) = e^x$ es
+\begin{equation*}
+    e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots = \sum_{n=0}^{\infty} \frac{x^n}{n!}
+\end{equation*}
+
+\newpage
+\begin{example}{2}
+    Determine la serie de Maclaurin para $f(x) = \sin(x)$.
+\end{example}
+Primero calculo las derivadas de $f(x) = \sin(x)$:
+\begin{align*}
+    f(x) = \sin(x) \quad &\Rightarrow \quad f'(x) = \cos(x) \\
+    f''(x) = -\sin(x) \quad &\Rightarrow \quad f'''(x) = -\cos(x) \\
+    f''''(x) = \sin(x) \quad &\Rightarrow \quad f'''''(x) = \cos(x) \\
+    \vdots
+\end{align*}
+Evaluando en $x=0$ se tiene que $f(0) = 0$, $f'(0) = 1$, $f''(0) = 0$, $f'''(0) = -1$, $f''''(0) = 0$, $f'''''(0) = 1$, $\cdots$. Entonces la serie de Maclaurin para $f(x) = \sin(x)$ es
+\begin{equation*}
+    \sin(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots = \sum_{n=0}^{\infty} (-1)^n \frac{x^{2n+1}}{(2n+1)!}
+\end{equation*}
+
+\begin{example}{3}
+    Determine la serie de Maclaurin para $f(x) = \cos(x)$.
+\end{example}
+Primero calculo las derivadas de $f(x) = \cos(x)$:
+\begin{align*}
+    f(x) = \cos(x) \quad &\Rightarrow \quad f'(x) = -\sin(x) \\
+    f''(x) = -\cos(x) \quad &\Rightarrow \quad f'''(x) = \sin(x) \\
+    f''''(x) = \cos(x) \quad &\Rightarrow \quad f'''''(x) = -\sin(x) \\
+    \vdots
+\end{align*}
+Evaluando en $x=0$ se tiene que $f(0) = 1$, $f'(0) = 0$, $f''(0) = -1$, $f'''(0) = 0$, $f''''(0) = 1$, $f'''''(0) = 0$, $\cdots$. Entonces la serie de Maclaurin para $f(x) = \cos(x)$ es
+\begin{equation*}
+    \cos(x) = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \frac{x^6}{6!} + \cdots = \sum_{n=0}^{\infty} (-1)^n \frac{x^{2n}}{(2n)!}
+\end{equation*}
+
+\begin{example}{4}
+    Determine la serie de Maclaurin para $f(x) = \ln(x+1)$.
+\end{example}
+Primero calculo las derivadas de $f(x) = \ln(x+1)$:
+\begin{align*}
+    f(x) = \ln(x+1) \quad &\Rightarrow \quad f'(x) = \frac{1}{x+1} \\
+    f''(x) = -\frac{1}{(x+1)^2} \quad &\Rightarrow \quad f'''(x) = \frac{2}{(x+1)^3} \\
+    f''''(x) = -\frac{6}{(x+1)^4} \quad &\Rightarrow \quad f'''''(x) = \frac{24}{(x+1)^5} \\
+    \vdots
+\end{align*}
+Evaluando en $x=0$ se tiene que $f(0) = 0$, $f'(0) = 1$, $f''(0) = -1$, $f'''(0) = 2$, $f''''(0) = -6$, $f'''''(0) = 24$, $\cdots$. Entonces la serie de Maclaurin para $f(x) = \ln(x+1)$ es
+\begin{equation*}
+    \ln(x+1) = x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + \cdots = \sum_{n=1}^{\infty} (-1)^{n-1} \frac{x^n}{n}
+\end{equation*}
+
+\newpage
+\begin{example}{5}
+    Determine la serie de Maclaurin para $f(x) = \arctan(x)$.
+\end{example}
+Primero calculo las derivadas de $f(x) = \arctan(x)$:
+\begin{align*}
+    f(x) = \arctan(x) \quad &\Rightarrow \quad f'(x) = \frac{1}{1+x^2} \\
+    f''(x) = -\frac{2x}{(1+x^2)^2} \quad &\Rightarrow \quad f'''(x) = \frac{2(3x^2-1)}{(1+x^2)^3} \\
+    f''''(x) = -\frac{8x(3x^2-1)}{(1+x^2)^4} \quad &\Rightarrow \quad f'''''(x) = \frac{8(15x^4-10x^2+1)}{(1+x^2)^5} \\
+    \vdots
+\end{align*}
+Evaluando en $x=0$ se tiene que $f(0) = 0$, $f'(0) = 1$, $f''(0) = 0$, $f'''(0) = 2$, $f''''(0) = 0$, $f'''''(0) = 8$, $\cdots$. Entonces la serie de Maclaurin para $f(x) = \arctan(x)$ es
+\begin{equation*}
+    \arctan(x) = x - \frac{x^3}{3} + \frac{x^5}{5} - \frac{x^7}{7} + \cdots = \sum_{n=0}^{\infty} (-1)^n \frac{x^{2n+1}}{2n+1}
+\end{equation*}
+
+\begin{example}{6}
+    Determine la serie de Maclaurin para $f(x) = \frac{1}{1-x}$.
+\end{example}
+Primero calculo las derivadas de $f(x) = \frac{1}{1-x}$:
+\begin{align*}
+    f(x) = \frac{1}{1-x} \quad &\Rightarrow \quad f'(x) = \frac{1}{(1-x)^2} \\
+    f''(x) = \frac{2}{(1-x)^3} \quad &\Rightarrow \quad f'''(x) = \frac{6}{(1-x)^4} \\
+    f''''(x) = \frac{24}{(1-x)^5} \quad &\Rightarrow \quad f'''''(x) = \frac{120}{(1-x)^6} \\
+    \vdots
+\end{align*}
+Evaluando en $x=0$ se tiene que $f(0) = 1$, $f'(0) = 1$, $f''(0) = 2$, $f'''(0) = 6$, $f''''(0) = 24$, $f'''''(0) = 120$, $\cdots$. Entonces la serie de Maclaurin para $f(x) = \frac{1}{1-x}$ es
+\begin{equation*}
+    \frac{1}{1-x} = 1 + x + x^2 + x^3 + \cdots = \sum_{n=0}^{\infty} x^n
+\end{equation*}
+
+\newpage
+\begin{example}{7}
+    Determine la serie de Maclaurin para $f(x) = \frac{1}{1+x}$.
+\end{example}
+Primero calculo las derivadas de $f(x) = \frac{1}{1+x}$:
+\begin{align*}
+    f(x) = \frac{1}{1+x} \quad &\Rightarrow \quad f'(x) = -\frac{1}{(1+x)^2} \\
+    f''(x) = \frac{2}{(1+x)^3} \quad &\Rightarrow \quad f'''(x) = -\frac{6}{(1+x)^4} \\
+    f''''(x) = \frac{24}{(1+x)^5} \quad &\Rightarrow \quad f'''''(x) = -\frac{120}{(1+x)^6} \\
+    \vdots
+\end{align*}
+Evaluando en $x=0$ se tiene que $f(0) = 1$, $f'(0) = -1$, $f''(0) = 2$, $f'''(0) = -6$, $f''''(0) = 24$, $f'''''(0) = -120$, $\cdots$. Entonces la serie de Maclaurin para $f(x) = \frac{1}{1+x}$ es
+\begin{equation*}
+    \frac{1}{1+x} = 1 - x + x^2 - x^3 + \cdots = \sum_{n=0}^{\infty} (-1)^n x^n
+\end{equation*}
+
+\begin{example}{8}
+    Determine la serie de Maclaurin para $f(x) = xe^x$.
+\end{example}
+Primero calculo las derivadas de $f(x) = xe^x$:
+\begin{align*}
+    f(x) = xe^x \quad &\Rightarrow \quad f'(x) = e^x + xe^x \\
+    f''(x) = 2e^x + xe^x \quad &\Rightarrow \quad f'''(x) = 3e^x + xe^x \\
+    f''''(x) = 4e^x + xe^x \quad &\Rightarrow \quad f'''''(x) = 5e^x + xe^x \\
+    \vdots
+\end{align*}
+Evaluando en $x=0$ se tiene que $f(0) = 0$, $f'(0) = 1$, $f''(0) = 2$, $f'''(0) = 3$, $f''''(0) = 4$, $f'''''(0) = 5$, $\cdots$. Entonces la serie de Maclaurin para $f(x) = xe^x$ es
+Entonces $f^{(n)}(0) = n$ para todo $n \in \mathbb{N}$. Entonces la serie de Maclaurin para $f(x) = xe^x$ es
+\begin{equation*}
+    xe^x = x + x^2 + \frac{x^3}{2!} + \frac{x^4}{3!} + \cdots = \sum_{n=1}^{\infty} \frac{x^n}{(n-1)!}
+\end{equation*}
+
+
+\subsection{Ejemplos de series de Taylor}
+
+\begin{example}{1}
+    Determine la serie de Taylor para $f(x) = e^x$ alrededor de $x=1$.
+\end{example}
+Si $f(x) = e^x$, entonces $f'(x) = e^x$, $f''(x) = e^x$, $f'''(x) = e^x$, $\cdots$. Evaluando en $x=1$ se tiene que $f(1) = e$, $f'(1) = e$, $f''(1) = e$, $f'''(1) = e$, $\cdots$. Entonces la serie de Taylor para $f(x) = e^x$ alrededor de $x=1$ es
+\begin{equation*}
+    e^x = e + e(x-1) + \frac{e}{2!}(x-1)^2 + \frac{e}{3!}(x-1)^3 + \cdots = \sum_{n=0}^{\infty} \frac{e}{n!}(x-1)^n
+\end{equation*}
+
+\newpage
+\begin{example}{2}
+    Determine la serie de Taylor para $f(x)= e^x$ en $x=2$.
+\end{example}
+Si $f(x) = e^x$, entonces $f'(x) = e^x$, $f''(x) = e^x$, $f'''(x) = e^x$, $\cdots$. Evaluando en $x=2$ se tiene que $f(2) = e^2$, $f'(2) = e^2$, $f''(2) = e^2$, $f'''(2) = e^2$, $\cdots$. Entonces la serie de Taylor para $f(x) = e^x$ alrededor de $x=2$ es
+\begin{equation*}
+    e^x = e^2 + e^2(x-2) + \frac{e^2}{2!}(x-2)^2 + \frac{e^2}{3!}(x-2)^3 + \cdots = \sum_{n=0}^{\infty} \frac{e^2}{n!}(x-2)^n
+\end{equation*} 
+
+\begin{example}{3}
+    Determine la serie de Taylor para $f(x) = \sin(x)$ alrededor de $x=\frac{\pi}{2}$.
+\end{example}
+Primero calculo las derivadas de $f(x) = \sin(x)$:
+\begin{align*}
+    f(x) = \sin(x) \quad &\Rightarrow \quad f'(x) = \cos(x) \\
+    f''(x) = -\sin(x) \quad &\Rightarrow \quad f'''(x) = -\cos(x) \\
+    f''''(x) = \sin(x) \quad &\Rightarrow \quad f'''''(x) = \cos(x) \\
+    \vdots
+\end{align*}
+Evaluando en $x=\frac{\pi}{2}$ se tiene que $f(\frac{\pi}{2}) = 1$, $f'(\frac{\pi}{2}) = 0$, $f''(\frac{\pi}{2}) = -1$, $f'''(\frac{\pi}{2}) = 0$, $f''''(\frac{\pi}{2}) = 1$, $f'''''(\frac{\pi}{2}) = 0$, $\cdots$. Entonces la serie de Taylor para $f(x) = \sin(x)$ alrededor de $x=\frac{\pi}{2}$ es
+\begin{equation*}
+    \sin(x) = 1 - (x-\frac{\pi}{2}) + \frac{(x-\frac{\pi}{2})^3}{3!} - \frac{(x-\frac{\pi}{2})^5}{5!} + \cdots = \sum_{n=0}^{\infty} (-1)^n \frac{(x-\frac{\pi}{2})^{2n+1}}{(2n+1)!}
+\end{equation*}
+
+\begin{example}{4}
+    Determine la serie de Taylor para $f(x) = \cos(x)$ alrededor de $x=\frac{\pi}{2}$.
+\end{example}
+Primero calculo las derivadas de $f(x) = \cos(x)$:
+\begin{align*}
+    f(x) = \cos(x) \quad &\Rightarrow \quad f'(x) = -\sin(x) \\
+    f''(x) = -\cos(x) \quad &\Rightarrow \quad f'''(x) = \sin(x) \\
+    f''''(x) = \cos(x) \quad &\Rightarrow \quad f'''''(x) = -\sin(x) \\
+    \vdots
+\end{align*}
+Evaluando en $x=\frac{\pi}{2}$ se tiene que $f(\frac{\pi}{2}) = 0$, $f'(\frac{\pi}{2}) = -1$, $f''(\frac{\pi}{2}) = 0$, $f'''(\frac{\pi}{2}) = 1$, $f''''(\frac{\pi}{2}) = 0$, $f'''''(\frac{\pi}{2}) = -1$, $\cdots$. Entonces la serie de Taylor para $f(x) = \cos(x)$ alrededor de $x=\frac{\pi}{2}$ es
+\begin{equation*}
+    \cos(x) = 0 - (x-\frac{\pi}{2})^2 + \frac{(x-\frac{\pi}{2})^4}{4!} - \frac{(x-\frac{\pi}{2})^6}{6!} + \cdots = \sum_{n=0}^{\infty} (-1)^n \frac{(x-\frac{\pi}{2})^{2n}}{(2n)!}
+\end{equation*}
+
+\begin{example}{5}
+    Determine la serie de Taylor para $f(x) = \ln(x+1)$ alrededor de $x=1$.
+\end{example}
+Primero calculo las derivadas de $f(x) = \ln(x+1)$:
+\begin{align*}
+    f(x) = \ln(x+1) \quad &\Rightarrow \quad f'(x) = \frac{1}{x+1} \\
+    f''(x) = -\frac{1}{(x+1)^2} \quad &\Rightarrow \quad f'''(x) = \frac{2}{(x+1)^3} \\
+    f''''(x) = -\frac{6}{(x+1)^4} \quad &\Rightarrow \quad f'''''(x) = \frac{24}{(x+1)^5} \\
+    \vdots
+\end{align*}
+Evaluando en $x=1$ se tiene que $f(1) = 0$, $f'(1) = 1$, $f''(1) = -1$, $f'''(1) = 2$, $f''''(1) = -6$, $f'''''(1) = 24$, $\cdots$. Entonces la serie de Taylor para $f(x) = \ln(x+1)$ alrededor de $x=1$ es
+\begin{equation*}
+    \ln(x+1) = (x-1) - \frac{(x-1)^2}{2} + \frac{(x-1)^3}{3} - \frac{(x-1)^4}{4} + \cdots = \sum_{n=1}^{\infty} (-1)^{n-1} \frac{(x-1)^n}{n}
+\end{equation*}
+
+\section{Polinomio de Taylor}
+
+Sea $f$ tal que existen $f'(a),f''(a),\dots,f^{(n)}(a)$. Para $n\geq0$, definimos el \textbf{polinomio de Taylor de $f$ de orden $n$ centrado en $a$} como
+\begin{equation*}
+    T_{n,a}(x) = f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \cdots + \frac{f^{(n)}(a)}{n!}(x-a)^n = \sum_{j=0}^{n} \frac{f^{(j)}(a)}{j!}(x-a)^j
+\end{equation*}
+
+\subsection{Ejemplo}
+Ahora veamos cómo utilizar esta definición para calcular varios polinomios de Taylor para $f(x)=\ln(x)$ en $x=1$.
+\newline Para calcular los polinomios de Taylor necesitamos evaluar $f$ y sus primeras $3$ derivadas en $x=1$:
+\begin{align*}
+    f(1) &= \ln(1) = 0 \\
+    f'(1) &= \frac{1}{1} = 1 \\
+    f''(1) &= -\frac{1}{1^2} = -1 \\
+    f'''(1) &= \frac{2}{1^3} = 2
+\end{align*}
+Por lo tanto
+\begin{align*}
+    T_{0,1}(x) &= 0, \\
+    T_{1,1}(x) &= 0 + 1(x-1) = x-1, \\
+    T_{2,1}(x) &= 0 + 1(x-1) - \frac{1}{2}(x-1)^2, \\
+    T_{3,1}(x) &= 0 + 1(x-1) - \frac{1}{2}(x-1)^2 + \frac{1}{3}(x-1)^3
+\end{align*}
+
+\subsection{Observaciones}
+
+\begin{itemize}
+    \item Notar que la $n$-ésima suma parcial de la serie de Taylor de $f$ centrada en $a$ es el polinomio de Taylor de $f$ de orden $n$ centrado en $a$.
+    \item Notar qur $T_{1,a}$ es la recta tangente al gráfico de $f$ en el punto $(a,f(a))$.
+\end{itemize}
+
+\newpage
+\subsection{Teorema de Taylor con resto}
+Si $f\in C^{(n)}[a,b]$ y existe $f^{n+1}(a,b)$, es decir que se puede diferenciar $n+1$ entonces para todo par $x,c \in [a,b]$ se tiene que 
+\begin{equation*}
+    f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(c)}{k!}(x-c)^k + E_n(x),
+\end{equation*}
+donde 
+\begin{equation*}
+    E_n(x) = \frac{f^{(n+1)}(\xi)}{(n+1)!}(x-c)^{n+1}, \quad \xi \in (x,c).
+\end{equation*}
+Y si existe un número real $M$ tal que $|f^{(n+1)}(x)|\leq M$ para todo $x\in [a,b]$ entonces se tiene que
+\begin{equation*}
+    |E_n(x)| \leq \frac{M}{(n+1)!}|x-a|^{n+1}.
+\end{equation*}
+para todo $x\in [a,b]$.
+
+\subsection{Teorema de Convergencia de las series de Taylor}
+Sea $f$ una función tal que existe $f^{(n)}(a)$ $\forall n \geq 0$. Entonces, se cumple que
+\begin{equation*}
+    f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n \quad \forall x \in (a-c,a+c) \Leftrightarrow \lim_{n\to\infty} E_n(x) = 0 \quad \forall x \in (a-c,a+c)
+\end{equation*}
+
+\subsubsection{Observación}
+Con este teorema, podemos demostrar que una serie de Taylor par $f$ en $a$ converge a $f$ si podemos probar que el resto $E_n(x) \to 0$.
+
+\subsubsection{Ejemplos}
+\begin{example}{1}
+    Usando el teorema de Taylor con resto, demostrar que la serie de Maclaurin para $f(x) = e^x$ converge a $f(x) = e^x$ para todo $x$ en su intervalo de convergencia.
+\end{example}
+Como se sabe, $\sum_{n=0}^{\infty} \frac{x^n}{n!}$ es la serie de Maclaurin para $f(x) = e^x$. Para determinar su intervalo de convergencia, utilizamos el criterio del cociente. Dado que
+\begin{equation*}
+    \frac{|a_{n+1}|}{a_n} = \frac{|x|^{n+1}}{(n+1)!} \cdot \frac{n!}{|x|^n} = \frac{|x|}{n+1}, 
+\end{equation*}
+tenemos que
+\begin{equation*}
+    \lim_{n\to\infty} \frac{|a_{n+1}|}{a_n} = \lim_{n\to\infty} \frac{|x|}{n+1} = 0.
+\end{equation*}
+para todo $x$. Por lo tanto, la serie converge absolutamente para todo $x$, y así, el intervalo de convergencia es $(-\infty, \infty)$. Para probar ahora que la serie converge a $e^x$ para todo $x$, utilziamos el hecho de que $f^{(n)}(x) = e^x$ para todo $n\geq 0$ y $e^x$ es una función crecciente en $(-\infty, \infty)$. Por lo tanto, para cualquier número real $b$, el valor máximo de $e^x$ para todo $|x| \le b$ es $e^b$. Entonces,
+\begin{equation*}
+    |E_n(x)| \le \frac{e^b}{(n+1)!}|x|^{(n+1)}
+\end{equation*}  
+Como acabamos de probar que la serie converge absolutamente para todo $x$, podemos tomar $b$ tan grande como queramos. Por lo tanto, $\lim_{n\to\infty} E_n(x) = 0$ para todo $x$, y así la serie de Maclaurin para $f(x) = e^x$ converge a $f(x) = e^x$ para todo $x$.
+
+\subsection{Teorema de Taylor del resto integral}
+Si $f\in C^{(n+1)}[a,b]$ entonces para todo par $x,c \in [a,b]$ se tiene que 
+\begin{equation*}
+    f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(c)}{k!}(x-c)^k + E_n(x) 
+\end{equation*}
+donde 
+\begin{equation*}
+    E_n(x) = \frac{1}{n!}\int_{c}^{x} f^{(n+1)}(t)(x-t)^ndt.
+\end{equation*}
+
+\subsection{Ejemplos y Aplicaciones}
+
+\begin{example}{1}
+    Dar la serie de Taylor de $f(x) = sen(x)$ y probar que $f$ coincide con la serie de Maclaurin.
+\end{example}
+
+Ya tenemos la serie de Maclaurin para $f(x) = \sin(x)$, que es
+\begin{equation*}
+    \sin(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots = \sum_{n=0}^{\infty} (-1)^n \frac{x^{2n+1}}{(2n+1)!}
+\end{equation*}
+Ahora notemos que $f^{(n+1)} = \pm sen(t)$ o $ \pm \cos(t)$, en cualquier caso vale para $f^{(n+1)}\leq 1$.
+Luego se sabe que el resto es mayor o igual a $0$
+\begin{equation*}
+    |R_n(x)| \ge 0 = \frac{|f^{(n+1)}(t)|}{(n+1)!} |x|^{(n+1)} \ge \frac{|x|^{(n+1)}}{(n+1)!}
+\end{equation*}
+como 
+\begin{equation*}
+    \lim_{n\to\infty} \frac{|x|^{(n+1)}}{(n+1)!} = 0
+\end{equation*}
+es decir, $\lim_{n\to\infty} E_n(x) = 0$ para todo $x$, entonces la serie de Maclaurin para $f(x) = \sin(x)$ converge a $f(x) = \sin(x)$ para todo $x$ es decir que coincide la expresión
+\begin{equation*}
+    sen(x) = \sum_{n=0}^{\infty} (-1)^n \frac{x^{2n+1}}{(2n+1)!}
+\end{equation*}
+
+\newpage
+
+\begin{example}{2}
+    Usando la fórmula de Maclaurin de la función exponencial, estimar el valor de $e$ con un error menor que $10^{-6}$.
+\end{example}
+Se tiene la serie de Maclaurin para $f(x) = e^x$, que es
+\begin{equation*}
+    e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots = \sum_{n=0}^{\infty} \frac{x^n}{n!}
+\end{equation*}
+Para $x=1$, obtenemos
+\begin{equation*}
+    e = 1 + 1 + \frac{1}{2!} + \frac{1}{3!} + \cdots + E_n(1)
+\end{equation*}
+Como sabemos que $f^{(n+1)}(x) = e^x$ para todo $n\geq 0$, entonces $E_n(1) = \frac{e^c}{(n+1)!}$ para algún $c\in [0,1]$.
+Despejando el resto se tiene que
+\begin{equation*}
+   | E_n(1) | = \left | e - \left(1 + 1 + \frac{1}{2!} + \frac{1}{3!} + \cdots\right) \right |
+\end{equation*}
+Ahora suponemos que $e<3$ y que por lo tanto $e^c<3$ para algún $c\in [0,1]$. Entonces
+\begin{equation*}
+    \frac{e^c}{(n+1)!} < \frac{3}{(n+1)!}
+\end{equation*}
+Luego,
+\begin{equation*}
+    \frac{3}{(n+1)!} < 10^{-6}
+\end{equation*}
+tomando $n=9$, 
+\begin{equation*}
+    \frac{3}{10!} < 10^{-6}
+\end{equation*}
+Esto quiere decir que tomando el polinomio de orden $9$, se tiene que el error es menor que $10^{-6}$.
+\begin{equation*}
+    e = 1 + 1 + \frac{1}{2!} + \frac{1}{3!} + \frac{1}{4!} + \frac{1}{5!} + \frac{1}{6!} + \frac{1}{7!} + \frac{1}{8!} + \frac{1}{9!}
+\end{equation*}
+
+\begin{example}{3}
+    Usando la fórmula de Maclaurin de la función $f(x)=\ln(1+x)$ , estimar el valor de $\ln(\frac{3}{2})$.
+\end{example}
+Por lo pronto sabemos que hay que evaluar el polinomio en $x=\frac{1}{2}$. Sabemos que la serie de Maclaurin para $f(x) = \ln(1+x)$ es
+\begin{equation*}
+    \ln(1+x) = \sum_{n=1}^{\infty} (-1)^{n-1} \frac{x^{(n+1)}}{n+1}
+\end{equation*}
+para $x \in (-1,1]$. Entonces, como $x=\frac{1}{2}$ pertenece a dicho intervalo, se puede asegurar que cualquier truncamiento de la serie evaluado en $x=\frac{1}{2}$ es una aproximación de $\ln(\frac{3}{2})$. Y es obvio que cuanto más términos se tomen, más precisa será la aproximación. 
+
+\end{document}

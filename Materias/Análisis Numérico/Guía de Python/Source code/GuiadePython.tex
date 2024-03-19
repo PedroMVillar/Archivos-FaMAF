@@ -1,0 +1,548 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Configuración de Paquetes
+\documentclass{article}
+\input{config_packages} % Incluir configuración de paquetes y encabezado
+\input{config_listings} % Incluir configuración de listings
+\input{config_mdframed} % Incluir configuración de mdframed
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{fancy}
+
+%Configuraciones adicionales
+\binoppenalty=\maxdimen 
+\relpenalty=\maxdimen 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Condiguracion de encabezado y pie de página
+\lhead{Pedro Villar}
+\rhead{Guía de Python} 
+\chead{\leftmark}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\tableofcontents
+
+\newpage
+
+\section{Variables en Python}
+Una variable es un espacio de memoria que se utiliza para almacenar un valor. En Python, las variables no necesitan ser declaradas con ningún tipo en particular y pueden incluso cambiar de tipo después de haber sido creadas.
+\subsection{Declaración de variables}
+Para declarar una variable en Python, se utiliza el operador de asignación \texttt{=}. La sintaxis es la siguiente:
+\begin{python_code}
+variable = valor
+\end{python_code}
+Donde \texttt{variable} es el nombre de la variable y \texttt{valor} es el valor que se le asigna. Por ejemplo:
+\begin{python_code}
+x = 5
+y = "Hola"
+\end{python_code}
+\subsection{Nombres de variables}
+Los nombres de las variables en pueden contener letras, números y guiones bajos (\_). Sin embargo, el nombre de una variable no puede comenzar con un número. Además, Python distingue entre mayúsculas y minúsculas, por lo que las variables \texttt{variable}, \texttt{Variable} y \texttt{VARIABLE} son diferentes.
+\subsection{Asignación múltiple}
+Python permite asignar un valor a varias variables al mismo tiempo. Por ejemplo:
+\begin{python_code}
+x, y, z = 5, 10, 15
+\end{python_code}
+\subsection{Asignación múltiple con el mismo valor}
+Tambien nos permite asignar el mismo valor a varias variables al mismo tiempo. Por ejemplo:
+\begin{python_code}
+x = y = z = 5
+\end{python_code}
+\subsubsection{Variables globales y locales}
+Una variable que se declara fuera de una función es una variable global, mientras que una variable que se declara dentro de una función es una variable local. Una variable global se puede utilizar en cualquier parte del programa, mientras que una variable local solo se puede utilizar dentro de la función en la que se declara.
+\subsubsection{Variables globales}
+Para declarar una variable global dentro de una función, se utiliza la palabra clave \texttt{global}. Por ejemplo:
+\begin{python_code}
+def myfunc():
+  global x
+  x = "fantastic"
+\end{python_code}
+\subsection{Variables locales}
+Si se declara una variable dentro de una función, esta será local, a menos que se utilice la palabra clave \texttt{global}. Por ejemplo:
+\begin{python_code}
+def myfunc():
+  x = "fantastic"
+\end{python_code}
+
+\subsection{Dirección de memoria}
+En Python, se puede obtener la dirección de memoria de una variable utilizando la función \texttt{id()}. Por ejemplo:
+\begin{python_code}
+x = 5
+print(id(x))
+\end{python_code}
+\section{Tipos de datos}
+\subsection{Tipos de datos numéricos}
+Se admiten los siguientes tipos de datos numéricos:
+\begin{itemize}
+    \item \texttt{int} (enteros)
+    \item \texttt{float} (flotantes)
+    \item \texttt{complex} (complejos)
+\end{itemize}
+\subsubsection{Enteros}
+Los enteros son números enteros, positivos o negativos, sin decimales, de longitud ilimitada. Por ejemplo:
+\begin{python_code}
+x = 1
+y = 35656222554887711
+z = -3255522
+\end{python_code}
+\subsubsection{Flotantes}
+Los flotantes son números reales, positivos o negativos, que contienen uno o más decimales. Por ejemplo:
+\begin{python_code}
+x = 1.10
+y = 1.0
+z = -35.59
+\end{python_code}
+\subsubsection{Complejos}
+Los números complejos se escriben con una \texttt{j} como parte imaginaria. Por ejemplo:
+\begin{python_code}
+x = 3+5j
+y = 5j
+z = -5j
+\end{python_code}
+\subsection{Tipos de datos secuenciales}
+Python admite los siguientes tipos de datos secuenciales:
+\begin{itemize}
+    \item \texttt{str} (cadenas)
+    \item \texttt{list} (listas)
+    \item \texttt{tuple} (tuplas)
+\end{itemize}
+\subsubsection{Cadenas}
+Las cadenas se definen entre comillas simples o dobles. Por ejemplo:
+\begin{python_code}
+x = "Hola"
+y = 'Hola'
+\end{python_code}
+\subsubsection{Listas}
+Las listas se definen entre corchetes y pueden contener cualquier tipo de dato. Por ejemplo:
+\begin{python_code}
+x = ["manzana", "platano", "cereza"]
+y = [1, 5, 7, 9, 3]
+z = [True, False, False]
+\end{python_code}
+\subsubsection{Tuplas}
+Las tuplas se definen entre paréntesis y pueden contener cualquier tipo de dato. Por ejemplo:
+\begin{python_code}
+x = ("manzana", "platano", "cereza")
+y = (1, 5, 7, 9, 3)
+z = (True, False, False)
+\end{python_code}
+
+\subsection{Manejo de cadenas}
+\subsubsection{Longitud de una cadena}
+Para obtener la longitud de una cadena, se utiliza la función \texttt{len()}. Por ejemplo:
+\begin{python_code}
+a = "Hola, Mundo!"
+print(len(a))
+\end{python_code}
+\subsubsection{Índices de una cadena}
+Los índices de una cadena comienzan en 0. Por ejemplo:
+\begin{python_code}
+a = "Hola, Mundo!"
+print(a[1])
+\end{python_code}
+\subsubsection{Subcadenas}
+Se pueden obtener subcadenas utilizando la notación de rebanadas. Por ejemplo:
+\begin{python_code}
+b = "Hola, Mundo!"
+print(b[2:5])
+\end{python_code}
+\subsubsection{Cadenas con formato}
+Se pueden utilizar las cadenas con formato para insertar valores en una cadena. Por ejemplo:
+\begin{python_code}
+edad = 36
+txt = "Mi nombre es Juan, y tengo {}"
+print(txt.format(edad))
+\end{python_code}
+
+\subsection{Tipos booleanos}
+Python tiene un tipo de datos booleanos, que solo puede tener dos valores: \texttt{True} o \texttt{False}. Por ejemplo:
+\begin{python_code}
+print(10 > 9)
+print(10 == 9)
+print(10 < 9)
+\end{python_code}
+
+\subsection{Procesar entrada del usuario}
+\subsubsection{Entrada del usuario}
+Para obtener la entrada del usuario, se utiliza la función \texttt{input()}. Por ejemplo:
+\begin{python_code}
+print("Ingresa tu nombre:")
+x = input()
+print("Hola, " + x)
+\end{python_code}
+\subsubsection{Conversión de la entrada del usuario}
+La entrada del usuario se almacena como una cadena. Para convertirla a un tipo de dato numérico, se utiliza la función \texttt{int()} o \texttt{float()}. Por ejemplo:
+\begin{python_code}
+print("Ingresa un numero:")
+x = int(input())
+print("El numero es " + str(x))
+\end{python_code}
+
+\section{Entrada y salida de datos}
+\subsection{Imprimir en la consola}
+Para imprimir en la consola, se utiliza la función \texttt{print()}. Por ejemplo:
+\begin{python_code}
+print("Hola, Mundo!")
+\end{python_code}
+\subsection{Formato de impresión}
+Se pueden utilizar las cadenas con formato para insertar valores en una cadena. Por ejemplo:
+\begin{python_code}
+edad = 36
+txt = "Mi nombre es Juan, y tengo {}"
+print(txt.format(edad))
+\end{python_code}
+\subsection{Entrada del usuario}
+Para obtener la entrada del usuario, se utiliza la función \texttt{input()}. Por ejemplo:
+\begin{python_code}
+print("Ingresa tu nombre:")
+x = input()
+print("Hola, " + x)
+\end{python_code}
+\subsection{Conversión de la entrada del usuario}
+La entrada del usuario se almacena como una cadena. Para convertirla a un tipo de dato numérico, se utiliza la función \texttt{int()} o \texttt{float()}. Por ejemplo:
+\begin{python_code}
+print("Ingresa un numero:")
+x = int(input())
+print("El numero es " + str(x))
+\end{python_code}
+
+\section{Operadores}
+
+\subsection{Operadores aritméticos}
+Los operadores aritméticos se utilizan para realizar operaciones matemáticas. Por ejemplo:
+\begin{python_code}
+x = 5
+y = 3
+print(x + y)
+print(x - y)
+print(x * y)
+print(x / y)
+print(x % y)
+print(x ** y)
+print(x // y)
+\end{python_code}
+
+\subsection{Operadores de asignación}
+Los operadores de asignación se utilizan para asignar valores a las variables. Por ejemplo:
+\begin{python_code}
+x = 5
+x += 3
+x -= 3
+x *= 3
+x /= 3
+x %= 3
+x **= 3
+x //= 3
+\end{python_code}
+Donde cada uno significa lo siguiente:
+\begin{itemize}
+    \item \texttt{x += 3} es equivalente a \texttt{x = x + 3}
+    \item \texttt{x -= 3} es equivalente a \texttt{x = x - 3}
+    \item \texttt{x *= 3} es equivalente a \texttt{x = x * 3}
+    \item \texttt{x /= 3} es equivalente a \texttt{x = x / 3}
+    \item \texttt{x \%= 3} es equivalente a \texttt{x = x \% 3}
+    \item \texttt{x **= 3} es equivalente a \texttt{x = x ** 3}
+    \item \texttt{x //= 3} es equivalente a \texttt{x = x // 3}
+\end{itemize}
+
+\subsection{Operadores de comparación}
+Los operadores de comparación se utilizan para comparar dos valores. Por ejemplo:
+\begin{python_code}
+x = 5
+y = 3
+print(x == y)
+print(x != y)
+print(x > y)
+print(x < y)
+print(x >= y)
+print(x <= y)
+\end{python_code}
+
+\subsection{Operadores lógicos}
+Los operadores lógicos se utilizan para combinar declaraciones condicionales. Por ejemplo:
+\begin{python_code}
+x = 5
+print(x > 3 and x < 10)
+print(x > 3 or x < 4)
+print(not(x > 3 and x < 10))
+\end{python_code}
+
+\section{Estructuras de control}
+Una estructura de control es un bloque de código que decide qué línea de código se ejecutará a continuación. Python admite las siguientes estructuras de control:
+\begin{itemize}
+    \item \texttt{if} (si)
+    \item \texttt{else} (si no)
+    \item \texttt{elif} (si no, si)
+    \item \texttt{while} (mientras)
+    \item \texttt{for} (para)
+    \item \texttt{break} (romper)
+    \item \texttt{continue} (continuar)
+\end{itemize}
+\subsection{Estructura if}
+La estructura \texttt{if} se utiliza para tomar decisiones basadas en condiciones. Por ejemplo:
+\begin{python_code}
+a = 33
+b = 200
+if b > a:
+  print("b es mayor que a")
+\end{python_code}
+\subsection{Estructura else}
+La estructura \texttt{else} se utiliza para ejecutar un bloque de código si la condición es falsa. Por ejemplo:
+\begin{python_code}
+a = 33
+b = 33
+if b > a:
+  print("b es mayor que a")
+else:
+  print("b no es mayor que a")
+\end{python_code}
+\subsection{Estructura elif}
+La estructura \texttt{elif} se utiliza para ejecutar un bloque de código si la condición anterior es falsa. Por ejemplo:
+\begin{python_code}
+a = 33
+b = 33
+if b > a:
+  print("b es mayor que a")
+elif a == b:
+  print("a y b son iguales")
+\end{python_code}
+\subsection{Estructura while}
+La estructura \texttt{while} se utiliza para ejecutar un bloque de código mientras la condición sea verdadera. Por ejemplo:
+\begin{python_code}
+i = 1
+while i < 6:
+  print(i)
+  i += 1
+\end{python_code}
+
+\subsection{Estructura for}
+La estructura \texttt{for} se utiliza para iterar sobre una secuencia (como una lista, tupla, conjunto o diccionario). Por ejemplo:
+\begin{python_code}
+frutas = ["manzana", "platano", "cereza"]
+for x in frutas:
+  print(x)
+\end{python_code}
+
+\subsection{Break y Continue}
+La estructura \texttt{break} se utiliza para salir del bucle. Por ejemplo:
+\begin{python_code}
+frutas = ["manzana", "platano", "cereza"]
+for x in frutas:
+  print(x)
+  if x == "platano":
+    break
+\end{python_code}
+La estructura \texttt{continue} se utiliza para saltar la iteración actual y continuar con la siguiente. Por ejemplo:
+\begin{python_code}
+frutas = ["manzana", "platano", "cereza"]
+for x in frutas:
+  if x == "platano":
+    continue
+  print(x)
+\end{python_code}
+
+\section{Funciones}
+Una función es un bloque de código que solo se ejecuta cuando se llama. Python admite funciones predefinidas, así como funciones definidas por el usuario.
+\subsection{Definición de funciones}
+En Python, una función se define utilizando la palabra clave \texttt{def}. Por ejemplo:
+\begin{python_code}
+def my_function():
+  print("Hola desde una funcion")
+\end{python_code}
+\subsection{Llamada a funciones}
+Para llamar a una función, simplemente se escribe el nombre de la función seguido de paréntesis. Por ejemplo:
+\begin{python_code}
+def my_function():
+  print("Hola desde una funcion")
+
+my_function()
+\end{python_code}
+\subsection{Argumentos de funciones}
+Los argumentos son los valores que se pasan a la función. Por ejemplo:
+\begin{python_code}
+def my_function(fname):
+  print(fname + " Refsnes")
+
+my_function("Emil")
+my_function("Tobias")
+my_function("Linus")
+\end{python_code}
+\subsection{Parámetros de funciones}
+Los parámetros son los nombres de las variables que se utilizan al definir una función. Por ejemplo:
+\begin{python_code}
+def my_function(fname, lname):
+  print(fname + " " + lname)
+
+my_function("Emil", "Refsnes")
+\end{python_code}
+\subsection{Valores de retorno}
+Para devolver un valor de una función, se utiliza la palabra clave \texttt{return}. Por ejemplo:
+\begin{python_code}
+def my_function(x):
+  return 5 * x
+
+print(my_function(3))
+print(my_function(5))
+print(my_function(9))
+\end{python_code}
+\section{Clases y objetos}
+\subsection{Definición de clases}
+En Python, una clase se define utilizando la palabra clave \texttt{class}. Por ejemplo:
+\begin{python_code}
+class MyClass:
+  x = 5
+\end{python_code}
+\subsection{Creación de objetos}
+Un objeto es una instancia de una clase. Para crear un objeto, se utiliza la misma sintaxis que para llamar a una función. Por ejemplo:
+\begin{python_code}
+p1 = MyClass()
+print(p1.x)
+\end{python_code}
+\subsection{Métodos de objetos}
+Los métodos son funciones que pertenecen a un objeto. Por ejemplo:
+\begin{python_code}
+class Person:
+  def __init__(self, name, age):
+    self.name = name
+    self.age = age
+
+  def myfunc(self):
+    print("Hola, mi nombre es " + self.name)
+
+p1 = Person("John", 36)
+p1.myfunc()
+\end{python_code}
+\subsection{El método \_\_init\_\_()}
+El método \_\_init\_\_() se utiliza para asignar valores a las propiedades del objeto cuando se crea el objeto. Por ejemplo:
+\begin{python_code}
+class Person:
+  def __init__(self, name, age):
+    self.name = name
+    self.age = age
+
+p1 = Person("John", 36)
+
+print(p1.name)
+print(p1.age)
+\end{python_code}
+\subsection{El método del objeto \_\_del\_\_()}
+El método \_\_del\_\_() se utiliza para destruir un objeto. Por ejemplo:
+\begin{python_code}
+class Person:
+  def __init__(self, name, age):
+    self.name = name
+    self.age = age
+
+  def __del__(self):
+    print("El objeto ha sido destruido")
+
+p1 = Person("John", 36)
+del p1
+\end{python_code}
+\section{Módulos}
+\subsection{Importación de módulos}
+Los módulos son archivos que contienen un conjunto de funciones que se pueden incluir en un programa. Para importar un módulo, se utiliza la palabra clave \texttt{import}. Por ejemplo:
+\begin{python_code}
+import mymodule
+\end{python_code}
+\subsection{Uso de módulos}
+Una vez que se ha importado un módulo, se pueden utilizar las funciones que contiene. Por ejemplo:
+\begin{python_code}
+import mymodule
+
+mymodule.greeting("Jonathan")
+\end{python_code}
+\subsection{Alias de módulos}
+Se puede crear un alias cuando se importa un módulo, utilizando la palabra clave \texttt{as}. Por ejemplo:
+\begin{python_code}
+import mymodule as mx
+
+a = mx.person1["age"]
+print(a)
+\end{python_code}
+\subsection{Módulos integrados}
+Python tiene un conjunto de módulos integrados que se pueden utilizar sin necesidad de instalarlos. Por ejemplo:
+\begin{python_code}
+import platform
+
+x = platform.system()
+print(x)
+\end{python_code}
+
+\section{Métodos numéricos}
+
+\subsection{Algoritmo de Horner}
+El algoritmo de Horner es un método para evaluar polinomios. Por ejemplo:
+\begin{python_code}
+def horner(p, x):
+    n = len(p)
+    result = p[0]
+    for i in range(1, n):
+        result = result * x + p[i]
+    return result
+\end{python_code}
+Este algoritmo evalúa un polinomio de la forma $p(x) = a_0 + a_1x + a_2x^2 + \ldots + a_nx^n$ en el punto $x$.
+Un ejemplo de uso de este algoritmo es el siguiente:
+\begin{python_code}
+p = [1, 2, 3]
+x = 2
+print(horner(p, x))
+\end{python_code}
+Donde la lista $p$ representa el polinomio $p(x) = 1 + 2x + 3x^2$ y $x = 2$.
+
+\subsection{Algoritmo de Bisección}
+El algoritmo de bisección es un método para encontrar raíces de una función. Por ejemplo:
+\begin{python_code}
+def biseccion(f, a, b, tol):
+    if f(a) * f(b) > 0:
+        return None
+    while (b - a) / 2.0 > tol:
+        midpoint = (a + b) / 2.0
+        if f(midpoint) == 0:
+            return midpoint
+        elif f(a) * f(midpoint) < 0:
+            b = midpoint
+        else:
+            a = midpoint
+    return (a + b) / 2.0
+\end{python_code}
+Este algoritmo encuentra una raíz de la función $f(x)$ en el intervalo $[a, b]$ con una tolerancia de $\text{tol}$.
+Un ejemplo de uso de este algoritmo es el siguiente:
+\begin{python_code}
+def f(x):
+    return x**2 - 2
+
+a = 1
+b = 2
+tol = 1e-6
+print(biseccion(f, a, b, tol))
+\end{python_code}
+Donde la función $f(x) = x^2 - 2$ tiene una raíz en el intervalo $[1, 2]$.
+
+\subsection{Algoritmo de Newton-Raphson}
+El algoritmo de Newton-Raphson es un método para encontrar raíces de una función. Por ejemplo:
+\begin{python_code}
+def newton_raphson(f, df, x0, tol):
+    while abs(f(x0)) > tol:
+        x0 = x0 - f(x0) / df(x0)
+    return x0
+\end{python_code}
+Este algoritmo encuentra una raíz de la función $f(x)$ con derivada $f'(x)$ y una tolerancia de $\text{tol}$.
+Un ejemplo de uso de este algoritmo es el siguiente:
+\begin{python_code}
+def f(x):
+    return x**2 - 2
+
+def df(x):
+    return 2 * x
+
+x0 = 1
+tol = 1e-6
+print(newton_raphson(f, df, x0, tol))
+\end{python_code}
+Donde la función $f(x) = x^2 - 2$ tiene una raíz en el punto $x = 1$.
+
+
+
+\end{document}
