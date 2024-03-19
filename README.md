@@ -30,6 +30,9 @@ Este repositorio tiene como objetivo consolidar y organizar de manera sistemáti
         - [Lab00](#lab00)
         - [Lab01](#lab01)
     - [Organización del Computador](#organización-del-computador)
+    - [Análisis Numérico](#análisis-numérico)
+      - [Apuntes - Resúmenes](#apuntes---resúmenes-2)
+      - [Prácticos Resueltos](#prácticos-resueltos)
 
 ## Navegación
 ### Acceso rápido a archivos
