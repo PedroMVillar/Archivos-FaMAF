@@ -210,3 +210,8 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 | [![Práctico 1 - Corroborado](./assets/readme.imgs/tpsist.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Organizaci%C3%B3n%20del%20Computador/Sistemas%20de%20Numeraci%C3%B3n/Pr%C3%A1ctico/Soluci%C3%B3n/tp01sol.pdf) | [![Práctico 2](./assets/readme.imgs/tpbool.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Organizaci%C3%B3n%20del%20Computador/%C3%81lgebra%20de%20Boole/Pr%C3%A1ctico/Soluci%C3%B3n/tp02sol.pdf) |
 |:---:|:---:|
 | [Práctico 1 - Corroborado](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Organizaci%C3%B3n%20del%20Computador/Sistemas%20de%20Numeraci%C3%B3n/Pr%C3%A1ctico/Soluci%C3%B3n/tp01sol.pdf) | [Práctico 2](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Organizaci%C3%B3n%20del%20Computador/%C3%81lgebra%20de%20Boole/Pr%C3%A1ctico/Soluci%C3%B3n/tp02sol.pdf) |
+
+---
+
+| <h3 align="center">Análisis Numérico</h3> |
+| --- |
