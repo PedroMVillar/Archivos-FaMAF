@@ -1,0 +1,122 @@
+\documentclass[20pt,margin=1in,innermargin=-4.5in,blockverticalspace=-0.25in]{tikzposter}
+\geometry{paperwidth=42in,paperheight=30in}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage[backend=biber,style=numeric]{biblatex}
+\usepackage{emory-theme}
+
+\usepackage{mwe} % for placeholder images
+
+% set theme parameters
+\tikzposterlatexaffectionproofoff
+\usetheme{EmoryTheme}
+\usecolorstyle{EmoryStyle}
+
+\title{Series de Potencia y de Taylor}
+\author{Pedro Villar}
+\institute{Análisis Numérico - Primer Cuatrimestre 2024}	
+\titlegraphic{\adjustbox{left=0.35\textwidth}{\includegraphics[width=0.3\textwidth]{famaf-logo.jpg}}}
+
+% begin document
+\begin{document}
+\maketitle
+\centering
+\begin{columns}
+
+    % ----------- Columna 1 - Teoría ------------------- %
+    \column{0.40}
+    \block{Series de Taylor}{
+        Sea $f$ una función infinitamente derivable en un intervalo $I$ y sea $x_0 \in I$. La serie de Taylor de $f$ centrada en $x_0$ es
+        \begin{equation*}
+            T_f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n
+        \end{equation*}
+    }
+    \block{¿Como obtener la serie de Taylor?}{
+        Para obtener la serie de Taylor de una función $f(x)$ centrada en $a$, se deben seguir los siguientes pasos:
+        \begin{enumerate}
+            \item Calcula las derivadas sucesivas de la función $f(x)$ respecto a $x$: $f'(x), f''(x), f'''(x), f^(4)(x), \dots , f^(n)(x)$.
+            \item Evalúa cada una de estas derivadas en el punto $x = a$: $f(a), f'(a), f''(a), f'''(a), \dots , f^(n)(a)$.
+            \item Forma el polinomio de Taylor utilizando los valores evaluados en el paso 2: $f(x) \approx f(a) + f'(a)(x - a) + (f''(a)/2!)(x - a)^2 + (f'''(a)/3!)(x - a)^3 + \dots + (f^(n)(a)/n!)(x - a)^n$ Este es el \textbf{polinomio de Taylor} de grado n centrado en $x = a$.
+            \item Expresa el polinomio de Taylor como una suma infinita: $f(x) = f(a) + f'(a)(x - a) + (f''(a)/2!)(x - a)^2 + (f'''(a)/3!)(x - a)^3 + \dots = \sum_{n=0}^{\infty} \frac{f^(n)(a)}{n!}(x - a)^n$. Este es el \textbf{desarrollo en serie de Taylor} de $f(x)$ centrado en $x = a$.
+        \end{enumerate}
+    }
+    \block{Teorema del Resto de Lagrange}{
+        Sea $f$ una función $n+1$ veces derivable en un intervalo $I$ y sea $x_0 \in I$. Entonces, para cada $x \in I$, existe un número $c$ entre $x$ y $x_0$ tal que
+        \begin{equation*}
+            f(x) = T_f(x) + \frac{f^{(n+1)}(c)}{(n+1)!}(x-x_0)^{n+1}
+        \end{equation*}
+        A esta expresión se la conoce como la \textbf{fórmula de Taylor con resto de Lagrange}.
+    }
+    \block{¿Como obtener el resto de Lagrange?}{
+        Cuando una serie de Taylor se trunca en el término $k$-ésimo, el error cometido al aproximar la función $f(x)$ por el polinomio de Taylor de grado $k$, se obtiene de la siguiente manera:
+        \begin{enumerate}
+            \item Que la serie este truncada en $k$ términos hace referencia a que la función $f(x)$ se aproxima por el polinomio de Taylor de grado $k$ centrado en $x = a$, es decir
+            \begin{equation*}
+                f(x) = \sum_{n=0}^{k} \frac{f^(n)(a)}{n!}(x - a)^n + R_k(x)
+            \end{equation*}
+            y lo que debemos calcular es el error $R_k(x)$, que se expresa como $R_k(x) = \frac{f^{(k+1)}(c)}{(k+1)!}(x - a)^{k+1}$.
+            \item El número $c$ es un número real que pertenece al intervalo $[a, x]$.
+            \item Calcular la derivada $(k+1)$-ésima de la función $f(x): f^{(k+1)}(x)$.
+            \item Encontrar un valor c entre a y x. Si se conoce que $f^{(k+1)}(x)$ no cambia de signo en el intervalo $[a, x]$, se puede tomar $c = a$. De lo contrario, se debe aplicar el \textbf{teorema del valor medio} para encontrar $c$.
+            \item Evaluar $f^{(k+1)}(c)$.
+            \item Sustituir los valores encontrados en la fórmula del resto de Lagrange: $R_k(x) = (f^{(k+1)}(c)/(k+1)!)(x - a)^{(k+1)}$.
+        \end{enumerate}
+    }
+
+    % ----------- Columna 2 - Ejemplo ------------------- %
+    \column{0.60}
+    \block{Ejemplo}{
+        \textbf{Obtener la serie de Taylor centrada en 0 para la función $f(x) = ln(x + 1)$. Escribir la serie usando la notación de sumatorias. Dar una expresión para el resto cuando la serie es truncada en $k$ términos.}
+        \begin{enumerate}
+            \item Calcular las derivadas sucesivas de la función $f(x)$ respecto a $x$: $f'(x) = 1/(x+1)$, $f''(x) = -1/(x+1)^2$, $f'''(x) = 2/(x+1)^3$, $f''''(x) = -6/(x+1)^4$, $\dots$.
+            \newline Con esto podemos ver que la derivada $n$-ésima de la función $f(x)$ es $f^{(n)}(x) = (-1)^{n-1}(n-1)!/(x+1)^n$.
+            \item Evaluar cada una de estas derivadas en el punto $x = 0$: $f(0) = 0$, $f'(0) = 1$, $f''(0) = -1$, $f'''(0) = 2$, $f''''(0) = -6$, $\dots$
+            \newline Si tomamos la expresión general de la derivada $n$-ésima de la función $f(x)$, se tiene que $f^{(n)}(0) = (-1)^{n-1}(n-1)!$.
+            \item Ahora desarrollo los términos del polinomio de taylor y reemplazo con los valores obtenidos en el paso 2: 
+            \begin{align*}
+                & \frac{f^0(0)}{1}x^0 + \frac{f^1(0)}{1!}x^1 + \frac{f^2(0)}{2!}x^2 + \frac{f^3(0)}{3!}x^3 + \frac{f^4(0)}{4!}x^4 + \dots \\
+                &= 0 + x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + \dots \\
+                &= \sum_{n=1}^{\infty} \frac{(-1)^{n-1}x^n}{n}
+            \end{align*}
+            Otra forma es reemplazar la expresión general en la fórmula de Taylor y simplificar:
+            \begin{equation*}
+                T_f(x) = = \sum_{n=1}^{\infty} \frac{(-1)^{n-1}(n-1)!}{n!} x^n = \sum_{n=1}^{k} \frac{(-1)^{n-1}x^n}{n}
+            \end{equation*}
+        \end{enumerate}
+        Ahora para dar una expresión para el resto cuando la serie es truncada en $k$ términos, se hace lo siguiente:
+        \begin{enumerate}
+            \item Que la serie este truncada en $k$ términos hace referencia a que la función $f(x)$ se aproxima por el polinomio de Taylor de grado $k$ centrado en $x = 0$, es decir
+            \begin{equation*}
+                f(x) = \sum_{n=1}^{k} \frac{(-1)^{n-1}x^n}{n} + R_k(x)
+            \end{equation*}
+            y lo que debemos calcular es el error $R_k(x)$, que se expresa como $R_k(x) = \frac{f^{(k+1)}(c)}{(k+1)!}x^{k+1}$.
+            \item La derivada $(k+1)$-ésima de la función $f(x)$ es $f^{(k+1)}(x) = (-1)^k \frac{k!}{(x+1)^{k+1}}$, pero tomando el $c=a$, se tiene que $f^{(k+1)}(c) = (-1)^k \frac{k!}{(1)^{k+1}} = (-1)^k k!$.
+            \item Entonces reemplazando en la fórmula del resto de Lagrange, se obtiene que 
+            \begin{equation*}
+                R_k(x) = \frac{(-1)^k k!}{(k+1)!}x^{k+1} = \frac{(-1)^k}{k+1}x^{k+1}
+            \end{equation*}
+        \end{enumerate}
+        \textbf{Estimar el número de términos que deberán incluirse en la serie para aproximar $ln(1.5)$ con un margen de error no mayor que $10^{-10}$.}
+        \begin{enumerate}
+            \item Se busca el valor de $k$ tal que $|R_k(0.5)| \leq 10^{-10}$, esto es ya que $ln(1.5) = ln(1 + 0.5)$.
+            \item Por lo tanto primero hay que evaluar $R_k(0.5)$
+            \begin{equation*}
+                R_k(0.5) = \frac{(-1)^k}{k+1}0.5^{k+1}
+            \end{equation*}
+            Y se tiene que buscar que $|R_k(0.5)| \leq 10^{-10}$, es decir
+            \begin{equation*}
+                \frac{0.5^{k+1}}{k+1} \leq 10^{-10}
+            \end{equation*}
+            A partir de acá se puede buscar el valor de $k$ que cumpla con la desigualdad.
+        \end{enumerate}
+    }
+\end{columns}
+
+\end{document}
