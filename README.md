@@ -52,8 +52,6 @@ Este comando creará una carpeta llamada "Archivos-FaMAF" en el directorio actua
 
    cd Archivos-FaMAF
 
-¡Listo! Ahora tienes una copia local del repositorio en tu máquina y puedes comenzar a trabajar con los archivos.
-
 ## Materias
 Cada materia cursada se encuentra organizada en una carpeta específica, que contiene todos los recursos académicos correspondientes a la asignatura. A continuación, se presenta un listado de las materias disponibles en el repositorio.
 
