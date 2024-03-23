@@ -13,7 +13,7 @@ Este repositorio tiene como objetivo consolidar y organizar de manera sistemáti
 # Índice de Contenido
 1. [Navegación - Cómo usar el repositorio](#navegación)
 2. [Materias](#materias) 
-    - [Álgebra Lineal - Álgebra II - Álgebra](#álgebra-lineal---álgebra-ii---álgebra)
+    - [Algebra Lineal - Algebra II - Algebra](#algebra-lineal---algebra-ii---algebra)
       - [Apuntes - Resúmenes](#apuntes---resúmenes)
       - [Ejercicios Resueltos](#ejercicios-resueltos)
       - [Parciales de práctica](#parciales-de-práctica)
