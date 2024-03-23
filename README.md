@@ -13,26 +13,22 @@ Este repositorio tiene como objetivo consolidar y organizar de manera sistemáti
 # Índice de Contenido
 1. [Navegación - Cómo usar el repositorio](#navegación)
 2. [Materias](#materias) 
-    - [Álgebra Lineal - Álgebra II - Álgebra](#álgebra-lineal---álgebra-ii---álgebra)
-      - [Apuntes - Resúmenes](#apuntes---resúmenes)
+    - [Álgebra Lineal - Álgebra II - Álgebra](#álgebra-lineal)
+      - [Apuntes y Resúmenes](#apuntes-y-resúmenes)
       - [Ejercicios Resueltos](#ejercicios-resueltos)
       - [Parciales de práctica](#parciales-de-práctica)
       - [Exámenes resueltos paso a paso](#exámenes-resueltos-paso-a-paso)
     - [Algoritmos y Estructuras de Datos 1](#algoritmos-y-estructuras-de-datos-1)
-      - [Apuntes - Resúmenes](#apuntes---resúmenes-1)
+      - [Apuntes y Resúmenes](#apuntes-y-resúmenes)
       - [Proyectos](#proyectos)
     - [Algoritmos y Estructuras de Datos 2](#algoritmos-y-estructuras-de-datos-2)
-      - [Teórico - Práctico](#teórico---práctico)
-        - [Análisis de Algoritmos](#análisis-de-algoritmos)
-          - [Ordenación Elemental](#ordenación-elemental)
-            - [Práctico 1](#práctico-1)
+      - [Teórico Práctico](#teórico-práctico)
       - [Laboratorio](#laboratorio)
-        - [Lab00](#lab00)
-        - [Lab01](#lab01)
     - [Organización del Computador](#organización-del-computador)
-    - [Análisis Numérico](#análisis-numérico)
-      - [Apuntes - Resúmenes](#apuntes---resúmenes-2)
-      - [Prácticos Resueltos](#prácticos-resueltos)
+      - [Apuntes y Resúmenes](#apuntes-y-resumenes)
+      - [Prácticos Resueltos](#practicos-resueltos)
+    - [Análisis Numérico](#analisis-numérico)
+      - [Apuntes y Resúmenes](#apuntes-y-resúmenes)
 
 ## Navegación
 ### Acceso rápido a archivos
@@ -66,7 +62,7 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 - [Algoritmos y Estructuras de Datos 2](#algoritmos-y-estructuras-de-datos-2)
 - [Organización del Computador](#organización-del-computador)
 
-<h3 align="center"> Álgebra Lineal - Álgebra II - Álgebra </h3>
+<h3 align="center"> Álgebra Lineal </h3>
 
 ---
 
@@ -76,7 +72,7 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 
 
 <div style="text-align:center;">
-  <h4>Apuntes - Resúmenes</h4>
+  <h4>Apuntes y Resúmenes</h4>
 </div>
 
 | [![Cambio de Base](./assets/readme.imgs/cambiodebase.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Apuntes%20-%20Documentos/Cambio%20de%20Base/cambiodebase.pdf) | [![Determinantes por inducción](./assets/readme.imgs/detinduc.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Apuntes%20-%20Documentos/Determinantes%20de%20orden%20n/detordenn.pdf) | [![Diagonalización](./assets/readme.imgs/diagonal.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Apuntes%20-%20Documentos/Diagonalizaci%C3%B3n/diagonalizacion.pdf) | [![Planos](./assets/readme.imgs/planos.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Apuntes%20-%20Documentos/Planos/planos.pdf) |
@@ -124,7 +120,7 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 ![Static Badge](https://img.shields.io/badge/Archivos%20c%20-%20green)
 
 <div style="text-align:center;">
-  <h4>Apuntes - Resúmenes</h4>
+  <h4>Apuntes y Resúmenes</h4>
 </div>
 
 | [![Compilación](./assets/readme.imgs/comp.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Funcional/Compilaci%C3%B3n/compilacion.pdf) | [![Interpretación de errores](./assets/readme.imgs/erro.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/%C3%81lgebra%20Lineal%20-%20Algebra%20II/Apuntes%20-%20Documentos/Determinantes%20de%20orden%20n/detordenn.pdf) | [![Pattern Matching](./assets/readme.imgs/pm.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Funcional/Pattern%20Matching/patternMatching.pdf) | [![Arreglos en C](./assets/readme.imgs/aec.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%201/Programaci%C3%B3n%20Imperativa/Arreglos%20en%20C/ArraysC.pdf) |
@@ -155,7 +151,7 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 
 
 <div style="text-align:center;">
-  <h3>Teórico - Práctico</h3>
+  <h3>Teórico Práctico</h3>
 </div>
 
 [![Static Badge](https://img.shields.io/badge/Acceso%20a%20notas%20de%20clase%20-%20pink)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Notas%20de%20Clase/Te%C3%B3rico%20Pr%C3%A1ctico/Source%20code/NotasdeClase.pdf)
@@ -192,7 +188,7 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 [![Static Badge](https://img.shields.io/badge/Acceso%20a%20notas%20de%20clase%20-%20pink)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Organizaci%C3%B3n%20del%20Computador/Notas%20de%20Clase/Source%20code/NotasdeClase.pdf)
 
 <div style="text-align:center;">
-  <h4>Resúmenes Infografías</h4>
+  <h4>Apuntes y Resúmenes</h4>
 </div>
 
 | [![Sistemas de Numeración](./assets/readme.imgs/sistnu.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Organizaci%C3%B3n%20del%20Computador/Sistemas%20de%20Numeraci%C3%B3n/Resumenes/M%C3%A9todos%20para%20Pr%C3%A1ctico%201/main.pdf) | [![Formato IEEE 754](./assets/readme.imgs/ieee.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Organizaci%C3%B3n%20del%20Computador/Sistemas%20de%20Numeraci%C3%B3n/Resumenes/Formato%20IEEE%20754/main.pdf) |
@@ -217,7 +213,7 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 ![Static Badge](https://img.shields.io/badge/Archivos%20pdf%20-%20brown)
 
 <div style="text-align:center;">
-  <h4>Apuntes - Resúmenes</h4>
+  <h4>Apuntes y Resúmenes</h4>
 </div>
 
 | [![Algoritmo de Horner](./assets/readme.imgs/horner.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/An%C3%A1lisis%20Num%C3%A9rico/1%20-%20An%C3%A1lisis%20de%20errores/Algoritmo%20de%20Horner/Horner.pdf) | [![Preliminares Matemáticos](./assets/readme.imgs/prel.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/An%C3%A1lisis%20Num%C3%A9rico/1%20-%20An%C3%A1lisis%20de%20errores/Preliminares%20Matem%C3%A1ticos/PreliminaresMatematicos.pdf) |
