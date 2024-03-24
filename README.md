@@ -29,6 +29,8 @@ Este repositorio tiene como objetivo consolidar y organizar de manera sistemáti
       - [Prácticos Resueltos](#practicos-resueltos)
     - [Análisis Numérico](#analisis-numérico)
       - [Apuntes y Resúmenes](#apuntes-y-resúmenes)
+3. [Cursos](#cursos)
+    - [Redes Neuronales con Python](#redes-neuronales-con-python)
 
 ## Navegación
 ### Acceso rápido a archivos
@@ -217,3 +219,14 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
 | [![Algoritmo de Horner](./assets/readme.imgs/horner.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/An%C3%A1lisis%20Num%C3%A9rico/1%20-%20An%C3%A1lisis%20de%20errores/Algoritmo%20de%20Horner/Horner.pdf) | [![Preliminares Matemáticos](./assets/readme.imgs/prel.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/An%C3%A1lisis%20Num%C3%A9rico/1%20-%20An%C3%A1lisis%20de%20errores/Preliminares%20Matem%C3%A1ticos/PreliminaresMatematicos.pdf) |
 |:---:|:---:|
 | [Algoritmo de Horner](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/An%C3%A1lisis%20Num%C3%A9rico/1%20-%20An%C3%A1lisis%20de%20errores/Algoritmo%20de%20Horner/Horner.pdf) | [Preliminares Matemáticos](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/An%C3%A1lisis%20Num%C3%A9rico/1%20-%20An%C3%A1lisis%20de%20errores/Preliminares%20Matem%C3%A1ticos/PreliminaresMatematicos.pdf) |
+
+---
+
+## Cursos
+
+### Redes Neuronales con Python
+
+Este curso tiene como objetivo brindar una introducción a las redes neuronales y su implementación en Python. A lo largo del curso, se abordarán los conceptos fundamentales de las redes neuronales, así como su aplicación en la resolución de problemas de clasificación y regresión. Además, se proporcionarán ejemplos prácticos y ejercicios para reforzar los conocimientos adquiridos.
+
+- [Bibliografía del curso](https://github.com/PedroMVillar/Archivos-FaMAF/tree/main/Cursos/Redes%20Neuronales%20con%20Python/Bibliograf%C3%ADa)
+- [Archivos de clase](https://github.com/PedroMVillar/Archivos-FaMAF/tree/main/Cursos/Redes%20Neuronales%20con%20Python/Temas)
