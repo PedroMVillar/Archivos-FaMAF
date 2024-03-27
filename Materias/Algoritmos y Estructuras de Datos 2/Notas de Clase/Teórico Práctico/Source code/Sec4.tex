@@ -1,0 +1,129 @@
+\section{Algoritmo de ordenación \texttt{merge\_sort}}
+
+Este algoritmo de ordenación es un ejemplo de algoritmo de ordenación recursivo. La idea es dividir el vector en dos partes iguales, ordenar cada una de las partes y luego combinarlas en un solo vector ordenado. 
+
+\subsection{Descripción del algoritmo por partes}
+La idea es definir un procedimiento al que le pasamos en qué parte del arreglo queremos hacer lo fundamental del mergesort: dividirlo en dos, ordenar cada mitad y luego intercalar las dos mitades. Este procedimiento es \texttt{merge\_sort\_rec}, que toma el arreglo a y las posiciones inicial y final del pedazo de arreglo que vamos a ordenar. El procedimiento principal llama al recursivo con los índices 1 y n (el arreglo completo).
+
+\begin{pascallike}
+proc merge_sort(in/out a: array[1..n] of T)
+    merge_sort_rec(a,1,n)
+end proc
+proc merg_sort_rec(in/out a: array[1..n] of T, in lft,rgt: nat)
+...
+end proc
+\end{pascallike}
+El procedimiento \texttt{merge\_sort\_rec} toma el arreglo a, y los índices \textbf{lft} y \textbf{rgt}, que corresponden con el comienzo y el final del pedazo de arreglo que queremos ordenar. Recordando la idea del algoritmo, el caso más simple es cuando el pedazo de arreglo tiene un solo elemento. En nuestra implementación eso corresponde a que lft sea igual a rgt. En ese caso el procedimiento no debe hacer nada, ya que el pedazo está trivialmente ordenado.
+En caso que no se dé esa situación, debemos:
+\begin{enumerate}
+    \item Dividir el pedazo de arreglo en dos,
+    \item ordenar cada una de esas mitades utilizando el mismo algoritmo, e
+    \item intercalar cada mitad ordenada.
+\end{enumerate}
+Para dividir el pedazo de arreglo, se define una variable \textbf{mid} de tipo nat a la que se le asigna el índice correspondiente a la posición del medio.
+\begin{pascallike}
+proc merg_sort_rec(in/out a: array[1..n] of T, in lft,rgt: nat)
+    var mid: nat
+    if rgt > lft --> mid := (rgt+lft) `div` 2
+    ...
+end proc
+\end{pascallike}
+Ahora entonces hay que llamar recursivamente al procedmiento dos veces: una para la primera mitad que irá desde la posición \textbf{lft} hasta \textbf{mid}, y otra para la segunda mitad, que irá desde la posición \textbf{mid+1} hasta \textbf{rgt}.
+\begin{pascallike}
+proc merg_sort_rec(in/out a: array[1..n] of T, in lft,rgt: nat)
+    var mid: nat
+    if rgt > lft --> mid := (rgt+lft) `div` 2
+    merge_sort_rec(a,lft,mid)
+    merge_sort_rec(a,mid+1,rgt)
+    ...
+end proc
+\end{pascallike}
+y por último, hay que intercalar. Esta tarea la implementaremos con un procedimiento llamado \texttt{merge}, que se define mas adelante.
+\begin{pascallike}
+proc merg_sort_rec(in/out a: array[1..n] of T, in lft,rgt: nat)
+    var mid: nat
+    if rgt > lft --> mid := (rgt+lft) `div` 2
+    merge_sort_rec(a,lft,mid)
+    merge_sort_rec(a,mid+1,rgt)
+    merge(a,lft,mid,rgt)
+end proc
+\end{pascallike}
+Ahora para implementar el procedimiento de \textbf{intercalación}, se necesita un arreglo auxiliar, en donde se van a guardar los valores de la primera mitad a intercalar.
+Se define entonces una variable de tipo array, dos variables en las que luego almacenaremos índices \texttt{j} y \texttt{k}, y se copia la primera mitad del arreglo en el arreglo auxiliar:
+\begin{pascallike}
+proc merge(in/out a: array[1..n] of T, in lft,mid,rgt: nat)
+    var tmp: array[1..n] of T
+    var j,k: nat
+    for i:=lft to mid do ->
+        tmp[i] := a[i] 
+    od
+    ...
+end proc
+\end{pascallike}
+Los índices \texttt{j} y \texttt{k} indicarán respectivamente el elemento de la primera mitad que estoy analizando para insertar en el pedazo de arreglo que quedará ordenado, y el índice de la segunda mitad que estoy analizando. Inicialmente observo el primero de cada mitad, es decir \textbf{lft} y \textbf{mid+1}.
+\begin{pascallike}
+proc merge(in/out a: array[1..n] of T, in lft,mid,rgt: nat)
+    var tmp: array[1..n] of T
+    var j,k: nat
+    for i:=lft to mid do ->
+        tmp[i] := a[i] 
+    od
+    j := lft
+    k := mid+1
+    ...
+end proc
+\end{pascallike}
+Ahora hay que rellenar el pedazo completo de arreglo que contendrá las dos mitades intercaladas ordenadamente. Lo recorro con un for desde lft hasta rgt. Y se puede ver que en cada paso si el elemento que estoy observando de la primera mitad es menor o igual que el de la segunda mitad, de acuerdo a esa comparación sabré qué elemento va a ubicarse en el arreglo ordenado.
+\begin{pascallike}
+proc merge(in/out a: array[1..n] of T, in lft,mid,rgt: nat)
+    var tmp: array[1..n] of T
+    var j,k: nat
+    for i:=lft to mid do ->
+        tmp[i] := a[i] 
+    od
+    j := lft
+    k := mid+1
+    for i:=lft to rgt do ->
+        if j <= mid && (k > rgt || tmp[j] <= a[k])
+            then a[i] := tmp[j]
+                j:= j+1
+            else a[i] := a[k]
+                k := k+1
+        fi
+    od
+end proc
+\end{pascallike}
+En la guarda del if hay que considerar también el caso en que ya haya agotado todos los elementos de la segunda mitad, lo que sucederá cuando \texttt{k > rgt}, y entonces en ese caso también completo con los elementos de la primera mitad (es decir los que están en el arreglo auxiliar).
+El código completo del algoritmo de ordenación \texttt{merge\_sort} es el siguiente:
+\begin{pascallike}
+proc merge_sort(in/out a: array[1..n] of T)
+    merge_sort_rec(a,1,n)
+end proc
+
+proc merge_sort_rec(in/out a: array[1..n] of T, in lft,rgt: nat)
+    var mid: nat
+    if rgt > lft --> mid := (rgt+lft) `div` 2
+        merge_sort_rec(a,lft,mid)
+        merge_sort_rec(a,mid+1,rgt)
+        merge(a,lft,mid,rgt)
+    fi
+end proc
+
+proc merge(in/out a: array[1..n] of T, in lft,mid,rgt: nat)
+    var tmp: array[1..n] of T
+    var j,k: nat
+    for i:=lft to mid do ->
+        tmp[i] := a[i] 
+    od
+    j := lft
+    k := mid+1
+    for i:=lft to rgt do ->
+        if j <= mid && (k > rgt || tmp[j] <= a[k])
+            then a[i] := tmp[j]
+                j:= j+1
+            else a[i] := a[k]
+                k := k+1
+        fi
+    od
+end proc
+\end{pascallike}
