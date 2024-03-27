@@ -1,0 +1,340 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Configuración de Paquetes
+\documentclass{article}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{scrextend}
+\usepackage{titletoc}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, fancyhdr, color, comment, graphicx, environ}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[shortlabels]{enumitem}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{mathptmx}
+\usepackage{cfr-lm}
+\usepackage{tabularx}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+\setlength{\headheight}{1.5cm}
+\renewcommand{\qed}{\quad\qedsymbol}
+\usetikzlibrary{calc}
+\renewcommand{\familydefault}{\sfdefault}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\fancypagestyle{mipagina}{
+    \fancyhf{} % Limpiar encabezado y pie de página
+    \fancyhead[L]{Pedro Villar} % Nombre a la izquierda
+    \fancyhead[C]{\rightmark} % Texto al centro 
+    \fancyhead[R]{Alg. y E.D 2} % Texto a la derecha
+    \fancyfoot[C]{\thepage} % Número de página al centro
+    \renewcommand{\headrulewidth}{0.4pt} % Grosor de la línea horizontal en el encabezado
+}
+
+\pagestyle{mipagina}
+\mdfsetup{skipabove=\topskip,skipbelow=\topskip}
+
+% Box de Definición
+\newcounter{def}[section]
+
+\NewDocumentEnvironment{defi}{o}{%
+    \stepcounter{def}%
+    \begin{mdframed}[
+        frametitle={%
+            \begin{tikzpicture}[baseline=(current bounding box.east),outer sep=0pt]
+                \node[anchor=east,rectangle,fill=blue!20,inner xsep=5pt] at (0,0) {\strut\IfValueTF{#1}{Definición~\thedef:~#1}{Definición~\thedef}};
+            \end{tikzpicture}%
+        },
+        innertopmargin=5pt,
+        linecolor=blue!20,
+        linewidth=2pt,
+        topline=true,
+        frametitleaboveskip=-\ht\strutbox, % Ajuste de espacio entre título y contenido
+        frametitlealignment={\hspace{5pt}}, % Ajuste de espacio entre el borde del frame y el título
+    ]
+}{%
+    \end{mdframed}%
+}
+
+% Box de ejemplos
+\newcounter{ejemplo}[section]
+
+\NewDocumentEnvironment{ejemplo}{o}{%
+    \stepcounter{ejemplo}%
+    \begin{mdframed}[
+        frametitle={%
+            \begin{tikzpicture}[baseline=(current bounding box.east),outer sep=0pt]
+                \node[anchor=east,rectangle,fill=brown!30,inner xsep=5pt] at (0,0) {\strut\IfValueTF{#1}{Ejemplo~\theejemplo:~#1}{Ejemplo~\theejemplo}};
+            \end{tikzpicture}%
+        },
+        innertopmargin=5pt,
+        linecolor=brown!30,
+        linewidth=2pt,
+        topline=true,
+        frametitleaboveskip=-\ht\strutbox, % Ajuste de espacio entre título y contenido
+        frametitlealignment={\hspace{5pt}}, % Ajuste de espacio entre el borde del frame y el título
+    ]
+}{%
+    \end{mdframed}%
+}
+
+% Entorno para Métodos (color verde)
+\newcounter{metodo}[section]
+\NewDocumentEnvironment{metodo}{o}{%
+    \stepcounter{metodo}%
+    \begin{mdframed}[
+        frametitle={%
+            \begin{tikzpicture}[baseline=(current bounding box.east),outer sep=0pt]
+                \node[anchor=east,rectangle,fill=green!30,inner xsep=5pt] at (0,0) {\strut\IfValueTF{#1}{Método~\themetodo:~#1}{Método~\themetodo}};
+            \end{tikzpicture}%
+        },
+        innertopmargin=5pt,
+        linecolor=green!30,
+        linewidth=2pt,
+        topline=true,
+        frametitleaboveskip=-\ht\strutbox, % Ajuste de espacio entre título y contenido
+        frametitlealignment={\hspace{5pt}}, % Ajuste de espacio entre el borde del frame y el título
+    ]
+}{%
+    \end{mdframed}%
+}
+
+% Entorno para Observaciones (color amarillo más oscuro)
+\newcounter{observacion}[section]
+\NewDocumentEnvironment{observacion}{o}{%
+    \stepcounter{observacion}%
+    \begin{mdframed}[
+        frametitle={%
+            \begin{tikzpicture}[baseline=(current bounding box.east),outer sep=0pt]
+                \node[anchor=east,rectangle,fill=yellow!50,inner xsep=5pt] at (0,0) {\strut\IfValueTF{#1}{Observación~\theobservacion:~#1}{Observación~\theobservacion}};
+            \end{tikzpicture}%
+        },
+        innertopmargin=5pt,
+        linecolor=yellow!50,
+        linewidth=2pt,
+        topline=true,
+        frametitleaboveskip=-\ht\strutbox, % Ajuste de espacio entre título y contenido
+        frametitlealignment={\hspace{5pt}}, % Ajuste de espacio entre el borde del frame y el título
+    ]
+}{%
+    \end{mdframed}%
+}
+
+% Entorno para Ejercicio
+\newcounter{ejer}[section]
+\NewDocumentEnvironment{ejer}{o}{%
+    \stepcounter{ejer}%
+    \begin{mdframed}[
+        frametitle={%
+            \begin{tikzpicture}[baseline=(current bounding box.east),outer sep=0pt]
+                \node[anchor=east,rectangle,fill=black!30,inner xsep=5pt] at (0,0) {\strut\IfValueTF{#1}{Ejercicio~\theejer:~#1}{Ejercicio~\theejer}};
+            \end{tikzpicture}%
+        },
+        innertopmargin=5pt,
+        linecolor=black!30,
+        linewidth=2pt,
+        topline=true,
+        frametitleaboveskip=-\ht\strutbox, % Ajuste de espacio entre título y contenido
+        frametitlealignment={\hspace{5pt}}, % Ajuste de espacio entre el borde del frame y el título
+    ]
+}{%
+    \end{mdframed}%
+}
+
+\newenvironment{solution}
+    {\textit{Solución:}}
+    {}
+
+
+\newcounter{pascalcode}[section]
+
+\renewcommand{\thepascalcode}{\arabic{section}.\arabic{pascalcode}}
+
+\lstdefinelanguage{pascal-like}{
+  morekeywords={var, type, tuple, enumerate, fi, ret, downto, where, proc, fun, in, out, if, then, else, while, do, for, to, end, od},
+  morecomment=[s]{\{-}{-\}},
+  morestring=[b]",
+  sensitive=true,
+  keywordstyle=\color{purple},
+  commentstyle=\color{green!70!black},
+  stringstyle=\color{blue!70!black},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  alsoletter={:,=,+,-,*,>,<,(,)},
+  morekeywords=[2]{:,=,+,-,*,>,<,(,),&,&&,||,!,!=,==},
+  keywordstyle=[2]{\color{blue}},
+  literate={:=}{{\textcolor{blue}{:=}}}2,
+  morekeywords=[3]{nat, array, of, int, real, bool, char}, 
+  keywordstyle=[3]{\color{green!40!black}},
+  literate={\^}{{\textasciicircum}}1,
+}
+
+\lstnewenvironment{pascallike}[1][]{
+  \refstepcounter{pascalcode}
+  \lstset{
+    language=pascal-like,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    captionpos=b,
+    #1
+  }
+}{\phantomsection\addcontentsline{lol}{section}{Código \thepascalcode}}
+
+
+%Configuraciones adicionales
+\binoppenalty=\maxdimen 
+\relpenalty=\maxdimen 
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\section*{Ejercicio 1}
+\begin{enumerate}[a)]
+  \item Ordená los arreglos del ejercicio 4 del práctico anterior utilizando el algoritmo de ordenación por intercalación.
+  \item En el caso del inciso a) del ejercicio 4, dar la secuencia de llamadas al procedimiento merge\_sort\_rec con los valores correspondientes de sus argumentos.
+\end{enumerate}
+
+\textbf{Punto a:}
+
+\begin{minipage}{0.5\textwidth}
+\begin{equation*}
+  \large
+  \begin{array}{|r|r|r|r|r|r|r|}
+    \hline \textcolor{red}{7} & \textcolor{red}{1} & \textcolor{red}{10} & \textcolor{red}{3} & \textcolor{red}{4} & \textcolor{red}{9} & \textcolor{red}{5} \\ \hline
+  \end{array}
+\end{equation*}
+\begin{equation*}
+  \large
+  \begin{array}{|r|r|r|r|r|r|r|}
+    \hline \textcolor{red}{7} & \textcolor{red}{1} & \textcolor{red}{10} & \textcolor{red}{3} & 4 & 9 & 5 \\ \hline
+  \end{array}
+\end{equation*}
+\begin{equation*}
+  \large
+  \begin{array}{|r|r|r|r|r|r|r|}
+    \hline \textcolor{red}{7} & \textcolor{red}{1} & 10 & 3 & 4 & 9 & 5 \\ \hline
+  \end{array}
+\end{equation*}
+\begin{equation*}
+  \large
+  \begin{array}{|r|r|r|r|r|r|r|}
+    \hline \textcolor{red}{7} & 1 & 10 & 3 & 4 & 9 & 5 \\ \hline
+  \end{array}
+\end{equation*}
+\begin{equation*}
+  \large
+  \begin{array}{|r|r|r|r|r|r|r|}
+    \hline \textcolor{blue}{7} & \textcolor{red}{1} & 10 & 3 & 4 & 9 & 5 \\ \hline
+  \end{array}
+\end{equation*}
+\begin{equation*}
+  \large
+  \begin{array}{|r|r|r|r|r|r|r|}
+    \hline \textcolor{blue}{7} & \textcolor{green}{1} & 10 & 3 & 4 & 9 & 5 \\ \hline
+  \end{array}
+\end{equation*}
+\begin{equation*}
+  \large
+  \begin{array}{|r|r|r|r|r|r|r|}
+    \hline \textcolor{blue}{1} & \textcolor{blue}{7} & \textcolor{red}{10} & \textcolor{red}{3} & 4 & 9 & 5 \\ \hline
+  \end{array}
+\end{equation*}
+\begin{equation*}
+  \large
+  \begin{array}{|r|r|r|r|r|r|r|}
+    \hline \textcolor{blue}{1} & \textcolor{blue}{7} & \textcolor{red}{10} & 3 & 4 & 9 & 5 \\ \hline
+  \end{array}
+\end{equation*}
+\begin{equation*}
+  \large
+  \begin{array}{|r|r|r|r|r|r|r|}
+    \hline \textcolor{blue}{1} & \textcolor {blue}{7} & \textcolor{green}{10} & \textcolor{red}{3} & 4 & 9 & 5 \\ \hline
+  \end{array}
+\end{equation*}
+\begin{equation*}
+  \large
+  \begin{array}{|r|r|r|r|r|r|r|}
+    \hline \textcolor{blue}{1} & \textcolor {blue}{7} & \textcolor{green}{10} & \textcolor{orange}{3} & 4 & 9 & 5 \\ \hline
+  \end{array}
+\end{equation*}
+\begin{equation*}
+  \large
+  \begin{array}{|r|r|r|r|r|r|r|}
+    \hline \textcolor{blue}{1} & \textcolor {blue}{7} & \textcolor{green}{3} & \textcolor{green}{10} & 4 & 9 & 5 \\ \hline
+  \end{array}
+\end{equation*}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+  \begin{equation*}
+    \large
+    \begin{array}{|r|r|r|r|r|r|r|}
+      \hline \textcolor{blue}{1} & \textcolor {blue}{3} & \textcolor{blue}{7} & \textcolor{blue}{10} & 4 & 9 & 5 \\ \hline
+    \end{array}
+  \end{equation*}
+  \begin{equation*}
+    \large
+    \begin{array}{|r|r|r|r|r|r|r|}
+      \hline \textcolor{blue}{1} & \textcolor {blue}{3} & \textcolor{blue}{7} & \textcolor{blue}{10} & \textcolor{red}{4} & \textcolor{red}{9} & \textcolor{red}{5} \\ \hline
+    \end{array}
+  \end{equation*}
+  \begin{equation*}
+    \large
+    \begin{array}{|r|r|r|r|r|r|r|}
+      \hline \textcolor{blue}{1} & \textcolor {blue}{3} & \textcolor{blue}{7} & \textcolor{blue}{10} & \textcolor{red}{4} & \textcolor{red}{9} & 5 \\ \hline
+    \end{array}
+  \end{equation*}
+  \begin{equation*}
+    \large
+    \begin{array}{|r|r|r|r|r|r|r|}
+      \hline \textcolor{blue}{1} & \textcolor {blue}{3} & \textcolor{blue}{7} & \textcolor{blue}{10} & \textcolor{red}{4} & 9 & 5 \\ \hline
+    \end{array}
+  \end{equation*}
+  \begin{equation*}
+    \large
+    \begin{array}{|r|r|r|r|r|r|r|}
+      \hline \textcolor{blue}{1} & \textcolor {blue}{3} & \textcolor{blue}{7} & \textcolor{blue}{10} & \textcolor{green}{4} & \textcolor{red}{9} & 5 \\ \hline
+    \end{array}
+  \end{equation*}
+  \begin{equation*}
+    \large
+    \begin{array}{|r|r|r|r|r|r|r|}
+      \hline \textcolor{blue}{1} & \textcolor {blue}{3} & \textcolor{blue}{7} & \textcolor{blue}{10} & \textcolor{green}{4} & \textcolor{orange}{9} & 5 \\ \hline
+    \end{array}
+  \end{equation*}
+  \begin{equation*}
+    \large
+    \begin{array}{|r|r|r|r|r|r|r|}
+      \hline \textcolor{blue}{1} & \textcolor {blue}{3} & \textcolor{blue}{7} & \textcolor{blue}{10} & \textcolor{green}{4} & \textcolor{green}{9} & \textcolor{red}{5} \\ \hline
+    \end{array}
+  \end{equation*}
+  \begin{equation*}
+    \large
+    \begin{array}{|r|r|r|r|r|r|r|}
+      \hline \textcolor{blue}{1} & \textcolor {blue}{3} & \textcolor{blue}{7} & \textcolor{blue}{10} & \textcolor{green}{4} & \textcolor{green}{9} & \textcolor{orange}{5} \\ \hline
+    \end{array}
+  \end{equation*}
+  \begin{equation*}
+    \large
+    \begin{array}{|r|r|r|r|r|r|r|}
+      \hline \textcolor{blue}{1} & \textcolor {blue}{3} & \textcolor{blue}{7} & \textcolor{blue}{10} & \textcolor{green}{4} & \textcolor{green}{5} & \textcolor{green}{9} \\ \hline
+    \end{array}
+  \end{equation*}
+  \begin{equation*}
+    \large
+    \begin{array}{|r|r|r|r|r|r|r|}
+      \hline \textcolor{blue}{1} & \textcolor {blue}{3} & \textcolor{blue}{4} & \textcolor{blue}{5} & \textcolor{blue}{7} & \textcolor{blue}{9} & \textcolor{blue}{10} \\ \hline
+    \end{array}
+  \end{equation*}
+\end{minipage}
+
+
+\end{document}
