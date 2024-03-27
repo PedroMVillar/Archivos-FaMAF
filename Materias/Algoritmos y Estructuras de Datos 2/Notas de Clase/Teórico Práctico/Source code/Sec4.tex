@@ -94,6 +94,7 @@ proc merge(in/out a: array[1..n] of T, in lft,mid,rgt: nat)
 end proc
 \end{pascallike}
 En la guarda del if hay que considerar también el caso en que ya haya agotado todos los elementos de la segunda mitad, lo que sucederá cuando \texttt{k > rgt}, y entonces en ese caso también completo con los elementos de la primera mitad (es decir los que están en el arreglo auxiliar).
+\newpage
 El código completo del algoritmo de ordenación \texttt{merge\_sort} es el siguiente:
 \begin{pascallike}
 proc merge_sort(in/out a: array[1..n] of T)

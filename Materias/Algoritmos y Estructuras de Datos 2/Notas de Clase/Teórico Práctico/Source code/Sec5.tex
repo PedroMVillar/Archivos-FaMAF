@@ -1,0 +1,113 @@
+\section{Algoritmo de ordenación \texttt{quick\_sort}}
+Este algoritmo consiste en separar dos mitades: por un lado los que irían al principio y por otro los que irían al final. Luego se ordenan las dos mitades de forma recursiva.\\
+
+\subsection{Descripción del algoritmo por partes}
+De manera similar al algoritmo de ordenación \texttt{merge\_sort}, se define un procedimiento recursivo que tomará el arreglo de elementos y dos índices correspondientes al pedazo de arreglo que se ordenará. El algoritmo principal llama a este procedimiento con los índices \texttt{1} y \texttt{n}, correspondiendo con la ordenación del arreglo completo.
+\begin{pascallike}
+proc quick_sort(in/out a: array[1..n] of T)
+    quick_sort_rec(a,1,n)
+end proc
+proc quick_sort_rec(in/out a: array[1..n] of T, in lft,rgt: nat)
+...
+end proc
+\end{pascallike}
+Este procedimiento recursivo tiene su caso más simple cuando \textbf{lft} y \textbf{rgt} son iguales, lo que significa que estoy ordenando un arreglo de un solo elemento. En el caso interesante, al procedimiento se lo llama partition que será el encargado de acomodar los elementos del pedazo de arreglo utilizando el elemento de más a la izquierda como \textbf{pivot}.
+\begin{pascallike}
+proc quick_sort_rec(in/out a: array[1..n] of T, in lft,rgt: nat)
+    var ppiv: nat
+    if rgt > lft --> 
+        partition(a,lft,rgt,ppiv)
+    ...
+...
+end proc
+\end{pascallike}
+El procedimiento \texttt{partition} modifica el arreglo desde \texttt{lft} hasta \texttt{rgt} dejando al comienzo todos los elementos que son menores o iguales al que se encontraba originalmente en la posición \texttt{lft}, y al final a todos los que son mayores o iguales. También modifica la variable \texttt{ppiv} asignándole el índice correspondiente al lugar donde queda ubicado definitivamente el elemento que se usó como \textbf{pivot}.
+Luego lo único que queda por hacer es llamar recursivamente al procedimiento, una vez para los elementos que quedaron acomodados a la izquierda del pivot, y otra vez para los elementos que quedaron acomodados a la derecha.
+\begin{pascallike}
+proc quick_sort_rec(in/out a: array[1..n] of T, in lft,rgt: nat)
+    var ppiv: nat
+    if rgt > lft --> 
+        partition(a,lft,rgt,ppiv)
+        quick_sort_rec(a,lft,ppv-1)
+        quick_sort_rec(a,ppiv+1,rgt)
+    fi
+end proc
+\end{pascallike}
+Queda por ver el procedimiento partition. Toma el arreglo, los dos índices que indican qué fragmento estamos ordenando, y una variable de solo escritura, en la cual indicaremos el índice en donde queda el pivot una vez que finalice el procedimiento.
+\begin{pascallike}
+proc partition(in/out a: array[1..n] of T, in lft,rgt: nat, out ppiv: nat)
+...
+end proc
+\end{pascallike}
+Lo que hay que hacer en este procedimiento es ir mirando con un índice los elementos que están a la izquierda y con otro los que están a la derecha. El índice \texttt{i} indicará el elemento que estoy mirando desde la izquierda, y respectivamente \texttt{j} indicará el de la derecha. El elemento tomado como \textbf{pivot} será el que está más a la izquierda.
+\begin{pascallike}
+proc partition(in/out a: array[1..n] of T, in lft,rgt: nat, out ppiv: nat)
+    var i,j: nat
+    ppiv:= lft
+    i:= lft+1
+    j:= rgt
+    ...
+end proc
+\end{pascallike}
+Luego hay que ir viendo si el elemento indicado con el índice \texttt{i} y el indicado con \texttt{j} están bien ubicados, es decir, si \texttt{a[i]} es menor o igual al \textbf{pivot}, y si \texttt{a[j]} es mayor o igual. En caso que sea así, \texttt{"avanzo"} el índice. Este avance corresponde a sumar uno para \texttt{i}, y a restar uno para \texttt{j}. En caso que el elemento de la izquierda esté mal ubicado, debemos encontrar un elemento de la derecha que también esté mal ubicado, y los intercambiamos.
+\begin{pascallike}
+proc partition(in/out a: array[1..n] of T, in lft,rgt: nat, out ppiv: nat)
+    var i,j: nat
+    ppiv:= lft
+    i:= lft+1
+    j:= rgt
+    do i <= j -->
+        if a[i] <= a[ppiv] --> i:= i+1
+           a[j] >= a[ppiv] --> j:= j-1
+           a[i] > a[ppiv] && a[j] < a[ppiv] --> swap(a,i,j)
+        fi
+    od
+...
+end proc
+\end{pascallike}
+Esto se repite hasta que los índices \texttt{i} y \texttt{j} se hayan cruzado. En ese momento se termina el ciclo y solo queda ubicar correctamente al elemento \textbf{pivot}, y asignar la variable \texttt{ppiv} para que indique la posición final en donde queda el mismo.
+\begin{pascallike}
+proc partition(in/out a: array[1..n] of T, in lft,rgt: nat, out ppiv: nat)
+    var i,j: nat
+    ppiv:= lft
+    i:= lft+1
+    j:= rgt
+    do i <= j --> if a[i] <= a[ppiv] --> i:= i+1
+                     a[j] >= a[ppiv] --> j:= j-1
+                     a[i] > a[ppiv] && a[j] < a[ppiv] --> swap(a,i,j)
+                  fi
+    od
+    swap(a,ppiv,j)
+    ppiv:= j
+end proc
+\end{pascallike}
+\newpage
+El código completo del algoritmo de ordenación \texttt{quick\_sort} es el siguiente:
+\begin{pascallike}
+proc quick_sort(in/out a: array[1..n] of T)
+    quick_sort_rec(a,1,n)
+end proc
+
+proc quick_sort_rec(in/out a: array[1..n] of T, in lft,rgt: nat)
+    var ppiv: nat
+    if rgt > lft --> 
+        partition(a,lft,rgt,ppiv)
+        quick_sort_rec(a,lft,ppv-1)
+        quick_sort_rec(a,ppiv+1,rgt)
+    fi
+end proc
+
+proc partition(in/out a: array[1..n] of T, in lft,rgt: nat, out ppiv: nat)
+    var i,j: nat
+    ppiv:= lft
+    i:= lft+1
+    j:= rgt
+    do i <= j --> if a[i] <= a[ppiv] --> i:= i+1
+                     a[j] >= a[ppiv] --> j:= j-1
+                     a[i] > a[ppiv] && a[j] < a[ppiv] --> swap(a,i,j)
+                  fi
+    od
+    swap(a,ppiv,j)
+    ppiv:= j
+end proc
+\end{pascallike}
