@@ -31,6 +31,7 @@ Este repositorio tiene como objetivo consolidar y organizar de manera sistemáti
       - [Apuntes y Resúmenes](#apuntes-y-resúmenes)
 3. [Cursos](#cursos)
     - [Redes Neuronales con Python](#redes-neuronales-con-python)
+4. [Notas de Clase](#notas-de-clase)
 
 ## Navegación
 ### Acceso rápido a archivos
@@ -235,3 +236,11 @@ Este curso tiene como objetivo brindar una introducción a las redes neuronales 
 
 - [Bibliografía del curso](https://github.com/PedroMVillar/Archivos-FaMAF/tree/main/Cursos/Redes%20Neuronales%20con%20Python/Bibliograf%C3%ADa)
 - [Archivos de clase](https://github.com/PedroMVillar/Archivos-FaMAF/tree/main/Cursos/Redes%20Neuronales%20con%20Python/Temas)
+
+---
+
+## Notas de Clase
+
+| [![Alg y Ed 2 Lab](./assets/readme.imgs/ndca2.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Notas%20de%20Clase/Laboratorio/Source%20code/NotasdeClase.pdf) | [![Alg y Ed 2 TP](./assets/readme.imgs/ndca2t.png)](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Notas%20de%20Clase/Te%C3%B3rico%20Pr%C3%A1ctico/Source%20code/NotasdeClase.pdf) |
+|:---:|:---:|
+| [Algoritmos 2 - Laboratorio ](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Notas%20de%20Clase/Laboratorio/Source%20code/NotasdeClase.pdf) | [Algoritmos 2 - Teórico Práctico](https://github.com/PedroMVillar/Archivos-FaMAF/blob/main/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Notas%20de%20Clase/Te%C3%B3rico%20Pr%C3%A1ctico/Source%20code/NotasdeClase.pdf) |
