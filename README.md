@@ -162,6 +162,11 @@ Cada materia cursada se encuentra organizada en una carpeta específica, que con
   - [Práctico 1](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Análisis%20de%20Algoritmos/Ordenación%20Elemental/Práctico/)
     - [Enunciado](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Análisis%20de%20Algoritmos/Ordenación%20Elemental/Práctico/practico.01.ordenacion.elemental.pdf)
     - [Solución](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Análisis%20de%20Algoritmos/Ordenación%20Elemental/Práctico/Solución/tp01sol.pdf)
+- [Ordenación Avanzada](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Análisis%20de%20Algoritmos/Ordenación%20Avanzada/)
+  - [Filminas de Clase](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Análisis%20de%20Algoritmos/Ordenación%20Avanzada/02.ordenacion.avanzada.pdf)
+  - [Práctico 2](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Análisis%20de%20Algoritmos/Ordenación%20Avanzada/Práctico/)
+    - [Enunciado](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Análisis%20de%20Algoritmos/Ordenación%20Avanzada/Práctico/practico.02.ordenacion.avanzada.pdf)
+    - [Solución](./Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/Análisis%20de%20Algoritmos/Ordenación%20Avanzada/Práctico/Solución/tp02sol.pdf)
 
 
 <div style="text-align:center;">
