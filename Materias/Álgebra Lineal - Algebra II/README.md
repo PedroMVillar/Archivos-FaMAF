@@ -1,4 +1,4 @@
-![Banner](/assets/banner.png)
+![Banner](../Álgebra%20Lineal%20-%20Algebra%20II/assets/banner.png)
 <Generar banner con liyasthomasgithubiobanner>
 <Dejar las carreras que correspondan>
 
