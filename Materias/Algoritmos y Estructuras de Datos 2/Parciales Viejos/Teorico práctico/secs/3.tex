@@ -1,0 +1,522 @@
+\subsection{Ejercicio 1}
+Completar la implementación de listas dada en el teórico usando punteros.
+
+\begin{codebox}
+\begin{pascallike}
+implement List of T where
+
+type Node of T = tuple
+                    elem : T
+                    next : pointer to (Node of T)
+                 end tuple
+
+type List of T = pointer to (Node of T)
+
+fun empty() ret l : List of T
+    l := null
+end fun
+
+proc addl(in e : T, in/out l : List of T)
+    var p : pointer to (Node of T)
+    alloc(p)
+    p->elem := e
+    p->next := l
+    l := p
+end proc
+
+fun is_empty(l: List of T) ret b: bool
+    b := l = null
+end fun
+
+{-PRE: not is_empty-}
+fun head(l: List of T) ret e : T
+    e := l->elem
+end fun
+\end{pascallike}
+\end{codebox}
+
+\begin{codebox}
+\begin{pascallike}
+{-PRE: not is_empty-}
+proc tail(in/out l: List of T)
+    var p: pointer to (Node of T)
+    p := l
+    l := l->next
+    free(p)
+end proc
+
+proc addr(in/out l: List of T, in e: T)
+    var p,q: pointer to (Node of T)
+    alloc(q)
+    q->elem := e
+    q->next := null 
+    if (not is_empty(l)) then
+        p := l
+        do p->next $\neq$ null 
+            p := p->next
+        od
+        p->next := q
+    else
+        l := q
+    fi
+end proc
+
+fun length(l: List of T) ret n: nat
+    var p: pointer to (Node of T)
+    p := l
+    n := 0
+    do p $\neq$ null 
+        p := p->next
+        n := n+1
+    od
+end fun
+
+proc concat(in/out l: List of T, in lO List of T)
+    var p: pointer to (Node of T)
+    p := l
+    do p->next $\neq$ null
+        p := p->next
+    od
+    p->next := l0
+end proc
+
+fun index (l : List of T, n : nat) ret e : T
+    var p : pointer to (Node of T)
+    p := l
+    for i := 1 to n do
+        p := p->next
+    end for
+    e := p->elem
+end fun
+\end{pascallike}
+\end{codebox}
+
+\begin{codebox}
+\begin{pascallike}
+proc take(in/out l : List of T, in n : nat)
+    var p,q : pointer to (Node of T)
+    p := l
+    for i := 1 to n do
+        p := p->next
+    end for
+    q := p->next
+    p->next := null
+    do q != null 
+        var r : pointer to (Node of T)
+        r := q
+        q := q->next
+        free(r)
+    do
+end proc
+
+proc drop(in/out l : List of T, in n : nat)
+    var p : pointer to (Node of T)
+    p := l
+    for i := 1 to n do
+        p := p->next
+    end for
+    l := p
+end proc
+
+fun copy_list(l1 : List of T) ret l2 : List of T
+    var p : pointer to (Node of T)
+    var q : pointer to (Node of T)
+    if l1 = null then
+        l2 := null
+    else
+        alloc(q)
+        q->elem := l1->elem
+        q->next := null
+        l2 := q
+        p := l1->next
+        do p != null 
+            alloc(q->next)
+            q := q->next
+            q->elem := p->elem
+            q->next := null
+            p := p->next
+        end while
+    end if
+end fun
+
+proc destroy(in/out l : List of T)
+    var p : pointer to (Node of T)
+    do l != null 
+        p := l
+        l := l->next
+        free(p)
+    end while
+end proc
+\end{pascallike}
+\end{codebox}
+
+\subsection{Ejercicio 2}
+Un \textbf{multiconjunto} M con elementos en S, es un subconjunto de S donde cada elemento tiene asociado un número natural que indica cuantas veces el elemento ocurre. En otras palabras, un multiconjunto puede pensarse como un conjunto en el cual los elementos pueden estar incluidos más de una vez, indicando cuantas veces lo hace.
+\begin{itemize}
+    \item[(a)] Especificar el TAD \texttt{Multiset of T} de multiconjuntos con elementos de tipo T incluyendo constructores para crear el multiconjunto vacío y otro para agregar un elemento a un multiconjunto. Y operaciones para saber si un multiconjunto es vacío o no, para saber si un elemento dado existe en el multiconjunto, para obtener cuántas veces un elemento dado ocurre en un multiconjunto, y para eliminar una ocurrencia de un elemento en un multiconjunto.
+    \item[(b)] Implementar el TAD \texttt{Multiset of T} especifiado en el punto anterior, utilizando como representación interna una lista donde cada elemento es un par consistente de un elemento de tipo T y un número natural que indica la cantidad de ocurrencias.
+    \item[(c)] Implementar una función que reciba un arreglo de N naturales y devuelva el multiconjunto que contiene todos los elementos pares que ocurren en el arreglo. Todo tipo de datos utilizado en la función debe utilizarse de manera abstracta. 
+\end{itemize}
+
+\subsubsection{Punto a}
+\begin{codebox}
+\begin{pascallike}
+spec Multiset of T where
+
+constructors
+    fun empty_m() ret m : Multiset of T 
+    {-crea un multiconjunto vacio-}
+
+    proc add_elem(in e: T, in/out m: Multiset of T)
+    {-agrega un elemento al multiconjunto-}
+
+destroy
+    proc destroy_m(in/out m: Multiset of T)
+    {-libera memoria en caso de que sea necesario-}
+
+operations
+    fun is_empty(m: Multiset of T) ret b : bool
+    {-devuelve true si el multiconjunto es vacio-}
+
+    fun exists(m: Multiset of T, e: T) ret b: bool
+    {-devuelve true si el elemento existe en el multiconjunto-}
+
+    fun hm_ocu(m: Multiset of T, e: T) ret k: nat
+    {-devuelve la cantidad de ocurrencias de un elemento en el multiconjunto-}
+
+    {-PRE: exists(m,e)-}
+    proc del_ocu(in/out m: Multiset of T, e: T)
+    {-elimina una ocurrencia de un elemento en un multiconjunto-}
+\end{pascallike}
+\end{codebox}
+
+\newpage
+\subsubsection{Punto b}
+\begin{codebox}
+\begin{pascallike}
+implement Multiset of T where
+
+type par of T = tuple
+                  elem: T
+                  ocu: nat
+                end tuple
+
+type Multiset of T = List of par
+
+fun empty_m() ret m: Multiset of T
+    m := empty()
+end fun
+
+proc add_elem(in e: T, in/out m: Multiset of T)
+    var p: par of T
+    var n: Multiset of T
+    p.elem := e
+    p.ocu := 1
+    if is_empty(m) then
+        addl(p, m)
+    else
+        n := copy_list(m)
+        do not is_empty(n) -> 
+            if (head(n).elem = e) then
+                head(n).ocu := head(n)->ocu + 1
+            fi
+            tail(n)
+        od
+        addl(p, m)
+    fi
+end proc
+
+proc destroy_m(in/out m: Multiset of T)
+    destroy(m)
+end proc
+
+fun exits(m: Multiset of T, e: T) ret b: bool
+    var n: Multiset of T
+    var tmp: par of T
+    b := false
+    n := copy_list(m)
+    do not is_empty(n) ->
+        tmp := head(n)
+        if (tmp.elem = e) then
+            b := true
+        fi
+        tail(n)
+    od
+end fun
+\end{pascallike}
+\end{codebox}
+
+\begin{codebox}
+\begin{pascallike}
+fun hm_ocu(m: Multiset of T, e: T) ret k: nat
+    var n: Multiset of T
+    var tmp: par of T
+    k := 0
+    n := copy_list(m)
+    do not is_empty(n) ->
+        tmp := head(n)
+        if (tmp.elem = e) then
+            k := k+1
+        fi
+        tail(n)
+    od
+end fun
+
+fun del_ocu(in/out m: Multiset of T, e: T)
+    var n,o: Multiset of T
+    n := copy_list(m)
+    o := copy_list(m)
+    var index : nat
+    var tmp: par of T
+    index := 1
+    do not is_empty(n) ->
+        tmp := head(n)
+        if(tmp.elem = e) 
+            destroy(n)
+        fi
+        else index := index +1
+        tail(n)
+    od
+    m := concat(take(o,index-1), drop(o,index+1))
+end fun
+\end{pascallike}
+\end{codebox}
+
+\subsubsection{Punto c}
+\begin{codebox}
+\begin{pascallike}
+fun mul_pares(a : array[1..N] of nat) ret m: Multiset of T
+    {-pongo los pares en el multiconjunto-}
+    m := empty_m()
+    for i := 1 to N do
+        if a[i] mod 2 = 0 then
+            add_elem(a[i], m)
+        fi
+    od
+end fun
+\end{pascallike}
+\end{codebox}
+
+\newpage
+\subsection{Ejercicio 3}
+Implementá el TAD Pila utilizando la siguiente representación
+\begin{codebox}
+\begin{pascallike}
+implement Stack of T where
+
+type Stack of T = List of T
+\end{pascallike}
+\end{codebox}
+(la especificación del TAD Stack es la siguiente)
+
+\begin{codebox}
+\begin{pascallike}
+spec Stack of T where
+
+constructors
+    fun empty_stack() ret s : Stack of T
+    {-crea una pila vacia.-}
+
+    proc push (in e : T,in/outs : Stack of T)
+    {-agrega el elemento e al tope de la pilas. -}
+
+operations
+    fun is_empty_stack(s : Stack of T) ret b : Bool
+    {-Devuelve True si la pila es vacia-}
+
+    fun top(s : Stack of T) ret e : T
+    {-Devuelve el elemento que se encuentra en el tope des. -}
+
+    {-PRE: not is_empty_stack(s) -}
+    proc pop (in/out s : Stack of T)
+    {-Elimina el elemento que se encuentra en el tope des. -}
+
+    {-PRE: not is_empty_stack(s) -}
+    fun copy_stack (s1 : Stack of T) ret s2 : Stack of T
+    {- copia el contenido de la pila s1 en la nueva pila s2 -}
+
+destroy
+    proc destroy_stack (in/out s: Stack of T)
+    {- elimina la memoria usada por la pila s en caso de ser necesario -}
+    
+end spec
+\end{pascallike}
+\end{codebox}
+
+\subsubsection{Solución}
+\begin{codebox}
+\begin{pascallike}
+implement Stack of T where
+
+type Stack of T = List of T
+
+fun empty_stack() ret s : Stack of T
+    s := empty()
+end fun
+
+proc push (in e : T,in/outs : Stack of T)
+    addl(e,s)
+end proc
+
+fun is_empty_stack(s: Stack of T) ret b : bool
+    b := is_empty(s)
+end fun
+
+fun top(s: Stack of T) ret e : T
+    e := head(s)
+end fun
+
+proc pop(in/out s: Stack of T)
+    tail(s)
+end proc
+
+fun copy_stack(s1: Stack of T) ret s2 : Stack of T
+    s2 := copy_list(s1)
+end fun
+
+proc destroy_stack(in/out s: Stack of T)
+    destroy(s)
+end proc
+
+end implement
+\end{pascallike}
+\end{codebox}
+
+\newpage
+\subsection{Ejercicio 4}
+Implementar el TAD Pila utilizando la siguiente representación
+\begin{codebox}
+\begin{pascallike}
+implement Stack of T where
+
+type Node of T = tuple
+                    elem : T
+                    next : pointer to (Node of T)
+                 end tuple
+
+type Stack of T = pointer to (Node of T)      
+\end{pascallike}
+\end{codebox}
+\subsubsection{Solución}
+
+\begin{codebox}
+\begin{pascallike}
+implement Stack of T where
+
+type Node of T = tuple
+                    elem : T
+                    next : pointer to (Node of T)
+                 end tuple
+
+type Stack of T = pointer to (Node of T)
+
+fun empty_stack() ret s: Stack of T
+    s := null
+end fun
+
+proc push(in e: T, in/out s: Stack of T)
+    var p: pointer to (Node of T)
+    alloc(p)
+    p->elem := e
+    if s = null then
+        s := p
+    else
+        p->next := s
+        s := p
+    fi
+end proc 
+
+fun is_empty_stack(s : Stack of T) ret b : Bool
+    b := s = null
+end fun
+\end{pascallike}
+\end{codebox}
+
+\begin{codebox}
+\begin{pascallike}
+fun top(s : Stack of T) ret e : T
+    e := s -> elem
+end fun
+
+proc pop (in/out s : Stack of T)
+    var p: pointer to (Node of T)
+    p := s
+    s := s->next
+    free(p)
+end proc
+
+proc copy_stack(s1 : Stack of T) ret s2 : Stack of T
+    var s10: pointer to (Node of T)
+    var s20: pointer to (Node of T)
+    var t : Node of T
+    if is_empty_stack(s1) then
+        s2 := empty_stack()
+    else
+        s10 := s1 
+        s2->elem := s1->elem
+        s2->next := null
+        s20 := s2
+
+    while s10 != null do
+        alloc(t)
+        t->elem := s10->elem
+        t->next := null
+        s10 := s10->next
+        s20 := s20->next
+    fi
+end proc
+\end{pascallike}
+\end{codebox}
+
+\newpage
+\subsection{Ejercicio 5}
+Implementá el TAD Cola utilizando un arreglo, pero asegurando que todas las operaciones estén implementadas en orden constante.
+
+\subsubsection{Solución}
+\begin{codebox}
+\begin{pascallike}
+implement Queue of T where
+
+type Queue of T = tuple
+                    elems : array [0 .. N-1] of T
+                    size : nat
+                    start : nat 
+                  end tuple
+
+fun empty_queue() ret q : Queue of T
+    q.size := 0
+    q.start := 0
+end fun
+
+proc enqueue (in/out q : Queue of T,ine : T)
+    var pos: nat
+    pos := (q.start + q.size) {-N-}
+    q.elems[pos] := e
+    q.size := q.size + 1
+end proc
+
+fun is_empty_queue(q : Queue of T) ret b : bool
+    b := q.size = 0
+end fun
+
+fun first(q : Queue of T) ret e : T
+    e := q.elems[0]
+end fun
+
+proc dequeue (in/out q : Queue of T)
+    var start_pos: nat
+    start_pos := (q.start + 1) {-N-}
+    q.start := start_pos
+    q.size := q.size - 1
+end proc
+
+proc destroy_queue (in/out q: Queue of T)
+    skip
+end proc
+
+end implement
+\end{pascallike}
+\end{codebox}
+
+\newpage
+\subsection{Ejercicio 6}

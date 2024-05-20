@@ -1,0 +1,456 @@
+\chapter{Práctico 2 - Parte 1}
+\section{Ejercicio 1}
+Escribir un algoritmo que dada una matriz \texttt{a: array[1..n,1..m] of int} calcule el elemento mínimo. Escribir otro algoritmo que devuelva un arreglo \texttt{array[1..n]} con el mínimo de cada fila de la matriz \texttt{a}.
+
+\subsection{Solución}
+\begin{codebox}{Ejercicio 1.1}
+\begin{pascallike}
+fun min_elem_array(a : array[1..n,1..m] of int) ret min_elem int
+    min_elem := a[1][1];
+    for fil:= 1 to n do
+        for col:= 1 to m do
+            if a[fil][col] < min_elem then
+                min_elem := a[col][fil];
+            fi
+        od
+    od
+end fun
+\end{pascallike}
+\end{codebox}
+
+\begin{codebox}{Ejercicio 1.2}
+\begin{pascallike}
+fun array_of_mins(a: array[1..n,1..m] of int) ret array_min array[1..n] of int
+for fil:= 1 to n do
+    array_min[fil] := min_elem_array(a[fil, 1..m])
+od
+end fun
+\end{pascallike}
+\end{codebox}
+
+
+\section{Ejercicio 2}
+Dados los tipos enumerados
+
+\begin{codebox}{mes}
+\begin{pascallike}
+type mes = enumerate
+            enero
+            febrero
+            ...
+            diciembre
+           end enumerate
+\end{pascallike}
+\end{codebox}
+
+\begin{codebox}{clima}
+\begin{pascallike}
+type clima = enumerate
+                Temp
+                TempMax
+                TempMin
+                Pres
+                Hum
+                Prec
+             end enumerate
+\end{pascallike}
+\end{codebox}
+
+El arreglo \texttt{med:array[1980..2016,enero..diciembre,1..28,Temp..Prec] of nat} es un arreglo multidimensional que contiene todas las mediciones estadísticas del clima para la ciudad de Córdoba desde el 1/1/1980 hasta el 28/12/2016. Por ejemplo, \texttt{med[2014,febrero,3,Pres]} indica la presión atmosférica que se registró el día 3 de febrero de 2014. Todas las mediciones están expresadas con números enteros. Por simplicidad asumiremos que todos los meses tienen 28 días.
+
+\begin{itemize}
+    \item[(a)] Dar un algoritmo que obtenga la menor temperatura mínima (TempMin) histórica registrada en la ciudad de Córdoba según los datos del arreglo.
+    \item[(b)] Dar un algoritmo que devuelva un arreglo que registre para cada año entre 1980 y 2016 la mayor temperatura máxima (TempMax) registrada durante ese año.
+    \item[(c)] Dar un algoritmo que devuelva un arreglo que registre para cada año entre 1980 y 2016 el mes de ese año en que se registró la mayor cantidad mensual de precipitaciones (Prec).
+    \item[(d)] Dar un algoritmo que utilice el arreglo devuelto en el inciso anterior (además de med) para obtener el año en que ese máximo mensual de precipitaciones fue mínimo (comparado con los de otros años).
+    \item[(e)]  Dar un algoritmo que obtenga el mismo resultado sin utilizar el del inciso (c)
+\end{itemize}
+
+\subsection{Solución (a)}
+\begin{codebox}{Ejercicio 2.a}
+\begin{pascallike}
+fun min_tempMin (a:array[1980..2016,enero..diciembre,1..28,Temp..Prec] of nat) 
+    ret min_temp int
+temp_min:= a[1980,enero,1,TempMin]
+for a:= 1980 to 2016 do
+    for m:= enero to diciembre do
+        for d:= 1 to 28 do
+            if (a[a,m,d,TempMin] < temp_min) then
+                temp_min:= a[a,m,d,TempMin]
+            fi 
+        od
+    od
+od
+end fun
+\end{pascallike}
+\end{codebox}
+
+\subsection{Solución (b)}
+\begin{codebox}{Ejercicio 2.b}
+\begin{pascallike}
+fun temp_max_a(a:array[1980..2016,enero..diciembre,1..28,Temp..Prec] of nat)
+    ret res:array[1980..2016] of int
+var max_a_temp: int
+for a:= 1980 to 2016 do
+    max_a_temp:= a[a,1,1,TempMax]
+    for mes:= enero to diciembre do
+        for dia:= 1 to 28 do
+        if(max_a_temp < a[a,m,d,TempMax]) then
+            res[a]:= a[a,m,d,TempMax]
+        fi
+        od
+    od
+od
+end fun
+\end{pascallike}
+\end{codebox}
+
+\subsection{Solución (c)}
+\begin{codebox}{Ejercicio 2.c}
+\begin{pascallike}
+fun mes_max_prec(a:array[1980..2016,enero..diciembre,1..28,Temp..Prec] of nat)
+    ret res:array[1980..2016] of mes
+var max_mes : mes
+var max_mes_prec, mas_prec : nat
+
+for a := 1980 to 2016 do
+    {-calcular max_mes para cada anio-}
+    max_mes_prec := 0
+    for mes := enero to diciembre do
+        {-calcular la suma prec_mes para cada mes-}
+        prec_mes := 0
+        for dia := 1 to 28 do
+            prec_mes := prec_mes + a[a,mes,dia,Prec]
+        od
+        if prec_mes >= max_mes_prec then
+            max_mes_prec := prec_mes
+            max_mes := mes
+        fi
+    od
+    res[a] := max_mes
+od
+end fun
+\end{pascallike}
+\end{codebox}
+
+\subsection{Solución (d)}
+\begin{codebox}{Ejercicio 2.d}
+\begin{pascallike}
+fun min_prec_mes(a:array[1980..2016,enero..diciembre,1..28,Temp..Prec] of nat)
+ret res_a: int
+var meses: array[1980..2016] of string
+var prec_meses: array[1980..2016] of string
+meses:= mes_may_prec(a)
+for mes := enero to diciembre do
+        {-calcular la suma prec_mes para cada mes-}
+        prec_mes := 0
+        for dia := 1 to 28 do
+            prec_mes := prec_mes + a[a,mes,dia,Prec]
+        od
+        if prec_mes >= max_mes_prec then
+            max_mes_prec := prec_mes
+            max_mes := mes
+        fi
+    od
+var min_prec: int
+min_prec:= prec_meses[1980]
+res_a:= 1980
+for a:= 1981 to 2016 do
+    if(prec_meses[a] < min_prec) then
+        min_prec:= prec_meses[a]
+        res_a:= a
+    fi
+od
+end fun
+\end{pascallike}
+\end{codebox}
+
+\subsection{Solución (e)}
+\begin{codebox}{Ejercicio 2.e}
+\begin{pascallike}
+fun min_prec_mes_2(a:array[1980..2016,enero..diciembre,1..28,Temp..Prec] of nat) 
+    ret res:array[1980..2016] of int
+{- primer algoritmo-}
+var res_tmp, prec_mes: int
+for an:= 1980 to 2016 do
+    res_tmp:= 0
+    for mes:= enero to diciembre do
+        prec_mes:= 0
+        for dia:= 1 to 28 do
+        prec_mes:= prec_mes + a[an,mes,dia,Prec]
+        od
+        if(res_tmp < prec_mes) then
+        res_parte1[an]:= mes
+        res_tmp:= prec_mes
+    od
+od
+{-segundo algoritmo-}
+var meses: array[1980..2016] of string
+var prec_meses: array[1980..2016] of string
+for an:= 1980 to 2016 do
+    for dia:= 1 to 28 do
+        prec_mes:= prec_mes + a[an,res_parte1[n],dia,Prec]
+    od
+    prec_meses[an]:= prec_mes
+od
+var min_prec: int
+min_prec:= prec_meses[1980]
+res_an:= 1980
+for an:= 1981 to 2016 do
+    if(prec_meses[an] < min_prec) then
+        min_prec:= prec_meses[an]
+        res_an:= an
+    fi
+od
+end proc
+\end{pascallike}
+\end{codebox}
+
+\section{Ejercicio 3}
+Dado el tipo
+
+\begin{codebox}{tipo}
+\begin{pascallike}
+type person = tuple
+     name: string
+     age: nat
+     weight: nat
+    end
+\end{pascallike}
+\end{codebox}
+
+\begin{itemize}
+    \item[(a)] escribí un algoritmo que calcule la edad y peso promedio de un arreglo \texttt{a : array[1..n] of person}.
+    \item[(b)] escribí un algoritmo que ordene alfabéticamente dicho arreglo. 
+\end{itemize}
+
+\subsection{Solución (a)}
+\begin{codebox}{Ejercicio 3.a}
+\begin{pascallike}
+proc prom_edad_peso(in a:array [1..n] of person, out prom_edad: float, 
+    out prom_peso: float)
+prom_edad := 0
+prom_peso := 0
+for i := 1 to n do
+    prom_edad := prom_edad + a[i].age
+    prom_peso := prom_peso + a[i].weight
+od
+prom_edad := prom_edad / n
+prom_peso := prom_peso / n
+end proc
+\end{pascallike}
+\end{codebox}
+
+\subsection{Solución (b)}
+Voy a necesitar una función que compare dos strings y devuelva verdadero si el primero es menor alfabéticamente que el segundo.
+
+\begin{codebox}{comparar}
+\begin{pascallike}
+fun menor(a:string, b:string) ret res:bool
+if(s1[1] < s2[1]) then res:= true
+else if(s1[1] = s2[1]) then
+    res:= menor(s1[2..length(s1)], s2[2..length(s2)])
+else res:= false
+fi
+end fun
+\end{pascallike}
+\end{codebox}
+Luego el algoritmo de ordenación selection sort aplicado a este caso sería:
+
+\begin{codebox}{Ejercicio 3.b}
+\begin{pascallike}
+proc ordenar(inout a:array[1..n] of person)
+var min: int
+for i:= 1 to n do
+    min:= i
+    for j:= i+1 to n do
+        if(menor(a[j].name, a[min].name)) then
+            min:= j
+        fi
+    od
+    if(min != i) then
+        swap(a[i], a[min])
+    fi
+od
+end proc
+\end{pascallike}
+\end{codebox}
+
+\section{Ejercicio 4}
+Dados dos punteros \texttt{p, q : pointer to int}
+\begin{itemize}
+    \item[(a)] escribí un algoritmo que intercambie los valores referidos sin modificar los valores de $p$ y $q$.
+    \item[(b)] escribí otro algoritmo que intercambie los valores de los punteros.
+\end{itemize}
+
+\subsection{Solución (a)}
+\begin{codebox}{Ejercicio 4.a}
+\begin{pascallike}
+proc swap_valores(p: pointer to int, q: pointer to int)
+var aux: int
+aux:= *p
+*p:= *q
+*q:= aux
+end proc
+\end{pascallike}
+\end{codebox}
+$\star p$ es una expresión que me da el valor guardado en el lugar de memoria apuntado por $p$. si $p$ es de tipo \texttt{pointer to T}, entonces el tipo de $\star p$ es \texttt{T}.
+
+\subsection{Solución (b)}
+\begin{codebox}{Ejercicio 4.b}
+\begin{pascallike}
+proc swap_punteros(p: pointer to int, q: pointer to int)
+var aux: pointer to int
+aux:= p
+p:= q
+q:= aux
+end proc
+\end{pascallike}    
+\end{codebox}
+
+\section{Ejercicio 5}
+Dados dos arreglos \texttt{a, b : array[1..n] of nat} se dice que a es \texttt{“lexicográficamente menor”} que b si existe $k \in {1 . . . n}$ tal que \texttt{a[k] < b[k]}, y para todo $i \in {1 . . . k - 1}$ se cumple \texttt{a[i] = b[i]}. En otras palabras, si en la primera posición en que $a$ y $b$ difierente, el valor de $a$ es menor que el de $b$. También se dice que $a$ es \textit{“lexicográficamente menor o igual”} a $b$ si $a$ es lexicográficamente menor que b o a es igual a $b$.
+
+\begin{itemize}
+    \item[(a)] Escribir un algoritmo lex less que recibe ambos arreglos y determina si a es lexicográficamente menor que b.
+    \item[(b)] Escribir un algoritmo lex less or equal que recibe ambos arreglos y determina si a es lexicográficamente menor o igual a b. 
+    \item[(c)] Dado el tipo enumerado
+\begin{codebox}{tipo}
+\begin{pascallike}
+type ord = enumerate
+             igual
+             menor
+             mayor
+           end enumerate
+\end{pascallike}
+\end{codebox}
+Escribir un algoritmo lex compare que recibe ambos arreglos y devuelve valores en el tipo ord. ¿Cuál es el interés de escribir este algoritmo?
+\end{itemize}
+
+\subsection{Solución (a)}
+\begin{codebox}{Ejercicio 5.a}
+\begin{pascallike}
+fun lex_less(a,b : array[1..n] of nat) ret res: bool
+res := false
+if a[1] < b[1] then
+    res := true
+else
+    for i:= 1 to n do
+        if a[i] < b[i] then
+            res := true
+            break
+        fi
+    od
+fi
+end fun
+\end{pascallike}
+\end{codebox}
+\textbf{Inicialización:} Se declara una variable res y se inicializa a false. Esta variable almacenará el resultado final que indica si a es lexicográficamente menor que b.
+\textbf{Comparando los primeros elementos:} 
+\begin{itemize}
+    \item El código verifica si el primer elemento de a (indicado por a[1]) es menor que el primer elemento de b (indicado por b[1]).
+    \item Si lo es, entonces res se establece inmediatamente a true. Esto se debe a que en la comparación lexicográfica, el arreglo con el primer elemento más pequeño se considera menor.
+\end{itemize}
+\textbf{Iterando por los arreglos:} 
+\begin{itemize}
+    \item Si los primeros elementos no son diferentes, el código entra en un ciclo que itera desde el índice 1 hasta n (la longitud de los arreglos).
+    \item Dentro del ciclo, compara los elementos en el índice actual (i) de ambos arreglos (a[i] y b[i]).
+    \begin{itemize}
+        \item Si se encuentra que un elemento en a es menor que el elemento correspondiente en b, entonces res se establece en true y el ciclo se detiene (break) usando la instrucción break. Esto se debe a que una vez que se encuentra una diferencia donde a tiene un elemento más pequeño que b, sabemos que a es lexicográficamente menor y no hay necesidad de seguir iterando.
+        \item Si se encuentra que un elemento en a es mayor que el elemento correspondiente en b, el ciclo termina inmediatamente devolviendo false. Esto se debe a que si a tiene un elemento mayor en cualquier punto, no puede ser lexicográficamente menor que b.
+    \end{itemize}
+\end{itemize}
+\textbf{Resultado:} Una vez que el ciclo termina de iterar por todos los elementos, si no se encuentra ninguna diferencia (a y b tienen los mismos elementos en todo), entonces res seguirá siendo false.
+
+\subsection{Solución (b)}
+\begin{codebox}{Ejercicio 5.b}
+\begin{pascallike}
+fun lex_less(a,b : array[1..n] of nat) ret res: bool
+res := false
+if a[1] < b[1] then
+    res := true
+else
+    for i:= 1 to n do
+        if a[i] < b[i] then
+            res := true
+            break
+        fi
+    od
+    if not res then
+    res := true
+    fi
+fi
+end fun
+\end{pascallike}
+\end{codebox}
+
+\subsection{Solución (c)}
+\begin{codebox}{Ejercicio 5.c}
+\begin{pascallike}
+fun lex_less(a,b : array[1..n] of nat) ret res: ord
+var comp: ord
+res := igual
+if a[1] < b[1] then
+comp := menor
+else if a[1] > b[1] then
+comp := mayor
+else
+for i:= 2 to n do
+    if a[i] < b[i] then
+        comp := menor
+        break
+    fi
+    if comp = mayor then
+        break
+    fi
+od
+fi
+res := comp
+end fun
+\end{pascallike}
+\end{codebox}
+
+\textbf{Comparación de primeros elementos:} Se compara el primer elemento de a y b. Si a[1] < b[1], se establece comp en menor. Si a[1] > b[1], se establece comp en mayor. En caso de igualdad, se mantiene comp en igual.
+
+\textbf{Ciclo de comparación:} Se recorren los elementos restantes de los arreglos. Si se encuentra un elemento en a menor que el correspondiente en b, se establece comp en menor y se sale del ciclo usando break. Si se encuentra un elemento en a mayor que el correspondiente en b, se establece comp en mayor y se sale del ciclo usando break. Si se recorre todo el ciclo sin encontrar diferencias (los elementos son iguales), comp mantiene el valor que le haya sido asignado en la comparación de los primeros elementos.
+
+\textbf{Asignación final:} Al final, se asigna el valor de comp a la variable res, lo que garantiza que el resultado devuelto sea de tipo ord y represente correctamente la comparación lexicográfica entre a y b.
+
+\textit{la función lex\_less devolverá un valor de tipo ord que indica si a es lexicográficamente menor que b (menor), mayor que b (mayor), o igual a b (igual).}
+
+\section{Ejercicio 6}
+Escribir un algoritmo que dadas dos matrices \texttt{a, b: array[1..n,1..m]} of nat devuelva su suma.
+
+\subsection{Solución}
+\begin{codebox}{Ejercicio 6}
+\begin{pascallike}
+fun suma_matric(a,b: array[1..n,1..m] of nat) ret res: array[1..n,1..m] of nat
+for i:= 1 to n do
+    for j:= 1 to m do
+        res[i,j]:= a[i,j] + b[i,j]
+    od
+od
+end fun
+\end{pascallike}
+\end{codebox}
+
+\section{Ejercicio 7}
+Escribir un algoritmo que dadas dos matrices \texttt{a: array[1..n,1..m] of nat} y \texttt{b: array[1..m,1..p]} of nat devuelva su producto.
+
+\subsection{Solución}
+\begin{codebox}{Ejercicio 7}
+\begin{pascallike}
+fun producto_matric(a: array[1..n,1..m] of nat, b: array[1..m,1..p] of nat) 
+    ret res: array[1..n,1..p] of nat
+for i:= 1 to n do
+    for j:= 1 to m do
+        suma := 0
+        for k:= 1 to m do 
+            suma := suma + a[i,k] * b[k,j]
+        od
+        res[i,j] := suma
+    od
+od
+end fun
+\end{pascallike}
+\end{codebox}

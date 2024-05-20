@@ -1,0 +1,91 @@
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage{amsmath,amsthm,amssymb,amsfonts, fancyhdr, color, comment, graphicx, environ}
+\usepackage[explicit]{titlesec}
+\usepackage{soul}
+\usepackage[top=1.8cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
+\usepackage{karnaugh-map}
+\usepackage{booktabs}
+\usepackage{mdframed}
+\usepackage{fix-cm}
+\usepackage{tabularx}
+\usepackage{tikz, fouriernc}
+\usetikzlibrary{calc}
+\usepackage[hidelinks]{hyperref}
+\usepackage[spanish]{babel}
+\usepackage[backend=biber]{biblatex}
+\bibliography{refs.bib}
+
+\input{paquetes/colorbox.tex}
+\input{paquetes/mintedcode.tex}
+
+\definecolor{lime}{RGB}{0,0,128}
+\definecolor{titleblue}{HTML}{4a7aa4}
+\setlength{\parindent}{0pt}
+
+\pagestyle{fancy}
+\fancyhf{} % Limpia los encabezados y pies de página existentes
+\lhead{Villar Pedro} % Añade "Nombre" al lado izquierdo del encabezado
+\rhead{\leftmark} % Añade la sección actual al lado derecho del encabezado
+
+\newtcolorbox{titlecolorbox}[1]{ %the box around chapter
+    coltext=white,
+    colframe=black,
+    colback=black,
+    boxrule=0pt,
+    arc=0pt,
+    notitle,
+    width=4.8em,
+    height=2.4ex,
+    before=\hfill
+}
+
+\usepackage{xcolor}
+
+\renewcommand{\chaptername}{Capítulo}
+\titlespacing*{\chapter}{0pt}{0pt}{0pt}
+\titleformat{\chapter}[display]
+  {\sffamily\Huge}
+  {}
+  {0pt}
+  {\begin{titlecolorbox}{}
+  {\large\sffamily\MakeUppercase{\chaptername}}
+  \end{titlecolorbox}
+  \vspace*{-4.19ex}\noindent\rule{\textwidth}{0.4pt}
+  \parbox[b]{\dimexpr\textwidth-4.8em\relax}{\raggedright\MakeUppercase{#1}}{\hfill\fontsize{70}{60}\selectfont\thechapter}
+  }
+  []
+
+\titleformat{name=\chapter,numberless}[display]
+  {\sffamily\Huge}
+  {}
+  {0pt}
+  {\begin{titlecolorbox}{}
+  {\large\sffamily\MakeUppercase{\chaptername}}
+  \end{titlecolorbox}
+  \vspace*{-4.19ex}\noindent\rule{\textwidth}{0.4pt}
+  \parbox[b]{\dimexpr\textwidth-4.8em\relax}{\raggedright\MakeUppercase{#1}}
+  }
+  []
+
+\titleformat{\section}[display]
+  {\sffamily\large}
+  {}
+  {0pt}
+  {\hrule\vspace*{0.25ex}\parbox[b]{\dimexpr\textwidth\relax}{\textcolor{darkgray}{\thesection}\quad\raggedright\bfseries\MakeUppercase{#1}}}
+  [\hrule]
+
+\titleformat{\subsection}[display]
+  {\sffamily\large}
+  {}
+  {0pt}
+  {\parbox[b]{\dimexpr\textwidth\relax}{\textcolor{darkgray}{\thesubsection}\quad\raggedright\bfseries{#1}}}
+  []
+
+\titleformat{\subsubsection}[display]
+  {\sffamily\large}
+  {}
+  {0pt}
+  {\parbox[b]{\dimexpr\textwidth\relax}{\textcolor{darkgray}{\thesubsubsection}\quad\raggedright\bfseries{#1}}}
+  []
+  

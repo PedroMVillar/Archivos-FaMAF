@@ -1,0 +1,15 @@
+\usepackage[many]{tcolorbox}    	% for COLORED BOXES (tikz and xcolor included)
+
+\newtcolorbox{codebox}[1][]{
+  sharpish corners, % better drop shadow
+  boxrule = 0pt,  % Remove all borders
+  toprule = 1pt,   % Add a 1pt top rule (black by default)
+  bottomrule = 1pt, % Add a 1pt bottom rule (black by default)
+  enhanced,
+  enlarge top by=0pt,  % No enlargement needed
+  colback = yellow!10,   % Background color
+  before skip = 0.2cm,  % Extra space before
+  after skip = 0.5cm,   % Extra space after
+  % Remove shadow and boxed title options
+  #1,
+}

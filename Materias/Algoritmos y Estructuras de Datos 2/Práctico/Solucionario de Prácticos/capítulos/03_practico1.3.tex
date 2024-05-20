@@ -1,0 +1,341 @@
+\chapter{Práctico 1 - Parte 3}
+
+\section{Ejercicio 1}
+Calculá el orden de complejidad de los siguientes algoritmos:
+
+\begin{codebox}{(a)}
+\begin{pascallike}
+proc f1(in n : nat)
+    if n $\leq$ 1 then skip
+    else
+        for i := 1 to 8 do 
+            f1(n div 2) 
+        od
+        for i := 1 to $n^3$ do 
+            t := 1 
+        od
+    fi
+end proc
+\end{pascallike}
+\end{codebox}
+
+\begin{codebox}{(b)}
+\begin{pascallike}
+proc f2(in n : nat)
+    for i := 1 to n do
+        for j := 1 to i do 
+            t := 1 
+        od
+    od
+    if n > 0 then
+        for i := 1 to 4 do 
+            f2(n div 2) 
+        od
+    fi
+end proc
+\end{pascallike}
+\end{codebox}
+
+\subsection{Solución (a)}
+En este caso notar que:
+\begin{itemize}
+    \item Tamaño de la entrada: $n$,
+    \item Operación a contar: $t := 1$.
+\end{itemize}
+Entonces, se puede definir una funcion $r(n)$, que representará la cantidad de asignaciones a la variable $t$ que ocurren al llamar a la función $f1$ con el dato de entrada $n$.
+
+Podemos observar que la función $f1$ esta dividida en dos casos, si $n \leq 1$ entonces no se realiza ninguna asignación a la variable $t$, por lo que $r(n) = 0$.
+\begin{equation*}
+    r(n) = 
+    \begin{cases}
+        0 & \text{si } n \leq 1 \\
+        ... & \text{en caso contrario}
+    \end{cases}
+\end{equation*}
+Como hay dos ciclos for en una secuencia, se puede analizar cada uno por separado y sumarlos, por ahora los puedo expresar como sumatoria:
+\begin{equation*}
+    r(n) = 
+    \begin{cases}
+        0 & \text{si } n \leq 1 \\
+        \sum_{i=1}^{8} ... + \sum_{i=1}^{n^3} ... & \text{en caso contrario}
+    \end{cases}
+\end{equation*}
+En el primer for, queremos contar la cantidad de asignaciones que se realizan al llamar a la función $f1$ con el dato de entrada $n/2$, por lo que se puede expresar como:
+\begin{equation*}
+    r(n) = 
+    \begin{cases}
+        0 & \text{si } n \leq 1 \\
+        \sum_{i=1}^{8} r(n/2) + \sum_{i=1}^{n^3} ... & \text{en caso contrario}
+    \end{cases}
+\end{equation*}
+En el segundo for, se realiza una asignación a la variable $t$ por cada iteración, por lo que se puede expresar como:
+\begin{equation*}
+    r(n) = 
+    \begin{cases}
+        0 & \text{si } n \leq 1 \\
+        \sum_{i=1}^{8} r(n/2) + \sum_{i=1}^{n^3} 1 & \text{en caso contrario}
+    \end{cases}
+\end{equation*}
+Resolviendo las sumatorias, se obtiene:
+\begin{equation*}
+    r(n) = 
+    \begin{cases}
+        0 & \text{si } n \leq 1 \\
+        8 \cdot r(n/2) + n^3 & \text{en caso contrario}
+    \end{cases}
+\end{equation*}
+Por lo que se puede observar que:
+\begin{itemize}
+    \item $a = 8$,
+    \item $b = 2$,
+    \item $g(n) = n^3$.
+\end{itemize}
+Como $a = 8 = 2^3 = b^3$, se puede decir que el orden de complejidad es $O(n^3 \log n)$.
+
+\subsection{Solución (b)}
+En este caso notar que:
+\begin{itemize}
+    \item Tamaño de la entrada: $n$,
+    \item Operación a contar: $t := 1$.
+\end{itemize}
+Entonces, se puede definir una funcion $r(n)$, que representará la cantidad de asignaciones a la variable $t$ que ocurren al llamar a la función $f2$ con el dato de entrada $n$.
+
+En este caso la función $f2$ está dividida en $n$ casos (cada uno representado por el valor de $i$):
+\begin{equation*}
+    r(n) = 
+    \begin{cases}
+        \sum_{i=1}^{n} \sum_{j=1}^{i} 1 & \text{casos simples }  \\
+        ... & \text{en caso contrario}
+    \end{cases}
+\end{equation*}
+En el for dentro del if, se realiza una llamada recursiva a la función $f2$ con el dato de entrada $n/2$, por lo que se puede expresar como:
+\begin{equation*}
+    r(n) = 
+    \begin{cases}
+        \sum_{i=1}^{n} \sum_{j=1}^{i} 1 & \text{casos simples }  \\
+        \sum_{i=1}^{n} \sum_{j=1}^{i} 1 +  \sum_{i=1}^{4} r(n/2) & \text{en caso contrario}
+    \end{cases}
+\end{equation*}
+Resolviendo las sumatorias, se obtiene:
+\begin{equation*}
+    r(n) = 
+    \begin{cases}
+        \sum_{i=1}^{n} i & \text{casos simples }  \\
+        \sum_{i=1}^{n} i +  \sum_{i=1}^{4} r(n/2) & \text{en caso contrario}
+    \end{cases}
+\end{equation*}
+\begin{equation*}
+    r(n) = 
+    \begin{cases}
+        \frac{n\cdot (n+1)}{2} & \text{casos simples }  \\
+        \frac{n\cdot (n+1)}{2} + 4 \cdot r(n/2) & \text{en caso contrario}
+    \end{cases}
+\end{equation*}
+
+Por lo que se puede observar que:
+\begin{itemize}
+    \item $a = 4$,
+    \item $b = 2$,
+    \item $g(n) = \frac{n\cdot (n+1)}{2}$.
+\end{itemize}
+Como $a = 4 = 2^2 = b^2$, se puede decir que el orden de complejidad es $O(n^2 \log n)$.
+
+\section{Ejercicio 2}
+Dado un arreglo \texttt{a : array[1..n] of nat} se define una cima de $a$ como un valor $k$ en el intervalo $1, . . . ,n$ tal que $a[1..k]$ está ordenado crecientemente y $a[k..n]$ está ordenado decrecientemente.
+\begin{itemize}
+    \item[(a)] Escribá un algoritmo que determine si un arreglo dado tiene cima.
+    \item[(b)] Escribí un algoritmo que encuentre la cima de un arreglo dado (asumiendo que efectivamente tiene una cima) utilizando una búsqueda secuencial, desde el comienzo del arreglo hacia el final. 
+    \item[(c)] Escribí un algoritmo que resuelva el mismo problema del inciso anterior utilizando la idea de \texttt{búsqueda binaria}.
+    \item[(d)] Calculá y compará el orden de complejidad de ambos algoritmos.
+\end{itemize}
+
+\subsection{Solución (a)}
+Para determinar si un arreglo tiene cima, se puede recorrer el arreglo y buscar el máximo que va a ser el probable punto cima.
+
+\begin{codebox}{Estructura}
+\begin{pascallike}
+fun tieneCima (a : array[1..n] of nat) ret r : bool
+    r := false
+    var tempos : nat
+    {-Busco la posible cima y lo guardo en tempos-}
+    for i := 2 to n do
+        if a[i-1] < a[i] then
+            tempos := i
+            r := true
+        fi
+    od
+    ...
+end fun
+\end{pascallike}
+\end{codebox}
+
+Luego de encontrar un elemento, habria que verificar si el resto del arreglo cumple con la condición de cima.
+
+\begin{codebox}{Solución final}
+\begin{pascallike}
+fun tieneCima (a : array[1..n] of nat) ret r : bool
+    r := false
+    var tempos : nat
+    {-Busco la posible cima y lo guardo en tempos-}
+    for i := 2 to n do
+        if a[i-1] < a[i] then
+            tempos := i
+            r := true
+        fi
+    od
+    {-Si hay alguna posible cima, verifico que el resto arreglo cumpla-}
+    for i := 1 to tempos do
+        if a[i] < a[i+1] then
+            r := false
+        fi
+    od
+    for i := tempos to n do
+        if a[i] > a[i+1] then
+            r := false
+        fi
+    od
+end fun
+\end{pascallike}
+\end{codebox}
+
+\subsection{Solución (b)}
+Para encontrar la cima y devolverla, el algoritmo es el mismo que el anterior con la diferencia de que en vez de devolver el valor de r, devuelvo el valor del arreglo en la posición tempos (y la verificación de si hay cima o no se puede omitir ya que se asume que hay cima).
+
+\begin{codebox}{Solución final}
+\begin{pascallike}
+fun cima (a : array[1..n] of nat) ret c : nat
+    var tempos : nat
+    {-Busco la cima y lo guardo en tempos-}
+    for i := 2 to n do
+        if a[i-1] < a[i] then
+            tempos := i
+        fi
+    od
+    c := a[tempos]
+end fun
+\end{pascallike}
+\end{codebox}
+
+\subsection{Solución (c)}
+Para encontrar la cima y devolverla, se puede utilizar la idea de búsqueda binaria. Se puede buscar el punto cima de la siguiente manera:
+
+\begin{itemize}
+    \item Se toma el punto medio del arreglo y se compara con el siguiente elemento.
+    \item Si el punto medio es menor al siguiente elemento, entonces la cima se encuentra en la mitad derecha del arreglo.
+    \item Si el punto medio es mayor al siguiente elemento, entonces la cima se encuentra en la mitad izquierda del arreglo.
+\end{itemize}
+
+\begin{codebox}{Solución}
+\begin{pascallike}
+fun busqueda_binaria_rec (a : array[1..n] of nat, lft, rgt: nat) ret i : nat
+var mid : nat
+if lft < rgt then
+    i := 0
+else
+    mid := (lft + rgt) div 2
+    if a[mid-1] $\geq$ a[mid] $\wedge$ a[mid+1] $\geq$ a[mid] then
+        i := busqueda_binaria_rec(a, lft, mid-1)
+    fi
+    if a[mid-1] $\leq$ a[mid] $\wedge$ a[mid+1] $\leq$ a[mid] then
+        i := mid
+    fi
+    if a[mid-1] $\leq$ a[mid] $\wedge$ a[mid+1] $\geq$ a[mid] then
+        i := busqueda_binaria_rec(a, mid+1, rgt)
+    fi
+fi
+end fun
+
+fun cima (a : array[1..n] of nat) ret c : nat
+    c := busqueda_binaria_rec(a, 2, n-1)
+end fun
+\end{pascallike}
+\end{codebox}
+
+\subsection{Solución (d)}
+Para el algoritmo de búsqueda secuencial, se puede observar que el peor caso es cuando la cima se encuentra en la última posición del arreglo, por lo que se recorre todo el arreglo. Por lo que el orden de complejidad es $O(n)$.
+
+Para el algoritmo de búsqueda binaria, se puede observar que el peor caso es cuando la cima se encuentra en la mitad del arreglo, por lo que se divide el arreglo en dos partes y se busca en una de ellas. Por lo que el orden de complejidad es $O(\log n)$.
+
+\section{Ejercicio 3}
+El siguiente algoritmo calcula el mínimo elemento de un arreglo \texttt{a : array[1..n]} of nat mediante la técnica de programación divide y vencerás. Analizá la eficiencia de $minimo(1, n)$.
+
+\begin{codebox}{Ejercicio 3}
+\begin{pascallike}
+fun minimo(a : array[1..n] of nat, i, k : nat) ret m : nat
+    if i = k then m := a[i]
+    else 
+        j := (i + k) div 2
+        m := min(minimo(a, i, j), minimo(a,j+1,k))
+    fi
+end fun
+\end{pascallike}
+\end{codebox}
+
+\subsection{Solución}
+Para analizar la eficiencia de $minimo(1, n)$, se puede observar que:
+\begin{itemize}
+    \item Tamaño de la entrada: $n$,
+    \item Operación a contar: $m := a[i]$.
+\end{itemize}
+Entonces, se puede definir una función $r(n)$, que representará la cantidad de asignaciones a la variable $m$ que ocurren al llamar a la función $minimo$ con el dato de entrada $n$.
+
+Se puede observar que la función $minimo$ está dividida en dos casos, si $i = 1$ se realiza una sola asignación a $m$, por lo que $r(n) = 1$. Si se toma el largo del segmento como $p$:
+\begin{equation*}
+    r(n) = 
+    \begin{cases}
+        1 & \text{si } p = 1 \\
+        1 + r(p/2) + r(p/2) & \text{en caso contrario}
+    \end{cases}
+\end{equation*}
+Resolviendo la ecuación, se obtiene:
+\begin{equation*}
+    r(n) = 
+    \begin{cases}
+        1 & \text{si } p = 1 \\
+        1 + 2r(p/2) & \text{en caso contrario}
+    \end{cases}
+\end{equation*}
+Por lo que se puede observar que:
+\begin{itemize}
+    \item $a = 2$,
+    \item $b = 2$,
+    \item $g(n) = 1$.   
+\end{itemize}
+Como $a = 2 > b^k$ con $k = 0$, se puede decir que el orden de complejidad es $O(n^{\log_2 2}) = O(n)$.
+
+\section{Ejercicio 4}
+Ordena usando $\sqsubset$ e $\approx$ los órdenes de las siguientes funciones. No calcules límites, utilizá las propiedades algebraicas.
+
+\begin{itemize}
+    \item[(a)] $n \log 2^n$, $2^n \log n$, $n! \log n$, $2^n$,
+    \item[(b)] $n^4+2 \log n$, $\log ({n^n}^4)$, $2^{4 \log n}$, $4^n$, $n^3 \log n$,
+    \item[(c)] $\log n!$, $n \log n$, $log(n^n)$.
+\end{itemize}
+
+\subsection{Solución (a)}
+Para ordenar los órdenes de las funciones, se puede observar que:
+\begin{align*}
+    1 < \log n \\
+    2^n < 2^n \log n \\
+\end{align*}
+Se puede tomar cualquier base, entonces:
+\begin{align*}
+    \log_2 2^n \approx n \\
+    \Rightarrow \log 2^n \approx \log_2 2^n \approx n \\
+\end{align*}
+Habría que comparar $2^n$ con $n^2$:
+\begin{align*}
+    \log 2^n \approx n \\
+    \Rightarrow n \cdot \log 2^n \approx n^2 < 2^n \\
+\end{align*}
+Se sabe que $n! > 2^n$, entonces:
+\begin{align*}
+    n! \log n > 2^n \log n \\
+\end{align*}
+Y entonces se puede ordenar las funciones como:
+\begin{equation*}
+    n \log 2^n < 2^n < 2^n \log n < n! \log n 
+\end{equation*}
+
+\subsection{Solución (b)}
+Para ordenar los órdenes de las funciones, se puede observar que:

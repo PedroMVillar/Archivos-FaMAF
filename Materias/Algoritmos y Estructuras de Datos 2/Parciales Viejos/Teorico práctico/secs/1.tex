@@ -1,0 +1,231 @@
+\subsection{Ejercicio 1}
+Para cada uno de los siguientes algoritmos determinar \textbf{por separado} cada uno de los siguientes incisos.
+\begin{itemize}
+    \item[(a)] ¿Que hace?
+    \item[(b)] ¿Cómo lo hace?
+    \item[(c)] El orden del algoritmo, analizando los distintos casos posibles.
+    \item[(d)] Proponer nombres mas adecuados para los identificadores (de variables, funciones y procedimientos).   
+\end{itemize}
+\begin{codebox}
+\begin{pascallike}
+proc p(in/out a: array[1..n] of nat)
+    var d: nat
+    for i := 1 to n do
+        d := i
+        for j:= i+1 to n do
+            if a[j] < a[d] then
+                d := j
+            fi
+        od
+        swap(a,i,d)
+    od
+end proc 
+\end{pascallike}
+\end{codebox}
+\begin{codebox}
+\begin{pascallike}
+fun f(a: array[1..n] of nat) ret b: array[1..n] of nat
+    var d: nat
+    for i := 1 to n do
+        b[i] := i
+    od
+    for i := 1 to n do
+        d := i
+        for j:= i+1 to n do
+            if a[b[j]] < a[b[d]] then
+                d := j
+            fi
+        od
+        swap(b,i,d)
+    od
+end fun
+\end{pascallike}
+\end{codebox}
+
+\subsubsection{Punto a}
+\begin{itemize}
+    \item El procedimiento \textbf{p} recibe un arreglo de números naturales y lo ordena de menor a mayor.
+    \item EL procedimiento \textbf{f} recibe un arreglo de números naturales y devuelve un arreglo con los índices de los elementos del arreglo original ordenados de menor a mayor.
+\end{itemize}
+
+\subsubsection{Punto b}
+\begin{itemize}
+    \item Recorre el arreglo de izquierda a derecha, en cada iteración busca el índice del menor elemento del arreglo que se encuentra a la derecha del índice actual y lo intercambia con el elemento en la posición actual.
+    \item Primero crea un arreglo con los índices de los elementos del arreglo original, luego recorre el arreglo de índices de izquierda a derecha, en cada iteración busca el índice del menor elemento del arreglo original que se encuentra a la derecha del índice actual y lo intercambia con el índice actual.
+\end{itemize}
+
+\subsubsection{Punto c}
+\begin{itemize}
+    \item El procedimiento \textbf{p} tiene un orden de $O(n^2)$, ya que recorre el arreglo de tamaño $n$ y en cada iteración recorre el arreglo de tamaño $n$.
+    \item El procedimiento \textbf{f} tiene un orden de $O(n^2)$, ya que recorre el arreglo de tamaño $n$ y en cada iteración recorre el arreglo de tamaño $n$.
+\end{itemize}
+
+\subsubsection{Punto d}
+\begin{itemize}
+    \item \textbf{p} \textbf{sort\_array}
+    \item \textbf{f} \textbf{index\_sorted\_array}
+\end{itemize}
+
+\subsection{Ejercicio 2}
+Para cada uno de los siguientes algoritmos determinar \textbf{por separado} cada uno de los siguientes incisos.
+\begin{itemize}
+    \item[(a)] ¿Que hace?
+    \item[(b)] ¿Cómo lo hace?
+    \item[(c)] El orden del algoritmo.
+\end{itemize}
+
+\begin{codebox}
+\begin{pascallike}
+proc p(in/out a: array[0..n] of nat)
+    for i := 0 to $\frac{n}{2}$ do
+        swap(a,i,n-1)
+    od
+end proc
+\end{pascallike}
+\end{codebox}
+
+\begin{codebox}
+\begin{pascallike}
+fun f(a: array[1..n] of nat) ret b: bool
+    var i: nat
+    i := 1
+    while (i < n) $\wedge$ (a[i] $\leq$ a[i+1]) do
+        i := i + 1
+    od
+    b := (i = n)
+end fun
+\end{pascallike}
+\end{codebox}
+
+\begin{codebox}
+\begin{pascallike}
+proc q(in/out a: array[0..n,0..n] of nat)
+    var tmp : nat
+    for i := 0 to n do
+        for j := 0 to $\frac{n}{2}$ do
+            tmp := a[i,j]
+            a[i,j] := a[i,n-j]
+            a[i,n-j] := tmp
+        od
+    od
+end proc
+\end{pascallike}
+\end{codebox}
+
+\subsubsection{Punto a}
+\begin{itemize}
+    \item El procedimiento \textbf{p} recibe un arreglo de números naturales y lo invierte.
+    \item La función \textbf{f} recibe un arreglo de números naturales y devuelve verdadero si el arreglo esta ordenado de menor a mayor y falso en caso contrario.
+    \item El procedimiento \textbf{q} recibe una matriz de números naturales cuadrada, e invierte cada fila de la matriz.
+\end{itemize}
+
+\subsubsection{Punto b}
+\begin{itemize}
+    \item Recorre el arreglo de izquierda a derecha, en cada iteración intercambia el elemento en la posición actual con el elemento en la posición $n-1$.
+    \item Recorre el arreglo de izquierda a derecha, en cada iteración compara el elemento en la posición actual con el elemento en la posición siguiente, si el elemento actual es menor o igual al siguiente, avanza al siguiente elemento, en caso contrario devuelve falso.
+    \item Recorre la matriz de izquierda a derecha y de arriba a abajo, en cada iteración intercambia el elemento en la posición actual con el elemento simétrico respecto al eje vertical.
+\end{itemize}
+
+\subsubsection{Punto c}
+\begin{itemize}
+    \item El procedimiento \textbf{p} tiene un orden de $O(n)$, ya que recorre el arreglo de tamaño $n$ y en cada iteración realiza una cantidad constante de operaciones.
+    \item La función \textbf{f} tiene un orden de $O(n)$, ya que recorre el arreglo de tamaño $n$ y en cada iteración realiza una cantidad constante de operaciones.
+    \item El procedimiento \textbf{q} tiene un orden de $O(n^2)$, ya que recorre la matriz de tamaño $n \times n$ y en cada iteración realiza una cantidad constante de operaciones.
+\end{itemize}
+
+\newpage
+\subsection{Ejercicio 3}
+Calcula el orden de cada uno de los siguientes algoritmos:
+\begin{codebox}
+\begin{pascallike}
+proc P(in/out a: array[1..n] of nat)
+    for i:= to n do
+        isort(a)
+        swap(a,1,n)
+    od
+end proc
+\end{pascallike}
+\end{codebox}
+donde isort es el algoritmo de ordenación por inserción.
+
+\begin{codebox}
+\begin{pascallike}
+proc Q(in/out a: array[1..n] of nat, in izq, der: nat)
+    var med : nati
+    if izq < der then
+        ssort(a,izq,der)
+        med := (izq + der) div 2
+        Q(a,izq,med)
+        Q(a,med+1,der)
+    fi
+end proc
+
+proc main(in/out a:array[1..n] of nat)
+    Q(a,1,n)
+end proc
+\end{pascallike}
+\end{codebox}
+donde ssort(a,izq,der) ordena el arreglo a entre las posiciones izq y der utilizando el algoritmo de ordenación por selección.
+
+\subsubsection{Solución}
+\begin{itemize}
+    \item Insertion sort tiene una complejidad de $O(n^2)$, entonces el procedimiento p tiene un orden de $n^3$.
+    \item El procedimiento tiene primero una complejidad de $(n^2)$ al hacer la llamada al algoritmo de ordenación por selección, luego se divide el arreglo en dos partes y se llama recursivamente a la función Q con cada una de las partes, por lo que la complejidad total es de $O(n^2 \log n)$.
+\end{itemize}
+
+\newpage
+\subsection{Ejercicio 4}
+Escribí una variante del algoritmo de ordenación por selección que vaya ordenando desde la última celda del arreglo hacia la primera. El resultado debe ser el mismo, es decir, el arreglo resultante debe estar ordenado de forma creciente, pero el modo de hacerlo debe ser diferente: en cada paso se debe seleccionar el \textbf{máximo} elemento aún no ordenado y colocarlo en la posición que corresponda desde el extremo final del arreglo.
+\subsubsection{Solución}
+\begin{codebox}
+\begin{pascallike}
+proc p(in/out a: array[1..n] of nat)
+    var d: nat
+    for i := n downto 1 do
+        d := i
+        for j:= 1 to n-1 do
+            if a[j] > a[d] then
+                d := j
+            fi
+        od
+        swap(a,i,d)
+    od
+end proc 
+\end{pascallike}
+\end{codebox}
+
+\subsection{Ejercicio 5}
+Se conoce con el nombre de \textit{cocktail sort} a una variación del algoritmo de ordenación \textit{selection sort} que consiste en obtener en cada pasada del arreglo no sólo el elemento mínimo del segmento correspondiente, sino el mínimo y el máximo, intercambiándolos luego por las posiciones primera y última del segmento, respectivamente. Por ejemplo si tenemos el arreglo $[8,5,18,3,4]$ (con posiciones de 1 a 5), el algoritmo en su primera pasada encontraría que el elemento mínimo está en la posición 4 y el máximo en la posición 3, que al intercambiarlos el arreglo resultante sería $[3,5,18,8,4]$. Se pide:
+\begin{itemize}
+    \item[(a)] Explicá con palabras claras cómo implementarás el algoritmo.
+    \item[(b)] Implementá de manera precisa el \textit{cocktail sort} en el lenguaje de la materia.
+\end{itemize}
+
+\subsubsection{Punto a}
+Recorrer el arreglo de izquierda a derecha, en cada iteración buscar el mínimo y el máximo del segmento correspondiente y luego intercambiarlos con los elementos en las posiciones primera y última del segmento, respectivamente. Luego se llama recursivamente al algoritmo con el segmento que va desde la posición siguiente a la primera hasta la posición anterior a la última.
+
+\subsubsection{Punto b}
+\begin{codebox}
+\begin{pascallike}
+proc cocktail_sort(a :array[1..n] of nat)
+    var d: nat
+    for i:= 1 to n do
+        d := i
+        k := i
+        for j:= i to n do
+            {- busca el minimo -}
+            if a[j] < a[d] then
+                d := j
+            fi
+            {- busca el maximo -}
+            if a[j] > a[k] then
+                k := j
+            fi
+        od
+        {- posiciona -}
+        swap(a,i,d)
+        swap(a,n-i+1,k)
+    od
+end proc
+\end{pascallike}
+\end{codebox}

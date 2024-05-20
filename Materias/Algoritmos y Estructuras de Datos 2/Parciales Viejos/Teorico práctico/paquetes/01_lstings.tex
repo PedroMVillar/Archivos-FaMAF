@@ -1,0 +1,35 @@
+\usepackage{listings}
+
+\newcounter{pascalcode}[section]
+
+\renewcommand{\thepascalcode}{\arabic{section}.\arabic{pascalcode}}
+
+\lstdefinelanguage{pascal-like}{
+  morekeywords={var, type, tuple, enumerate, constructors, spec, destroy, implement, operations, fi, ret, downto, where, proc, fun, in, out, if, then, else, while, do, for, to, end, od},
+  morecomment=[s]{\{-}{-\}},
+  morestring=[b]",
+  sensitive=true,
+  keywordstyle=\color{orange},
+  commentstyle=\color{green!70!black},
+  stringstyle=\color{blue!70!black},
+  %numbers=left,
+  %numberstyle=\tiny\color{gray},
+  alsoletter={:,=,+,-,*,>,<,(,)},
+  morekeywords=[2]{:,=,+,-,*,>,<,(,),&,&&,||,!,!=,==},
+  keywordstyle=[2]{\color{blue}},
+  literate={:=}{{\textcolor{green!50!black}{:=}}}2,
+  morekeywords=[3]{nat, array, of, int, real, bool, char}, 
+  keywordstyle=[3]{\color{blue!40!black}},
+  mathescape=true
+}
+
+\lstnewenvironment{pascallike}[1][]{
+  \refstepcounter{pascalcode}
+  \lstset{
+    language=pascal-like,
+    %numbers=left,
+    %numberstyle=\tiny\color{gray},
+    %captionpos=b,
+    #1
+  }
+}{\phantomsection\addcontentsline{lol}{section}{Código \thepascalcode}}

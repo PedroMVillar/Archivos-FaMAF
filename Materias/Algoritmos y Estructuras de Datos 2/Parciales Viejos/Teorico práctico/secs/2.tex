@@ -1,0 +1,54 @@
+\subsection{Ejercicio 1}
+\begin{itemize}
+    \item[(a)] Dado el siguiente algoritmo, planteá la recurrencia que indica la cantidad de asignaciones realizadas en función de la entrada $n$:
+\begin{codebox}
+\begin{pascallike}
+fun f(n: nat) ret m: nat
+    if n $\leq$ 2 then
+        m := n
+    else 
+        m := 3*f(n/2) + n
+    fi
+end fun
+\end{pascallike}
+\end{codebox}
+    \item[(b)] Resolvé la siguiente recurrencia: $t(n) = \begin{cases} 1 & \text{si } n \leq 2 \\ 4t(n/2) + n^2 & \text{si } n > 2 \end{cases}$.
+    \item[(c)] La recurrencia que obtuviste en el item a) ¿es la misma que resolviste en el item b)?. En caso contrario, resolvela también.
+\end{itemize}
+
+\subsubsection{Punto a}
+\begin{itemize}
+    \item Recibe una entrada del tamaño n.
+    \item La operación a contar es la asignación de la variable m.
+\end{itemize}
+
+\begin{equation*}
+    t(n) = \begin{cases}
+        1 & \text{si } n \leq 2 \\
+        3t(n/2) & \text{si } n > 2
+    \end{cases}
+\end{equation*}
+
+\begin{itemize}
+    \item $a = 1$,
+    \item $b = 2$,
+    \item $k = 0$.
+\end{itemize}
+
+Entonces $a = 1 = b^k = 2^0 \rightarrow t(n) = \log_2 n$
+
+\subsubsection{Punto b}
+\begin{equation*}
+    t(n) = \begin{cases}
+        1 & \text{si } n \leq 2 \\
+        4t(n/2) + n^2 & \text{si } n > 2
+    \end{cases}
+\end{equation*}
+
+\begin{itemize}
+    \item $a = 4$,
+    \item $b = 2$,
+    \item $k = 2$.
+\end{itemize}
+
+Entonces $a = 4 = b^k = 2^2 = 4 \rightarrow t(n) = n^2 \log_2 n$.

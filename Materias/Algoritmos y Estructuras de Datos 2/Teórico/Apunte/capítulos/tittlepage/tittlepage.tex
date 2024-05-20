@@ -1,0 +1,12 @@
+\begin{titlepage}
+    \begin{tikzpicture}[overlay,remember picture]
+        \fill[lime!10] (current page.south east) rectangle (current page.north west);
+        \fill[lime,even odd rule] (current page.south west) rectangle ([xshift=1.5cm]current page.north west) ($(current page.north west)!.5!(current page.south west)$) arc(180:270:3) ($(current page.north west)!.5!(current page.south west)$) arc(270:450:3.5) ([yshift=7cm]$(current page.north west)!.5!(current page.south west)$)  arc(180:90:3);
+  %           \draw[lime!10,double=lime!10,double distance=2mm] (current page.south west) --+ (2,2) --+ (-2,6) --+ (2,8) --+ (-2,9) --+ (2,13) --+ (-2,18) --+ (2,30);
+            \draw[lime,thin] (13,-1) node[lime,above left] {\Huge Algoritmos 2 - TP} --+ (0,3) node[lime,below right] {\Huge 1C-2024};
+        \node[yshift=-5cm,xslant=1,yscale=1.6,lime!40,opacity=.2] at (9.5,-6.5) {\scalebox{6}{Apunte}};
+        \node[yshift=-5cm,lime] at (8,-7) {\scalebox{6}{Apunte}};
+            \draw[lime,fill=titleblue!20] ([xshift=-1cm]current page.north east) -- ([yshift=-1cm]current page.north east) -- ([yshift=-2cm]current page.north east) -- ([xshift=-2cm]current page.north east);
+        \path ([xshift=-1cm]current page.north east) -- ([yshift=-1cm]current page.north east) node[midway,sloped,below=.1cm,lime] {Villar Pedro};
+    \end{tikzpicture}
+  \end{titlepage}

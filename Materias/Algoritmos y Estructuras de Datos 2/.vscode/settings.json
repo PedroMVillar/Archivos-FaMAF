@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "stdbool.h": "c",
+        "array_helpers.h": "c",
+        "sort_helpers.h": "c",
+        "stdlib.h": "c",
+        "stdio.h": "c"
+    },
+    "workbench.sideBar.location": "right"
+}

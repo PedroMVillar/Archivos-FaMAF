@@ -1,0 +1,514 @@
+\chapter{Práctico 2 - Parte 2}
+
+\section{Ejercicio 1}
+Completá la implementación de listas dada en el teórico usando punteros.
+
+\subsection{Solución}
+\begin{codebox}{Definición del tipo}
+\begin{pascallike}
+implement List of T where
+type Node of T = tuple
+                   elem : T
+                   next : pointer to (Node of T)
+                 end tuple
+
+type List of T = pointer to (Node of T)
+
+\end{pascallike}
+\end{codebox}
+
+\begin{codebox}{Constructores}
+\begin{pascallike}
+fun empty() ret l : List of T
+    l := null
+end fun
+
+proc addl(in e : T, in/out l : List of T)
+    var p : pointer to (Node of T)
+    alloc(p)
+    p->elem := e
+    p->next := l
+    l := p
+end proc
+\end{pascallike}
+\end{codebox}
+
+\begin{codebox}{Operaciones \#1}
+\begin{pascallike}
+fun is_empty (l : List of T) ret b : bool
+    b := l = null
+end fun
+
+fun head (l : List of T) ret e : T
+    e := l->elem
+end fun
+
+proc tail(in/out l : List of T)
+    var p : pointer to (Node of T)
+    p := l
+    l := l->next
+    free(p)
+end proc
+
+proc addr (in/out l : List of T, in e : T)
+    var p : pointer to (Node of T)
+    alloc(p)
+    p->elem := e
+    p->next := null
+    var q : pointer to (Node of T)
+    q := l
+    while q->next != null do
+        q := q->next
+    end while
+    q->next := p
+end proc
+
+fun length(l : List of T) ret n : nat
+    var p : pointer to (Node of T)
+    p := l
+    n := 0
+    while p != null do
+        n := n + 1
+        p := p->next
+    end while
+end fun
+
+fun concat (in/out l : List of T, in l0 : List of T)
+    var p : pointer to (Node of T)
+    p := l
+    while p->next != null do
+        p := p->next
+    end while
+    p->next := l0
+end fun
+
+fun index (l : List of T, n : nat) ret e : T
+    var p : pointer to (Node of T)
+    p := l
+    for i := 1 to n do
+        p := p->next
+    end for
+    e := p->elem
+end fun
+\end{pascallike}
+\end{codebox}
+
+\begin{codebox}{Operaciones \#2}
+\begin{pascallike}
+proc take(in/out l : List of T, in n : nat)
+    var p : pointer to (Node of T)
+    p := l
+    for i := 1 to n do
+        p := p->next
+    end for
+    var q : pointer to (Node of T)
+    q := p->next
+    p->next := null
+    while q != null do
+        var r : pointer to (Node of T)
+        r := q
+        q := q->next
+        free(r)
+    end while
+end proc
+
+proc drop(in/out l : List of T, in n : nat)
+    var p : pointer to (Node of T)
+    p := l
+    for i := 1 to n do
+        p := p->next
+    end for
+    l := p
+end proc
+
+fun copy_list(l1 : List of T) ret l2 : List of T
+    var p : pointer to (Node of T)
+    var q : pointer to (Node of T)
+    if l1 = null then
+        l2 := null
+    else
+        alloc(q)
+        q->elem := l1->elem
+        q->next := null
+        l2 := q
+        p := l1->next
+        while p != null do
+            alloc(q->next)
+            q := q->next
+            q->elem := p->elem
+            q->next := null
+            p := p->next
+        end while
+    end if
+end fun
+\end{pascallike}
+\end{codebox}
+
+\begin{codebox}{Operación de destrucción}
+\begin{pascallike}
+proc destroy(in/out l : List of T)
+    var p : pointer to (Node of T)
+    while l != null do
+        p := l
+        l := l->next
+        free(p)
+    end while
+end proc
+\end{pascallike}
+\end{codebox}
+
+\section{Ejercicio 2}
+Dada una constante natural N, implementá el TAD Lista de elementos de tipo T, usando un arreglo de tamaño N y un natural que indica cuántos elementos del arreglo son ocupados por elementos de la lista. ¿Esta implementación impone nuevas restricciones? ¿En qué función o procedimiento tenemos una nueva precondición?
+
+\subsection{Solución}
+\begin{codebox}{Definición del tipo}
+\begin{pascallike}
+implement List of T where
+type List of T = tuple
+                   elems : array 1..N of T
+                   n : nat
+                 end tuple
+\end{pascallike}
+\end{codebox}
+
+\begin{codebox}{Constructores}
+\begin{pascallike}
+fun empty() ret l : List of T
+    l.elems := []
+    l.n := 0
+end fun
+
+proc addl(in e : T, in/out l : List of T)
+    l.n := l.n + 1
+    l.elems[l.n] := e
+end proc
+
+fun is_empty (l : List of T) ret b : bool
+    b := l.n = 0
+end fun
+
+fun head (l : List of T) ret e : T
+    e := l.elems[1]
+end fun
+
+proc tail(in/out l : List of T)
+    for i := 1 to l.n - 1 do
+        l.elems[i] := l.elems[i + 1]
+    end for
+    l.n := l.n - 1
+end proc
+
+proc addr (in/out l : List of T, in e : T)
+    l.n := l.n + 1
+    l.elems[l.n] := e
+end proc
+
+fun length(l : List of T) ret n : nat
+    n := l.n
+end fun
+\end{pascallike}
+\end{codebox}
+\begin{codebox}{Constructores}
+\begin{pascallike}
+fun concat (in/out l : List of T, in l0 : List of T)
+    for i := 1 to l0.n do
+        l.n := l.n + 1
+        l.elems[l.n] := l0.elems[i]
+    end for
+end fun
+
+fun index (l : List of T, n : nat) ret e : T
+    e := l.elems[n]
+end fun
+
+proc take(in/out l : List of T, in n : nat)
+    for i := n + 1 to l.n do
+        l.elems[i - n] := l.elems[i]
+    end for
+    l.n := l.n - n
+end proc
+
+proc drop(in/out l : List of T, in n : nat)
+    for i := 1 to l.n - n do
+        l.elems[i] := l.elems[i + n]
+    end for
+    l.n := l.n - n
+end proc
+
+fun copy_list(l1 : List of T) ret l2 : List of T
+    l2.n := l1.n
+    for i := 1 to l1.n do
+        l2.elems[i] := l1.elems[i]
+    end for
+end fun
+
+proc destroy(in/out l : List of T)
+    l.n := 0
+end proc
+\end{pascallike}
+\end{codebox}
+
+Esta implementación impone la restricción de que la cantidad de elementos de la lista no puede superar a N. La nueva precondición se encuentra en la operación \texttt{addl}, que no puede agregar un elemento si la lista ya está llena.
+
+\section{Ejercicio 3}
+Implementá el procedimiento $add\_at$ que toma una lista de tipo $T$, un natural $n$, un elemento e de tipo $T$, y agrega el elemento $e$ en la posición $n$, quedando todos los elementos siguientes a continuación. Esta operación tiene como precondición que n sea menor al largo de la lista.
+
+\subsection{Solución}
+\begin{codebox}{Operación}
+\begin{pascallike}
+proc add_at(in/out l : List of T, in n : nat, in e : T)
+    for i := l.n downto n + 1 do
+        l.elems[i + 1] := l.elems[i]
+    end for
+    l.elems[n] := e
+    l.n := l.n + 1
+end proc
+\end{pascallike}
+\end{codebox}
+
+\begin{enumerate}
+    \item \textbf{Argumentos:} 
+    \begin{itemize}
+        \item l (in/out): La lista que se modificará. La palabra clave in/out indica que se puede leer y escribir en l.
+        \item n (in): El índice en el que se insertará el nuevo elemento. Los valores válidos van de 0 a l.n.
+        \item e (in): El elemento que se insertará.
+    \end{itemize}
+    \item \textbf{Desplazamiento de elementos:}
+    \begin{itemize}
+        \item La lógica central consiste en desplazar elementos en el arreglo elems para hacer espacio para el nuevo elemento en la posición n.
+        \item El ciclo for itera hacia atrás desde l.n hasta n + 1. En cada iteración:
+        \begin{itemize}
+            \item l.elems[i + 1] := l.elems[i]: El elemento en el índice actual i se copia a la siguiente posición i + 1
+        \end{itemize}
+        \item Este ciclo esencialmente crea un espacio en la posición n + 1 al mover los elementos una posición hacia la derecha.
+    \end{itemize}
+    \item \textbf{Inserción del nuevo elemento:} Después del ciclo, l.elems[n] se asigna el nuevo elemento e. Esto coloca e en el índice de inserción deseado n.
+    \item \textbf{Actualización de la longitud de la lista:} Finalmente, l.n se incrementa en 1 para reflejar el nuevo tamaño de la lista.
+\end{enumerate}
+
+
+\section{Ejercicio 4}
+\begin{itemize}
+    \item[(a)] Especificá un TAD tablero para mantener el tanteador en contiendas deportivas entre dos equipos (equipo A y equipo B). Deberá tener un constructor para el comienzo del partido (tanteador inicial), un constructor para registrar un nuevo tanto del equipo A y uno para registrar un nuevo tanto del equipo B. El tablero sólo registra el estado actual del tanteador, por lo tanto el orden en que se fueron anotando los tantos es irrelevante.
+
+    Además se requiere operaciones para comprobar si el tanteador está en cero, si el equipo A ha anotado algún tanto, si el equipo B ha anotado algún tanto, una que devuelva verdadero si y sólo si el equipo A va ganando, otra que devuelva verdadero si y sólo si el equipo B va ganando, y una que devuelva verdadero si y sólo si se registra un empate.
+
+    Finalmente habrá una operación que permita anotarle un número n de tantos a un equipo y otra que permita “castigarlo” restándole un número n de tantos. En este último caso, si se le restan más tantos de los acumulados equivaldrá a no haber anotado ninguno desde el comienzo del partido.    
+
+    \item[(b)] Implementá el TAD Tablero utilizando una tupla con dos contadores: uno que indique los tantos del equipo A, y otro que indique los tantos del equipo B.
+    \item[(c)] Implementá el TAD Tablero utilizando una tupla con dos naturales: uno que indique los tantos del equipo A, y otro que indique los tantos del equipo B. ¿Hay alguna diferencia con la implementación del inciso anterior? ¿Alguna operación puede resolverse más eficientemente?
+\end{itemize}
+
+\subsection{Solución (a)}
+\begin{itemize}
+    \item \textbf{Nombre:} Tablero
+    \item \textbf{Constructores:}
+    \begin{itemize}
+        \item \texttt{tanteador\_inicial()}: comienzo del partido.
+        \begin{codebox}{Definición}
+            \begin{pascallike}
+                proc tanteador_inicial(in/out t : Tablero)
+            \end{pascallike}    
+        \end{codebox}
+        \item \texttt{anotar\_A()}: registrar un nuevo tanto del equipo A.
+        \begin{codebox}{Definición}
+            \begin{pascallike}
+                proc anotar_A(in/out t : Tablero)
+            \end{pascallike}
+        \end{codebox}
+        \item \texttt{anotar\_B()}: registrar un nuevo tanto del equipo B.
+        \begin{codebox}{Definición}
+            \begin{pascallike}
+                proc anotar_B(in/out t : Tablero)
+            \end{pascallike}
+        \end{codebox}
+    \end{itemize}
+    \item \textbf{Operaciones:}
+    \begin{itemize}
+        \item Comprobar si el tanteador está en cero.
+        \item Comprobar si el equipo A ha anotado algún tanto.
+        \item Comprobar si el equipo B ha anotado algún tanto.
+        \item Devolver verdadero si y sólo si el equipo A va ganando.
+        \item Devolver verdadero si y sólo si el equipo B va ganando.
+        \item Devolver verdadero si y sólo si se registra un empate.
+        \item Anotarle un número n de tantos a un equipo.
+        \item “Castigarlo” restándole un número n de tantos.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Solución (b)}
+\begin{codebox}{Definición del tipo}
+\begin{pascallike}
+implement Tablero where
+type Tablero = tuple
+                  tantos_A : Counter
+                  tantos_B : Counter
+              end tuple
+\end{pascallike}
+\end{codebox}
+
+\begin{codebox}{Constructores}
+\begin{pascallike}
+proc tanteador_inicial(in/out t : Tablero)
+    init(t.tantos_A)
+    init(t.tantos_B)
+end proc
+
+proc anotar_A(in/out t : Tablero)
+    incr(t.tantos_A)
+end proc
+
+proc anotar_B(in/out t : Tablero)
+    incr(t.tantos_B)
+end proc
+\end{pascallike}
+\end{codebox}
+
+\begin{codebox}{Operaciones}
+\begin{pascallike}
+fun esta_en_cero(t : Tablero) ret b : bool
+    b := is_init(t.tantos_A) $\wedge$ is_init(t.tantos_B)
+end fun
+
+fun anoto_A(t : Tablero) ret b : bool
+    b := !is_init(t.tantos_A)
+end fun
+
+fun anoto_B(t : Tablero) ret b : bool
+    b := !is_init(t.tantos_B)
+end fun
+
+fun va_ganando_A(t : Tablero) ret b : bool
+    b := t.tantos_A > t.tantos_B {-revisar-}
+end fun
+
+fun va_ganando_B(t : Tablero) ret b : bool
+    b := t.tantos_B > t.tantos_A {-revisar-}
+end fun
+
+fun empate(t : Tablero) ret b : bool
+    b := t.tantos_A = t.tantos_B {-revisar-}
+end fun
+
+proc anotar_n_tantos(in/out t : Tablero, in n : nat, in equipo : char)
+    if equipo = 'A' then
+        for i := 1 to n do
+            inc(t.tantos_A)
+        end for
+    else
+        for i := 1 to n do
+            inc(t.tantos_B)
+        end for
+    end if
+end proc
+
+proc castigar(in/out t : Tablero, in n : nat, in equipo : char)
+    if equipo = 'A' then
+        for i := 1 to n do
+            if not is_zero(t.tantos_A) then
+                dec(t.tantos_A)
+            end if
+        end for
+    else
+        for i := 1 to n do
+            if not is_zero(t.tantos_B) then
+                dec(t.tantos_B)
+            end if
+        end for
+    end if
+end proc
+\end{pascallike}
+\end{codebox}
+
+\subsection{Solución (c)}
+\begin{codebox}{Definición del tipo}
+\begin{pascallike}
+implement Tablero where
+type Tablero = tuple
+                  tantos_A : nat
+                  tantos_B : nat
+              end tuple
+\end{pascallike}
+\end{codebox}
+La diferencia es que ahora los tantos son naturales en lugar de contadores. La operación \texttt{inc} y \texttt{dec} no son necesarias, ya que se puede incrementar o decrementar directamente los valores.
+
+\section{Ejercicio 5}
+Especificá el TAD Conjunto finito de elementos de tipo T. Como constructores considerá el conjunto vacío y el que agrega un elemento a un conjunto. Como operaciones: una que chequee si un elemento e pertenece a un conjunto c, una que chequee si un conjunto es vacío, la operación de unir un conjunto a otro , insersectar un conjunto con otro y obtener la diferencia. Estas últimas tres operaciones deberían especificarse como procedimientos que toman dos conjuntos y modifican el primero de ellos.
+
+\subsection{Solución}
+\begin{itemize}
+    \item \textbf{Nombre:} Conjunto
+    \item \textbf{Constructores:}
+    \begin{itemize}
+        \item conjunto vacío.
+        \begin{codebox}{Definición}
+            \begin{pascallike}
+                fun vacio() ret c : Conjunto
+            \end{pascallike}
+        \end{codebox}
+        \item agrega un elemento a un conjunto.
+        \begin{codebox}{Definición}
+            \begin{pascallike}
+                proc agregar(in e : T, in/out c : Conjunto)
+            \end{pascallike}
+        \end{codebox}
+    \end{itemize}
+    \item \textbf{Operaciones:}
+    \begin{itemize}
+        \item chequea si un elemento e pertenece a un conjunto c.
+        \begin{codebox}{Definición}
+            \begin{pascallike}
+                fun pertenece(in e : T, in c : Conjunto) ret b : bool
+            \end{pascallike}
+        \end{codebox}
+        \item chequea si un conjunto es vacío.
+        \begin{codebox}{Definición}
+            \begin{pascallike}
+                fun es_vacio(in c : Conjunto) ret b : bool
+            \end{pascallike}
+        \end{codebox}
+        \item unir un conjunto a otro.
+        \begin{codebox}{Definición}
+            \begin{pascallike}
+                proc unir(in c1 : Conjunto, in c2 : Conjunto, 
+                    in/out c3 : Conjunto)
+            \end{pascallike}
+        \end{codebox}
+        \item intersectar un conjunto con otro.
+        \begin{codebox}{Definición}
+            \begin{pascallike}
+                proc interseccion(in c1 : Conjunto, in c2 : Conjunto, 
+                    in/out c3 : Conjunto)
+            \end{pascallike}
+        \end{codebox}
+        \item obtener la diferencia.
+        \begin{codebox}{Definición}
+            \begin{pascallike}
+                proc diferencia(in c1 : Conjunto, in c2 : Conjunto, 
+                    in/out c3 : Conjunto)
+            \end{pascallike}
+        \end{codebox}
+    \end{itemize}
+\end{itemize}
+
+La especificación completa queda:
+\begin{codebox}{Definición del tipo}
+\begin{pascallike}
+spec Conjunto where 
+
+constructors
+    fun vacio() ret c : Conjunto
+    proc agregar(in e : T, in/out c : Conjunto)
+
+destroy 
+    proc destroy(in/out c : Conjunto)
+
+operations
+    fun pertenece(in e : T, in c : Conjunto) ret b : bool
+    fun es_vacio(in c : Conjunto) ret b : bool
+    proc unir(in c1 : Conjunto, in c2 : Conjunto, in/out c3 : Conjunto)
+    proc interseccion(in c1 : Conjunto, in c2 : Conjunto, in/out c3 : Conjunto)
+    proc diferencia(in c1 : Conjunto, in c2 : Conjunto, in/out c3 : Conjunto)
+\end{pascallike}
+\end{codebox}
+

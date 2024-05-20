@@ -1,0 +1,146 @@
+\chapter{Recurrencias Divide y Vencerás}
+Un algoritmo Divide y Vencerás típico resuelve un problema siguiendo estos 3 pasos:
+\begin{enumerate}
+    \item \textbf{Dividir:} Descomponer el problema en sub-problemas del mismo tipo. Este paso involucra descomponer el problema original en pequeños sub-problemas. Cada sub-problema debe representar una parte del problema original. Por lo general, este paso emplea un enfoque recursivo para dividir el problema hasta que no es posible crear un sub-problema más.
+    \item \textbf{Vencer:} Resolver los sub-problemas recursivamente. Este paso recibe un gran conjunto de sub-problemas a ser resueltos. Generalmente a este nivel, los problemas se resuelven por sí solos.
+    \item \textbf{Combinar:}  Combinar las respuestas apropiadamente. Cuando los sub-problemas son resueltos, esta fase los combina recursivamente hasta que estos formulan la solución al problema original. Este enfoque algorítmico trabaja recursivamente y los pasos de conquista y fusión trabajan tan a la par que parece un sólo paso.
+\end{enumerate}
+
+\section{Estructura de un algoritmo Divide y Vencerás}
+La estrucutra de un algoritmo utilizado esta técnica es la siguiente:
+
+\begin{codebox}{Código 42}
+\footnotesize Divide y Vencerás
+\tcblower
+\begin{verbatim}
+fun DyV(x) ret y
+    if x suficientemente pequeño o simple then y:= ad_hoc(x)
+    else descomponer x en x1, x2, . . . , xa
+        for i:= 1 to a do 
+            yi := DyV(xi) 
+        od
+        combinar y1, y2, . . . , ya para obtener la solución y de x
+    fi
+end fun
+\end{verbatim}
+\end{codebox}
+Donde normalmente $x_i$ es una fracción de $x$ ($|x_i| = \frac{|x|}{b}$), para algun $b$ constante mayor a 1).
+
+Normalmente se ve lo siguiente:
+\begin{itemize}
+    \item \textbf{Solución trivial}: Si el problema es suficientemente pequeño, se resuelve de manera directa.
+    \item \textbf{Descomposisión}: Se divide el problema en subproblemas más pequeños.
+    \item \textbf{Combinación}: Se combinan las soluciones de los subproblemas para obtener la solución del problema original.
+\end{itemize}
+
+\section{Ejemplos}
+\begin{enumerate}
+    \item Ordenación por intercalación
+    \begin{itemize}
+        \item \textbf{Solución trivial}: Si el arreglo tiene un solo elemento, ya está ordenado.
+        \item \textbf{Descomposición}: Se divide el arreglo en dos mitades ($b=2$).
+        \item \textbf{Combinación}: Se intnercalan los dos arreglos ordenados.
+    \end{itemize}
+    \item Ordenación rápida
+    \begin{itemize}
+        \item \textbf{Solución trivial}: Si el arreglo tiene un solo elemento, ya está ordenado.
+        \item \textbf{Descomposición}: Se elige un pivote y se divide el arreglo en dos partes, una con los elementos menores al pivote y otra con los elementos mayores ($b=2$).
+        \item \textbf{Combinación}: Se ordenan las dos partes recursivamente.
+    \end{itemize}
+\end{enumerate}
+
+\section{Análisis de algoritmos Divide y Vencerás}
+Si queremos contar el costo computacional (número de operaciones) $t(n)$ de la función $DyV$ obtenemos:
+\begin{equation*}
+    t(n) = 
+    \begin{cases}
+        c & \text{si la entrada es pequeña o simple} \\
+        a \cdot t(n/b) + g(n) & \text{en caso contrario}
+    \end{cases}
+\end{equation*}
+Donde:
+\begin{itemize}
+    \item $c$ es una constante que representa el costo computacional de la función \texttt{ad\_hoc} en el caso base.
+    \item $a \cdot t(n/b)$, el valor $a$ que representa la cantidad de llamadas recursivas por nivel y $n/b$ es el tamaño de la entrada en cada llamada recursiva es decir, el tamaño de los subproblemas.
+    \item $g(n)$ es el costo computacional de los procesos de descomposición y de combinación.
+\end{itemize}
+
+Si $t(n)$ no es decreciente, y $g(n)$ es polinomial, entonces:
+\begin{equation*}
+    t(n) = 
+    \begin{cases}
+        n ^{\log_ba} & \text{si } a > b^k \\
+        n^k \log n & \text{si } a = b^k \\
+        n^k & \text{si } a < b^k
+    \end{cases}
+\end{equation*}
+
+\section{Ejemplo completo de análisis}
+Se busca calcular el orden de complejidad de:
+\begin{codebox}{Código 43}
+\footnotesize Ejemplo completo
+\tcblower
+\begin{pascallike}
+proc f1(in n : nat)
+    if n $\leq$ 1 then skip
+    else
+        for i := 1 to 8 do f1(n div 2) od
+        for i := 1 to n 3 do t := 1 od
+    fi
+end proc
+\end{pascallike}
+\end{codebox}
+En este caso notar que:
+\begin{itemize}
+    \item Tamaño de la entrada: $n$,
+    \item Operación a contar: $t := 1$.
+\end{itemize}
+Entonces, se puede definir una funcion $r(n)$, que representará la cantidad de asignaciones a la variable $t$ que ocurren al llamar a la función $f1$ con el dato de entrada $n$.
+
+Podemos observar que la función $f1$ esta dividida en dos casos, si $n \leq 1$ entonces no se realiza ninguna asignación a la variable $t$, por lo que $r(n) = 0$.
+\begin{equation*}
+    r(n) = 
+    \begin{cases}
+        0 & \text{si } n \leq 1 \\
+        ... & \text{en caso contrario}
+    \end{cases}
+\end{equation*}
+Como hay dos ciclos for en una secuencia, se puede analizar cada uno por separado y sumarlos, por ahora los puedo expresar como sumatoria:
+\begin{equation*}
+    r(n) = 
+    \begin{cases}
+        0 & \text{si } n \leq 1 \\
+        \sum_{i=1}^{8} ... + \sum_{i=1}^{n^3} ... & \text{en caso contrario}
+    \end{cases}
+\end{equation*}
+En el primer for, queremos contar la cantidad de asignaciones que se realizan al llamar a la función $f1$ con el dato de entrada $n/2$, por lo que se puede expresar como:
+\begin{equation*}
+    r(n) = 
+    \begin{cases}
+        0 & \text{si } n \leq 1 \\
+        \sum_{i=1}^{8} r(n/2) + \sum_{i=1}^{n^3} ... & \text{en caso contrario}
+    \end{cases}
+\end{equation*}
+En el segundo for, se realiza una asignación a la variable $t$ por cada iteración, por lo que se puede expresar como:
+\begin{equation*}
+    r(n) = 
+    \begin{cases}
+        0 & \text{si } n \leq 1 \\
+        \sum_{i=1}^{8} r(n/2) + \sum_{i=1}^{n^3} 1 & \text{en caso contrario}
+    \end{cases}
+\end{equation*}
+Resolviendo las sumatorias, se obtiene:
+\begin{equation*}
+    r(n) = 
+    \begin{cases}
+        0 & \text{si } n \leq 1 \\
+        8 \cdot r(n/2) + n^3 & \text{en caso contrario}
+    \end{cases}
+\end{equation*}
+Por lo que se puede observar que:
+\begin{itemize}
+    \item $a = 8$,
+    \item $b = 2$,
+    \item $g(n) = n^3$.
+\end{itemize}
+Como $a = 8 = 2^3 = b^3$, se puede decir que el orden de complejidad es $O(n^3 \log n)$.
