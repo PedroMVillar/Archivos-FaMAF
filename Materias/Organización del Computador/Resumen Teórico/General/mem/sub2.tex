@@ -1,0 +1,18 @@
+\subsection{Operaciones de Lectura y Escritura}
+Las dos operaciones que efectúa una memoria de acceso aleatorio son escritura y lectura. La señal de escritura especifica una operación de transferencia hacia adentro, y la de lectura, una de transferencia hacia afuera. Al aceptar una de estas señales de control, los circuitos internos de la memoria efectúan la operación deseada.
+Los pasos que deben seguirse para transferir una nueva palabra a la memoria son:
+\begin{enumerate}
+    \item Aplique la dirección binaria de la localidad deseada a las líneas de dirección.
+    \item Aplique a las líneas de entrada de datos los bits de datos que se guardarán en la memoria.
+    \item Active la entrada \texttt{escribir}.
+\end{enumerate}
+
+La unidad de memoria tomará entonces los bits de las líneas de datos de entrada y los almacenará en la localidad especificada por las líneas de dirección.
+Los pasos que deben seguirse para sacar de la memoria una palabra almacenada son:
+\begin{enumerate}
+    \item Aplique a las líneas de dirección la dirección binaria de la localidad deseada.
+    \item Active la entrada \texttt{leer}.
+\end{enumerate}
+
+La unidad de memoria tomará entonces los bits de la localidad seleccionada por la dirección
+y los aplicará a las líneas de datos de salida. El contenido de la localidad seleccionada no cambia después de la lectura.

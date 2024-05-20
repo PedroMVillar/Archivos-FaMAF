@@ -1,0 +1,263 @@
+Un número decimal, como por ejemplo $4543$, representa una cantidad igual a 4 millares, 5 centenas, 4 decenas y 3 unidades. En general, un número decimal se puede expresar como una suma de potencias de 10, multiplicadas por los dígitos que lo componen. Por ejemplo, el número 4543 se puede expresar como:
+\begin{equation*}
+    4543 = \textcolor{blue}{4} \cdot 10^3 + \textcolor{blue}{5} \cdot 10^2 + \textcolor{blue}{4} \cdot 10^1 + \textcolor{blue}{3} \cdot 10^0
+\end{equation*}
+
+\begin{mdframed}[backgroundcolor=gray!10,linewidth=0]
+    En general un número decimal se puede expresar como:
+    \begin{equation*}
+        \textcolor{blue}{a_n} \cdot 10^n + \textcolor{blue}{a_{n-1}} \cdot 10^{n-1} + \ldots + \textcolor{blue}{a_1} \cdot 10^1 + \textcolor{blue}{a_0} \cdot 10^0
+    \end{equation*}
+    donde $a_i$ es un dígito decimal y $n$ es el número de dígitos menos uno.
+
+    Los coeficientes $a_i$ son números enteros no negativos menores que 10. El valor $i$ indica la posición del dígito en el número, comenzando por la derecha con $i = 0$ y por tanto, la potencia de 10 correspondiente es $10^i$.
+\end{mdframed}
+
+Decimos que un sistema numérico decimal es base $10$ porque usa diez dígitos: $0, 1, 2, 3, 4, 5, 6, 7, 8, 9$. En general, un sistema numérico de base $b$ usa $b$ dígitos, que son los números enteros no negativos menores que $b$. Por ejemplo, el \textbf{sistema binario} es base $2$ porque usa dos dígitos: $0$ y $1$.
+
+\subsection{Sistema Binario}
+El sistema binario es un sistema de numeración en el que los números se representan utilizando solamente dos dígitos: 0 y 1.
+
+En este sistema, cada coeficiente $a_i$ es un dígito binario, es decir, un $0$ o un $1$ y se multiplica por una potencia de $2$ en lugar de $10$. Por ejemplo, el número binario $1011$ se puede expresar como:
+\begin{equation*}
+    1011 = \textcolor{blue}{1} \cdot 2^3 + \textcolor{blue}{0} \cdot 2^2 + \textcolor{blue}{1} \cdot 2^1 + \textcolor{blue}{1} \cdot 2^0
+\end{equation*}
+O tomando un número con punto decimal, por ejemplo $11010.11$, se puede expresar como:
+\begin{equation*}
+    11010.11 = \textcolor{blue}{1} \cdot 2^4 + \textcolor{blue}{1} \cdot 2^3 + \textcolor{blue}{0} \cdot 2^2 + \textcolor{blue}{1} \cdot 2^1 + \textcolor{blue}{0} \cdot 2^0 + \textcolor{blue}{1} \cdot 2^{-1} + \textcolor{blue}{1} \cdot 2^{-2}
+\end{equation*}
+
+\subsection{Sistema Hexadecimal}
+El sistema hexadecimal es un sistema de numeración en el que los números se representan utilizando dieciséis dígitos: $0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F$. Los dígitos $A$ a $F$ representan los números $10$ a $15$.
+
+En este sistema, cada coeficiente $a_i$ es un dígito hexadecimal y se multiplica por una potencia de $16$. Por ejemplo, el número hexadecimal $2A3$ se puede expresar como:
+\begin{equation*}
+    2A3 = \textcolor{blue}{2} \cdot 16^2 + \textcolor{blue}{A} \cdot 16^1 + \textcolor{blue}{3} \cdot 16^0
+\end{equation*}
+
+\subsection{Métodos de Conversión}
+\subsubsection{Hexadecimal a Binario}
+El sistema hexadecimal es una base 16, por lo que cada dígito puede representar 4 bits. Para pasar de hexadecimal a binario, simplemente se reemplaza cada dígito por su representación en 4 bits. La tabla de conversión es la siguiente:
+
+\begin{center}
+    \begin{tabular}{cccccc} % Eliminar las líneas verticales
+       \toprule % Línea superior más gruesa
+       Hexadecimal & Binario & Hexadecimal & Binario & Hexadecimal & Binario\\
+       \midrule % Línea intermedia más fina
+       0 & 0000 & 5 & 0101 & A & 1010 \\
+       1 & 0001 & 6 & 0110 & B & 1011 \\
+       2 & 0010 & 7 & 0111 & C & 1100 \\
+       3 & 0011 & 8 & 1000 & D & 1101 \\
+       4 & 0100 & 9 & 1001 & E & 1110 \\
+         &      &   &      & F & 1111 \\
+       \bottomrule % Línea inferior más gruesa
+   \end{tabular}
+   \end{center}
+Por ejemplo, para pasar de \texttt{0x123456} a binario, simplemente se reemplaza cada dígito por su representación en 4 bits:
+\begin{center}
+    \texttt{0x123456} $\rightarrow$ \texttt{0001 0010 0011 0100 0101 0110}
+\end{center}
+
+\subsubsection{Binario a Hexadecimal}
+Para pasar de binario a hexadecimal, simplemente se agrupan los bits de a 4 y se reemplaza cada grupo por su representación en hexadecimal, teniendo en cuenta las siguientes consideraciones:
+\begin{itemize}
+    \item Si el número tiene parte decimal, se agrupan los bits de a 4 a partir del punto decimal y luego se hace la parte entera.
+    \item Si el número de bits no es múltiplo de 4, se agrega un 0 a la izquierda para completar el último grupo.
+    \item En el caso de que en la parte fraccionaria se necesite agregar ceros se agregan a la derecha.
+\end{itemize}
+Por ejemplo, para pasar de \texttt{10 1100 1101 1011.1100 0010 000} a hexadecimal:
+\begin{equation*}
+    \underbrace{0010}_{2}\underbrace{1100}_{C}\underbrace{1101}_{D}\underbrace{1011}_{B} \ \ \ \ \underbrace{1100}_{C}\underbrace{0010}_{2}\underbrace{0000}_{0}
+\end{equation*}
+\begin{equation*}
+    (10110011011011.11000010000)_2 = 0x2CDB.C20 
+\end{equation*}
+
+\subsubsection{Hexadecimal a Decimal}
+Para pasar de hexadecimal a decimal, simplemente se reemplaza cada dígito por su representación en decimal y se multiplica por la potencia de 16 correspondiente. Por ejemplo, para pasar de \texttt{0x123456} a decimal:
+\begin{equation*}
+    0x123456 = 1 \cdot 16^5 + 2 \cdot 16^4 + 3 \cdot 16^3 + 4 \cdot 16^2 + 5 \cdot 16^1 + 6 \cdot 16^0 = 1193046
+\end{equation*}
+
+\subsubsection{Decimal a Binario}
+Para pasar de decimal a binario, simplemente se divide el número por 2 y se toma el resto. Luego se divide el cociente por 2 y se toma el resto, y así sucesivamente hasta que el cociente sea 0. Luego se toman los restos en orden inverso. Por ejemplo, para pasar de 59 a binario:
+\begin{equation*}
+    59 = 1 \cdot 2^5 + 1 \cdot 2^4 + 0 \cdot 2^3 + 1 \cdot 2^2 + 1 \cdot 2^1 + 1 \cdot 2^0 = 111011
+\end{equation*}
+
+\subsection{Complemento a 2 para números negativos}
+El complemento a 2 es una forma de representar números negativos en binario. Para obtener el complemento a 2 de un número negativo, primero se agregan ceros a la izquierda para \textbf{completar la cantidad de bits} que de el registro, luego se \textbf{invierten todos los bits} y \textbf{se le suma 1 al resultado}.
+Por ejemplo, para obtener el complemento a 2 de -121 en 8 bits:
+\begin{align*}
+    121/2 &= 60 \quad \text{residuo } 1\\
+    60/2 &= 30 \quad \text{residuo } 0\\
+    30/2 &= 15 \quad \text{residuo } 0\\
+    15/2 &= 7 \quad \text{residuo } 1 \quad \quad \Rightarrow 01111001 \rightarrow 10000110 + 1 = 10000111 \\
+    7/2 &= 3 \quad \text{residuo } 1\\
+    3/2 &= 1 \quad \text{residuo } 1\\
+    1/2 &= 0 \quad \text{residuo } 1
+\end{align*}
+
+\subsubsection{Convertir decimal negativo a binario con complemento a 2}
+\begin{enumerate}
+    \item Calcular el valor absoluto del número en binario.
+    \item Completar con ceros a la izquierda para que el número tenga la cantidad de bits que se desea.
+    \item Aplicar el complemento a 2.
+\end{enumerate}
+
+\subsubsection{Convertir binario con complemento a 2 a decimal}
+\begin{enumerate}
+    \item Si el bit más significativo es 1, el número es negativo. Se aplica el complemento a 2 para obtener el valor absoluto.
+    \item Se multiplica cada bit por la potencia de 2 correspondiente y se suma.
+\end{enumerate}
+
+\subsection{Suma de números binarios}
+La suma de dos números binarios se realiza de la misma forma que la suma de dos números decimales, pero con la diferencia de que el acarreo se produce cuando el resultado de la suma de dos bits es $2$ o más. En este caso, el bit de la suma se coloca en la posición correspondiente y se lleva un acarreo a la posición siguiente.
+Por ejemplo, la suma de $1011$ y $1101$ se realiza de la siguiente forma:
+\begin{table}[h]
+    \centering
+    \begin{tabular}{cccccc}
+        & 1 & 0 & 1 & 1 & (11) \\
+        + & 1 & 1 & 0 & 1 & (13) \\ \hline
+        1 & 0 & 0 & 0 & 0 & (24)
+    \end{tabular}
+\end{table}
+El resultado es $10000$ en binario, que es igual a $16$ en decimal.
+Hay que tener en cuenta las siguientes reglas:
+\begin{itemize}
+    \item $0 + 0 = 0$
+    \item $0 + 1 = 1$
+    \item $1 + 0 = 1$
+    \item $1 + 1 = 10$
+\end{itemize}
+
+\subsection{Resta de números binarios}
+La resta de dos números binarios se realiza de la misma forma que la resta de dos números decimales, pero con la diferencia de que el préstamo se produce cuando el resultado de la resta de dos bits es negativo. En este caso, se toma prestado un bit de la posición siguiente.
+Por ejemplo, la resta de $1101$ y $1011$ se realiza de la siguiente forma:
+\begin{table}[h]
+    \centering
+    \begin{tabular}{cccccc}
+        & 1 & 1 & 0 & 1 & (13) \\
+        - & 1 & 0 & 1 & 1 & (11) \\ \hline
+        0 & 1 & 0 & 0 & 0 & (2)
+    \end{tabular}
+\end{table}
+El resultado es $100$ en binario, que es igual a $4$ en decimal.
+Hay que tener en cuenta las siguientes reglas:
+\begin{itemize}
+    \item $0 - 0 = 0$
+    \item $0 - 1 = 1$ (y llevamos 1 )
+    \item $1 - 0 = 1$
+    \item $1 - 1 = 0$
+\end{itemize}
+
+\subsection{Multiplicación de números binarios}
+La multiplicación de dos números binarios se realiza teniendo en cuenta dos reglas, la primera regla dice. \textbf{Todo número multiplicado por cero es igual a cero} y la segunda, que \textbf{uno por uno, es igual a uno.} Luego, el producto se puede hacer de la misma forma a la que se hace en el sistema decimal, esto consiste en multiplicar el multiplicando por cada uno de los dígitos del multiplicador y luego se realiza la suma de los productos.
+Por ejemplo, la multiplicación de $110$ y $10$ se realiza de la siguiente forma:
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ccccc}
+        &   & 1 & 1 & 0 \\
+        & x &   & 1 & 0 \\ \hline
+        &   & 0 & 0 & 0 \\
+        + & 1 & 1 & 0 &  \\ \hline
+        & 1 & 1 & 0 & 0
+    \end{tabular}
+\end{table}
+
+\subsection{Conversiones de bases}
+El proceso de convertir un número de un sistema numérico a otro se realiza plantenado el número en el sistema original y luego se divide sucesivamente por la base del sistema al que se quiere convertir, tomando el residuo de cada división. El resultado se obtiene tomando los residuos en orden inverso. Por ejemplo, para convertir el número $23$ en base $10$ a base $2$, se realiza el siguiente proceso:
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c|c}
+        \textbf{División} & \textbf{Cociente} & \textbf{Residuo} \\ \hline
+        23                & 11                & 1                \\
+        11                & 5                 & 1                \\
+        5                 & 2                 & 1                \\
+        2                 & 1                 & 0                \\
+        1                 & 0                 & 1
+    \end{tabular}
+\end{table}
+Por lo tanto el número $23$ en base $10$ es igual a $10111$ en base $2$. Para convertir un número de base $2$ a base $10$, se realiza el proceso inverso, multiplicando cada dígito por la potencia de $2$ correspondiente a su posición y sumando los resultados.
+
+\begin{mdframed}[backgroundcolor=gray!10,linewidth=0]
+    La conversión de enteros decimales a cualquier base $r$ se puede realizar mediante el algoritmo de la división sucesiva. El algoritmo consiste en dividir el número decimal por la base $r$ y tomar el residuo. Luego, se divide el cociente obtenido por la base $r$ y se toma el residuo. Este proceso se repite hasta que el cociente sea cero. El número en base $r$ se obtiene tomando los residuos en orden inverso.
+\end{mdframed}
+
+\subsection{Sistema IEEE 754}
+El sistema IEEE 754 es un estándar para la representación de números en punto flotante. Este sistema establece las caracteristicas de las tres partes de un número en punto flotante: el \textbf{signo}, \textbf{exponente} y \textbf{fracción (mantisa)}. Se enfoca en el método de precisión simple que utiliza 32 bits.
+
+\subsubsection{Características}
+\begin{center} \textbf{Bit de signo:} \end{center}
+El bit de signo es el primer bit del número en punto flotante. \textbf{Si el bit de signo es 0}, el número es \textbf{positivo}, \textbf{si es 1}, el número es \textbf{negativo}.    
+\begin{center} \textbf{Exponente:} \end{center}
+Indica cuántos “lugares” se debe desplazar hacia la derecha o hacia la izquierda la coma binaria de la parte significativa. El exponente de un número puede ser tanto positivo como negativo. En el caso de la precisión simple, el exponente se representa con 8 bits y se suma 127 al valor del exponente para obtener el valor.
+\begin{center} \textbf{Mantisa o parte fraccionaria:} \end{center}
+La mantisa es la parte fraccionaria del número en punto flotante. En el caso de la precisión simple, la mantisa se representa con 23 bits. Debe ser normalizada, eso se logra moviendo la coma binaria a la izquierda hasta que el primer bit sea 1.
+\begin{equation*}
+    1,xxxxx \times 2^{yyyy}
+\end{equation*}
+Al hacer esto, se debe adaptar el exponente para que el valor no se modifique, es decir, el exponente será ahora \textbf{la cantidad de veces que se movió la coma binaria a la izquierda}.
+
+\subsection{Convertir de decimal a IEEE 754}
+\begin{enumerate}
+    \item Determinar el bit de signo.
+    \item Convertir la parte entera y la parte fraccionaria a binario.
+    \item Normalizar.
+    \item Encontrar el exponente moviendo la coma y sumando 127, expresado en binario.
+    \item Encontrar la parte fraccionaria.
+    \item Conformar el número en punto flotante.
+\end{enumerate}
+
+\subsection{Convertir de IEEE 754 a decimal}
+\begin{enumerate}
+    \item Dividir el número en punto flotante en sus tres partes.
+    \item Encontrar el bit de signo.
+    \item Encontrar el exponente y restarle 127.
+    \item Desnormalizar el número y pasarlo a decimal.
+\end{enumerate}
+
+\subsection{Ejemplo de conversión de decimal a IEEE 754 - Completo}
+Se busca convertir el número $723.125_{10}$ a IEEE 754.
+\begin{enumerate}
+    \item El bit de signo es 0, ya que el número es positivo.
+    \item Se convierte la parte entera y la parte fraccionaria a binario.
+    \begin{itemize}
+        \item Parte entera:
+        \begin{align*}
+            723 \div 2 &= 361 \text{ residuo } 1 \\
+            361 \div 2 &= 180 \text{ residuo } 1 \\
+            180 \div 2 &= 90 \text{ residuo } 0 \\
+            90 \div 2 &= 45 \text{ residuo } 0 \\
+            45 \div 2 &= 22 \text{ residuo } 1 \\
+            22 \div 2 &= 11 \text{ residuo } 0 \\
+            11 \div 2 &= 5 \text{ residuo } 1 \\
+            5 \div 2 &= 2 \text{ residuo } 1 \\
+            2 \div 2 &= 1 \text{ residuo } 0 \\
+            1 \div 2 &= 0 \text{ residuo } 1 \\
+        \end{align*}
+        Por lo que la parte entera en binario es $1011010011$.
+        \item Parte fraccionaria:
+        \begin{align*}
+            0.125 \times 2 &= 0.25 \\
+            0.25 \times 2 &= 0.5 \\
+            0.5 \times 2 &= 1
+        \end{align*}
+        Por lo que la parte fraccionaria en binario es $001$.
+    \end{itemize}
+    El número en binario es $1011010011.001$.
+    \item Para normalizar movemos la coma tantos lugares como sea necesario para que quede un uno seguido por una parte fraccionaria.
+    \begin{itemize}
+        \item \textbf{Sin normalizar:} $1011010011.001 \times 2^0$
+        \item \textbf{Normalizado:} $1.011010011001 \times 2^{10}$
+    \end{itemize}
+    \item El exponente es la cantidad de veces que se movió la coma binaria a la izquierda, en este caso, 10 veces. Por lo que el exponente es $127 + 10 = 137_{10} = 10001001_2$.
+    \item La parte fraccionaria se compone por los 23 bits que siguen a la coma decimal del número normalizado.
+    \begin{equation*}
+        01101001100100000000000
+    \end{equation*}
+    \item Para conformar el número en punto flotante, se coloca el bit de signo, el exponente y la parte fraccionaria.
+    \begin{equation*}
+        0 \ 10001001 \ 01101001100100000000000
+    \end{equation*}
+\end{enumerate} 

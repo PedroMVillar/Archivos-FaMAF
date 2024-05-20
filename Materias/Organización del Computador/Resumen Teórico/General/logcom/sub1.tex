@@ -1,0 +1,50 @@
+\subsection{Producto de Sumas y Suma de Productos (Maxitérminos y Mintérminos)}
+Las funciones lógicas se pueden expresar de dos formas diferentes, como una suma de productos o como un producto de sumas. La forma de obtener dicha expresión se basa en identificar que valores de salida tomarán el valor de $1$ y el valor de $0$.
+\newline Supongamos que se tiene una función lógica de tres variables $x$, $y$ y $z$, con la siguiente tabla de verdad:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ccc|c}
+        \toprule
+        \textbf{x} & \textbf{y} & \textbf{z} & \textbf{S}\\
+        \midrule
+        0 & 0 & 0 & 0\\
+        0 & 0 & 1 & 1\\
+        0 & 1 & 0 & 1\\
+        0 & 1 & 1 & 0\\
+        1 & 0 & 0 & 1\\
+        1 & 0 & 1 & 0\\
+        1 & 1 & 0 & 0\\
+        1 & 1 & 1 & 1\\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{enumerate}
+    \item Para expresar como \textbf{suma de productos}, se toman los minitérminos que hacen que la función devuelva $1$, luego se suman los minitérminos.
+    \item Para expresar como \textbf{producto de sumas}, se toman los maxitérminos que hacen que la función devuelva $0$, luego se multiplican los maxitérminos.
+\end{enumerate}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{cccccc}
+        \toprule
+        \textbf{x} & \textbf{y} & \textbf{z} & \textbf{S} & \textbf{Minterminos} & \textbf{Maxiterminos}\\
+        \midrule
+        0 & 0 & 0 & 0 & $m_0 = x'y'z'$ & $M_0 = x+y+z$\\
+        0 & 0 & 1 & 1 & $m_1 = x'y'z$ & $M_1 = x+y+z'$\\
+        0 & 1 & 0 & 1 & $m_2 = x'yz'$ & $M_2 = x+y'+z$\\
+        0 & 1 & 1 & 0 & $m_3 = x'yz$ & $M_3 = x+y'+z'$\\
+        1 & 0 & 0 & 1 & $m_4 = xy'z'$ & $M_4 = x'+y+z$\\
+        1 & 0 & 1 & 0 & $m_5 = xy'z$ & $M_5 = x'+y+z'$\\
+        1 & 1 & 0 & 0 & $m_6 = xyz'$ & $M_6 = x'+y'+z$\\
+        1 & 1 & 1 & 1 & $m_7 = xyz$ & $M_7 = x'+y'+z'$\\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+Con esto se tienen las formas canónicas de la función lógica, las cuales se pueden simplificar utilizando mapas de Karnaugh.
+\begin{itemize}
+    \item \textbf{Suma de productos:} $S = m_1 + m_2 + m_4 + m_7 = x'y'z + x'yz' + xy'z' + xyz$,
+    \item \textbf{Producto de sumas:} $S = M_0 \cdot M_3 \cdot M_5 \cdot M_6 = (x+y+z)(x+y'+z')(x'+y+z')(x'+y'+z)$.
+\end{itemize}

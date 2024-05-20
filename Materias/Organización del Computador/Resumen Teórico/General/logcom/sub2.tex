@@ -1,0 +1,174 @@
+\subsection{Mapas de Karnaugh}
+\begin{mdframed}[backgroundcolor=gray!10,linewidth=0]
+    Los mapas de Karnaugh son una herramienta útil que nos permite aplicar un método de simplificación de funciones lógicas.
+\end{mdframed}
+
+El Mapa de Karnaugh tiene la característica de que puede ser visto como una representación bidimensional de una tabla de verdad. En la tabla de verdad, se colocan las variables por columnas y las combinaciones de tales variables determinan un valor de salida, 0 o 1, sin embargo, en el mapa las variables se colocan como si de un plano cartesiano se tratara, respetando cada una de las combinaciones que de ellas se generan, y colocando en la intersección de las combinaciones de las variables, el valor de salida.
+
+
+\newpage
+\begin{figure}[h]
+    \centering
+    \begin{karnaugh-map}[4][4][1][$w$][$z$][$y$][$x$]
+        \minterms{0,1,2,3,4,8,9,11,12}
+        \autoterms[0]
+        \implicant{0}{8}{red}
+        \implicant{0}{2}{blue}
+        \implicant{0}{1}{green}
+    \end{karnaugh-map}
+    \caption{Ejemplo de un mapa de Karnaugh}
+\end{figure}
+
+Los mapas muestran la relación que existe entre  las entradas y las salidas de un circuito lógico, si se aplica adecuadamente el resultado será el más simplificado posible. Pueden ser utilizados para cualquier número de variables de entrada sin embargo se recomienda un máximo de seis variables.
+
+\subsubsection{Representación de tabla de verdad en un mapa de Karnaugh}
+
+Las tablas de la verdad se pueden representar en un mapa de Karnaugh, para ello se deben seguir los siguientes pasos:
+\begin{enumerate}
+    \item Se deben identificar los términos de la tabla de verdad que son 1.
+    \item Se deben identificar los términos de la tabla de verdad que son 0.
+    \item Se deben identificar los términos de la tabla de verdad que son 1 y que se pueden agrupar.
+    \item Se deben identificar los términos de la tabla de verdad que son 0 y que se pueden agrupar.
+\end{enumerate}
+
+\begin{mdframed}[backgroundcolor=gray!10,linewidth=0]
+    Observaciones:
+    \begin{itemize}
+        \item Los términos de la tabla de verdad que son 1 se representan en el mapa de Karnaugh con un $1$, y sirven para expresar a la función como una suma de productos.
+        \item Los términos de la tabla de verdad que son 0 se representan en el mapa de Karnaugh con un $0$ y sirven para expresar a la función como un producto de sumas.
+    \end{itemize}
+\end{mdframed}
+
+\newpage
+\subsubsection{Ejemplo de representación de tabla de verdad en un mapa de Karnaugh}
+
+Supongamos que se tiene la siguiente tabla de la verdad:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ccccc}
+        \toprule
+        \textbf{x} & \textbf{y} & \textbf{z} & \textbf{w} & \textbf{S}\\
+        \midrule
+        0 & 0 & 0 & 0 & 0\\
+        0 & 0 & 0 & 1 & 1\\
+        0 & 0 & 1 & 0 & 1\\
+        0 & 0 & 1 & 1 & 0\\
+        0 & 1 & 0 & 0 & 1\\
+        0 & 1 & 0 & 1 & 0\\
+        0 & 1 & 1 & 0 & 0\\
+        0 & 1 & 1 & 1 & 1\\
+        1 & 0 & 0 & 0 & 1\\
+        1 & 0 & 0 & 1 & 0\\
+        1 & 0 & 1 & 0 & 0\\
+        1 & 0 & 1 & 1 & 1\\
+        1 & 1 & 0 & 0 & 0\\
+        1 & 1 & 0 & 1 & 1\\
+        1 & 1 & 1 & 0 & 1\\
+        1 & 1 & 1 & 1 & 0\\
+        \bottomrule
+    \end{tabular}
+\end{table}
+Para hacer un mapa de Karnaugh, primero se separan las variabes $xy$ y $zw$ y se colocan en el mapa de la siguiente forma:
+
+\begin{figure}[h]
+    \centering
+    \begin{karnaugh-map}[4][4][1][$w$][$z$][$y$][$x$]
+        %\minterms{3,4,5,6,7,9,12,13,14}
+        \autoterms[-]
+    \end{karnaugh-map}
+    \caption{Mapa de Karnaugh para las variables $xy$}
+\end{figure}
+
+\newpage
+Luego identificamos los términos de la tabla de verdad que son 1 y los colocamos en el mapa de Karnaugh.
+\newline Por ejemplo esta linea de la tabla
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ccccc}
+        \toprule
+        \textbf{x} & \textbf{y} & \textbf{z} & \textbf{w} & \textbf{S}\\
+        \midrule
+        0 & 0 & 0 & 1 & 1\\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+Se coloca en el mapa de Karnaugh en la posición donde $xy$ toma $00$ y $zw$ toma $01$.
+
+\begin{figure}[h]
+    \centering
+    \begin{karnaugh-map}[4][4][1][$w$][$z$][$y$][$x$]
+        \minterms{1}
+        \autoterms[0]
+        \implicant{1}{1}{red}
+    \end{karnaugh-map}
+    \caption{Ejemplo de representación}
+\end{figure}
+
+Pasar por cada linea de la tabla de verdad y colocar los términos en el mapa de Karnaugh. Los términos que no son $1$ se colocan como $0$ en el mapa de Karnaugh.
+
+\begin{figure}[h]
+    \centering
+    \begin{karnaugh-map}[4][4][1][$x$][$y$][$z$][$w$]
+        \minterms{1,2,4,7,8,11,13,14}
+        \autoterms[0]
+    \end{karnaugh-map}
+    \caption{Mapa de Karnaugh completo del ejemplo.}
+\end{figure}
+
+\subsubsection{Agrupación de términos}
+
+Para simplificar la función lógica, se deben agrupar los términos que son 1 en el mapa de Karnaugh. Los términos se pueden agrupar siguiendo las siguientes reglas:
+
+\begin{enumerate}
+    \item Los grupos deben contener una cantidad de elementos igual a potencias de 2. Es decir, los grupos solo podrán realizarse con cantidades de celdas iguales a: 1, 2, 4, 8, 16, 32, etc.
+    \item Se deben generar grupos con combinaciones de variables adyacentes, es decir, sólo debe de haber un cambio entre cada una de las combinaciones, por ejemplo la combinación $ABC'$ es adyacente con $AB'C'$ , ya que sólo cambia la variable $B$.
+    \item Grupos en las posiciones en los extremos y esquinas del mapa. Las posiciones de los extremos y las esquinas son adyacentes, por lo que se pueden agrupar. Esta adyacencia se debe a que el mapa de Karnaught puede ser visto como un toroide.
+    \item Grupos de unos darán lugar a una suma de productos o mini términos.
+    \item Grupos de ceros darán lugar a un producto de sumas o maxi términos.
+    \item Los grupos deben ser lo más grande posible. Se buscará realizar grupos con la mayor cantidad de elementos posibles, entre más grande el grupo, se obtiene una función más simplificada. 
+    \item No se pueden generar grupos en diagonal. Solo se permitirán grupos en vertical y horizontal dentro del mapa.
+    \item Puede existir solapamiento de grupos, siempre y cuando exista al menos un elemento que no haya sido agrupado anteriormente.
+    \item No deben existir grupos redundantes, es decir, no se puede realizar un grupo dentro de otro grupo, y no se puede realizar un grupo con elementos que ya hayan sido completamente agrupados en otros conjuntos.
+\end{enumerate}
+
+Por ejemplo, si se tiene este mapa de Karnaugh:
+
+\begin{figure}[h]
+    \centering
+    \begin{karnaugh-map}[4][4][1][$x$][$y$][$z$][$w$]
+        \minterms{4,12,6,14,0,2}
+        \autoterms[0]
+    \end{karnaugh-map}
+    \caption{Mapa de Karnaugh para agrupar.}
+\end{figure}
+
+Se debería agrupar de la siguiente forma:
+
+\begin{figure}[h]
+    \centering
+    \begin{karnaugh-map}[4][4][1][$w$][$z$][$y$][$x$]
+        \minterms{4,12,6,14,0,2}
+        \autoterms[0]
+        \implicantedge{0}{4}{2}{6}{green}
+        \implicantedge{4}{12}{6}{14}{red}
+    \end{karnaugh-map}
+    \caption{Mapa de Karnaugh agrupado.}
+    \label{fig:karnaugh_agrupado}
+\end{figure}
+
+\newpage
+\subsubsection{Simplificación de la función lógica}
+Para la simplificación de la función lógica, se usan los grupos que se han formado en el mapa de Karnaugh. Cada grupo se convierte en un término de la función lógica, y se deben sumar los términos que se obtienen de los grupos, teniendo en cuenta lo siguiente:
+
+\begin{enumerate}
+    \item Si un grupo es de una sola celda, se incluye igualmente en la función lógica.
+    \item En el grupo, las variables que cambian de valor "se me van" del término, y las que no cambian su valor permanecen.
+    \item Si un grupo se solapa con otro, no cambia la forma de trabajarlos, cada grupo es un término distinto.
+\end{enumerate}
+
+Por ejemplo, tomando el mapa de Karnaugh anterior, se obtiene la siguiente función lógica:
+\begin{equation*}
+    F = x'w' + yw'
+\end{equation*}

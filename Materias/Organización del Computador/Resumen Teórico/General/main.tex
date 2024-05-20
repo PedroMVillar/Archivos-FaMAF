@@ -1,0 +1,219 @@
+\documentclass{scrreprt}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage{amsmath,amsthm,amssymb,amsfonts, fancyhdr, color, comment, graphicx, environ}
+\usepackage[explicit]{titlesec}
+\usepackage{soul}
+\usepackage[top=1.8cm, bottom=1.5cm, left=1.5cm, right=1.5cm]{geometry}
+\usepackage{karnaugh-map}
+\usepackage{booktabs}
+\usepackage{mdframed}
+\usepackage{fix-cm}
+\usepackage{tabularx}
+\usepackage{tikz, fouriernc}
+\usetikzlibrary{calc}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{lime}{RGB}{0,0,128}
+\definecolor{titleblue}{HTML}{4a7aa4}
+\setlength{\parindent}{0pt}
+
+\newbox\TitleUnderlineTestBox
+\newcommand*\TitleUnderline[1]
+  {%
+    \bgroup
+    \setbox\TitleUnderlineTestBox\hbox{\colorbox{titleblue}\strut}%
+    \setul{\dimexpr\dp\TitleUnderlineTestBox-.3ex\relax}{.3ex}%
+    \ul{#1}%
+    \egroup
+  }
+\newcommand*\SectionNumberBox[1]
+  {%
+    \colorbox{titleblue}
+      {%
+        \makebox[2.5em][c]
+          {%
+            \color{white}%
+            \strut
+            \csname the#1\endcsname
+          }%
+      }%
+    \TitleUnderline{\ \ \ }%
+  }
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{titleblue}}
+  {\SectionNumberBox{section}}
+  {0pt}
+  {\TitleUnderline{#1}}
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{titleblue}}
+  {\SectionNumberBox{subsection}}
+  {0pt}
+  {\TitleUnderline{#1}}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{titleblue}}
+  {\SectionNumberBox{subsubsection}}
+  {0pt}
+  {\TitleUnderline{#1}}
+
+  \definecolor{numbercolor}{gray}{0.7}
+
+  \makeatletter
+  \renewcommand\chapterheadstartvskip{\vskip50pt}
+  
+  \newcommand\chaptitlefont{%
+    \fontfamily{pbk}\fontseries{db}%
+    \fontshape{n}\fontsize{25}{35}\selectfont\raggedleft}
+  
+  \newcommand\chapnumfont{%
+    \fontfamily{pbk}\fontseries{m}\fontshape{n}%
+    \fontsize{1in}{0in}\selectfont\color{titleblue}}
+  
+  \renewcommand\chapterheadendvskip{\par\vskip2mm\hrule\vskip40pt}
+  
+  \renewcommand*{\@@makechapterhead}[1]{\chapterheadstartvskip
+    {%
+      \setlength{\parindent}{\z@}\setlength{\parfillskip}{\fill}%
+      \normalfont\sectfont\nobreak\size@chapter{}%
+      \if@chapterprefix
+        \let\@tempa\raggedsection
+      \else
+        \let\@tempa\@hangfrom
+      \fi
+      \@tempa{\ifnum \c@secnumdepth >\m@ne%
+            \if@chapterprefix
+              \expandafter\size@chapterprefix
+            \else
+              \expandafter\size@chapter
+            \fi
+            \if@chapterprefix
+              \size@chapterprefix{}\endgraf\nobreak\vskip.5\baselineskip
+            \fi
+        \fi
+      }%
+  \begin{tabularx}{\textwidth}{Xl}
+  {\parbox[b]{\linewidth}{\chaptitlefont #1}}
+  & \raisebox{-15pt}{\chapnumfont\thechapter}%
+  \end{tabularx}%
+   \nobreak\chapterheadendvskip
+  }%
+  }
+  \renewcommand*{\@@makeschapterhead}[1]{%
+    \chapterheadstartvskip%
+    {\normalfont\sectfont\nobreak\size@chapter{}%
+      \setlength{\parindent}{\z@}\setlength{\parfillskip}{\fill}%
+      \raggedsection \interlinepenalty \@M 
+  \begin{tabularx}{\textwidth}{X}%
+  {\parbox[b]{\linewidth}{\chaptitlefont #1}%
+  \vphantom{\raisebox{-15pt}{\chapnumfont 1}}}
+  \end{tabularx}%
+  \par}%
+    \nobreak\chapterheadendvskip%
+  }
+  \makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[L]{\textbf{Villar Pedro}}
+\fancyhead[R]{\textbf{FaMAF, Org. del Computador}}
+\fancyhead[C]{\thepage}
+
+%% Cambiar nombre de la tabla de contenidos
+
+\begin{document}
+
+%-------------------------------------------%
+% Portada del documento
+\begin{titlepage}
+  \begin{tikzpicture}[overlay,remember picture]
+      \fill[lime!10] (current page.south east) rectangle (current page.north west);
+      \fill[lime,even odd rule] (current page.south west) rectangle ([xshift=1.5cm]current page.north west) ($(current page.north west)!.5!(current page.south west)$) arc(180:270:3) ($(current page.north west)!.5!(current page.south west)$) arc(270:450:3.5) ([yshift=7cm]$(current page.north west)!.5!(current page.south west)$)  arc(180:90:3);
+%           \draw[lime!10,double=lime!10,double distance=2mm] (current page.south west) --+ (2,2) --+ (-2,6) --+ (2,8) --+ (-2,9) --+ (2,13) --+ (-2,18) --+ (2,30);
+          \draw[lime,thin] (13,-1) node[lime,above left] {\Huge Org. del Computador} --+ (0,3) node[lime,below right] {\Huge 1C-2024};
+      \node[yshift=-5cm,xslant=1,yscale=1.6,lime!40,opacity=.2] at (9.5,-6.5) {\scalebox{6}{Apunte}};
+      \node[yshift=-5cm,lime] at (8,-7) {\scalebox{6}{Apunte}};
+          \draw[lime,fill=titleblue!20] ([xshift=-1cm]current page.north east) -- ([yshift=-1cm]current page.north east) -- ([yshift=-2cm]current page.north east) -- ([xshift=-2cm]current page.north east);
+      \path ([xshift=-1cm]current page.north east) -- ([yshift=-1cm]current page.north east) node[midway,sloped,below=.1cm,lime] {Villar Pedro};
+  \end{tikzpicture}
+\end{titlepage}
+%-------------------------------------------%
+
+\tableofcontents
+\newpage
+
+\listoffigures
+\newpage
+%-------------------------------------------%
+\chapter{Primer Parcial}
+
+\textbf{Fecha:} 24/04/2024
+\vspace{1cm}
+
+\textbf{Prácticos:} 1, 2, 3, 4 y 5.
+\vspace{1cm}
+
+\textbf{Temas:}
+\begin{itemize}
+    \item \hyperref[sec:num]{Sistemas de Numeración.}
+    \item \hyperref[sec:bool]{Álgebra de Boole.}
+    \item \hyperref[sec:logica]{Lógica Combinacional.}
+    \item \hyperref[sec:mem]{Direccionamiento y Lógica de Decodificación de Memorias.}
+    \item \hyperref[sec:sec]{Circuitos secuenciales.}
+\end{itemize}
+
+\newpage  
+%-------------- Sistemas de Numeración --------------%
+\section{Sistemas de Numeración}\label{sec:num}
+\input{num/main.tex}
+%-------------------------------------------------%
+
+\newpage
+%-------------- Álgebra de Boole --------------%
+\section{Álgebra de Boole}\label{sec:bool}
+\input{bool/main.tex}
+%-------------------------------------------------%
+
+\newpage
+%-------------- Lógica Combinacional --------------%
+\section{Lógica Combinacional}\label{sec:logica}
+\input{logcom/sub1.tex}
+
+\input{logcom/sub2.tex}
+
+\input{logcom/sub3.tex}
+
+\input{logcom/sub4.tex}
+
+\input{logcom/sub5.tex}
+
+\input{logcom/sub6.tex}
+%-------------------------------------------------%
+
+
+\newpage
+%-- Direccionamiento y lógica de Decodificación de Memorias --%
+\section{Direccionamiento y Lógica de Decodificación de Memorias}\label{sec:mem}
+
+\input{mem/sub1.tex}
+
+\input{mem/sub2.tex}
+
+\input{mem/sub3.tex}
+
+\input{mem/sub4.tex}
+
+\input{mem/sub5.tex}
+
+\input{mem/sub6.tex}
+%-------------------------------------------------%
+
+\newpage
+%-------------- Circuitos Secuenciales --------------%
+\section{Circuitos Secuenciales}\label{sec:sec}
+
+\input{sec/main.tex}
+%-------------------------------------------------%
+
+\end{document}
