@@ -7,11 +7,16 @@
 
 char *string_clone(const char *str) {
     char *clone=NULL;
-    /*
-     * COMPLETAR
-     *
-     */
-    return output;
+    size_t length = strlen(str);
+    clone = malloc((length + 1) * sizeof(char));
+    if (clone == NULL) {
+        return NULL;
+    }
+    for (size_t i = 0; i < length; i++) {
+        clone[i] = str[i];
+    }
+    clone[length] = '\0';
+    return clone;
 }
 
 

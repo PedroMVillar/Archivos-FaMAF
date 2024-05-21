@@ -6,13 +6,15 @@
 #define MAX_LENGTH 1820
 
 char *string_clone(const char *str, size_t length) {
-    char clon[MAX_LENGTH];
-    char *output=clon;
-    for (size_t i=0; i<length;i++) {
-        output[i] = str[i];
+    char *clon = malloc((length + 1) * sizeof(char));
+    if (clon == NULL) {
+        return NULL;
     }
-    output[length] = '\0';
-    return output;
+    for (size_t i = 0; i < length; i++) {
+        clon[i] = str[i];
+    }
+    clon[length] = '\0';
+    return clon;
 }
 
 
@@ -71,3 +73,8 @@ int main(void) {
     return EXIT_SUCCESS;
 }
 
+/*
+Si se cambia char original[] por char *original, el programa tendrá un comportamiento indefinido
+debido a que se está intentando modificar una cadena de caracteres que está en una sección de
+memoria de solo lectura.
+*/
