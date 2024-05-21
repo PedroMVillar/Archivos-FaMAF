@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <assert.h>
+#include <stdbool.h>
 #include "stack.h"
 
 struct _s_stack {
@@ -7,6 +8,11 @@ struct _s_stack {
     unsigned int size;      // Cantidad de elementos en la pila
     unsigned int capacity;  // Capacidad actual del arreglo elems
 };
+
+/* Invariante de representación */
+bool is_stack(stack s){
+    return s != NULL && s->elems != NULL;
+}   
 
 stack stack_empty(){
     stack s = (stack)malloc(sizeof(struct _s_stack));
@@ -17,6 +23,8 @@ stack stack_empty(){
 }
 
 stack stack_push(stack s, stack_elem e){
+    /* Invariante */
+    assert(is_stack(s));
     if(s->size == s->capacity){
         s->capacity *= 2;
         s->elems = (stack_elem*)realloc(s->elems, s->capacity * sizeof(stack_elem));
@@ -30,6 +38,8 @@ stack stack_push(stack s, stack_elem e){
 }
 
 stack stack_pop(stack s){
+    /* Invariante */
+    assert(is_stack(s));
     assert(s->size > 0);
     for(unsigned int i = 0; i < s->size-1; i++){
         s->elems[i] = s->elems[i+1];
@@ -43,6 +53,8 @@ unsigned int stack_size(stack s){
 }
 
 stack_elem stack_top(stack s){
+    /* Invariante */
+    assert(is_stack(s));
     assert(s->size > 0);
     return s->elems[0];
 }
@@ -52,6 +64,8 @@ bool stack_is_empty(stack s){
 }
 
 stack_elem *stack_to_array(stack s){
+    /* Invariante */
+    assert(is_stack(s));
     if (stack_is_empty(s)) {
         return NULL;
     }
