@@ -524,7 +524,7 @@ Para aproximar los datos de la tabla con un modelo de la forma \( f(x) \sim -e^{
 \[
 f(x) = -e^{ax^2+bx+c} \Rightarrow \ln(-f(x)) = ax^2 + bx + c.
 \]
-Entonces hay que aplicar dicha transformación y en vez de tener \( y \) en la tabla, se tiene \( \overline{y} = \ln(y) \), por lo que la tabla se convierte en:
+Entonces hay que aplicar dicha transformación y en vez de tener \( y \) en la tabla, se tiene \( \overline{y} = \ln(-y) \), por lo que la tabla se convierte en:
 \begin{center}
 \begin{tabular}{||r||r|r|r|r||}
 \hline
@@ -1309,5 +1309,11 @@ Visualmente, vemos que la función se aproxima a los datos:
     \caption{Aproximación de la función \( f(x) = e^x \) en el intervalo \([-1,1]\)}
     \label{fig:myplot14}
 \end{figure}
+\newpage
+\section[Unidad 5 - Integración Numérica]{Integración Numérica}
+Dada una función $f$ definida sobre un intervalo acotado $[a,b]$, queremos calcular:
+\begin{equation}
+    J(f) = \int_{a}^{b} f(x) dx
+\end{equation}
 
 \end{document}
