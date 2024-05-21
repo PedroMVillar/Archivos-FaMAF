@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #include "queue_helpers.h"
+#include "queue.h"
 
 
 queue queue_from_file(const char *filepath) {
@@ -51,17 +52,4 @@ queue queue_user_disscard(queue q) {
         q = queue_disscard(q, disscard);
     }
     return res==1 ? q: NULL;
-}
-
-queue queue_disscard(queue q, unsigned int n){
-    queue result=queue_empty();
-    unsigned int i=0;
-    while (!queue_is_empty(q)) {
-        if (i!=n) {
-            result = queue_enqueue(result, queue_first(q));
-        }
-        q = queue_dequeue(q);
-        i++;
-    }
-    return result;
 }

@@ -114,4 +114,3 @@ queue queue_destroy(queue q) {
     assert(q == NULL);
     return q;
 }
-
