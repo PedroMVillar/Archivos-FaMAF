@@ -42,7 +42,6 @@ invrep(queue q) {
 queue queue_empty(void) {
     queue q=NULL;
     q = malloc(sizeof(struct s_queue));
-    assert(invrep(q) && queue_is_empty(q));
     return q;
 }
 
