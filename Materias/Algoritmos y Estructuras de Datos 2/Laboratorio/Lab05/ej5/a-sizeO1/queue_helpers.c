@@ -29,4 +29,3 @@ queue queue_from_file(const char *filepath) {
     fclose(file);
     return q;
 }
-
