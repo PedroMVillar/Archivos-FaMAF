@@ -9,6 +9,7 @@
 \usepackage{hyperref}
 \usepackage[spanish]{babel}
 \usepackage{pgfplots} % Add this line
+\pgfplotsset{compat=1.18}
 \usepackage{fancyhdr}
 \hypersetup{
     colorlinks=true,
@@ -57,6 +58,8 @@
 \maketitle
 \newpage
 \tableofcontents
+\newpage
+\listoffigures
 \newpage
 \section[Unidad 4 - Aproximación de Funciones]{Aproximación de funciones}
 \subsection[Aproximación con n puntos]{Método de Mínimos Cuadrados}
@@ -1311,9 +1314,118 @@ Visualmente, vemos que la función se aproxima a los datos:
 \end{figure}
 \newpage
 \section[Unidad 5 - Integración Numérica]{Integración Numérica}
-Dada una función $f$ definida sobre un intervalo acotado $[a,b]$, queremos calcular:
+Dada una función $f$ definida sobre un intervalo acotado $[a,b]$, queremos calcular y aproximarlo mediante polinomios interpolantes. La integral de $f$ en el intervalo $[a,b]$ se define como:
 \begin{equation}
-    J(f) = \int_{a}^{b} f(x) dx
+    \int_{a}^{b} f(x) dx \approx \int_{a}^{b} P(x) dx
 \end{equation}
+\subsection{Reglas Simples}
+\subsubsection{Regla del Trapecio}
+Se busca integrar $\int_{a}^{b} f(x) dx$, en este método se consideran \textbf{2 puntos}: $x_0=a, x_1=b$, luego tomo $h=b-a$. De esta manera se aproxima a la función $P(x)$ usando el polinomio de interpolación de Lagrange de grado 1:
+\begin{equation}
+    P_1(x) = \frac{x-x_1}{x_0-x_1}f(x_0) + \frac{x-x_0}{x_1-x_0}f(x_1)
+\end{equation}
+y el error es:
+\begin{equation}
+    e_1(f) = \frac{f''(\xi_x)}{2!} (x-x_0)(x-x_1)
+\end{equation}
+Ahora si, buscamos aproximar la integral de $f(x)$ en el intervalo $[a,b]$ usando $P_1(x)$:
+\begin{align}
+    \int_{a}^{b} f(x) dx &\approx \int_{a}^{b} P_1(x) dx \\
+    &\approx \int_{a}^{b} \left( \frac{x-x_1}{x_0-x_1}f(x_0) + \frac{x-x_0}{x_1-x_0}f(x_1) \right) dx \\
+    &\approx \frac{h}{2} (f(a) + f(b))
+\end{align}
+Y el error de la regla del trapecio es:
+\begin{equation}
+    E_T = -\frac{h^3}{12} f''(\xi)
+\end{equation}
+Visualmente, podemos ver la regla del trapecio:
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            xlabel={$x$},
+            ylabel={$f(x)$},
+            xmin=0, xmax=2,
+            ymin=0, ymax=5,
+            axis lines=center,
+            axis on top=true,
+            domain=0:2,
+            ]
+            \addplot [mark=none,draw=blue] {-x^2 + 4*x + 1};
+            \addplot [mark=none,draw=red, fill=red, fill opacity=0.5] coordinates {(0,0) (0,1) (2,5) (2,0)} --cycle;
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Regla del trapecio}
+    \label{fig:myplot15}
+\end{figure}
+\newpage
+\subsubsection{Regla del Rectángulo}
+Se busca integrar $\int_{a}^{b} f(x) dx$, en este método se considera \textbf{1 punto}: $x_0=a$, luego tomo $h=b-a$. De esta manera se aproxima a la función $P(x)$ usando el polinomio de interpolación de Lagrange de grado 0: 
+\begin{equation}
+    P_0(x) = f(x_0)
+\end{equation}
+y el error es:
+\begin{equation}
+    e_0(f) = \frac{f'(\xi_x)}{1!} (x-x_0)
+\end{equation}
+Ahora si, buscamos aproximar la integral de $f(x)$ en el intervalo $[a,b]$ usando $P_0(x)$:
+\begin{align}
+    \int_{a}^{b} f(x) dx &\approx \int_{a}^{b} P_0(x) dx \\
+    &\approx \int_{a}^{b} f(x_0) dx \\
+    &\approx h f(a)
+\end{align}
+Y el error de la regla del rectángulo es:
+\begin{equation}
+    E_R = -\frac{h^2}{2} f'(\xi)
+\end{equation}
+Visualmente, podemos ver la regla del rectángulo:
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            xlabel={$x$},
+            ylabel={$f(x)$},
+            xmin=0, xmax=2,
+            ymin=0, ymax=5,
+            axis lines=center,
+            axis on top=true,
+            domain=0:2,
+            ]
+            \addplot [mark=none,draw=blue] {-x^2 + 4*x + 1};
+            \addplot [mark=none,draw=red, fill=red, fill opacity=0.5] coordinates {(0,0) (0,1) (2,1) (2,0)} --cycle;
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Regla del rectángulo}
+    \label{fig:myplot16}
+\end{figure}
+\newpage
+\subsubsection{Regla de Simpson}
+Se busca integrar $\int_{a}^{b} f(x) dx$, en este método se consideran \textbf{3 puntos}: $x_0=a, x_1=\frac{a+b}{2}, x_2=b$, luego tomo $h=\frac{b-a}{2}$. De esta manera se aproxima a la función $P(x)$ usando el polinomio de interpolación de Lagrange de grado 2:
+\begin{equation}
+    P_2(x) = \frac{(x-x_1)(x-x_2)}{(x_0-x_1)(x_0-x_2)}f(x_0) + \frac{(x-x_0)(x-x_2)}{(x_1-x_0)(x_1-x_2)}f(x_1) + \frac{(x-x_0)(x-x_1)}{(x_2-x_0)(x_2-x_1)}f(x_2)
+\end{equation}
+y el error es:
+\begin{equation}
+    e_2(f) = \frac{f'''(\xi_x)}{3!} (x-x_0)(x-x_1)(x-x_2)
+\end{equation}
+Ahora si, buscamos aproximar la integral de $f(x)$ en el intervalo $[a,b]$ usando $P_2(x)$:
+\begin{align}
+    \int_{a}^{b} f(x) dx &\approx \int_{a}^{b} P_2(x) dx \\
+    &\approx \int_{a}^{b} \left( \frac{(x-x_1)(x-x_2)}{(x_0-x_1)(x_0-x_2)}f(x_0) + \frac{(x-x_0)(x-x_2)}{(x_1-x_0)(x_1-x_2)}f(x_1) + \frac{(x-x_0)(x-x_1)}{(x_2-x_0)(x_2-x_1)}f(x_2) \right) dx \\
+    &\approx \frac{h}{3} (f(a) + 4f(a+h) + f(b))
+\end{align}
+Y el error de la regla de Simpson es:
+\begin{equation}
+    E_S = -\frac{h^5}{90} f^{(4)}(\xi)
+\end{equation}
+Visualmente, podemos ver la regla de Simpson:
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{images/simpson.png}
+    \caption{Regla de Simpson}
+    \label{fig:myplot18}
+\end{figure}
 
 \end{document}

@@ -7,22 +7,10 @@
 
 #include <stdbool.h>
 
-typedef int stack_elem;
-
-typedef struct _s_stack_node {
-    stack_elem e;
-    struct _s_stack_node *next;
-} stack_node;
-
-typedef struct {
-    stack_node *top;
-    unsigned int size_act;
-} stack_t;
-
 /**
 * @brief Stack type definition
 */
-typedef stack_t* stack;
+typedef struct _s_stack *stack;
 
 /**
 * @brief Stack elements type definition
@@ -39,7 +27,7 @@ stack stack_empty();
 * @brief Inserts an element at the top of the stack
 * @param s A stack
 * @param e An element to push into the stack
-* @return The new stack with 'e' at the top
+* @return The new stack with 'elem' at the top
 */
 stack stack_push(stack s, stack_elem e);
 
