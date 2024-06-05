@@ -1419,13 +1419,58 @@ Y el error de la regla de Simpson es:
     E_S = -\frac{h^5}{90} f^{(4)}(\xi)
 \end{equation}
 Visualmente, podemos ver la regla de Simpson:
-
-
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{images/simpson.png}
     \caption{Regla de Simpson}
     \label{fig:myplot18}
 \end{figure}
+
+\subsubsection{Regla del punto medio}
+Se busca integrar $\int_{a}^{b} f(x) dx$, en este método se considera \textbf{1 punto}: $x_0=\frac{a+b}{2}$, luego tomo $h=b-a$. De esta manera se aproxima a la función $P(x)$ usando el polinomio de interpolación de Lagrange de grado 0:
+\begin{equation}
+    P_0(x) = f(x_0)
+\end{equation}
+y el error es:
+\begin{equation}
+    e_0(f) = \frac{f'(\xi_x)}{1!} (x-x_0)
+\end{equation}
+Ahora si, buscamos aproximar la integral de $f(x)$ en el intervalo $[a,b]$ usando $P_0(x)$:
+\begin{align}
+    \int_{a}^{b} f(x) dx &\approx \int_{a}^{b} P_0(x) dx \\
+    &\approx \int_{a}^{b} f(x_0) dx \\
+    &\approx h f\left( \frac{a+b}{2} \right)
+\end{align}
+
+\begin{definition}{Exactitud}
+    La precisión o grado de exactitud de una fórmula o regla de cuadratura es el mayor entero no negativo n tal que la fórmula de integración es exacta para $x^k$, para todo $k = 0,\dots n$
+    \begin{itemize}
+        \item Regla del Rectángulo: Exactitud 0
+        \item Regla del punto medio: Exactitud 1
+        \item Regla del Trapecio: Exactitud 1
+        \item Regla de Simpson: Exactitud 3
+    \end{itemize}
+\end{definition}
+
+\subsection{Reglas Compuestas}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+    Regla & Fórmula & Error \\
+    \hline
+    Rectángulo & $\frac{b-a}{n} \sum_{i=0}^{n-1} f(x_i)$ & $\frac{(b-a)}{2} \frac{(b-a)}{n} f'(\mu)$ \\
+    \hline
+    Punto Medio & $2 \frac{(b-a)}{n+2} \sum_{i=0}^{n/2} f(x_2i)$ & $\frac{(b-a)}{6}  \left( \frac{(b-a)}{n+2} \right)^2 f''(\mu)$ \\
+    \hline
+    Trapecio & $\frac{(b-a)/n}{2} \left\{ f(a) + 2 \sum_{i=1}^{n-1} f(x_i) + f(b) \right\} $ & $-\frac{(b-a)}{12} \left(\frac{(b-a)}{n}\right)^2 f''(\mu)$ \\
+    \hline
+    Simpson & $\frac{(b-a)/n}{3} \left\{ f(x_0) + 2 \sum_{i=1}^{n/2-1} f(x_{2i}) + 4 \sum_{i=1}^{n/2} f(x_{2i-1}) + f(x_n) \right\}$ & $-\frac{(b-a)}{180} \left(\frac{(b-a)}{n}\right)^4 f^{(4)}(\mu)$ \\
+    \hline
+    \end{tabular}
+    \caption{Reglas compuestas}
+    \label{tab:my_label}
+\end{table}
 
 \end{document}
