@@ -226,9 +226,60 @@ proc eliminarFacturas(in/out f : Set of Factura, t : Nat)
 end fun
 ``` 
 
-![ej8](ej8.png)
+![ej7](ej7.png)
 
+```pascal
+type Persona = tuple
+				id : Nat
+				o2 : Nat
+			end tuple
 
+fun salvarPersonas(p : Set of Persona) ret res : Queue of Persona
+	var vivos : Set of Persona
+	vivos := set_copy(p)
+	var o2Actual : Nat
+	o2Actual := C
+	var salvado : Persona
+	res := empty_queue()
+	do !is_empty_queue(vivos) ->
+		salvado := seleccionarPersona(vivos)
+		set_elim(vivos, salvado)
+		enqueue(res, salvado)
+		o2Actual := o2Actual - o2Total(v) * t
+		if o2Actual <= 0 then
+			set_destroy(vivos)
+			vivos := empty_set()
+		fi 
+	od
+end fun
+
+fun seleccionarPersona(v : Set of Persona) ret res : Persona
+	var tmp : Set of Persona
+	tmp := set_copy(v)
+	var head : Persona
+	res := set_get(tmp)
+	set_elim(tmp, res)
+	do !is_empty_list(tmp) ->
+		head := set_get(tmp)
+		set_elim(tmp, head)
+		if head.o2 >= res.o2 then
+			res := head
+		fi
+	od
+end fun
+
+fun o2Total(v: Set of Persona) ret res : Nat
+	var tmp : Set of Persona
+	tmp := copy_set(v)
+	var head : Persona
+	res := 0
+	do !is_empty_set(tmp) ->
+		head := set_get(tmp)
+		set_elim(tmp, head)
+		res := res + head.o2
+	od
+end fun
+```
 
 ## Algoritmos Voraces sobre grafos (Prim y Djisktra)
 ```
