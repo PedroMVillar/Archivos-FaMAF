@@ -27,7 +27,7 @@ end fun
 
 ### Ejercicios
 
-![[Pasted image 20240604182710.png]]
+![ej3](ej3.png)
 
 ```pascal
 type Localidad = tuple
@@ -71,7 +71,7 @@ En este caso, el algoritmo funcionaría de la siguiente manera:
 6. En la quinta iteración, `head = (“Localidad5”, 7)`. Como `distSum + head.dist = 13` es mayor que `A = 10`, `prevHead` se agrega a `res`, `distSum` se actualiza a `head.dist = 7` y `prevHead` se actualiza a `head`.
 7. Al final del algoritmo, `res = [(“Localidad2”, 4), (“Localidad3”, 5), (“Localidad4”, 6)]`.
 
-![[Pasted image 20240605155433.png]]
+![ej4](ej4.png)
 ```pascal
 type ballena = tuple
 				id: Nat
@@ -122,7 +122,7 @@ proc limpiar(in/out b : Set of Ballena, in time : Nat)
 end proc
 ```
 
-![[Pasted image 20240605161810.png]]
+![ej5](ej5.png)
 
 ```pascal
 type Amigo = tuple
@@ -174,7 +174,7 @@ proc eliminarAmigos(in/out a : Set of Amigo, in dia : Nat)
 end proc
 ```
 
-![[Pasted image 20240605171152.png]]
+![ej6](ej6.png)
 
 ```pascal
 type Factura = tuple
@@ -226,7 +226,7 @@ proc eliminarFacturas(in/out f : Set of Factura, t : Nat)
 end fun
 ``` 
 
-![[Pasted image 20240606181916.png]]
+![ej8](ej8.png)
 
 
 
