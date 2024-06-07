@@ -225,24 +225,6 @@ proc eliminarFacturas(in/out f : Set of Factura, t : Nat)
 	od 
 end fun
 ``` 
-
-![ej8](ej8.png)
-
-
-
 ## Algoritmos Voraces sobre grafos (Prim y Djisktra)
 ```
 ```
-
-## Backtracking
-```
-```
-
-## Programación Dinámica
-```
-```
-
-## BFS y DFS
-```
-```
-
