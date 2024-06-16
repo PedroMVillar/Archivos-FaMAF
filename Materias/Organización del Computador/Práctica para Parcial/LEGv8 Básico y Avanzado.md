@@ -32,7 +32,7 @@
 - `Rd`: el registro de destino ocupa también 5 bits, toma valores en $[0,2^5)$.
 
 ## Instrucciones de tipo `I`
-Las instrucciones de tipo I en LEGv8 son instrucciones que operan en un registro y un valor inmediato.
+**Las instrucciones de tipo I en LEGv8 son instrucciones que operan en un registro y un valor inmediato.**
 - `ADDI Rd, Rn, #imm`: Suma el contenido del registro `Rn` y un valor inmediato (*imm*) y almacena el resultado en el registro `Rd`.
 - `SUBI Rd, Rn, #imm`: Resta un valor inmediato (*imm*) del contenido del registro `Rn` y almacena el resultado en el registro `Rd`.
 - `ANDI Rd, Rn, #imm`: Realiza una operación **AND** bit a bit en el registro `Rn` y un valor inmediato (*imm*) y almacena el resultado en el registro `Rd`.
@@ -44,3 +44,16 @@ Las instrucciones de tipo I en LEGv8 son instrucciones que operan en un registro
 - `opcode`: ocupa 10 bits,
 - `ALU_inmediate`: número no signado de 12 bits, va desde $[0,2^{12})$,
 - `Rn` y `Rd`: ocupan 5 bits cada uno se pueden poner desde $X0$ a $X31$.
+
+## Instrucciones de tipo `D`
+**Las instrucciones de tipo D en LEGv8 son instrucciones que se utilizan para la carga y almacenamiento de datos.**
+- `LDUR Rt, [Rn, #imm]`: Carga el contenido de la memoria en la dirección calculada sumando el valor inmediato (*imm*) al registro `Rn` en el registro de destino `Rt`. LDUR maneja datos de 64 bits.
+- `LDURB Rt, [Rn, #imm]`: Similar a LDUR, pero maneja datos de 8 bits (*byte*).
+- `LDURH Rt, [Rn, #imm]`: Similar a LDUR, pero maneja datos de 16 bits (*half-word*).
+- `LDURSW Rt, [Rn, #imm]`: Carga un valor de 32 bits de la memoria, lo extiende con signo a 64 bits y lo almacena en el registro `Rt`.
+- `LDXR Rt, [Rn]`: Carga el contenido de la memoria en la dirección indicada por el registro `Rn` en el registro de destino `Rt` de manera exclusiva. Esta instrucción se utiliza en operaciones atómicas.
+- `STUR Rt, [Rn, #imm]`: Almacena el contenido del registro de origen `Rt` en la memoria en la dirección calculada sumando el valor inmediato (*imm*) al registro `Rn`. STUR maneja datos de 64 bits.
+- `STURB Rt, [Rn, #imm]`: Similar a STUR, pero maneja datos de 8 bits (*byte*).
+- `STURH Rt, [Rn, #imm]`: Similar a STUR, pero maneja datos de 16 bits (*half-word*).
+- `STURW Rt, [Rn, #imm]`: Similar a STUR, pero maneja datos de 32 bits (*word*).
+- `STXR Rm, Rt, [Rn]`: Almacena el contenido del registro de origen `Rt` en la memoria en la dirección indicada por el registro `Rn` de manera exclusiva. Si la operación es exitosa, se almacena un 0 en el registro de estado `Rm`. Si no es exitosa, se almacena un 1. Esta instrucción se utiliza en operaciones atómicas.
