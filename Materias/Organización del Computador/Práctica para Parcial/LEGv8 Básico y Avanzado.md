@@ -10,11 +10,11 @@
 - `LSR Rd, Rn, Rm`: Desplaza los bits en el registro `Rn` a la derecha por el valor en el registro `Rm` y almacena el resultado en el registro `Rd`.
 ### Arithmetic Core Instruction Set
 - `FADD Rd, Rn, Rm`: Suma los valores flotantes en los registros `Rn` y `Rm` y almacena el resultado en el registro `Rd`.
-- - `FDIVS Rd, Rn, Rm`: Divide el valor flotante en el registro `Rn` por el valor flotante en el registro `Rm` y almacena el resultado en el registro `Rd`. La **S** indica que se utilizan números de precisión simple.
+- `FDIVS Rd, Rn, Rm`: Divide el valor flotante en el registro `Rn` por el valor flotante en el registro `Rm` y almacena el resultado en el registro `Rd`. La **S** indica que se utilizan números de precisión simple.
 - `FDIVD Rd, Rn, Rm`: Similar a FDIVS pero utiliza números de doble precisión.
 - `FMULS Rd, Rn, Rm`: Multiplica los valores flotantes en los registros `Rn` y `Rm` y almacena el resultado en el registro `Rd`. La **S** indica que se utilizan números de precisión simple.
 - `FMULD Rd, Rn, Rm`: Similar a FMULS pero utiliza números de doble precisión.
-- - `FSUBS Rd, Rn, Rm`: Resta el valor flotante en el registro `Rm` del registro `Rn` y almacena el resultado en el registro `Rd`. La **S** indica que se utilizan números de precisión simple.
+- `FSUBS Rd, Rn, Rm`: Resta el valor flotante en el registro `Rm` del registro `Rn` y almacena el resultado en el registro `Rd`. La **S** indica que se utilizan números de precisión simple.
 - `FSUBD Rd, Rn, Rm`: Similar a FSUBS pero utiliza números de doble precisión.
 - `MUL Rd, Rn, Rm`: Multiplica los valores en los registros `Rn` y `Rm` y almacena el resultado en el registro `Rd`.
 - `SDIV Rd, Rn, Rm`: Divide el valor en el registro `Rn` por el valor en el registro `Rm` y almacena el resultado en el registro `Rd`. Esta operación es una división con signo.
