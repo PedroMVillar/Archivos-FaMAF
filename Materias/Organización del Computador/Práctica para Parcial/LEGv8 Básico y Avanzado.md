@@ -23,3 +23,10 @@
 - `STURD Rt, [Rn, #imm]`: Similar a STURS, pero almacena un valor de doble precisión.
 - `UDIV Rd, Rn, Rm`: Divide el valor en el registro `Rn` por el valor en el registro `Rm` y almacena el resultado en el registro `Rd`. Esta operación es una división sin signo.
 - `UMULH Rd, Rn, Rm`: Multiplica los valores en los registros `Rn` y `Rm`, toma la parte alta del resultado y la almacena en el registro `Rd`. Esta operación es una multiplicación sin signo.
+### Límites 
+![[Pasted image 20240616132030.png]]
+- `opcode`: ocupa 11 bits,
+- `Rm`: el segundo registro operando ocupa 5 bits, es decir toma valores en $[0,2^5)$.
+- `shampt`: el valor de desplazamiento ocupa 6 bits, es decir toma valores en $[0,2^6)$.
+- `Rn`: el primer registro operando ocupa otros 5 bits, toma valores en $[0,2^5)$.
+- `Rd`: el registro de destino ocupa también 5 bits, toma valores en $[0,2^5)$.
