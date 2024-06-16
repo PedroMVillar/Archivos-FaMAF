@@ -6,8 +6,8 @@
 - `AND Rd, Rn, Rm`: Realiza una operación **AND** bit a bit en los registros `Rn` y `Rm` y almacena el resultado en el registro `Rd`.
 - `ORR Rd, Rn, Rm`: Realiza una operación **OR** bit a bit en los registros `Rn` y `Rm` y almacena el resultado en el registro `Rd`.
 - `EOR Rd, Rn, Rm`: Realiza una operación **XOR** bit a bit en los registros `Rn` y `Rm` y almacena el resultado en el registro `Rd`.
-- `LSL Rd, Rn, Rm`: Desplaza los bits en el registro `Rn` a la izquierda por el valor en el registro `Rm` y almacena el resultado en el registro `Rd`.
-- `LSR Rd, Rn, Rm`: Desplaza los bits en el registro `Rn` a la derecha por el valor en el registro `Rm` y almacena el resultado en el registro `Rd`.
+- `LSL Rd, Rn, <<`: Desplaza los bits en el registro `Rn` a la izquierda por el valor en el `shampt` y almacena el resultado en el registro `Rd`.
+- `LSR Rd, Rn, >>`: Desplaza los bits en el registro `Rn` a la derecha por el valor en el `shampt` y almacena el resultado en el registro `Rd`.
 ### Arithmetic Core Instruction Set
 - `FADD Rd, Rn, Rm`: Suma los valores flotantes en los registros `Rn` y `Rm` y almacena el resultado en el registro `Rd`.
 - `FDIVS Rd, Rn, Rm`: Divide el valor flotante en el registro `Rn` por el valor flotante en el registro `Rm` y almacena el resultado en el registro `Rd`. La **S** indica que se utilizan números de precisión simple.
@@ -30,3 +30,17 @@
 - `shampt`: el valor de desplazamiento ocupa 6 bits, es decir toma valores en $[0,2^6)$.
 - `Rn`: el primer registro operando ocupa otros 5 bits, toma valores en $[0,2^5)$.
 - `Rd`: el registro de destino ocupa también 5 bits, toma valores en $[0,2^5)$.
+
+## Instrucciones de tipo `I`
+Las instrucciones de tipo I en LEGv8 son instrucciones que operan en un registro y un valor inmediato.
+- `ADDI Rd, Rn, #imm`: Suma el contenido del registro `Rn` y un valor inmediato (*imm*) y almacena el resultado en el registro `Rd`.
+- `SUBI Rd, Rn, #imm`: Resta un valor inmediato (*imm*) del contenido del registro `Rn` y almacena el resultado en el registro `Rd`.
+- `ANDI Rd, Rn, #imm`: Realiza una operación **AND** bit a bit en el registro `Rn` y un valor inmediato (*imm*) y almacena el resultado en el registro `Rd`.
+- `ORRI Rd, Rn, #imm`: Realiza una operación **OR** bit a bit en el registro `Rn` y un valor inmediato (*imm*) y almacena el resultado en el registro `Rd`.
+- `EORI Rd, Rn, #imm`: Realiza una operación **XOR** bit a bit en el registro `Rn` y un valor inmediato *(imm)* y almacena el resultado en el registro `Rd`.
+### Límites
+
+![[Pasted image 20240616134842.png]]
+- `opcode`: ocupa 10 bits,
+- `ALU_inmediate`: número no signado de 12 bits, va desde $[0,2^{12})$,
+- `Rn` y `Rd`: ocupan 5 bits cada uno se pueden poner desde $X0$ a $X31$.
