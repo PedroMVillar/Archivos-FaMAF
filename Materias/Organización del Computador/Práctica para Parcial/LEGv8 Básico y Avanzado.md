@@ -107,6 +107,7 @@ loop:
 ![bf](img/bf.png)
 - `opcode`: ocupa 6 bits,
 - `BR_address`: ocupa 26 bits, signado, toma valores en $(-2^{25}, 2^{25})$.
+
 ![cbf](img/cbf.png)
 - `opcode`: ocupa 8  bits,
 - `COND_BR_address`: número signado, ocupa 19 bits,
