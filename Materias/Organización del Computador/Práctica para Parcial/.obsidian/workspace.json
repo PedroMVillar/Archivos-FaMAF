@@ -16,21 +16,8 @@
                 "file": "GreenCards Personales/version1.pdf"
               }
             }
-          },
-          {
-            "id": "828959c19f717207",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "LEGv8 Básico y Avanzado.md",
-                "mode": "source",
-                "source": false
-              }
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -96,7 +83,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "LEGv8 Básico y Avanzado.md",
+                "file": "GreenCards Personales/version1.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -113,7 +100,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "LEGv8 Básico y Avanzado.md",
+                "file": "GreenCards Personales/version1.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -136,7 +123,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "LEGv8 Básico y Avanzado.md"
+                "file": "GreenCards Personales/version1.pdf"
               }
             }
           }
@@ -157,16 +144,22 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "828959c19f717207",
+  "active": "9c84039916bb08f0",
   "lastOpenFiles": [
-    "GreenCards Personales/version1.pdf",
+    "img/rf.png",
+    "img/imf.png",
+    "img/if.png",
+    "img/df.png",
+    "img/cbf.png",
+    "img/bf.png",
+    "img",
+    "bf.png",
+    "df.png",
+    "if.png",
+    "cbf.png",
+    "imf.png",
     "LEGv8 Básico y Avanzado.md",
-    "Pasted image 20240616231434.png",
-    "Pasted image 20240616220300.png",
-    "Pasted image 20240616143042.png",
-    "Pasted image 20240616140759.png",
-    "Pasted image 20240616134842.png",
-    "Pasted image 20240616132030.png",
+    "GreenCards Personales/version1.pdf",
     "GreenCards Personales/version2.pdf",
     "GreenCards Personales",
     "Nueva carpeta"

@@ -24,7 +24,7 @@
 - `UDIV Rd, Rn, Rm`: Divide el valor en el registro `Rn` por el valor en el registro `Rm` y almacena el resultado en el registro `Rd`. Esta operación es una división sin signo.
 - `UMULH Rd, Rn, Rm`: Multiplica los valores en los registros `Rn` y `Rm`, toma la parte alta del resultado y la almacena en el registro `Rd`. Esta operación es una multiplicación sin signo.
 ### Límites 
-![[Pasted image 20240616132030.png]]
+![[rf.png]]
 - `opcode`: ocupa 11 bits,
 - `Rm`: el segundo registro operando ocupa 5 bits, es decir toma valores en $[0,2^5)$.
 - `shampt`: el valor de desplazamiento ocupa 6 bits, es decir toma valores en $[0,2^6)$.
@@ -40,7 +40,7 @@
 - `EORI Rd, Rn, #imm`: Realiza una operación **XOR** bit a bit en el registro `Rn` y un valor inmediato *(imm)* y almacena el resultado en el registro `Rd`.
 ### Límites
 
-![[Pasted image 20240616134842.png]]
+![[if.png]]
 - `opcode`: ocupa 10 bits,
 - `ALU_inmediate`: número no signado de 12 bits, va desde $[0,2^{12})$,
 - `Rn` y `Rd`: ocupan 5 bits cada uno se pueden poner desde $X0$ a $X31$.
@@ -59,7 +59,7 @@
 - `STXR Rm, Rt, [Rn]`: Almacena el contenido del registro de origen `Rt` en la memoria en la dirección indicada por el registro `Rn` de manera exclusiva. Si la operación es exitosa, se almacena un 0 en el registro de estado `Rm`. Si no es exitosa, se almacena un 1. Esta instrucción se utiliza en operaciones atómicas.
 
 ### Límites
-![[Pasted image 20240616140759.png]]
+![[df.png]]
 - `opcode`: ocupa 11 bits,
 - `DT_address`: offset inmediato, ocupa 9 bits y es signado, toma valores en $(-2^8,2^8)$.
 - `Rn` y `Rt`: los registros tienen 5 bits cada uno puede tomar desde $0$ a $31$ incluido.
@@ -104,10 +104,10 @@ loop:
 - `CBNZ Rn, label`: Salta al código etiquetado por 'label' si el valor en el registro `Rn` no es cero.
 - `B.cond label`: Salta al código etiquetado por 'label' si la condición especificada es verdadera. Las condiciones pueden ser EQ (igual), NE (no igual), GT (mayor que), LT (menor que), GE (mayor o igual), LE (menor o igual), etc.
 ### Límites
-![[Pasted image 20240616143042.png]]
+![[bf.png]]
 - `opcode`: ocupa 6 bits,
 - `BR_address`: ocupa 26 bits, signado, toma valores en $(-2^{25}, 2^{25})$.
-![[Pasted image 20240616220300.png]]
+![[cbf.png]]
 - `opcode`: ocupa 8  bits,
 - `COND_BR_address`: número signado, ocupa 19 bits,
 - `Rt`: registro como todos, toma desde $X0$ a $X31$.
@@ -157,7 +157,7 @@ Esto moverá el valor 0x5678 a los bits más bajos de X0, sin cambiar los bits m
 
 ### Límites
 
-![[Pasted image 20240616231434.png]]
+![[imf.png]]
 - `opcode`: ocupa 9 bits,
 - `LSL`: ocupa 2 bits, lo que quiere decir $00 \rightarrow 0$, $01 \rightarrow 16$, $10 \rightarrow 32$ y $11 \rightarrow 48$.
 - `MOV_immediate`: Número no signado de 16 bits, con valor en $[0,2^{16})$.
