@@ -83,7 +83,7 @@ int main() {
 
 Supongamos que los elementos del arreglo están almacenados desde la dirección de memoria X1 y que X0 es utilizado como el contador y X2 es utilizado para almacenar la suma. 
 
-```assembly
+```asm
 MOV X2, #0               // Inicializar suma a 0
 MOV X0, #0               // Inicializar contador a 0
 
@@ -112,3 +112,45 @@ loop:
 - `COND_BR_address`: número signado, ocupa 19 bits,
 - `Rt`: registro como todos, toma desde $X0$ a $X31$.
 
+### Ejemplo
+Se tiene el siguiente código en C:
+```c
+int main() {
+    int arr[5] = {1, 2, 3, 4, 5};
+    int sum = 0;
+    int i = 0;
+    while (sum < 10) {
+        sum += arr[i];
+        i++;
+    }
+    return 0;
+}
+```
+Supongamos que los elementos del arreglo están almacenados desde la dirección de memoria X1 y que X0 es utilizado como el contador, X2 es utilizado para almacenar la suma y X3 es utilizado para almacenar el valor actual del arreglo.
+```asm
+MOV X0, #0               // Inicializar contador a 0
+MOV X2, #0               // Inicializar suma a 0
+
+loop:
+    LDUR X3, [X1, X0]    // Cargar el valor del arreglo en X3
+    ADD X2, X2, X3       // Sumar el valor a la suma
+    ADDI X0, X0, #8      // Incrementar el contador
+    SUBS X4, X2, #10     // Comprobar si la suma es mayor o igual a 10
+    B.LT loop            // Si la suma es menor que 10, volver al inicio del bucle
+```
+
+## Instrucciones de tipo `IM`
+**Las instrucciones de tipo IM en LEGv8 son instrucciones que operan en un registro y un valor inmediato. Las instrucciones MOVZ y MOVK son parte de este conjunto de instrucciones y se utilizan para mover (cargar) valores inmediatos en un registro.**
+- `MOVZ Rd, #imm, LSL #pos`: Mueve el valor inmediato `#imm` al registro `Rd`, pero antes de hacerlo, el valor inmediato se desplaza a la izquierda por la cantidad especificada en `#pos`. El desplazamiento *se realiza en incrementos de 16 bits*, por lo que `#pos` puede ser 0, 16, 32 o 48. La instrucción MOVZ también borra cualquier valor existente en el registro `Rd` antes de mover el nuevo valor.
+- `MOVK Rd, #imm, LSL #pos`: Similar a MOVZ, pero en lugar de borrar cualquier valor existente en el registro `Rd`, la instrucción MOVK mantiene el valor existente y solo actualiza los bits especificados por el desplazamiento. Esto permite establecer valores de 16 bits en un registro de 64 bits sin alterar los otros bits.
+
+Por ejemplo, usar MOVZ para cargar un valor en un registro:
+```asm
+MOVZ X0, #0x1234, LSL #16
+```
+Esto cargará el valor 0x1234 en el registro X0, pero antes de hacerlo, el valor se desplazará 16 bits a la izquierda, por lo que el valor final en X0 será 0x12340000.
+Luego, usar MOVK para modificar algunos de los bits sin cambiar los demás:
+```asm
+MOVK X0, #0x5678, LSL #0
+```
+Esto moverá el valor 0x5678 a los bits más bajos de X0, sin cambiar los bits más altos que se establecieron con MOVZ, por lo que el valor final en X0 será 0x12345678.
