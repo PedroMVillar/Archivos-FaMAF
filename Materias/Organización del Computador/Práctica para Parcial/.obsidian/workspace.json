@@ -11,9 +11,11 @@
             "id": "9c84039916bb08f0",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "GreenCards Personales/version1.pdf"
+                "file": "LEGv8 Básico y Avanzado.md",
+                "mode": "source",
+                "source": false
               }
             }
           }
@@ -83,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "GreenCards Personales/version1.pdf",
+                "file": "LEGv8 Básico y Avanzado.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -100,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "GreenCards Personales/version1.pdf",
+                "file": "LEGv8 Básico y Avanzado.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -123,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "GreenCards Personales/version1.pdf"
+                "file": "LEGv8 Básico y Avanzado.md"
               }
             }
           }
@@ -146,6 +148,7 @@
   },
   "active": "9c84039916bb08f0",
   "lastOpenFiles": [
+    "GreenCards Personales/version1.pdf",
     "img/rf.png",
     "img/imf.png",
     "img/if.png",
@@ -157,9 +160,7 @@
     "df.png",
     "if.png",
     "cbf.png",
-    "imf.png",
     "LEGv8 Básico y Avanzado.md",
-    "GreenCards Personales/version1.pdf",
     "GreenCards Personales/version2.pdf",
     "GreenCards Personales",
     "Nueva carpeta"
