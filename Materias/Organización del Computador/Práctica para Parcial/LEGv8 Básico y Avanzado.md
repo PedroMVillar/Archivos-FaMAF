@@ -154,3 +154,11 @@ Luego, usar MOVK para modificar algunos de los bits sin cambiar los demás:
 MOVK X0, #0x5678, LSL #0
 ```
 Esto moverá el valor 0x5678 a los bits más bajos de X0, sin cambiar los bits más altos que se establecieron con MOVZ, por lo que el valor final en X0 será 0x12345678.
+
+### Límites
+
+![[Pasted image 20240616231434.png]]
+- `opcode`: ocupa 9 bits,
+- `LSL`: ocupa 2 bits, lo que quiere decir $00 \rightarrow 0$, $01 \rightarrow 16$, $10 \rightarrow 32$ y $11 \rightarrow 48$.
+- `MOV_immediate`: Número no signado de 16 bits, con valor en $[0,2^{16})$.
+- `Rd`: registro de destino con 5 bits, va desde $X0$ a $X31$.
