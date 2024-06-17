@@ -57,3 +57,58 @@
 - `STURH Rt, [Rn, #imm]`: Similar a STUR, pero maneja datos de 16 bits (*half-word*).
 - `STURW Rt, [Rn, #imm]`: Similar a STUR, pero maneja datos de 32 bits (*word*).
 - `STXR Rm, Rt, [Rn]`: Almacena el contenido del registro de origen `Rt` en la memoria en la dirección indicada por el registro `Rn` de manera exclusiva. Si la operación es exitosa, se almacena un 0 en el registro de estado `Rm`. Si no es exitosa, se almacena un 1. Esta instrucción se utiliza en operaciones atómicas.
+
+### Límites
+![[Pasted image 20240616140759.png]]
+- `opcode`: ocupa 11 bits,
+- `DT_address`: offset inmediato, ocupa 9 bits y es signado, toma valores en $(-2^8,2^8)$.
+- `Rn` y `Rt`: los registros tienen 5 bits cada uno puede tomar desde $0$ a $31$ incluido.
+
+### Ejemplo
+Se tiene el siguiente código en *C*:
+```c
+int main() {
+    int arr[5] = {1, 2, 3, 4, 5};
+    int sum = 0;
+    
+    for (int i = 0; i < 5; i++) {
+        sum += arr[i];
+    }
+    
+    printf("Suma: %d", sum);
+    
+    return 0;
+}
+```
+
+Supongamos que los elementos del arreglo están almacenados desde la dirección de memoria X1 y que X0 es utilizado como el contador y X2 es utilizado para almacenar la suma. 
+
+```assembly
+MOV X2, #0               // Inicializar suma a 0
+MOV X0, #0               // Inicializar contador a 0
+
+loop:
+    LDUR X3, [X1, X0]    // Cargar el valor del arreglo en X3
+    ADD X2, X2, X3       // Sumar el valor a la suma
+    ADDI X0, X0, #8      // Incrementar el contador
+    SUBS X4, X0, #40     // Comprobar si hemos leído 5 elementos (5 * 8 bytes = 40 bytes)
+    B.NE loop            // Si no, volver al inicio del bucle
+```
+## Instrucciones de tipo `B` y `CB`
+**Las instrucciones de tipo B en LEGv8 son instrucciones de bifurcación (branch), que se utilizan para controlar el flujo del programa. Estas instrucciones cambian el valor del contador de programa (PC) para saltar a diferentes partes del código.**
+
+- `B label`: Salta incondicionalmente al código etiquetado por '*label*'.
+- `BL label`: Similar a B, pero también guarda el retorno en el enlace (link register, `LR`), lo que permite retornar a la instrucción siguiente después de la llamada cuando se ejecuta una instrucción de retorno.
+- `BR Rn`: Salta incondicionalmente al código en la dirección especificada por el registro `Rn`.
+- `CBZ Rn, label`: Salta al código etiquetado por '*label*' si el valor en el registro `Rn` es cero.
+- `CBNZ Rn, label`: Salta al código etiquetado por 'label' si el valor en el registro `Rn` no es cero.
+- `B.cond label`: Salta al código etiquetado por 'label' si la condición especificada es verdadera. Las condiciones pueden ser EQ (igual), NE (no igual), GT (mayor que), LT (menor que), GE (mayor o igual), LE (menor o igual), etc.
+### Límites
+![[Pasted image 20240616143042.png]]
+- `opcode`: ocupa 6 bits,
+- `BR_address`: ocupa 26 bits, signado, toma valores en $(-2^{25}, 2^{25})$.
+![[Pasted image 20240616220300.png]]
+- `opcode`: ocupa 8  bits,
+- `COND_BR_address`: número signado, ocupa 19 bits,
+- `Rt`: registro como todos, toma desde $X0$ a $X31$.
+
