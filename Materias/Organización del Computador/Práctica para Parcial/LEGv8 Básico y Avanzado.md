@@ -162,3 +162,26 @@ Esto moverá el valor 0x5678 a los bits más bajos de X0, sin cambiar los bits m
 - `LSL`: ocupa 2 bits, lo que quiere decir $00 \rightarrow 0$, $01 \rightarrow 16$, $10 \rightarrow 32$ y $11 \rightarrow 48$.
 - `MOV_immediate`: Número no signado de 16 bits, con valor en $[0,2^{16})$.
 - `Rd`: registro de destino con 5 bits, va desde $X0$ a $X31$.
+
+## Uso de FLAGS
+**Las flags son utilizadas para almacenar el resultado de ciertas operaciones para su uso en instrucciones de bifurcación condicional posteriores. Estas flags se establecen después de ciertas operaciones aritméticas y lógicas.**
+1. *Zero flag (`Z`)*: Se establece si el resultado de una operación es 0.
+2. *Negative flag (`N`)*: Se establece si el resultado de una operación es negativo.
+3. *Carry flag (`C`)*: Se establece si una operación produce un carry out. Por ejemplo, si la suma de dos números excede lo que puede ser almacenado en el registro de destino.
+4. *Overflow flag (`V`)*: Se establece si una operación produce un overflow, lo que ocurre cuando el resultado de una operación es demasiado grande o demasiado pequeño para ser representado.
+
+Después de una operación que afecta a estas flags, se pueden usar instrucciones de bifurcación condicional (como B.EQ, B.NE, B.GT, B.LT, etc.) para alterar el flujo del programa en función de estas condiciones. Por ejemplo, usar la instrucción B.EQ para saltar a una etiqueta específica si la flag Zero está establecida, indicando que el resultado de la última operación fue 0.
+
+```asm
+SUBS X0, X1, X2 // Resta X2 de X1 y guarda el resultado en X0. También establece las flags.
+B.EQ zero // Si la flag Zero está establecida (es decir, X1 era igual a X2), salta a la etiqueta 'zero'.
+
+// ... Aquí iría el código para cuando X1 no es igual a X2 ...
+
+B end // Salta a 'end' para evitar ejecutar el código de 'zero'.
+zero:
+// ... Aquí iría el código para cuando X1 es igual a X2 ...
+end:
+// Continúa con el resto del programa
+```
+
