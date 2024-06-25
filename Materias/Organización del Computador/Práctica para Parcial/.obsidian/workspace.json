@@ -8,18 +8,29 @@
         "type": "tabs",
         "children": [
           {
-            "id": "9c84039916bb08f0",
+            "id": "ec982ee324b13795",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "GreenCards Personales/version1.pdf"
+              }
+            }
+          },
+          {
+            "id": "075db767484b029a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "LEGv8 Básico y Avanzado.md",
+                "file": "1 - LEGv8 Ejercicios.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +96,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "LEGv8 Básico y Avanzado.md",
+                "file": "1 - LEGv8 Ejercicios.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +113,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "LEGv8 Básico y Avanzado.md",
+                "file": "1 - LEGv8 Ejercicios.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +136,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "LEGv8 Básico y Avanzado.md"
+                "file": "1 - LEGv8 Ejercicios.md"
               }
             }
           }
@@ -146,21 +157,26 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "9c84039916bb08f0",
+  "active": "075db767484b029a",
   "lastOpenFiles": [
+    "img/7ej6.png",
+    "1 - LEGv8 Ejercicios.md",
+    "1 - LEGv8 Básico y Avanzado.md",
     "GreenCards Personales/version1.pdf",
+    "img/7ej5.png",
+    "img/7ej2.png",
+    "img/7ej1.png",
+    "img/6ej6.png",
+    "3 Implementación de la ISA Ejercicios.md",
+    "3 - Implementación de la ISA.md",
+    "2 - Ensamblado y desensamblado Ejercicios.md",
+    "2 - Ensamblado y desensamblado.md",
     "img/rf.png",
     "img/imf.png",
     "img/if.png",
     "img/df.png",
     "img/cbf.png",
-    "img/bf.png",
     "img",
-    "bf.png",
-    "df.png",
-    "if.png",
-    "cbf.png",
-    "LEGv8 Básico y Avanzado.md",
     "GreenCards Personales/version2.pdf",
     "GreenCards Personales",
     "Nueva carpeta"

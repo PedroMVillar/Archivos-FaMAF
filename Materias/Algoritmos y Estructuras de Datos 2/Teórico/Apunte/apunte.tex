@@ -1,5 +1,6 @@
 \documentclass{scrreprt}
 \input{paquetes/packages.tex}
+\bibliography{refs.bib}
 
 \begin{document}
 \input{capítulos/tittlepage/tittlepage.tex}
@@ -10,8 +11,32 @@
 \input{capítulos/divide y venceras/divyven.tex}
 \input{capítulos/tipos de dato/tipos concretos/tipos.tex}
 \input{capítulos/tipos de dato/tipos abstractos/tads.tex}
+\input{capítulos/greedy.tex}
+\input{capítulos/backtracking.tex}
+\input{capítulos/dinamica.tex}
+\input{capítulos/ejercicios.tex}
 
 
 \newpage
-\printbibliography
+% -------------------------------------- %
+\begin{thebibliography}{9}
+
+    \bibitem{gunther2024} Gunther, E. (2024). Filminas de la cátedra. [Material didáctico].
+    
+    \bibitem{aho1986} Aho, A. V., Hopcroft, J. E., \& Ullman, J. D. (1986). Estructura de Datos y Algoritmos (2da ed.). Addison-Wesley.
+    
+    \bibitem{villalobos2015} Villalobos, J. (2015). EstructurasdeDatosC. [Material didáctico].
+    
+    \bibitem{alvarez2019} Álvarez Rodríguez, A., \& Cuenca Bartolomé, J. (2019). Algoritmos + Estructuras de Datos = Programas. Paraninfo.
+    
+    \bibitem{bhargava2016} Bhargava, A. Y. (2016). Grokking algorithms: An illustrated introduction for programmers and other curious minds. Manning Publications.
+
+    \bibitem{backtracking} Algoritmo Backtracking. (s. f.). https://docs.jjpeleato.com/algoritmia/backtracking
+
+    \bibitem{voraces} Algoritmos Voraces. (s. f.). http://atlas.uned.es/algoritmos/voraces/voraces.html
+
+    \bibitem{unc} Wiki - FAMAF. (s. f.). https://wiki.cs.famaf.unc.edu.ar/
+    
+\end{thebibliography}
+% -------------------------------------- %
 \end{document}

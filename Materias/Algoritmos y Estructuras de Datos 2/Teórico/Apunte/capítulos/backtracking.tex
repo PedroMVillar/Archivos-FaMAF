@@ -1,0 +1,57 @@
+\chapter{Backtracking (Vuelta Atrás - Fuerza Bruta)}
+
+\section{Introducción}
+
+El backtracking es una técnica de programación que se utiliza para encontrar soluciones a problemas computacionales. Se basa en la idea de que si se llega a un punto en el que no se puede continuar avanzando, se debe retroceder y probar otra opción. Es decir, se trata de un algoritmo recursivo que busca soluciones de manera sistemática, explorando todas las posibilidades hasta encontrar la correcta. 
+
+Para hacer la conexión con algoritmos voraces, podríamos decir que no siempre un criterio voraz es suficiente para encontrar la solución óptima. En estos casos, el backtracking es una buena alternativa, ya que explora todas las posibilidades y encuentra la solución óptima. Con la desventaja de que es un algoritmo más costoso en términos de tiempo de ejecución.
+
+\section{Estructura}
+Normalmente se busca primero definir la función recursiva que resuelve el problema y luego se llama a esta función con los parámetros iniciales. La función recursiva se encarga de explorar todas las posibilidades, y en cada paso se verifica si se ha llegado a una solución o si se ha llegado a un punto en el que no se puede continuar avanzando. En este último caso, se retrocede y se prueba con otra opción.
+
+\section{Ejemplo}
+Retomando el problema de las monedas que vimos en el capítulo de algoritmos voraces, podemos ver que en algunos casos un algoritmo voraz no es suficiente para encontrar la solución óptima. Ahora vamos a hacer una versión de este problema utilizando backtracking.
+
+La función recursiva es la siguiente:
+$$
+cambio(i, j) = 
+\begin{cases}
+    0 & j = 0 \\
+    \infty & j > 0 \wedge i = 0 \\
+    cambio(i - 1, j) &  d_i > j > 0 \wedge i > 0 \\
+    min(cambio(i - 1, j), 1 + cambio(i, j - d_i)) & j \geq di > 0 \wedge i > 0
+\end{cases}
+$$
+Que luego, se puede implementar en un lenguaje de programación de la siguiente manera:
+
+\begin{codebox}{Problema del cambio de monedas con backtracking}
+\begin{pascallike}
+fun cambio(d:array[1..n] of nat, i,j: nat) ret r: nat
+    if j=0 then r:= 0
+    else if i = 0 then r:= $\infty$
+    else if d[i] > j then r:= cambio(d,i-1,j)
+    else r:= min(cambio(d,i-1,j),1+cambio(d,i,j-d[i]))
+    fi
+    r := cambio(d,n,j)
+end fun    
+\end{pascallike}
+\end{codebox}
+
+\subsection{Observaciones}
+
+Cuando definimos de forma matemática la solución del problema, se siguen los siguientes estándares:
+\begin{itemize}
+    \item El conjunto de soluciones se expresa en tuplas, donde cada una es el valor de la solución.
+    $$
+    s = (v_1, v_2, \ldots, v_n)
+    $$
+    \item El conjunto parcial de soluciones será aquel en que se encuentre en cierto nivel K:
+    $$
+    s_p = (v_1, v_2,...,v_k) \\ \text{si } k ...
+    $$
+    \item Si se puede añadir un elemento más, la solución avanza a otro nivel $(K+1)$.
+    \item Si no existe ningún valor, se retrocede al valor $(K-1)$.
+    \item Se continua hasta que una solución parcial sea una solución al problema o hasta que no queden mas posibilidades a probar.
+\end{itemize}
+
+El resultado es equivalente a hacer una búsqueda en profundidad en el árbol de soluciones. Sin embargo, este árbol es implícito, no se almacena en ningún lugar.
