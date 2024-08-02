@@ -19,4 +19,7 @@ Este repositorio tiene como objetivo consolidar y organizar de manera sistemáti
 |Computación| 1C-2024| [Algoritmos y Estructuras II](/Materias/Algoritmos%20y%20Estructuras%20de%20Datos%202/) |
 |Computación|1C-2024|[Organización del Computador](/Materias/Organización%20del%20Computador/)|
 |Computación - Mate. Aplicada|1C-2024|[Análisis Numérico](/Materias/Análisis%20Numérico/)|
-
+|Mate. Aplicada| 2C-2024| [Física 1](/Materias/Física%201/)|
+|Computación| 2C-2024| [Sistemas Operativos](/Materias/Sistemas%20Operativos/)|
+|Computación| 2C-2024| [Intro. a la Lógica](/Materias/Introducción%20a%20la%20Lógica%20y%20a%20la%20Programación/)|
+|Computación - Mate. Aplicada|2C-2024| [Probabilidad y Estadística](/Materias/Probabilidad%20y%20Estadística/)|
