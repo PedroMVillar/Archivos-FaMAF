@@ -10,3 +10,4 @@
 Todo el contenido de este repositorio es de libre acceso y uso. Si deseas contribuir, por favor sigue las [instrucciones de contribución](CONTRIBUTING.md).
 ## Recursos
 ### Prácticos Resueltos
+- [Práctico 1](./Prácticos%20Resueltos/Guía%201.pdf)
