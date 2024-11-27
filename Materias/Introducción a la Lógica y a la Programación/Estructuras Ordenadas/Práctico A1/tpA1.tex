@@ -1,0 +1,142 @@
+\documentclass[10pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, margin=1.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{xcolor}
+\usepackage[framemethod=tikz]{mdframed}
+\title{Introducción a la Lógica y la Computación - Estructuras de orden - \\ Práctico 1: Relaciones.
+\\
+ 2024 }
+\author{Villar Pedro}
+\date{}
+\mdfdefinestyle{mpdframe}{
+    frametitlebackgroundcolor   =black!15,
+    frametitlerule          =true,
+        roundcorner     =10pt,
+        middlelinewidth     =1pt,
+        innermargin     =0.5cm,
+        outermargin     =0.5cm,
+        innerleftmargin     =0.5cm,
+        innerrightmargin        =0.5cm,
+        innertopmargin      =\topskip,
+        innerbottommargin   =\topskip,
+            }
+%   Studies
+\mdfdefinestyle{sol}{%
+        style=mpdframe,
+        frametitle={Solución},
+    }
+\newmdenv[style=sol]{sol}
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+    \item[(1)] Determine si la relación dada es una relación de equivalencia sobre $\{1, 2, 3, 4, 5\}$. Si la relación es de equivalencia, indique las clases de equivalencia.
+    \begin{itemize}
+        \item[(a)] $\{(1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (1, 3),(3, 1)\}$
+        \item[(b)] $\{(1, 1), (2, 2), (3, 3), (4, 4)\}$
+        \item[(c)] $\{(x, y) | 1 \leq x \leq 5, 1 \leq y \leq 5\}$  
+    \end{itemize}
+    \begin{sol}
+        Recordemos la definición: 
+        \begin{center}
+            \textbf{Una relación es de equivalencia si satisface las propiedades de reflexividad, simetría y transitividad.}    
+        \end{center}
+        \begin{enumerate}
+            \item [(a)] La relación es de equivalencia. Las clases de equivalencia son $\{1, 3\}, \{2\}, \{4\}, \{5\}$. \\
+            Prueba: la relación es reflexiva ya que $(x, x) \in R$ para todo $x \in \{1, 2, 3, 4, 5\}$, la relación es simétrica ya que si $(x, y) \in R$ entonces $(y, x) \in R$ y la relación es transitiva ya que si $(x, y) \in R$ y $(y, z) \in R$ entonces $(x, z) \in R$.
+            \item [(b)] La relación no es de equivalencia. \\
+            Prueba: la relación no es simétrica ya que $(1, 3) \in R$ pero $(3, 1) \notin R$.
+            \item [(c)] La relación no es de equivalencia. \\
+            Prueba: la relación no es simétrica ya que $(1, 2) \in R$ pero $(2, 1) \notin R$.
+        \end{enumerate}
+    \end{sol}
+    \item[(2)] Determine si las siguientes relaciones sobre $\mathbb{Z}$ son reflexivas, simétricas, antisimétricas o transitivas:
+    \begin{itemize}
+        \item[(a)] $(x, y) \in R$ si $x^{2}=y^{2}$\\
+        \item[(c)] $(x, y) \in R$ si $x \geq y$\\
+        \item[(b)] $(x, y) \in R$ si $x>y$\\
+        \item[(d)] $(x, y) \in R$ si $x \neq y$\\
+    \end{itemize}
+    \begin{sol}
+        \begin{enumerate}
+            \item [(a)] La relación es reflexiva, simétrica y transitiva. \\
+            Prueba: la relación es reflexiva ya que $x^{2}=x^{2}$ para todo $x \in \mathbb{Z}$, la relación es simétrica ya que si $x^{2}=y^{2}$ entonces $y^{2}=x^{2}$ y la relación es transitiva ya que si $x^{2}=y^{2}$ y $y^{2}=z^{2}$ entonces $x^{2}=z^{2}$.
+            \item [(c)] La relación es reflexiva, antisimétrica y transitiva. \\
+            Prueba: la relación es reflexiva ya que $x \geq x$ para todo $x \in \mathbb{Z}$, la relación es antisimétrica ya que si $x \geq y$ y $y \geq x$ entonces $x=y$ y la relación es transitiva ya que si $x \geq y$ y $y \geq z$ entonces $x \geq z$.
+            \item [(b)] La relación es irreflexiva, antisimétrica y transitiva. \\
+            Prueba: la relación es irreflexiva ya que $x \nless x$ para todo $x \in \mathbb{Z}$, la relación es antisimétrica ya que si $x > y$ y $y > x$ entonces $x=y$ y la relación es transitiva ya que si $x > y$ y $y > z$ entonces $x > z$.
+            \item [(d)] La relación es irreflexiva, simétrica y transitiva. \\
+            Prueba: la relación es irreflexiva ya que $x \neq x$ para todo $x \in \mathbb{Z}$, la relación es simétrica ya que si $x \neq y$ entonces $y \neq x$ y la relación es transitiva ya que si $x \neq y$ y $y \neq z$ entonces $x \neq z$.
+        \end{enumerate}
+    \end{sol}
+    \item[(3)] Utilizando las respuestas del ejercicio (2) determine para cada caso si la relación es de equivalencia y/o de orden. Recuerde que una relación de orden debe ser reflexiva, antisimétrica, y transitiva.
+    \begin{sol}
+        \begin{enumerate}
+            \item [(a)] La relación es de equivalencia. \\
+            Prueba: la relación es reflexiva ya que $x^{2}=x^{2}$ para todo $x \in \mathbb{Z}$, la relación es simétrica ya que si $x^{2}=y^{2}$ entonces $y^{2}=x^{2}$ y la relación es transitiva ya que si $x^{2}=y^{2}$ y $y^{2}=z^{2}$ entonces $x^{2}=z^{2}$.
+            \item [(c)] La relación es de orden. \\
+            Prueba: la relación es reflexiva ya que $x \geq x$ para todo $x \in \mathbb{Z}$, la relación es antisimétrica ya que si $x \geq y$ y $y \geq x$ entonces $x=y$ y la relación es transitiva ya que si $x \geq y$ y $y \geq z$ entonces $x \geq z$.
+            \item [(b)] La relación no es de orden ni de equivalencia. \\
+            Prueba: la relación no es reflexiva ya que $x \nless x$ para todo $x \in \mathbb{Z}$, la relación es antisimétrica ya que si $x > y$ y $y > x$ entonces $x=y$ pero no es reflexiva, la relación es transitiva ya que si $x > y$ y $y > z$ entonces $x > z$ pero no es reflexiva.
+            \item [(d)] La relación no es de orden ni de equivalencia. \\
+            Prueba: la relación no es reflexiva ya que $x \neq x$ para todo $x \in \mathbb{Z}$, la relación es simétrica ya que si $x \neq y$ entonces $y \neq x$ pero no es reflexiva, la relación es transitiva ya que si $x \neq y$ y $y \neq z$ entonces $x \neq z$ pero no es reflexiva.
+        \end{enumerate}
+    \end{sol}
+    \item[(4)] Sea $A$ un conjunto y $f$ una función definida en $A$. Probar que la relación $\{(x, y) \in A \times A | f(x)=f(y)\}$ es una relación de equivalencia sobre $A$. Comparar con 2 a.
+    \begin{sol}
+        \begin{itemize}
+            \item Reflexividad: $f(x)=f(x)$ para todo $x \in A$ por lo que $(x, x) \in R$ para todo $x \in A$.
+            \item Simetría: Si $f(x)=f(y)$ entonces $f(y)=f(x)$ por lo que $(x, y) \in R$ implica $(y, x) \in R$.
+            \item Transitividad: Si $f(x)=f(y)$ y $f(y)=f(z)$ entonces $f(x)=f(z)$ por lo que $(x, y) \in R$ y $(y, z) \in R$ implica $(x, z) \in R$.
+        \end{itemize}
+        Por lo tanto, la relación es de equivalencia.
+    \end{sol}
+    \item[(5)] Utilizando como motivación con los ejercicios 2 b y 2c, responda: 
+    \begin{itemize}
+        \item[(a)] Sea $R$ una relación irreflexiva y transitiva ("relación de orden parcial estricto") sobre un conjunto $A$. Probar que $R \cup$ Igualdad $_{A}$ es una relación de orden parcial sobre $A$.
+        \item[(b)] ¿Cómo se podrá obtener una relación de orden parcial estricto a partir de una relación de orden parcial?
+    \end{itemize}
+    \begin{sol}
+        \begin{itemize}
+            \item[(a)] Sea $R$ una relación irreflexiva y transitiva sobre un conjunto $A$. Para probar que $R \cup$ Igualdad $_{A}$ es una relación de orden parcial sobre $A$ debemos probar que es reflexiva, antisimétrica y transitiva.
+            \begin{itemize}
+                \item Reflexividad: $x=x$ para todo $x \in A$ por lo que $(x, x) \in R \cup$ Igualdad $_{A}$ para todo $x \in A$.
+                \item Antisimetría: Si $(x, y) \in R \cup$ Igualdad $_{A}$ y $(y, x) \in R \cup$ Igualdad $_{A}$ entonces $(x, y) \in R$ y $(y, x) \in R$ o $x=y$ y $y=x$ por lo que $x=y$.
+                \item Transitividad: Si $(x, y) \in R \cup$ Igualdad $_{A}$ y $(y, z) \in R \cup$ Igualdad $_{A}$ entonces $(x, y) \in R$ y $(y, z) \in R$ o $x=y$ y $y=z$ por lo que $x=z$.
+            \end{itemize}
+            Por lo tanto, $R \cup$ Igualdad $_{A}$ es una relación de orden parcial sobre $A$.
+            \item[(b)] Para obtener una relación de orden parcial estricto a partir de una relación de orden parcial debemos eliminar la reflexividad. Es decir, si $R$ es una relación de orden parcial sobre un conjunto $A$ entonces $R \setminus$ Igualdad $_{A}$ es una relación de orden parcial estricto sobre $A$.
+        \end{itemize}
+    \end{sol}
+    \item[(6)] Liste los pares de la relación de equivalencia sobre $\{1, 2, 3, 4\}$ definida por la partición dada. También señale las clases de equivalencia [1], [2], [3] y [4].
+    \begin{itemize}
+        \item[(a)] $\{1, 2\}, \{3, 4\}$
+        \item[(b)] $\{1\}, \{2\}, \{3\}, \{4\}$
+    \end{itemize}
+    \begin{sol}
+        \begin{itemize}
+            \item[(a)] La relación de equivalencia es $\{(1, 1), (2, 2), (3, 3), (4, 4), (1, 2), (2, 1), (3, 4), (4, 3)\}$. Las clases de equivalencia son $[1]=\{1, 2\}$ y $[2]=\{3, 4\}$.
+            \item[(b)] La relación de equivalencia es $\{(1, 1), (2, 2), (3, 3), (4, 4)\}$. Las clases de equivalencia son $[1]=\{1\}$, $[2]=\{2\}$, $[3]=\{3\}$ y $[4]=\{4\}$.
+        \end{itemize}
+    \end{sol}
+    \item[(7)] Sea R la relación "Fulano no es más viejo que Mengano" sobre un conjunto de personas $A$.
+    \begin{itemize}
+        \item[(a)] De un ejemplo, puede ser ficticio, de un conjunto $A$ de personas en los cuales esa relación no sea un orden parcial.
+        \item[(b)] Explique qué propiedad falla para que sea un orden parcial.
+    \end{itemize}
+    \begin{sol}
+        \begin{itemize}
+            \item[(a)] Sea $A=\{Fulano, Mengano\}$ y la relación $R=\{(Fulano, Mengano)\}$. La relación no es un orden parcial ya que no es reflexiva.
+            \item[(b)] La propiedad que falla es la reflexividad. La relación no es reflexiva ya que Fulano no es más viejo que Mengano pero Mengano no es más viejo que Fulano.
+        \end{itemize}
+    \end{sol}
+\end{enumerate}
+
+\end{document}
